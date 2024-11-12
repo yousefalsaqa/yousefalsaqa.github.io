@@ -1,0 +1,145 @@
+/* Global Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f8f9fa;
+}
+
+/* Sidebar navigation styling */
+.sidebar {
+    position: fixed;
+    top: 60px;
+    left: 1060px;
+}
+
+.sidebar ul {
+    display: flex; /* Make the UL elements horizontally aligned */
+    list-style: none;
+}
+
+
+
+.sidebar .nav-link {
+    color: #333;
+    font-weight: bold;
+    text-decoration: none;
+    width: 100%; /* Full width */
+}
+
+.li .sidebar {
+    float:left;
+}
+
+.sidebar .nav-link:hover,
+.sidebar .nav-link.active {
+    background-color: #007bff;
+    color: white;
+}
+
+/* Hero Section */
+#hero {
+    background-image: url('../lab.jpg');
+    background-size: cover;
+    background-color: red; /* Add this to confirm the section is styled */
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fd0909;
+}
+
+
+#hero h1 {
+    font-size: 3rem;
+    font-weight: 700;
+}
+
+#hero p {
+    font-size: 1.5rem;
+}
+
+/* Add vertical space */
+.section {
+    padding: 120px 0;
+}
+
+/* Projects Section */
+.projects {
+    background-color: #ffffff;
+}
+
+.card {
+    transition: all 0.3s ease-in-out;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card img {
+    max-height: 250px;
+    object-fit: cover;
+}
+
+.card-body {
+    background: #f8f9fa;
+}
+
+/* Contact Section */
+.contact {
+    background: #343a40;
+    color: #fff;
+}
+
+.footer {
+    background: #222;
+    padding: 20px 0;
+    text-align: center;
+}
+
+/* Styles for the top bar */
+#topbar {
+    position: fixed; /* Keeps the bar fixed at the top */
+    top: 0;
+    left: 0;
+    width: 100%; /* Full width of the screen */
+    height: 60px; /* Adjust height as needed */
+    background-color: #2d2d2d; /* Matte grey color */
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Ensures content is aligned properly */
+    padding: 0 20px; /* Adds padding inside the bar */
+    z-index: 1000; /* Makes sure it's always on top */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Adds a subtle shadow */
+  }
+  
+  /* Styles for name */
+  #topbar h1 {
+    color: #fff; /* White text */
+    font-size: 24px; /* Adjust as needed */
+    font-family: 'Poppins', sans-serif; /* Keep consistent with your site */
+    margin: 0; /* Removes default margin */
+  }
+  
+  /* Styles for the icon */
+  #topbar .icon {
+    font-size: 24px; /* Adjust the size of the icon */
+    color: #fff; /* Icon color */
+    cursor: pointer; /* Makes it look clickable */
+  }
+  
+  /* Add space for content to avoid being hidden behind fixed top bar */
+  body {
+    padding-top: 60px; /* Matches the height of the top bar */
+  }
+
+  #nav-container {
+    position: fixed;
+    height: 50px;
+    width: 100%;
+    min-width: 600px;
+    top: 0;
+    left: 0;
+    display: none;
+    z-index: 1000;
+}
+
