@@ -63,33 +63,107 @@ body {
     z-index: 1000; /* Ensure navbar is on top */
 }
 
-/* Ensure proper alignment of buttons */
-.navbar-nav .nav-link {
-    color: white;
+/* Navbar Styling */
+#navbar-scrollspy {
+    position: fixed; /* Keep it at the top */
+    top: 0;
+    left: 0;
+    z-index: 1000; /* Ensure it's layered below the header name */
+    width: 100%; /* Stretch the navbar across the screen */
+    background: transparent; /* Dark semi-transparent background */
+    padding: 10px 0; /* Add padding for better spacing */
+}
+
+/* Navbar Link Styling */
+#navbar-scrollspy .nav-link {
+    color: white; /* White text for links */
+    padding: 10px 15px;
+    text-decoration: none;
     font-weight: bold;
     text-transform: uppercase;
-    padding: 10px 20px;
     border-radius: 5px;
-    text-decoration: none;
     transition: background-color 0.3s ease;
 }
 
-/* Remove white background on buttons */
-.navbar-nav .nav-link.active, 
-.navbar-nav .nav-link:hover {
-    background-color: transparent; /* Remove white background */
-    color: yellow; /* Highlight active or hover state */
+/* Active and Hover Links */
+#navbar-scrollspy .nav-link.active,
+#navbar-scrollspy .nav-link:hover {
+    background-color: transparent; /* Remove the white background completely */
+    color: yellow; /* Highlight link text */
 }
 
-/* Align name properly */
+/* Name Header Styling */
 #name-header {
-    font-size: 2rem;
+    position: absolute; /* Position relative to the parent */
+    top: 70px; /* Adjust to sit below the navbar */
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%); /* Correct centering offset */
+    z-index: 1200; /* Ensure it's above the navbar */
+    font-size: 2.5rem;
     font-weight: bold;
     color: yellow;
-    position: relative;
     text-align: center;
-    z-index: 1000; /* Ensure above other elements */
+    background: transparent; /* No background for header */
 }
+/* Navbar Container */
+#navbar-scrollspy {
+    position: fixed; /* Fix it to the viewport */
+    top: 50%; /* Center vertically */
+    left: 0; /* Attach to the right edge */
+    transform: translateY(-50%); /* Center vertically with transform */
+    z-index: 1000; /* Ensure it stays above other elements */
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    gap: 20px; /* Space between buttons */
+    background: transparent; /* Transparent background */
+    padding: 0; /* Remove extra padding */
+    width: auto; /* Ensure it's not stretched */
+    height: auto; /* Ensure it doesn't fill unintended space */
+    border: none; /* Remove any border */
+}
+
+/* Navbar Links */
+#navbar-scrollspy .nav-link {
+    color: white; /* White text */
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 10px 15px; /* Add padding for clickable area */
+    text-decoration: none; /* Remove underline */
+    text-align: center; /* Center text */
+    border-radius: 10px; /* Optional rounded corners */
+    background: linear-gradient(to right, #800080, #4b0082); /* Purple gradient */
+    transition: transform 0.2s ease, background-color 0.3s ease;
+}
+
+/* Hover and Active Effects */
+#navbar-scrollspy .nav-link:hover {
+    transform: scale(1.1); /* Slight zoom effect on hover */
+    background: linear-gradient(to right, #ff4500, #ff8c00); /* Orange gradient */
+    color: white;
+}
+
+#navbar-scrollspy .nav-link.active {
+    background: linear-gradient(to right, #ffd700, #ffa500); /* Gold gradient for active link */
+    color: black; /* Black text for contrast */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    #navbar-scrollspy {
+        top: 10px; /* Move closer to the top */
+        right: 10px; /* Add spacing from the edge */
+        transform: none; /* Remove vertical centering */
+        flex-direction: row; /* Make it horizontal for small screens */
+        border-radius: 0; /* Remove rounded corners */
+    }
+
+    #navbar-scrollspy .nav-link {
+        font-size: 0.9rem; /* Smaller text */
+        padding: 8px 12px; /* Reduce padding */
+    }
+}
+
+
 
 #hero p {
     font-size: 1.5rem;
@@ -167,74 +241,6 @@ body {
         padding: 6px 12px;
     }
 }
-
-/* Navbar Container Fix */
- #navbar-scrollspy {
-    position: fixed;
-    top: 10px;
-    background: rgba(0, 0, 0, 0.8); /* Semi-transparent dark background */
-    padding: 8px 15px;
-    border-radius: 12px; /* Subtle rounded corners */
-    display: flex;
-    gap: 10px; /* Space between buttons */
-    z-index: 1000;
-    transition: all 0.3s ease-in-out;
-    width: auto; /* Ensure no fixed width */
-    } 
-
-.bg-light.sidebar {
-    padding: 0 !important; /* Remove extra padding */
-}
-
-
-/* Navigation Buttons */
-#navbar-scrollspy .nav-link {
-    display: inline-block;
-    color: #ffffff;
-    font-size: 0.9em;
-    font-weight: bold;
-    text-transform: uppercase;
-    text-decoration: none;
-    padding: 10px 20px;
-    border-radius: 8px;
-    background: linear-gradient(to right, #4b0082, #800080); /* Purple gradient */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Subtle shadow */
-    transition: all 0.3s ease;
-    white-space: nowrap; /* Prevent text wrapping */
-}
-
-/* Hover Effect */
-#navbar-scrollspy .nav-link:hover {
-    background: linear-gradient(to right, #00ced1, #1e90ff); /* Aqua to blue gradient */
-    color: white;
-    transform: translateY(-3px); /* Lift effect */
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
-}
-
-/* Active Button */
-#navbar-scrollspy .nav-link.active {
-    background: linear-gradient(to right, #ffd700, #ffa500); /* Gold gradient */
-    color: black;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4); /* Highlight shadow */
-    transform: scale(1.1); /* Slight enlargement */
-}
-
-
-
-/* Responsive Adjustments */
-@media (max-width: 768px) {
-    #navbar-scrollspy {
-        top: 5px;
-        right: 10px;
-        padding: 6px 15px;
-    }
-
-    #navbar-scrollspy .nav-link {
-        font-size: 0.8em;
-        padding: 8px 12px;
-    }
-}
-
 
 body {
     background: linear-gradient(to bottom, #4b0082, #000080, #000);
@@ -666,9 +672,8 @@ body {
     font-size: 1rem;
     text-align: center;
     margin: 10px 0;
-    overflow: hidden; /* Hide overflowing text */
     text-overflow: ellipsis; /* Add ellipsis if description is too long */
-    max-height: 40px; /* Limit description height */
+    max-height: 60px; /* Limit description height */
 }
 
 /* Styling for Learn More button */
