@@ -16,52 +16,60 @@
   <link href="css/style.css" rel="stylesheet">
 </head>
 <body>
-  <!-- Project Description Section -->
-  <section id="project-details" class="project-details section">
-    <div class="container" data-aos="fade-up">
-      <div class="section-title">
-        <h2>AutoDrive Competition</h2>
-        <p>Level 4 Autonomous Vehicle Development</p>
+  <section id="autodrive-project-showcase" class="showcase-section">
+    <div class="container">
+      <!-- Overview Section -->
+      <div class="showcase-box">
+        <h2><i class="bi bi-info-circle"></i> Overview</h2>
+        <p>
+          This project is part of the Queen's AutoDrive team’s efforts in the development of a Level 4 autonomous vehicle. I focused on implementing an advanced lane detection model to enhance the perception system. The Ultra-Fast Lane Detection (UFLD) algorithm allowed the vehicle to detect lanes at high speeds, crucial for safe and effective navigation.
+        </p>
       </div>
 
-      <div class="row">
-        <div class="col-lg-6">
-          <img src="initiallanedetection.jpg" class="img-fluid" alt="AutoDrive Project Image">
-        </div>
-        <div class="col-lg-6 pt-4 pt-lg-0 content">
-          <h3>Overview</h3>
-          <p>This project is part of the Queen's AutoDrive team’s efforts in the development of a Level 4 autonomous vehicle, where I focused on implementing an advanced lane detection model to enhance the perception system. The Ultra-Fast Lane Detection (UFLD) algorithm allowed the vehicle to detect lanes at high speeds, crucial for safe and effective navigation.</p>
+      <!-- Project Highlights Section -->
+      <div class="showcase-box">
+        <h2><i class="bi bi-lightning"></i> Project Highlights</h2>
+        <ul>
+          <li>Used <strong>Ultra-Fast Lane Detection (UFLD)</strong> algorithm, achieving over 300 FPS for real-time performance.</li>
+          <li>Integrated the model with onboard vehicle systems for accurate lane tracking in challenging conditions.</li>
+          <li>Optimized the model for embedded deployment, ensuring minimal computational overhead.</li>
+        </ul>
+      </div>
 
-          <h3>Project Highlights</h3>
-          <ul>
-            <li>Used **Ultra-Fast Lane Detection (UFLD)** algorithm, achieving over 300 frames per second (FPS) for real-time performance.</li>
-            <li>Integrated the model with onboard vehicle systems, enabling accurate lane detection and tracking even in challenging conditions.</li>
-            <li>Optimized the model for embedded deployment, ensuring minimal computational overhead.</li>
-          </ul>
+      <!-- Technical Details Section -->
+      <div class="showcase-box">
+        <h2><i class="bi bi-cpu"></i> Technical Details</h2>
+        <p>
+          The UFLD model employs a row-based classification approach, significantly reducing processing demands compared to traditional pixel-based segmentation. Its lightweight architecture made it ideal for real-time applications on embedded automotive systems.
+        </p>
+      </div>
 
-          <h3>Technical Details</h3>
-          <p>The UFLD model employs a row-based classification approach, significantly reducing processing demands compared to traditional pixel-based segmentation. The model’s lightweight architecture made it ideal for real-time applications on embedded automotive systems.</p>
+      <!-- Outcome Section -->
+      <div class="showcase-box">
+        <h2><i class="bi bi-trophy"></i> Outcome</h2>
+        <p>
+          With this implementation, the Queen's AutoDrive vehicle demonstrated improved lane detection capabilities, contributing to safer and more reliable autonomous driving in various scenarios.
+        </p>
+      </div>
 
-          <h3>Outcome</h3>
-          <p>With this implementation, the Queen's AutoDrive vehicle demonstrated improved lane detection capabilities, contributing to safer and more reliable autonomous driving in various scenarios.</p>
-
-          <h3>Project Media</h3>
-            <div class="video-container">
-              <video autoplay loop muted playsinline>
-              <source src="KingstonLaneDetection.mp4" type="video/mp4">
-              Your browser does not support the video tag.
-              </video>
-            </div>
-
-
+      <!-- Project Media Section -->
+      <div class="showcase-box text-center">
+        <h2><i class="bi bi-camera-reels"></i> Project Media</h2>
+        <div class="video-container">
+          <video autoplay loop muted playsinline>
+            <source src="assets/KingstonLaneDetection.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
         </div>
       </div>
     </div>
-      <!-- Back-to-Main Button -->
-  <a href="index.html" id="back-to-main" class="back-to-main">
-    <span>⬅ Main Page</span>
-  </a>
+
+    <!-- Back-to-Main Button -->
+    <a href="index.html" id="back-to-main" class="back-to-main">
+      <span>⬅ Main Page</span>
+    </a>
   </section>
+
 
   <!-- Footer -->
   <footer id="footer" class="footer">
