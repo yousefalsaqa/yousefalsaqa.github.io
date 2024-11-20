@@ -57,6 +57,40 @@ body {
     font-weight: 700;
 }
 
+/* Fix for overlapping name and buttons */
+.navbar {
+    position: relative;
+    z-index: 1000; /* Ensure navbar is on top */
+}
+
+/* Ensure proper alignment of buttons */
+.navbar-nav .nav-link {
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+/* Remove white background on buttons */
+.navbar-nav .nav-link.active, 
+.navbar-nav .nav-link:hover {
+    background-color: transparent; /* Remove white background */
+    color: yellow; /* Highlight active or hover state */
+}
+
+/* Align name properly */
+#name-header {
+    font-size: 2rem;
+    font-weight: bold;
+    color: yellow;
+    position: relative;
+    text-align: center;
+    z-index: 1000; /* Ensure above other elements */
+}
+
 #hero p {
     font-size: 1.5rem;
 }
@@ -135,7 +169,7 @@ body {
 }
 
 /* Navbar Container Fix */
-#navbar-scrollspy {
+ #navbar-scrollspy {
     position: fixed;
     top: 10px;
     background: rgba(0, 0, 0, 0.8); /* Semi-transparent dark background */
@@ -146,7 +180,7 @@ body {
     z-index: 1000;
     transition: all 0.3s ease-in-out;
     width: auto; /* Ensure no fixed width */
-}
+    } 
 
 .bg-light.sidebar {
     padding: 0 !important; /* Remove extra padding */
@@ -335,6 +369,25 @@ body {
     font-size: 1em;
     margin: 8px 0;
 }
+
+/* Fix for video alignment on mobile */
+.video-container {
+    width: 100%; /* Make video container responsive */
+    max-width: 650px; /* Optional: Set max width for larger screens */
+    height: auto; /* Maintain aspect ratio */
+    overflow: hidden;
+    margin: 0 auto; /* Center the video */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.video-container video {
+    width: 100%; /* Ensure video scales with container */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 8px; /* Optional: Rounded corners */
+}
+
 
 #autodrive-project .btn {
     background-color: #008080; /* Teal for button background */
