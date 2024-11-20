@@ -642,3 +642,17 @@ body {
     justify-content: center; /* Center cards horizontally */
     align-items: stretch; /* Ensure all cards align vertically */
 }
+.showcase-box img {
+    border-radius: 10px;
+    max-width: 80%; /* Limit image size for smaller screens */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Add shadow for better visibility */
+    margin-top: 20px;
+  }
+  
+  .showcase-box p em {
+    font-size: 0.9em;
+    color: #ccc; /* Light gray for the caption text */
+    display: block;
+    margin-top: 10px;
+  }
+  
