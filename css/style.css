@@ -1,37 +1,41 @@
 /* Global Styles */
+/* Reset the body and html margins and padding */
+html, body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Ensures consistent sizing across elements */
+}
+
+/* Optional: Apply to other elements */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Reset all elements */
+}
+
 body {
     font-family: 'Poppins', sans-serif;
     background-color: #f8f9fa;
+    padding-top: 60px; /* Matches the height of the top bar */
 }
 
 /* Sidebar navigation styling */
 .sidebar {
     position: fixed;
     top: 60px;
-    left: 1060px;
+    left: 1060px; /* Adjust this as needed for larger screens */
 }
 
-.sidebar ul {
-    display: flex; /* Make the UL elements horizontally aligned */
-    list-style: none;
-}
-
-
-
-.sidebar .nav-link {
-    color: #333;
-    font-weight: bold;
-    text-decoration: none;
-    width: 100%; /* Full width */
-}
-
-.li .sidebar {
-    float:left;
+/* Responsive Sidebar Positioning */
+@media (max-width: 1200px) {
+    .sidebar {
+        left: 50px; /* Adjust for smaller screens */
+    }
 }
 
 .sidebar .nav-link:hover,
 .sidebar .nav-link.active {
-    background-color: #007bff;
+    background-color: black;
     color: white;
 }
 
@@ -45,8 +49,8 @@ body {
     align-items: center;
     justify-content: center;
     color: #fd0909;
+    border: 1px solid red; /* Debugging border to visualize section boundaries */
 }
-
 
 #hero h1 {
     font-size: 3rem;
@@ -60,11 +64,12 @@ body {
 /* Add vertical space */
 .section {
     padding: 120px 0;
+/* Debugging border for visibility */
 }
 
 /* Projects Section */
 .projects {
-    background-color: #ffffff;
+    padding: 60px 0;
 }
 
 .card {
@@ -86,60 +91,484 @@ body {
 
 /* Contact Section */
 .contact {
-    background: #343a40;
     color: #fff;
+    padding: 60px 0;
 }
 
 .footer {
-    background: #222;
     padding: 20px 0;
     text-align: center;
 }
 
 /* Styles for the top bar */
-#topbar {
-    position: fixed; /* Keeps the bar fixed at the top */
-    top: 0;
-    left: 0;
-    width: 100%; /* Full width of the screen */
-    height: 60px; /* Adjust height as needed */
-    background-color: #2d2d2d; /* Matte grey color */
-    display: flex;
-    align-items: center;
-    justify-content: space-between; /* Ensures content is aligned properly */
-    padding: 0 20px; /* Adds padding inside the bar */
-    z-index: 1000; /* Makes sure it's always on top */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Adds a subtle shadow */
-  }
-  
-  /* Styles for name */
-  #topbar h1 {
-    color: #fff; /* White text */
-    font-size: 24px; /* Adjust as needed */
-    font-family: 'Poppins', sans-serif; /* Keep consistent with your site */
-    margin: 0; /* Removes default margin */
-  }
-  
-  /* Styles for the icon */
-  #topbar .icon {
-    font-size: 24px; /* Adjust the size of the icon */
-    color: #fff; /* Icon color */
-    cursor: pointer; /* Makes it look clickable */
-  }
-  
-  /* Add space for content to avoid being hidden behind fixed top bar */
-  body {
-    padding-top: 60px; /* Matches the height of the top bar */
-  }
-
-  #nav-container {
+/* Top Name Styling */
+#top-name {
     position: fixed;
-    height: 50px;
-    width: 100%;
-    min-width: 600px;
-    top: 0;
-    left: 0;
-    display: none;
+    top: 10px;
+    left: 20px;
+    z-index: 1000;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #ffd700; /* Gold color */
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    padding: 8px 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    font-family: 'Poppins', sans-serif; /* Use matching website font */
+    transition: all 0.3s ease;
+}
+
+/* Hover Effect */
+#top-name:hover {
+    background: linear-gradient(to right, #4b0082, #800080); /* Purple gradient */
+    color: white; /* Text changes to white */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+    transform: scale(1.05); /* Slight enlargement on hover */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    #top-name {
+        font-size: 1.2em;
+        padding: 6px 12px;
+    }
+}
+
+/* Navbar Container Fix */
+#navbar-scrollspy {
+    position: fixed;
+    top: 10px;
+    background: rgba(0, 0, 0, 0.8); /* Semi-transparent dark background */
+    padding: 8px 15px;
+    border-radius: 12px; /* Subtle rounded corners */
+    display: flex;
+    gap: 10px; /* Space between buttons */
+    z-index: 1000;
+    transition: all 0.3s ease-in-out;
+    width: auto; /* Ensure no fixed width */
+}
+
+.bg-light.sidebar {
+    padding: 0 !important; /* Remove extra padding */
+}
+
+
+/* Navigation Buttons */
+#navbar-scrollspy .nav-link {
+    display: inline-block;
+    color: #ffffff;
+    font-size: 0.9em;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    background: linear-gradient(to right, #4b0082, #800080); /* Purple gradient */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+    transition: all 0.3s ease;
+    white-space: nowrap; /* Prevent text wrapping */
+}
+
+/* Hover Effect */
+#navbar-scrollspy .nav-link:hover {
+    background: linear-gradient(to right, #00ced1, #1e90ff); /* Aqua to blue gradient */
+    color: white;
+    transform: translateY(-3px); /* Lift effect */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+}
+
+/* Active Button */
+#navbar-scrollspy .nav-link.active {
+    background: linear-gradient(to right, #ffd700, #ffa500); /* Gold gradient */
+    color: black;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4); /* Highlight shadow */
+    transform: scale(1.1); /* Slight enlargement */
+}
+
+
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    #navbar-scrollspy {
+        top: 5px;
+        right: 10px;
+        padding: 6px 15px;
+    }
+
+    #navbar-scrollspy .nav-link {
+        font-size: 0.8em;
+        padding: 8px 12px;
+    }
+}
+
+
+body {
+    background: linear-gradient(to bottom, #4b0082, #000080, #000);
+    /* #4b0082 is a deep purple, #000080 is navy blue, and #000 is black */
+    color: white; /* Ensures text is readable on dark background */
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+}
+/* Terrabot Project Custom Styling */
+#terrabot-project {
+    background-color: #2e2e2e; /* Dark background */
+    border-radius: 8px;
+    padding: 20px;
+    margin: 15px 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+#terrabot-project:hover {
+    transform: scale(1.02); /* Slightly enlarges on hover */
+}
+
+#terrabot-project img {
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+#terrabot-project h3 {
+    color: #ffd700; /* Gold color for title */
+    font-size: 1.4em;
+    margin-top: 10px;
+}
+
+#terrabot-project p {
+    color: #cccccc; /* Light gray for text */
+    font-size: 1em;
+    margin: 10px 0;
+}
+
+#terrabot-project .btn {
+    background-color: #4b0082; /* Purple for button background */
+    color: #ffffff;
+    padding: 8px 12px;
+    font-weight: bold;
+    border-radius: 4px;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+#terrabot-project .btn:hover {
+    background-color: #800080; /* Darker purple on hover */
+    color: #ffffff;
+}
+/* Formula Racing Project Custom Styling */
+#formula-racing-project {
+    background-color: #1c1c1c; /* Dark gray background */
+    border-radius: 10px;
+    padding: 18px;
+    margin: 15px 0;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#formula-racing-project:hover {
+    transform: translateY(-5px); /* Lift effect on hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Stronger shadow on hover */
+}
+
+#formula-racing-project img {
+    border-radius: 10px;
+    margin-bottom: 12px;
+}
+
+#formula-racing-project h4 {
+    color: #ff4500; /* Orange color for title */
+    font-size: 1.3em;
+    margin-top: 8px;
+}
+
+#formula-racing-project p {
+    color: #dddddd; /* Light gray for text */
+    font-size: 1em;
+    margin: 8px 0;
+}
+
+#formula-racing-project .btn {
+    background-color: #3333ff; /* Blue for button background */
+    color: #ffffff;
+    padding: 8px 14px;
+    font-weight: bold;
+    border-radius: 4px;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#formula-racing-project .btn:hover {
+    background-color: #1a1aff; /* Darker blue on hover */
+    color: #ffffff;
+}
+/* AutoDrive Lane Detection Project Custom Styling */
+#autodrive-project {
+    background-color: #141414; /* Very dark background */
+    border-radius: 12px;
+    padding: 20px;
+    margin: 15px 0;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+#autodrive-project:hover {
+    transform: scale(1.03); /* Slightly enlarges on hover */
+    background-color: #1a1a1a; /* Darker shade on hover */
+}
+
+#autodrive-project img {
+    border-radius: 12px;
+    margin-bottom: 15px;
+}
+
+#autodrive-project h4 {
+    color: #00ced1; /* Aqua color for title */
+    font-size: 1.4em;
+    margin-top: 10px;
+}
+
+#autodrive-project p {
+    color: #cccccc; /* Light gray for text */
+    font-size: 1em;
+    margin: 8px 0;
+}
+
+#autodrive-project .btn {
+    background-color: #008080; /* Teal for button background */
+    color: #ffffff;
+    padding: 8px 16px;
+    font-weight: bold;
+    border-radius: 4px;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#autodrive-project .btn:hover {
+    background-color: #006666; /* Darker teal on hover */
+    color: #ffffff;
+}
+.video-container {
+    width: 650px; /* Set a smaller width */
+    height: auto; /* Maintain aspect ratio */
+    overflow: hidden; /* Ensures no extra content spills outside */
+    margin: 10px auto; /* Centers the video horizontally */
+    display: flex;
+    justify-content: center; /* Ensures the video aligns in the center of the container */
+    align-items: center;
+}
+
+.video-container video {
+    width: 100%; /* Restricts video to container size */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 8px; /* Optional: Rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Optional: Add shadow for aesthetics */
+}
+
+#back-to-main {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    display: block; /* Hide button initially */
+    background: linear-gradient(to right, #4b0082, #800080);
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 12px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    text-decoration: none;
+    transition: all 0.3s ease;
     z-index: 1000;
 }
 
+#back-to-main:hover {
+    background: linear-gradient(to right, #5a00b2, #9000a0);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+    transform: scale(1.05);
+}
+/* Global Styling */
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(to bottom right, #4b0082, #000080, #000); /* Dark gradient */
+    color: #ffffff;
+    overflow-x: hidden; /* Prevent horizontal scroll */
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header Styling */
+#terrabot-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+#terrabot-header h1 {
+    font-size: 3em;
+    font-weight: bold;
+    color: #ffd700; /* Gold color for title */
+    margin-bottom: 10px;
+}
+
+#terrabot-header p {
+    font-size: 1.5em;
+    color: #e0e0e0; /* Subtle gray */
+}
+
+#terrabot-header .header-image {
+    max-width: 50%;
+    height: auto;
+    margin-top: 20px;
+    border-radius: 15px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+}
+
+/* Showcase Section Styling */
+.showcase-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 50px;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent */
+    border-radius: 15px;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.4);
+}
+
+.showcase-section:nth-child(even) {
+    flex-direction: row-reverse; /* Alternate layout */
+}
+
+.showcase-section .text-content {
+    flex: 1;
+}
+
+.showcase-section .showcase-image {
+    max-width: 50%;
+    border-radius: 15px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+}
+
+/* Headings */
+.showcase-section h2 {
+    font-size: 2em;
+    margin-bottom: 15px;
+    color: #87ceeb; /* Sky blue */
+}
+
+.showcase-section p {
+    font-size: 1.2em;
+    line-height: 1.6;
+    color: #dcdcdc; /* Light gray */
+}
+
+/* Footer Styling */
+#terrabot-footer {
+    text-align: center;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
+    font-size: 1em;
+    color: #cccccc;
+}
+/* Contact Button Styling */
+#contact-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: linear-gradient(to right, #4b0082, #800080); /* Purple gradient */
+    color: white;
+    font-size: 1em;
+    font-weight: bold;
+    padding: 12px 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+/* Hover Effect for Contact Button */
+#contact-button:hover {
+    background: linear-gradient(to right, #00ced1, #1e90ff); /* Aqua to blue gradient */
+    transform: scale(1.05); /* Slight enlargement */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+}
+/* Formula SAE Section Styling */
+.formula-sae-section {
+    padding: 60px 20px;
+    background: linear-gradient(to bottom, #4b0082, #000080, #000);
+    color: #ffffff;
+}
+
+/* Showcase Box Styling */
+.showcase-box {
+    background-color: rgba(255, 255, 255, 0.1); /* Slightly transparent white */
+    border-radius: 15px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+.showcase-box h2 {
+    color: #87ceeb; /* Sky blue for section titles */
+    margin-bottom: 15px;
+}
+
+.showcase-box p, .showcase-box ul {
+    font-size: 1.2em;
+    line-height: 1.6;
+    color: #dddddd; /* Light gray for text */
+}
+
+.showcase-box ul {
+    list-style: none;
+    padding: 0;
+}
+
+.showcase-box ul li {
+    margin-bottom: 10px;
+    position: relative;
+    padding-left: 25px;
+}
+
+.showcase-box ul li::before {
+    content: "\2022"; /* Bullet point */
+    color: #ffd700; /* Gold bullet */
+    position: absolute;
+    left: 0;
+}
+
+/* Image Styling */
+.showcase-box img {
+    border-radius: 15px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.6);
+}
+
+/* Back-to-Main Button */
+#back-to-main {
+    display: inline-block;
+    margin-top: 20px;
+    background: linear-gradient(to right, #4b0082, #800080); /* Purple gradient */
+    color: #ffffff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+#back-to-main:hover {
+    background: linear-gradient(to right, #00ced1, #1e90ff); /* Aqua gradient */
+    transform: translateY(-2px);
+}

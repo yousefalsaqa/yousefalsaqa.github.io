@@ -30,22 +30,50 @@ function navigateToProject(projectId) {
     alert("Navigating to project: " + projectDetails[projectId].title + "\nDescription: " + projectDetails[projectId].description + "\nTechnologies: " + projectDetails[projectId].technologies);
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-    const burgerMenu = document.querySelector('.burger-menu');
-    const navMenu = document.querySelector('.navmenu ul');
-    
-    // Initially hide the nav menu on mobile
-    navMenu.style.display = 'none';
-    
-    // Toggle menu display on burger menu click
-    burgerMenu.addEventListener('click', function () {
-        if (navMenu.style.display === 'none') {
-            navMenu.style.display = 'flex'; // Show menu
-        } else {
-            navMenu.style.display = 'none'; // Hide menu
-        }
-    });
+document.addEventListener("DOMContentLoaded", () => {
+    const sections = document.querySelectorAll("section");
+    const navLinks = document.querySelectorAll("#navbar-scrollspy .nav-link");
+
+    const updateActiveLink = () => {
+        let activeSection = "";
+
+        // Iterate through sections and find the one currently in the viewport
+        sections.forEach((section) => {
+            const rect = section.getBoundingClientRect();
+            const sectionTop = rect.top;
+            const sectionHeight = rect.height;
+
+            // Check if the section is at least partially visible in the viewport
+            if (sectionTop <= window.innerHeight / 2 && sectionTop + sectionHeight >= window.innerHeight / 2) {
+                activeSection = section.getAttribute("id");
+            }
+        });
+
+        // Update the active class on navigation links
+        navLinks.forEach((link) => {
+            link.classList.remove("active");
+            if (link.getAttribute("href").includes(activeSection)) {
+                link.classList.add("active");
+            }
+        });
+    };
+
+    // Listen for scroll events and update active link
+    window.addEventListener("scroll", updateActiveLink);
 });
+
+
+
+// Show Back-to-Main button after scrolling down
+window.addEventListener("scroll", function () {
+    const backToMain = document.getElementById("back-to-main");
+    if (window.scrollY > 100) { // Adjust scroll threshold as needed
+        backToMain.style.display = "block"; // Show button
+    } else {
+        backToMain.style.display = "none"; // Hide button
+    }
+});
+
 
 
 

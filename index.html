@@ -28,7 +28,7 @@
   <!-- Header -->
   <header id="header" class="header d-flex align-items-center sticky-top">
     <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
-      <div id="topbar">
+      <div id="top-name">
         <h1>Yousef Alsaqa</h1>
       </div>
     </div>
@@ -36,7 +36,7 @@
 
   <!-- Side Slider -->
   <nav id="navbar-scrollspy" class="navbar bg-light sidebar">
-    <ul class="nav flex-row">
+    <ul class="nav felx-row">
       <li class="nav-item">
         <a class="nav-link active" href="#about">About</a>
       </li>
@@ -45,9 +45,6 @@
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#experience">Experience</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#contact">Contact</a>
       </li>
     </ul>
   </nav>
@@ -61,14 +58,13 @@
       </div>
       <div class="row">
         <div class="col-lg-4" data-aos="fade-right">
-          <img src="Yousef Headshot.jpg" class="img-fluid" alt="Profile Picture">
+          <img src="assets/Yousef Headshot.jpg" class="img-fluid" alt="Profile Picture">
         </div>
         <div class="col-lg-8 pt-4 pt-lg-0 content" data-aos="fade-left">
           <h3>Mechatronics & Robotics Engineer</h3>
           <ul>
             <li><i class="bi bi-chevron-right"></i> <strong>Email:</strong> <span>21ymsa@queensu.ca</span></li>
             <li><i class="bi bi-chevron-right"></i> <strong>Phone:</strong> <span>+1 613-987-5970</span></li>
-            <li><i class="bi bi-chevron-right"></i> <strong>Location:</strong> <span>Kingston, ON, Canada</span></li>
           </ul>
           <p>Driven by my passion for robotics and automation, I’ve participated in multiple projects involving control systems, machine learning, and engineering design.</p>
         </div>
@@ -85,38 +81,36 @@
       </div>
       <div class="row">
         <!-- Project 1 -->
-        <div class="col-lg-4 col-md-6 portfolio-item">
-          <img src="initiallanedetection.jpg" class="img-fluid" alt="AutoDrive Project">
+        <div id="autodrive-project" class="col-lg-4 col-md-6 portfolio-item">
+          <img src="assets/initiallanedetection.jpg" class="img-fluid" alt="AutoDrive Project">
           <div class="portfolio-info">
-            <h4>AutoDrive Lane Detection</h4>
-            <p>Using Machine Learning to detect lanes</p>
-            <a href="autodrive-project.html" class="btn btn-outline-primary">Learn More</a>
+              <h4>AutoDrive Lane Detection</h4>
+              <p>Using Machine Learning to detect lanes</p>
+              <a href="autodrive-project.html" class="btn btn-outline-primary">Learn More</a>
           </div>
-        </div>
+      </div>      
 
         <!-- Project 2 -->
-        <div class="col-lg-4 col-md-6 portfolio-item">
-          <img src="img/portfolio/app-2.jpg" class="img-fluid" alt="Formula Racing">
+        <div id="formula-racing-project" class="col-lg-4 col-md-6 portfolio-item">
+          <img src="assets/queensfsae.png" class="img-fluid" alt="Formula Racing">
           <div class="portfolio-info">
-            <h4>Formula Racing Team</h4>
-            <p>Aerodynamics & Control Systems</p>
-            <a href="steering-project.html" class="btn btn-outline-primary">Learn More</a>
+              <h4>Formula Racing Team</h4>
+              <p>Steering & Control Systems</p>
+              <a href="steering-project.html" class="btn btn-outline-primary">Learn More</a>
           </div>
-        </div>
+      </div>
+      
 
         <!-- Project 3 -->
-        <div class="col-lg-4 col-md-6 portfolio-item">
-          <img src="img/portfolio/app-3.jpg" class="img-fluid" alt="MREN 203 Project">
-          <div class="portfolio-info">
-            <h4>MREN 203 Design Project</h4>
-            <p>CO2 Mapping Robot</p>
-            <a href="#projectModal3" data-bs-toggle="modal" class="btn btn-outline-primary">Learn More</a>
-          </div>
-        </div>
+        <div id="terrabot-project" class="col-lg-4 col-md-6 portfolio-item">
+          <img src="assets/203_Rover.jpg" class="img-fluid" alt="MREN 203 Project">
+          <div class="project" id="mren203">
+              <h3>MREN 203 Project: Terrabot</h3>
+              <p>An innovative indoor CO2 monitoring robot developed to improve air quality monitoring for Q-PMC.</p>
+              <a href="terrabot-details.html" class="btn btn-primary">Learn More</a> <!-- Link to new page -->
+          </div>        
       </div>
-    </div>
-  </section>
-
+      
   <!-- Experience Section -->
   <section id="experience" class="experience section" style="min-height: 100vh;">
     <div class="container" data-aos="fade-up">
@@ -130,67 +124,12 @@
     </div>
   </section>
 
-  <!-- Contact Section -->
-  <section id="contact" class="contact section" style="min-height: 100vh;">
-    <div class="container" data-aos="fade-up">
-      <div class="section-title">
-        <h2>Contact</h2>
-        <p>Feel free to reach out for collaborations or inquiries:</p>
-      </div>
-      <div class="row">
-        <div class="col-lg-6">
-          <form action="forms/contact.php" method="post" class="php-email-form">
-            <div class="row gy-4">
-              <div class="col-md-6">
-                <input type="text" name="name" class="form-control" placeholder="Your Name" required>
-              </div>
-              <div class="col-md-6">
-                <input type="email" name="email" class="form-control" placeholder="Your Email" required>
-              </div>
-              <div class="col-md-12">
-                <input type="text" name="subject" class="form-control" placeholder="Subject" required>
-              </div>
-              <div class="col-md-12">
-                <textarea name="message" rows="6" class="form-control" placeholder="Message" required></textarea>
-              </div>
-              <div class="col-md-12 text-center">
-                <button type="submit" class="btn btn-primary">Send Message</button>
-              </div>
-            </div>
-          </form>
-        </div>
-        <div class="col-lg-6">
-          <div class="info">
-            <div class="address">
-              <i class="bi bi-geo-alt"></i>
-              <h4>Location:</h4>
-              <p>Kingston, ON, Canada</p>
-            </div>
-            <div class="email">
-              <i class="bi bi-envelope"></i>
-              <h4>Email:</h4>
-              <p>21ymsa@queensu.ca</p>
-            </div>
-            <div class="phone">
-              <i class="bi bi-phone"></i>
-              <h4>Call:</h4>
-              <p>+1 613-987-5970</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- Footer -->
   <footer id="footer" class="footer">
     <div class="container">
-      <p>© 2024 Yousef Alsaqa. All Rights Reserved.</p>
+      <p>© 2024 Yousef Alsaqa. All Rights Reserved. <a href="mailto:21ymsa@queensu.ca" id="contact-button" class="contact-button">Contact Me</a></p>
       <div class="social-links">
-        <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
-        <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-        <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-        <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+        <a href="https://www.linkedin.com/in/yousef-alsaqa-b1ab4822b/" class="linkedin"><i class="bi bi-linkedin"></i></a>
       </div>
     </div>
   </footer>

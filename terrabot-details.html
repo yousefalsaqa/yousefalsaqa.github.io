@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terrabot Project Showcase</title>
+    <link rel="stylesheet" href="css/style.css"> <!-- Link to your CSS file -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- Icons -->
+</head>
+<body>
+    <!-- Main Container -->
+    <div id="terrabot-container" class="container">
+        <!-- Project Header -->
+        <header id="terrabot-header">
+            <h1>Terrabot Project</h1>
+            <p>By Terraforma Corporation for Q-PMC</p>
+            <img src="203_Rover.jpg" alt="Terrabot Project" class="header-image">
+        </header>
+
+        <!-- Executive Summary -->
+        <section id="terrabot-executive-summary" class="showcase-section">
+            <div class="text-content">
+                <h2><i class="fas fa-clipboard-list"></i> Executive Summary</h2>
+                <p>The Terrabot project involves the design and development of a robot for CO2 monitoring in indoor environments. Using SLAM and CO2 sensors, it generates a “heat map” of CO2 distribution, enhancing air quality management. This solution is expected to reduce costs associated with air quality monitoring while ensuring a healthier indoor environment.</p>
+            </div>
+        </section>
+
+        <!-- System Architecture -->
+        <section id="terrabot-system-architecture" class="showcase-section">
+            <img src="SystemArchitecture.png" alt="System Architecture" class="showcase-image">
+            <div class="text-content">
+                <h2><i class="fas fa-cogs"></i> System Architecture</h2>
+                <p>The Terrabot uses a Raspberry Pi for data processing and connects to various sensors, including LiDAR for SLAM and a CO2 sensor. Key components communicate through ROS nodes. Navigation modes (autonomous or remote control) are selectable, and the robot utilizes Dijkstra's Algorithm for effective mapping.</p>
+            </div>
+        </section>
+
+        <!-- CO2 Mapping Details -->
+        <section id="terrabot-co2-mapping" class="showcase-section">
+            <div class="text-content">
+                <h2><i class="fas fa-map-marked-alt"></i> CO2 Mapping</h2>
+                <p>The CO2 mapping feature employs a heatmap visualization technique, using measured CO2 concentration data at specific coordinates. Data interpolation fills gaps between measurements, creating a comprehensive visual representation of CO2 distribution in the environment.</p>
+                <img src="CO2.png" alt="CO2 Heat Map" class="showcase-image">
+            </div>
+        </section>
+
+        <!-- Room Mapping Details -->
+        <section id="terrabot-room-mapping" class="showcase-section">
+            <img src="SLAMmap.png" alt="Room Mapping with Hector SLAM" class="showcase-image">
+            <div class="text-content">
+                <h2><i class="fas fa-map"></i> Room Mapping</h2>
+                <p>The room mapping feature is powered by Hector SLAM, which uses LiDAR data to build a real-time 2D occupancy grid map. This allows the robot to autonomously navigate the room while avoiding obstacles, ensuring efficient and accurate mapping for CO2 heatmap generation.</p>
+            </div>
+        </section>
+
+        <!-- Hardware Section -->
+        <section id="terrabot-hardware" class="showcase-section">
+            <div class="text-content">
+                <h2><i class="fas fa-tools"></i> Hardware</h2>
+                <ul>
+                    <li>Raspberry Pi v4</li>
+                    <li>Arduino Uno Wifi Rev2</li>
+                    <li>360-Degree LiDAR Sensor</li>
+                    <li>SCD30 Air Quality Sensor</li>
+                    <li>SHARP Distance Sensor</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer id="terrabot-footer">
+            <p>&copy; 2024 Terraforma Corporation. All Rights Reserved.</p>
+        </footer>
+    </div>
+
+    <!-- Back-to-Main Button -->
+    <a href="index.html" id="back-to-main" class="back-to-main">
+        <span>⬅ Main Page</span>
+    </a>
+</body>
+</html>
