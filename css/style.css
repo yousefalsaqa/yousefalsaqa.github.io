@@ -57,127 +57,106 @@ body {
     font-weight: 700;
 }
 
-/* Fix for overlapping name and buttons */
-.navbar {
-    position: relative;
-    z-index: 1000; /* Ensure navbar is on top */
-}
 
-/* Navbar Styling */
+/*
+Navbar Styling 
 #navbar-scrollspy {
-    position: fixed; /* Keep it at the top */
-    top: 0;
-    left: 0;
-    z-index: 1000; /* Ensure it's layered below the header name */
-    width: 100%; /* Stretch the navbar across the screen */
-    background: transparent; /* Dark semi-transparent background */
-    padding: 10px 0; /* Add padding for better spacing */
-}
-
-/* Navbar Link Styling */
-#navbar-scrollspy .nav-link {
-    color: white; /* White text for links */
-    padding: 10px 15px;
-    text-decoration: none;
-    font-weight: bold;
-    text-transform: uppercase;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-}
-
-/* Active and Hover Links */
-#navbar-scrollspy .nav-link.active,
-#navbar-scrollspy .nav-link:hover {
-    background-color: transparent; /* Remove the white background completely */
-    color: yellow; /* Highlight link text */
-}
-
-/* Name Header Styling */
-#name-header {
-    position: absolute; /* Position relative to the parent */
-    top: 70px; /* Adjust to sit below the navbar */
-    left: 50%; /* Center horizontally */
-    transform: translateX(-50%); /* Correct centering offset */
-    z-index: 1200; /* Ensure it's above the navbar */
-    font-size: 2.5rem;
-    font-weight: bold;
-    color: yellow;
-    text-align: center;
-    background: transparent; /* No background for header */
-}
-/* Navbar Container */
-#navbar-scrollspy {
-    position: fixed; /* Fix it to the viewport */
-    top: 50%; /* Center vertically */
-    left: 0; /* Attach to the right edge */
-    transform: translateY(-50%); /* Center vertically with transform */
-    z-index: 1000; /* Ensure it stays above other elements */
+    position: fixed; /* Fix it to the viewport 
+    top: 50%; /* Center vertically
+    left: 10px; /* Attach to the left edge 
+    transform: translateY(-50%); /* Center vertically with transform 
+    z-index: 1000; /* Ensure it stays above other elements
     display: flex;
-    flex-direction: column; /* Stack items vertically */
-    gap: 20px; /* Space between buttons */
-    background: transparent; /* Transparent background */
-    padding: 0; /* Remove extra padding */
-    width: auto; /* Ensure it's not stretched */
-    height: auto; /* Ensure it doesn't fill unintended space */
-    border: none; /* Remove any border */
+    flex-direction: column; /* Stack items vertically
+    gap: 20px; /* Space between buttons 
+    background: transparent; /* Transparent background 
+    padding: 0; /* Remove extra padding 
+    width: auto; /* Ensure it's not stretched
+    border: none; /* Remove any border 
 }
+*/
 
-/* Navbar Links */
+
+/* Navbar Links 
 #navbar-scrollspy .nav-link {
-    color: white; /* White text */
+    color: white; /* White text 
     font-weight: bold;
     text-transform: uppercase;
-    padding: 10px 15px; /* Add padding for clickable area */
-    text-decoration: none; /* Remove underline */
-    text-align: center; /* Center text */
-    border-radius: 10px; /* Optional rounded corners */
-    background: linear-gradient(to right, #800080, #4b0082); /* Purple gradient */
+    padding: 10px 15px; /* Add padding for clickable area 
+    text-decoration: none; /* Remove underline 
+    text-align: center; /* Center text 
+    border-radius: 10px; /* Optional rounded corners 
+    background: linear-gradient(to right, #800080, #4b0082); /* Purple gradient 
     transition: transform 0.2s ease, background-color 0.3s ease;
-}
+} */
 
-/* Hover and Active Effects */
+/* Hover and Active Effects 
 #navbar-scrollspy .nav-link:hover {
-    transform: scale(1.1); /* Slight zoom effect on hover */
-    background: linear-gradient(to right, #ff4500, #ff8c00); /* Orange gradient */
+    transform: scale(1.1); /* Slight zoom effect on hover 
+    background: linear-gradient(to right, #ff4500, #ff8c00); /* Orange gradient 
     color: white;
 }
 
 #navbar-scrollspy .nav-link.active {
-    background: linear-gradient(to right, #ffd700, #ffa500); /* Gold gradient for active link */
-    color: black; /* Black text for contrast */
+    background: linear-gradient(to right, #ffd700, #ffa500); /* Gold gradient for active link 
+    color: black; /* Black text for contrast
 }
+*/
 
-/* Responsive Adjustments */
+
+/* Responsive Adjustments 
 @media (max-width: 768px) {
     #navbar-scrollspy {
-        top: 10px; /* Move closer to the top */
-        right: 10px; /* Add spacing from the edge */
-        transform: none; /* Remove vertical centering */
-        flex-direction: row; /* Make it horizontal for small screens */
-        border-radius: 0; /* Remove rounded corners */
+        top: 10px; /* Move closer to the top 
+        left: 50%; /* Center horizontally for small screens 
+        transform: translateX(-50%); /* Horizontally center 
+        flex-direction: row; /* Make it horizontal for small screens 
+        gap: 10px; /* Adjust spacing for horizontal layout 
     }
 
     #navbar-scrollspy .nav-link {
-        font-size: 0.9rem; /* Smaller text */
-        padding: 8px 12px; /* Reduce padding */
+        font-size: 0.9rem; /* Smaller text 
+        padding: 8px 12px; /* Reduce padding 
     }
+} */
+
+.nav-link {
+    text-decoration: none;
+    color: #ffffff; /* Default link color */
+    padding: 10px 15px;
+    font-weight: bold;
+    transition: color 0.3s ease, background-color 0.3s ease;
+  }
+  
+  .nav-link:hover {
+    color: #ffd700; /* Hover color */
+  }
+  
+  .nav-link.active {
+    color: #000000; /* Active text color */
+    background-color: #ffd700; /* Active background color */
+    border-radius: 5px; /* Optional: Rounded corners */
+    padding: 10px 15px; /* Ensure padding stays consistent */
+  }
+  
+
+/* Hidden State for Buttons */
+.hidden-buttons {
+    opacity: 0;
+    pointer-events: none; /* Disable interaction */
+    transition: opacity 0.5s ease; /* Smooth fade-in effect */
 }
 
+/* Visible State for Buttons */
+.visible-buttons {
+    opacity: 1;
+    pointer-events: auto; /* Enable interaction */
+    transition: opacity 0.5s ease; /* Smooth fade-in effect */
+}
 
 
 #hero p {
     font-size: 1.5rem;
-}
-
-/* Add vertical space */
-.section {
-    padding: 120px 0;
-/* Debugging border for visibility */
-}
-
-/* Projects Section */
-.projects {
-    padding: 60px 0;
 }
 
 .card {
@@ -210,37 +189,198 @@ body {
 
 /* Styles for the top bar */
 /* Top Name Styling */
-#top-name {
-    position: fixed;
-    top: 10px;
-    left: 20px;
+/* Header Container */
+#header {
+    background: transparent;
+    padding: 15px 30px; /* Spacing inside the header */
     z-index: 1000;
-    font-size: 1.5em;
-    font-weight: bold;
-    color: #ffd700; /* Gold color */
-    background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-    padding: 8px 15px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    font-family: 'Poppins', sans-serif; /* Use matching website font */
-    transition: all 0.3s ease;
 }
 
-/* Hover Effect */
-#top-name:hover {
-    background: linear-gradient(to right, #4b0082, #800080); /* Purple gradient */
-    color: white; /* Text changes to white */
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
-    transform: scale(1.05); /* Slight enlargement on hover */
+/* Name Styling */
+.header-name {
+    font-family: 'Cinzel', serif; /* Elegant and professional font */
+    font-size: 2.8em; /* Larger size to make it prominent */
+    font-weight: bold; /* Strong emphasis */
+    color: #FF4500; /* Vibrant orange-red for contrast */
+    text-align: center; /* Center-align the name */
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4); /* Add depth with subtle shadow */
+    background: linear-gradient(to right, hsl(0, 0%, 0%), hsl(53, 100%, 41%)); /* Gold to amber gradient */
+    -webkit-background-clip: text; /* Gradient clipped to text */
+    -webkit-text-fill-color: transparent; /* Makes gradient visible */
+    padding: 10px; /* Add padding for spacing */
+    margin: 0 auto; /* Center horizontally in the header */
+    border-radius: 8px; /* Rounded edges for elegance */
+}
+
+
+.header-name:hover {
+    transform: scale(1.1); /* Slight enlargement on hover */
+}
+
+/* Navigation Styling */
+#navbar {
+    display: flex;
+    gap: 20px; /* Space between links */
+}
+
+#navbar .nav-link {
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: white; /* White text for contrast */
+    text-decoration: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+#navbar .nav-link:hover {
+    background: rgba(255, 255, 255, 0.2); /* Subtle hover effect */
+    transform: translateY(-3px); /* Hover lift effect */
+}
+
+#navbar .nav-link.active {
+    background: rgba(255, 255, 255, 0.5); /* Highlight for the active link */
+    color: black;
 }
 
 /* Responsive Adjustments */
 @media (max-width: 768px) {
-    #top-name {
-        font-size: 1.2em;
-        padding: 6px 12px;
+    #header {
+        flex-direction: column;
+        padding: 10px 20px;
+    }
+
+    .header-name {
+        font-size: 1.5rem;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    #navbar {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    #navbar .nav-link {
+        padding: 6px 10px;
+        font-size: 0.9rem;
     }
 }
+
+
+/* About Section Container */
+.about-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    padding: 10px;
+    background: transparent;
+    color: white;
+}
+
+/* About Content Layout */
+.about-content {
+    display: flex;
+    gap: 40px; /* Space between image and text */
+    max-width: 1200px;
+    align-items: center;
+}
+
+/* Image Styling */
+.about-image img {
+    border-radius: 50%; /* Circle Image */
+    width: 250px; /* Adjust size */
+    height: 250px;
+    object-fit: cover;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Add shadow */
+}
+
+/* Text Content Styling */
+.about-text {
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Heading and Subtitle */
+.about-heading {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin: 0;
+    text-transform: uppercase;
+    background: linear-gradient(to right, #ffd700, #ffa500);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.about-subtitle {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: #e0e0e0;
+}
+
+/* Buttons */
+.about-buttons {
+    display: flex;
+    gap: 20px;
+}
+
+.about-buttons .btn {
+    padding: 12px 20px;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.about-buttons .btn-primary {
+    background: linear-gradient(to right, #800080, #4b0082);
+    color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.about-buttons .btn-primary:hover {
+    background: linear-gradient(to right, #5a00b2, #1e90ff);
+    transform: translateY(-2px);
+}
+
+.about-buttons .btn-secondary {
+    background: linear-gradient(to right, #ff4500, #ff8c00);
+    color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.about-buttons .btn-secondary:hover {
+    background: linear-gradient(to right, #ff6347, #ffa500);
+    transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+    .about-content {
+        flex-direction: column; /* Stack image and text vertically */
+        text-align: center;
+    }
+
+    .about-image img {
+        width: 200px;
+        height: 200px;
+    }
+
+    .about-text {
+        align-items: center;
+    }
+
+    .about-buttons {
+        justify-content: center;
+    }
+}
+
 
 body {
     background: linear-gradient(to bottom, #4b0082, #000080, #000);
@@ -637,7 +777,6 @@ body {
     border-radius: 12px;
     padding: 20px;
     margin: 15px;
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /* Subtle shadow */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     display: flex;
     flex-direction: column;
@@ -692,15 +831,15 @@ body {
     background-color: #1a1aff; /* Lighter blue */
 }
 
-/* Grid layout for project cards */
-.projects-grid {
+    /* Grid layout for project cards */
+    .projects-grid {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
     justify-content: center; /* Center cards horizontally */
     align-items: stretch; /* Ensure all cards align vertically */
 }
-.showcase-box img {
+    .showcase-box img {
     border-radius: 10px;
     max-width: 80%; /* Limit image size for smaller screens */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Add shadow for better visibility */
@@ -712,5 +851,179 @@ body {
     color: #ccc; /* Light gray for the caption text */
     display: block;
     margin-top: 10px;
+  }
+  /* Header */
+
+    #rexcubot-header {
+    text-align: center;
+    padding: 20px;
+    background: #4b0082;
+    color: #ffd700;
+  }
+  
+  #rexcubot-title {
+    font-size: 2.5rem;
+    margin: 0;
+  }
+  
+  #rexcubot-subtitle {
+    font-size: 1.2rem;
+    margin: 10px 0;
+  }
+  
+  /* Sections */
+  section {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 1200px;
+  }
+  
+  h2 {
+    font-size: 1.8rem;
+    color: #ffd700;
+    margin-bottom: 15px;
+  }
+  
+  p {
+    margin: 10px 0;
+  }
+  
+  ul {
+    list-style-type: disc;
+    margin-left: 20px;
+  }
+  
+  /* Images */
+  img {
+    width: 100%;
+    max-width: 400px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    margin-bottom: 10px;
+  }
+  
+  .image-caption {
+    font-size: 0.9rem;
+    color: #bdbdbd;
+    text-align: center;
+  }
+  
+  /* Embedded Report */
+  iframe {
+    border: none;
+  }
+  
+  .report-note {
+    text-align: center;
+    font-size: 0.9rem;
+    margin-top: 10px;
+  }
+  
+  .report-note a {
+    color: #ffd700;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  .report-note a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Footer */
+  #rexcubot-footer {
+    text-align: center;
+    padding: 10px;
+    background: #4b0082;
+    color: #ffffff;
+  }
+  /* QSET Robotic Arm Styling */
+    #qset-container {
+    margin: 0 auto;
+    max-width: 1200px;
+    padding: 20px;
+    color: #ffffff;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(to bottom, #4b0082, #000000);
+  }
+  
+  /* Back to Main Page Button */
+  #qset-back-to-main {
+    display: inline-block;
+    margin-bottom: 20px;
+    padding: 10px 20px;
+    color: #ffffff;
+    background: #800080;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+  }
+  #qset-back-to-main:hover {
+    background: #ff4500;
+  }
+  
+  /* Title Section */
+  #qset-title h1 {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 5px;
+    color: #ffd700;
+  }
+  #qset-title h2 {
+    font-size: 1.5rem;
+    text-align: center;
+    color: #ffffff;
+    margin-bottom: 30px;
+  }
+  
+  /* Design Section */
+  #qset-design-section img {
+    width: 100%;
+    max-width: 600px;
+    display: block;
+    margin: 20px auto;
+    border-radius: 10px;
+  }
+  
+  /* System Architecture Section */
+  #qset-system-section img {
+    width: 100%;
+    max-width: 600px;
+    display: block;
+    margin: 20px auto;
+    border-radius: 10px;
+  }
+  
+  /* Mathematical Section */
+  #qset-math-section img {
+    width: 100%;
+    max-width: 600px;
+    display: block;
+    margin: 20px auto;
+    border-radius: 10px;
+  }
+  
+  /* FBD Section */
+  #qset-fbd-section img {
+    width: 100%;
+    max-width: 600px;
+    display: block;
+    margin: 20px auto;
+  }
+  
+  /* Poster Section */
+  #qset-poster-frame {
+    width: 100%;
+    height: 500px;
+    border: none;
+    margin: 20px 0;
+    background: #ffffff;
+  }
+  
+  #qset-poster-section a {
+    color: #ffd700;
+    text-decoration: underline;
   }
   

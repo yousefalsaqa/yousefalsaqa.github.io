@@ -7,6 +7,59 @@ document.body.addEventListener('activate.bs.scrollspy', function () {
     console.log('Active section:', activeSection.textContent);
 });
 
+// Get the navbar element
+const navbar = document.getElementById('navbar-scrollspy');
+
+// Add a scroll event listener to the window
+window.addEventListener('scroll', () => {
+    // Check the scroll position
+    if (window.scrollY > 100) { // Adjust threshold as needed
+        navbar.classList.add('visible');
+        navbar.classList.remove('hidden');
+    } else {
+        navbar.classList.add('hidden');
+        navbar.classList.remove('visible');
+    }
+});
+
+// Select all navigation links and sections
+const navLinks = document.querySelectorAll('.nav-link');
+const sections = document.querySelectorAll('#about, #projects, #experience, #footer');
+
+// Function to remove 'active' class from all links
+const removeActiveClasses = () => {
+  navLinks.forEach((link) => link.classList.remove('active'));
+};
+
+// Function to add 'active' class to the current link
+const activateNavLink = (id) => {
+  removeActiveClasses();
+  const activeLink = document.querySelector(`.nav-link[href="#${id}"]`);
+  if (activeLink) {
+    activeLink.classList.add('active');
+  }
+};
+
+// Use Intersection Observer API to observe each section
+const observer = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        activateNavLink(entry.target.id);
+      }
+    });
+  },
+  {
+    threshold: 0.2, // Trigger when section is at least 60% visible
+  }
+);
+
+// Observe each section
+sections.forEach((section) => {
+  observer.observe(section);
+});
+
+
 // Project Navigation (can be used with modal or separate page)
 function navigateToProject(projectId) {
     let projectDetails = {

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rexcubot Project Details</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header id="rexcubot-header">
+    <h1 id="rexcubot-title">Tronassic Park: Team Rexcubot</h1>
+    <p id="rexcubot-subtitle">Advanced robotic design and implementation for precision and adaptability.</p>
+  </header>
+
+  <main id="rexcubot-main">
+    <!-- Introduction Section -->
+    <section id="rexcubot-intro">
+      <div id="rexcubot-intro-text">
+        <p>
+          Rexcubot was designed for the Tronassic Park competition to autonomously navigate and complete precision-based tasks. The competition demanded innovation in design, electronics, and control, focusing on object retrieval and autonomous navigation. 
+        </p>
+      </div>
+      <div id="rexcubot-intro-image">
+        <img src="assets/303_Rexcubot_Main.jpg" alt="Fully Assembled Rexcubot">
+        <p class="image-caption">Rexcubot in its final assembly, ready for competition.</p>
+      </div>
+    </section>
+
+    <!-- Scoop Mechanism Section -->
+    <section id="rexcubot-scoop">
+      <h2>Scoop Mechanism</h2>
+      <div id="rexcubot-scoop-text">
+        <p>
+          The scoop mechanism was designed using a <b>parallel linkage system</b> to ensure uniform motion throughout its range. This approach provided stability and consistent force distribution, crucial for retrieving scattered objects efficiently. 
+        </p>
+        <p>
+          The lightweight aluminum arms of the linkage reduced the inertial load on the servo motor, optimizing energy consumption while maintaining structural integrity. Testing ensured the scoop could retrieve multiple objects in a single motion without mechanical failure.
+        </p>
+      </div>
+      <div id="rexcubot-scoop-image">
+        <img src="assets/303_Scoop.jpg" alt="Scoop Mechanism Design">
+        <p class="image-caption">The parallel linkage-based scoop mechanism, engineered for precision and durability.</p>
+      </div>
+    </section>
+
+    <!-- Claw Assembly Section -->
+    <section id="rexcubot-claw">
+      <h2>Claw Assembly</h2>
+      <div id="rexcubot-claw-text">
+        <p>
+          The claw assembly was designed for tasks requiring high precision, such as rescuing the Ken doll from a pit. The gripper's actuation was controlled via a high-torque servo, ensuring smooth operation under variable load conditions.
+        </p>
+        <p>
+          The gripper’s geometry was optimized to handle a wide range of object shapes and sizes. Stress analysis ensured the assembly could withstand repeated use without deformation or loss of grip strength.
+        </p>
+      </div>
+      <div id="rexcubot-claw-image">
+        <img src="assets/303_Gripper.jpg" alt="Claw Mechanism Design">
+        <p class="image-caption">Precision gripper mechanism for reliable object manipulation.</p>
+      </div>
+    </section>
+
+    <!-- Control Systems Section -->
+    <section id="rexcubot-control">
+      <h2>Control Systems</h2>
+      <div id="rexcubot-control-text">
+        <p>
+          Rexcubot featured a hybrid control system, combining autonomous navigation with manual gamepad control. The <b>IR sensors</b> facilitated precise line-following capabilities, while the ultrasonic sensors provided obstacle detection and avoidance.
+        </p>
+        <p>
+          The software architecture was developed in C++, incorporating state machines for task transitions. A UDP-based communication protocol enabled seamless real-time control via a Python gamepad interface.
+        </p>
+      </div>
+      <div id="rexcubot-control-image">
+        <img src="assets/electric_schematic_303.png" alt="Control Systems Schematic">
+        <p class="image-caption">Wiring and control system schematic for Rexcubot.</p>
+      </div>
+    </section>
+
+    <!-- Research Report Section -->
+    <section id="rexcubot-report">
+      <h2>Research Report</h2>
+      <p>
+        The comprehensive research report details the design process, testing phases, and results of Rexcubot's competition performance. It highlights innovations in robotic systems integration and lessons learned for future projects.
+      </p>
+      <div id="rexcubot-report-viewer">
+        <iframe src="assets/303botreport.pdf" width="100%" height="500px" frameborder="0"></iframe>
+        <p class="report-note">
+          If the embedded document doesn’t load, <a href="assets/303botreport.pdf" download>download the report here</a>.
+        </p>
+      </div>
+    </section>
+
+    <!-- Poster Section -->
+    <section id="rexcubot-poster">
+      <h2>Project Poster</h2>
+      <p>
+        A visually engaging poster summarizing Rexcubot’s key features and competition performance.
+      </p>
+      <div id="rexcubot-poster-image">
+        <img src="assets/303bot_poster.jpg" alt="Project Poster">
+        <p class="image-caption">Rexcubot competition poster highlighting key achievements.</p>
+      </div>
+    </section>
+  </main>
+
+    <a href="index.html" id="back-to-main" class="back-to-main">
+        <span>⬅ Main Page</span>
+    </a>
+
+  <footer id="rexcubot-footer">
+    <p>© 2024 Team Rexcubot | Tronassic Park Competition</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+  <title>QSET Robotic Arm</title>
+</head>
+<body>
+  <div id="qset-container" class="container">
+    <!-- Project Title -->
+    <div id="qset-title">
+      <h1>QSET Robotic Arm</h1>
+      <h2>By Queen's Space Engineering Team</h2>
+    </div>
+
+    <!-- Design Description Section -->
+    <div id="qset-design-section">
+      <h3>Design Overview</h3>
+      <p>
+        The QSET robotic arm was developed to enable precise manipulation for space exploration tasks. 
+        The arm consists of six degrees of freedom, offering unparalleled dexterity. The design incorporates 
+        advanced parallel-link mechanisms for stability, and the joints are driven using high-efficiency gear trains.
+      </p>
+      <img src="assets/qset_arm_drawing.png" alt="QSET Robotic Arm Design" id="qset-arm-drawing">
+      <p>
+        The base pan provides rotational movement (joint 1), while the shoulder (joint 2) ensures vertical articulation.
+        The elbow (joint 3) and forearm rotation (joint 4) enable intermediate positioning, and the wrist (joints 5 and 6) 
+        handle fine end-effector manipulations, such as gripping and tool rotations.
+      </p>
+    </div>
+
+    <!-- System Architecture Section -->
+    <div id="qset-system-section">
+      <h3>System Architecture</h3>
+      <p>
+        The arm's control architecture is built on an STM32F407 microcontroller, ensuring real-time response. 
+        Key components include:
+      </p>
+      <ul>
+        <li>Linear actuators for large joint movements</li>
+        <li>Servos for fine wrist articulation</li>
+        <li>CAN transceiver for robust communication</li>
+        <li>Voltage step-down modules for power regulation</li>
+      </ul>
+      <img src="assets/qsetsystemarchitecture.png" alt="System Architecture Diagram" id="qset-system-diagram">
+      <p>
+        The diagram illustrates how the microcontroller interfaces with peripherals like calibration limit switches, 
+        actuators, and CAN communication modules, enabling seamless operation and feedback control.
+      </p>
+    </div>
+
+    <!-- Mathematical Analysis Section -->
+    <div id="qset-math-section">
+      <h3>Kinematic and Dynamic Analysis</h3>
+      <p>
+        The arm's motion was modeled using Denavit-Hartenberg (DH) parameters to define the joint transformations.
+        The forward kinematics were solved by constructing homogeneous transformation matrices for each joint.
+      </p>
+      <img src="assets/arm_math1.png" alt="Rotation Matrices" id="qset-rotation-math">
+      <img src="assets/arm_math2.png" alt="Homogeneous Transformations" id="qset-homogeneous-math">
+      <p>
+        Dynamic analysis involved deriving the equations of motion using Lagrangian mechanics, factoring in torque, 
+        inertia, and external forces acting on the arm. The arm's operational stability was ensured by calculating 
+        force distributions at each joint under load.
+      </p>
+      <img src="assets/arm_math3.png" alt="Force Analysis" id="qset-force-math">
+    </div>
+
+    <!-- FBD Section -->
+    <div id="qset-fbd-section">
+      <h3>Free Body Diagram</h3>
+      <p>
+        The Free Body Diagram (FBD) showcases the forces and moments acting on the robotic arm. It guided the 
+        selection of materials and components, ensuring the arm's structural integrity and load-handling capabilities.
+      </p>
+      <img src="assets/arm_fbd.png" alt="Free Body Diagram" id="qset-fbd-diagram">
+    </div>
+    <a href="index.html" id="qset-back-to-main" class="back-to-main">← Main Page</a>
+
+
+  </div>
+</body>
+</html>

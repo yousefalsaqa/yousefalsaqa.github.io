@@ -25,46 +25,57 @@
 
 <body data-bs-spy="scroll" data-bs-target="#navbar-scrollspy" data-bs-offset="100" tabindex="0">
 
-  <!-- Header -->
   <header id="header" class="header d-flex align-items-center sticky-top">
-    <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
-      <div id="top-name">
-        <h1>Yousef Alsaqa</h1>
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+      <!-- Updated Name Section -->
+      <div id="top-name" class="d-flex align-items-center">
+        <h1 class="header-name">Yousef Alsaqa</h1>
       </div>
+      <!-- Navigation Links -->
+      <nav id="navbar" class="d-flex">
+        <a href="#about" class="nav-link">About</a>
+        <a href="#projects" class="nav-link">Projects</a>
+        <a href="#experience" class="nav-link">Experience</a>
+        <a href="mailto:21ymsa@queensu.ca" class="nav-link">Contact</a>
+      </nav>
     </div>
   </header>
+  
 
-  <!-- Side Slider -->
+  <!-- Side Slider 
   <header id="header">
     <nav id="navbar-scrollspy" class="navbar">
       <a href="#about" class="nav-link active">About</a>
       <a href="#projects" class="nav-link">Projects</a>
       <a href="#experience" class="nav-link">Experience</a>
     </nav>
-  </header>
+  </header> -->
 
   <!-- About Section -->
-  <section id="about" class="about section" style="min-height: 100vh;">
-    <div class="container" data-aos="fade-up">
-      <div class="section-title">
-        <h2>About Me</h2>
-        <p>I am an Egyptian international student pursuing my BaSc in Mechatronics and Robotics Engineering with a passion for autonomous systems, machine learning, and control systems.</p>
-      </div>
-      <div class="row">
-        <div class="col-lg-4" data-aos="fade-right">
-          <img src="assets/Yousef Headshot.jpg" class="img-fluid" alt="Profile Picture">
-        </div>
-        <div class="col-lg-8 pt-4 pt-lg-0 content" data-aos="fade-left">
-          <h3>Mechatronics & Robotics Engineer</h3>
-          <ul>
-            <li><i class="bi bi-chevron-right"></i> <strong>Email:</strong> <span>21ymsa@queensu.ca</span></li>
-            <li><i class="bi bi-chevron-right"></i> <strong>Phone:</strong> <span>+1 613-987-5970</span></li>
-          </ul>
-          <p>Driven by my passion for robotics and automation, I’ve participated in multiple projects involving control systems, machine learning, and engineering design.</p>
-        </div>
-      </div>
+  <section id="about" class="about-section">
+    <div class="container">
+      <div class="about-content">
+            <!-- Image Section -->
+            <div class="about-image">
+                <img src="assets/Yousef Headshot.jpg" alt="Yousef Alsaqa">
+            </div>
+
+            <!-- Text Section -->
+            <div class="about-text">
+                <h1 class="about-heading">Mechatronics & Robotics Engineer</h1>
+                <p class="about-subtitle">
+                    I am an Egyptian international student pursuing my BaSc in Mechatronics and Robotics Engineering 
+                    with a passion for autonomous systems, machine learning, and control systems.
+                </p>
+                <div class="about-buttons">
+                    <a href="#projects" class="btn btn-primary">Projects</a>
+                    <a href="#experience" class="btn btn-secondary">Experience</a>
+                </div>
+            </div>
+       </div>
     </div>
   </section>
+
 
   <!-- Projects Section -->
   <section id="projects" class="projects section">
@@ -96,8 +107,25 @@
           <img src="assets/203_Rover.jpg" alt="Terrabot Project">
           <h4>MREN 203 Project: Terrabot</h4>
           <p>An indoor CO2 monitoring robot developed to measure air quality.</p>
-          <a href="terrabot-details.html" class="btn">Learn More</a>
+          <a href="terrabot-details.html" class="btn">Learn More</a>  
         </div>
+        
+        <!-- MREN 303 Project -->
+        <div class="project-card">
+          <img src="assets/303bot.jpg" alt="Team Rexcubot Project">
+          <h4>The Rexcubot</h4>
+          <p>A custom mobile robot designed to autonomously navigate, retrieve objects in competitive scenarios.</p>
+          <a href="rexcubot-details.html" class="btn">Learn More</a>  
+        </div>
+
+        <!-- QSET ARM -->
+        <div class="project-card">
+          <img src="assets/qset robot with arm.png" alt="QSET Robotic Arm Project">
+          <h4>QSET Robotic Arm</h4>
+          <p>Robotic arm design with advanced kinematics and robust control architecture for space exploration tasks.</p>
+          <a href="qsetarm-details.html" class="btn">Learn More</a>
+        </div>
+        
       </div>
     </div>
   </section>
