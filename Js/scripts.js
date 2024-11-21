@@ -50,7 +50,7 @@ const observer = new IntersectionObserver(
     });
   },
   {
-    threshold: 0.2, // Trigger when section is at least 60% visible
+    threshold: 0, // Trigger when section is at least 60% visible
   }
 );
 
