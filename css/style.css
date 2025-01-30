@@ -938,14 +938,14 @@ body {
     background: #4b0082;
     color: #ffffff;
   }
-  /* QSET Robotic Arm Styling */
-    #qset-container {
+ /* General Container Styling */
+#qset-showcase-container {
     margin: 0 auto;
     max-width: 1200px;
     padding: 20px;
-    color: #ffffff;
+    color: #f0f0f0;
     font-family: 'Poppins', sans-serif;
-    background: linear-gradient(to bottom, #4b0082, #000000);
+    line-height: 1.6;
   }
   
   /* Back to Main Page Button */
@@ -954,76 +954,87 @@ body {
     margin-bottom: 20px;
     padding: 10px 20px;
     color: #ffffff;
-    background: #800080;
+    background: #0078d7;
     border-radius: 10px;
     text-decoration: none;
     font-weight: bold;
     transition: background-color 0.3s ease;
   }
   #qset-back-to-main:hover {
-    background: #ff4500;
+    background: #0056b3;
   }
   
   /* Title Section */
   #qset-title h1 {
-    font-size: 2.5rem;
+    font-size: 2.8rem;
     text-align: center;
     margin-bottom: 5px;
-    color: #ffd700;
+    color: #ffffff;
   }
   #qset-title h2 {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     text-align: center;
-    color: #ffffff;
+    color: #a1a1d6;
     margin-bottom: 30px;
   }
   
-  /* Design Section */
-  #qset-design-section img {
-    width: 100%;
-    max-width: 600px;
-    display: block;
-    margin: 20px auto;
+  /* Showcase Box Styling */
+  .showcase-box {
+    margin: 20px 0;
+    padding: 25px;
+    border: 1px solid #3a3a5e;
     border-radius: 10px;
+    background: #2a2a45;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   }
   
-  /* System Architecture Section */
-  #qset-system-section img {
-    width: 100%;
-    max-width: 600px;
-    display: block;
-    margin: 20px auto;
-    border-radius: 10px;
+  .showcase-box h3 {
+    font-size: 2rem;
+    margin-bottom: 15px;
+    color: #ffffff;
+    border-bottom: 2px solid #5a5aad;
+    padding-bottom: 5px;
   }
   
-  /* Mathematical Section */
-  #qset-math-section img {
-    width: 100%;
-    max-width: 600px;
-    display: block;
-    margin: 20px auto;
-    border-radius: 10px;
+  .showcase-box p {
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+    color: #d3d3f7;
   }
   
-  /* FBD Section */
-  #qset-fbd-section img {
-    width: 100%;
-    max-width: 600px;
+  .showcase-box ul {
+    list-style-type: square;
+    margin-left: 20px;
+    color: #d3d3f7;
+  }
+  
+  /* Images */
+  .showcase-images img {
+    max-width: 48%;
+    margin: 10px;
+    border-radius: 10px;
+    display: inline-block;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  }
+  
+  #qset-arm-drawing, #qset-robot-with-arm, #qset-system-diagram, #qset-rotation-math,
+  #qset-homogeneous-math, #qset-force-math, #qset-fbd-diagram {
+    max-width: 100%;
+    margin: 15px auto;
     display: block;
-    margin: 20px auto;
+    border-radius: 10px;
   }
   
   /* Poster Section */
   #qset-poster-frame {
     width: 100%;
     height: 500px;
-    border: none;
+    border: 1px solid #cccccc;
     margin: 20px 0;
-    background: #ffffff;
   }
   
   #qset-poster-section a {
-    color: #ffd700;
+    color: #0078d7;
     text-decoration: underline;
   }
   
