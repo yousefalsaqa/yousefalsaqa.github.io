@@ -65,9 +65,7 @@
       <!-- Logo/Name Section -->
       <div class="header-brand">
         <h1 class="header-name" role="heading" aria-level="1">
-          <a href="#about" aria-label="Yousef Alsaqa - Go to about section">
-            Yousef Alsaqa
-          </a>
+          Yousef Alsaqa
         </h1>
       </div>
       
@@ -472,17 +470,11 @@ function simulateEnergy() {
   <script src="vendor/aos/aos.js"></script>
   <script src="vendor/glightbox/js/glightbox.min.js"></script>
 
-  <!-- Main Application -->
-  <script type="module" src="js/app.js"></script>
+  <!-- Navigation Script (Works immediately) -->
+  <script src="js/navigation-fallback.js"></script>
   
-  <!-- Fallback for browsers without module support -->
-  <script nomodule>
-    console.warn('Your browser does not support ES modules. Some features may not work.');
-    // Load legacy script as fallback
-    var script = document.createElement('script');
-    script.src = 'js/scripts.js';
-    document.head.appendChild(script);
-  </script>
+  <!-- Main Application (Enhanced features) -->
+  <script type="module" src="js/app.js"></script>
 
 </body>
 
