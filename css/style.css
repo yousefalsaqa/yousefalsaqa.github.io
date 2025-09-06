@@ -13,6 +13,11 @@ html, body {
     box-sizing: border-box; /* Reset all elements */
 }
 
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px; /* Fixed offset for header */
+}
+
 body {
     font-family: 'Poppins', sans-serif;
     background-color: #f8f9fa;

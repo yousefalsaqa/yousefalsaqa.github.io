@@ -37,67 +37,24 @@
   <link href="vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
   <!-- Main CSS File -->
-  <link href="css/main.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
 </head>
 
 <body data-bs-spy="scroll" data-bs-target="#navbar" data-bs-offset="100">
   
-  <!-- Skip Links for Accessibility -->
-  <div class="skip-links">
-    <a href="#main-content" class="skip-link">Skip to main content</a>
-    <a href="#navbar" class="skip-link">Skip to navigation</a>
-  </div>
 
-  <!-- Scroll Progress Indicator -->
-  <div class="scroll-indicator" role="progressbar" aria-label="Page scroll progress">
-    <div class="scroll-indicator-bar"></div>
-  </div>
-
-  <!-- Loading Overlay -->
-  <div class="loading-overlay" id="loading-overlay" aria-hidden="true">
-    <div class="loading-spinner" role="status" aria-label="Loading content">
-      <span class="sr-only">Loading...</span>
-    </div>
-  </div>
-
-  <header id="header" class="header" role="banner">
-    <div class="header-container">
-      <!-- Logo/Name Section -->
-      <div class="header-brand">
-        <h1 class="header-name" role="heading" aria-level="1">
-          Yousef Alsaqa
-        </h1>
+  <header id="header" class="header d-flex align-items-center sticky-top">
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+      <!-- Updated Name Section -->
+      <div id="top-name" class="d-flex align-items-center">
+        <h1 class="header-name">Yousef Alsaqa</h1>
       </div>
-      
-      <!-- Mobile Menu Toggle -->
-      <button class="mobile-menu-toggle" 
-              id="mobile-menu-toggle" 
-              aria-expanded="false" 
-              aria-controls="navbar"
-              aria-label="Toggle navigation menu">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-      
-      <!-- Navigation -->
-      <nav id="navbar" class="navbar" role="navigation" aria-label="Main navigation">
-        <a href="#about" class="nav-link" aria-describedby="about-desc">
-          <span>About</span>
-          <span id="about-desc" class="sr-only">Learn about my background and expertise</span>
-        </a>
-        <a href="#projects" class="nav-link" aria-describedby="projects-desc">
-          <span>Projects</span>
-          <span id="projects-desc" class="sr-only">View my engineering projects and work</span>
-        </a>
-        <a href="#experience" class="nav-link" aria-describedby="experience-desc">
-          <span>Experience</span>
-          <span id="experience-desc" class="sr-only">Explore my professional experience</span>
-        </a>
-        <a href="mailto:21ymsa@queensu.ca" class="nav-link" aria-describedby="contact-desc">
-          <span>Contact</span>
-          <span id="contact-desc" class="sr-only">Send me an email</span>
-        </a>
+      <!-- Navigation Links -->
+      <nav id="navbar" class="d-flex">
+        <a href="#about" class="nav-link">About</a>
+        <a href="#projects" class="nav-link">Projects</a>
+        <a href="#experience" class="nav-link">Experience</a>
+        <a href="mailto:21ymsa@queensu.ca" class="nav-link">Contact</a>
       </nav>
     </div>
   </header>
@@ -419,62 +376,24 @@ function simulateEnergy() {
     </section>
   
 
-  </main>
-
+  
   <!-- Footer -->
-  <footer id="footer" class="footer" role="contentinfo">
+  <footer id="footer" class="footer">
     <div class="container">
-      <p>© 2024 Yousef Alsaqa. All Rights Reserved. 
-        <a href="mailto:21ymsa@queensu.ca" class="contact-button" aria-describedby="email-desc">
-          <i class="bi bi-envelope" aria-hidden="true"></i>
-          <span>Contact Me</span>
-          <span id="email-desc" class="sr-only">Send email to 21ymsa@queensu.ca</span>
-        </a>
-      </p>
-      <div class="social-links" role="list" aria-label="Social media links">
-        <a href="https://www.linkedin.com/in/yousef-alsaqa-b1ab4822b/" 
-           class="linkedin" 
-           role="listitem"
-           aria-label="Visit Yousef Alsaqa's LinkedIn profile"
-           target="_blank"
-           rel="noopener noreferrer">
-          <i class="bi bi-linkedin" aria-hidden="true"></i>
-          <span class="sr-only">LinkedIn</span>
-        </a>
+      <p>© 2024 Yousef Alsaqa. All Rights Reserved. <a href="mailto:21ymsa@queensu.ca" id="contact-button" class="contact-button">Contact Me</a></p>
+      <div class="social-links">
+        <a href="https://www.linkedin.com/in/yousef-alsaqa-b1ab4822b/" class="linkedin"><i class="bi bi-linkedin"></i></a>
       </div>
     </div>
   </footer>
-
-  <!-- Fixed Contact Button -->
-  <a href="mailto:21ymsa@queensu.ca" 
-     id="contact-button" 
-     class="btn-fab btn-primary" 
-     aria-label="Send email to Yousef Alsaqa"
-     title="Contact me via email">
-    <i class="bi bi-envelope" aria-hidden="true"></i>
-  </a>
-
-  <!-- Back to Top Button -->
-  <button class="btn-back-to-top" 
-          id="back-to-top" 
-          aria-label="Back to top of page"
-          title="Back to top">
-    <i class="bi bi-arrow-up" aria-hidden="true"></i>
-  </button>
-
-  <!-- Background Pattern -->
-  <div class="bg-pattern" aria-hidden="true"></div>
 
   <!-- Vendor JS Files -->
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="vendor/aos/aos.js"></script>
   <script src="vendor/glightbox/js/glightbox.min.js"></script>
 
-  <!-- Navigation Script (Works immediately) -->
-  <script src="js/navigation-fallback.js"></script>
-  
-  <!-- Main Application (Enhanced features) -->
-  <script type="module" src="js/app.js"></script>
+  <!-- Main JS File -->
+  <script src="js/scripts.js"></script>
 
 </body>
 

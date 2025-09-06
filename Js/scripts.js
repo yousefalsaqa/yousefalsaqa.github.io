@@ -26,6 +26,33 @@ window.addEventListener('scroll', () => {
 const navLinks = document.querySelectorAll('.nav-link');
 const sections = document.querySelectorAll('#about, #projects, #experience, #footer');
 
+// Add click handlers for smooth scrolling with proper offset
+navLinks.forEach(link => {
+    link.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        
+        // Skip email links
+        if (href.startsWith('mailto:')) return;
+        
+        // Handle section links
+        if (href.startsWith('#')) {
+            e.preventDefault();
+            const targetId = href.substring(1);
+            const targetElement = document.getElementById(targetId);
+            
+            if (targetElement) {
+                const headerHeight = 80; // Account for fixed header
+                const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        }
+    });
+});
+
 // Function to remove 'active' class from all links
 const removeActiveClasses = () => {
   navLinks.forEach((link) => link.classList.remove('active'));
