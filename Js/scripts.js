@@ -55,11 +55,11 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// Select all navigation links and sections
-const navLinks = document.querySelectorAll('.nav-link');
+// Select all navigation links and sections  
+const navLinks = document.querySelectorAll('#navbar .nav-link');
 const sections = document.querySelectorAll('#about, #projects, #experience, #footer');
 
-// Add click handlers for smooth scrolling with proper offset
+// Add click handlers for smooth scrolling with proper offset and active state
 navLinks.forEach(link => {
     link.addEventListener('click', function(e) {
         const href = this.getAttribute('href');
@@ -70,6 +70,11 @@ navLinks.forEach(link => {
         // Handle section links
         if (href.startsWith('#')) {
             e.preventDefault();
+            
+            // Update active state immediately
+            navLinks.forEach(navLink => navLink.classList.remove('active'));
+            this.classList.add('active');
+            
             const targetId = href.substring(1);
             const targetElement = document.getElementById(targetId);
             
@@ -94,7 +99,7 @@ const removeActiveClasses = () => {
 // Function to add 'active' class to the current link
 const activateNavLink = (id) => {
   removeActiveClasses();
-  const activeLink = document.querySelector(`.nav-link[href="#${id}"]`);
+  const activeLink = document.querySelector(`#navbar .nav-link[href="#${id}"]`);
   if (activeLink) {
     activeLink.classList.add('active');
   }
@@ -145,7 +150,7 @@ function navigateToProject(projectId) {
 
 document.addEventListener("DOMContentLoaded", () => {
     const sections = document.querySelectorAll("section");
-    const navLinks = document.querySelectorAll("#navbar-scrollspy .nav-link");
+    const mainNavLinks = document.querySelectorAll("#navbar .nav-link");
 
     const updateActiveLink = () => {
         let activeSection = "";
@@ -163,7 +168,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         // Update the active class on navigation links
-        navLinks.forEach((link) => {
+        mainNavLinks.forEach((link) => {
             link.classList.remove("active");
             if (link.getAttribute("href").includes(activeSection)) {
                 link.classList.add("active");
@@ -173,6 +178,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Listen for scroll events and update active link
     window.addEventListener("scroll", updateActiveLink);
+    
+    // Set initial active state (default to About)
+    setTimeout(() => {
+        if (mainNavLinks.length > 0 && !document.querySelector('#navbar .nav-link.active')) {
+            mainNavLinks[0].classList.add('active');
+        }
+    }, 100);
 });
 
 
