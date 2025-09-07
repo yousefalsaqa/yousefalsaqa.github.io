@@ -299,3 +299,4 @@ export const dispatchCustomEvent = (eventName, detail = {}, target = document) =
         console.error(`Error dispatching custom event ${eventName}:`, error);
     }
 };
+

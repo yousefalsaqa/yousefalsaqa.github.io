@@ -309,69 +309,118 @@ function simulateEnergy() {
   
         
     <!-- Experience Section -->
-    <section id="experience" class="experience section" aria-labelledby="experience-heading">
+    <section id="experience" class="projects section" aria-labelledby="experience-heading">
       <div class="container">
         <div class="section-title fade-in-up">
-          <h2 id="experience-heading">Professional Experience</h2>
+          <h2 id="experience-heading">Experience</h2>
+          <p>My professional experience in engineering, mentoring, and leadership roles:</p>
         </div>
-  
-        <!-- Mechanical Engineering Intern -->
-        <article class="showcase-box fade-in-up" role="article">
-          <h3><i class="bi bi-briefcase" aria-hidden="true"></i> Mechanical Engineering Intern</h3>
-          <p><strong>Dorsch Holding GmbH (June 2023 – August 2023)</strong></p>
-        <ul>
-          <li><strong>Advanced Water Drainage System Design:</strong> Conducted fluid dynamics simulations to resolve inefficiencies in an underground pump-based system. Transitioned to a gravity-fed system optimized using Bernoulli’s principle, resulting in a 25% reduction in energy consumption and seamless integration with the national piping network.</li>
-          <li><strong>Hydraulic Sewage Lift Optimization:</strong> Addressed hydraulic head inconsistencies by recalibrating pump positions and adjusting pressure calculations. Delivered CAD models with enhanced pump configurations, ensuring operational reliability under varying load conditions.</li>
-          <li><strong>Fire Fighting Systems:</strong> Used hydraulic simulations to correct pressure imbalances and optimize the placement of Pressure Reducing Valves (PRVs). Designed CAD layouts that balanced flow distribution across an extensive pipeline network.</li>
-          <li><strong>Compressed Air and Laboratory Gas Systems:</strong> Identified and mitigated energy inefficiencies by refining pressure drop calculations and repositioning critical components. Optimized system performance, reducing pressure losses by 18% through advanced CAD modeling techniques.</li>
-        </ul>
-        <p>
-          <strong>Technical Contributions:</strong> Conducted root cause analysis of system inefficiencies, implemented MATLAB-based simulations for flow and pressure optimization, and utilized SolidWorks for high-precision CAD designs. Collaborated with multidisciplinary teams, including civil and electrical engineers, to integrate mechanical systems into large-scale infrastructure projects.
-        </p>
-          <div class="text-center">
-            <img src="assets/BuhasaOil.png" 
-                 alt="Aerial view of completed Bu Hasa oil field project showing integrated water drainage, compressed air, and fire safety systems infrastructure"
-                 class="img-fluid rounded" 
-                 loading="lazy"
-                 width="800"
-                 height="600"
-                 style="max-width: 80%; margin-top: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.5);">
-            <p class="mt-3"><em>Completed oil field project showcasing the finalized water drainage, compressed air, and fire safety systems.</em></p>
-          </div>
-        </article>
-  
-        <!-- Engineering International Student Mentor -->
-        <article class="showcase-box fade-in-up" role="article">
-          <h3><i class="bi bi-people-fill" aria-hidden="true"></i> Engineering International Student Mentor</h3>
-          <p><strong>July 2022 – Present</strong></p>
-          <ul>
-            <li>Provided targeted mentoring for international engineering students, focusing on academic strategies, technical skill development, and cultural adaptation.</li>
-            <li>Guided students on CAD modeling, programming, and simulation techniques, helping them excel in courses and projects.</li>
-            <li>Organized peer-led workshops on SolidWorks and MATLAB, fostering a collaborative learning environment for underrepresented student groups.</li>
-          </ul>
-        </article>
     
-        <!-- International Student Ambassador -->
-        <article class="showcase-box fade-in-up" role="article">
-          <h3><i class="bi bi-person-badge" aria-hidden="true"></i> International Student Ambassador</h3>
-          <p><strong>January 2023 – Present</strong></p>
-          <ul>
-            <li>Acted as a liaison between prospective students and the university, offering insights into engineering programs and campus resources.</li>
-            <li>Assisted with recruitment strategies by creating targeted presentations and data-driven outreach campaigns to engage international applicants.</li>
-            <li>Collaborated with university admissions to improve the onboarding experience for new students, streamlining processes for academic advising and housing.</li>
-          </ul>
-        </article>
+        <div class="projects-grid" role="list" aria-label="Professional experience showcase">
+          <!-- Recruitment Representative -->
+          <article class="project-card fade-in-up" role="listitem">
+            <div class="project-card-media">
+              <img src="assets/queensfsae.png" 
+                   alt="Queen's University recruitment and admissions work"
+                   loading="lazy"
+                   width="350"
+                   height="200">
+            </div>
+            <div class="project-card-content">
+              <h3>Recruitment Representative</h3>
+              <p><strong>Queen's University — Undergraduate Admission & Recruitment</strong><br>
+              <em>2024–Present</em></p>
+              <p>Led outreach and technical initiatives to improve admissions strategy. Developed analysis tools and AI-driven models that influenced program requirements.</p>
+              <div class="project-technologies" role="list" aria-label="Technologies used">
+                <span class="project-tech" role="listitem">Python</span>
+                <span class="project-tech" role="listitem">Salesforce CRM</span>
+                <span class="project-tech" role="listitem">Excel</span>
+                <span class="project-tech" role="listitem">AI/ML</span>
+              </div>
+              <div class="impact-section">
+                <strong>Impact:</strong> Insights from my analysis contributed to changes in Commerce admission requirements and streamlined KPI reporting across programs.
+              </div>
+            </div>
+          </article>
+
+          <!-- Mechanical Engineering Intern -->
+          <article class="project-card fade-in-up" role="listitem">
+            <div class="project-card-media">
+              <img src="assets/BuhasaOil.png" 
+                   alt="Bu Hasa oil field project showing integrated water drainage, compressed air, and fire safety systems infrastructure"
+                   loading="lazy"
+                   width="350"
+                   height="200">
+            </div>
+            <div class="project-card-content">
+              <h3>Mechanical Engineering Intern</h3>
+              <p><strong>Dorsch Holding GmbH</strong><br>
+              <em>June 2023 – August 2023</em></p>
+              <p>Designed advanced water drainage systems and optimized hydraulic systems for industrial applications, achieving significant energy reductions.</p>
+              <div class="project-technologies" role="list" aria-label="Technologies used">
+                <span class="project-tech" role="listitem">MATLAB</span>
+                <span class="project-tech" role="listitem">SolidWorks</span>
+                <span class="project-tech" role="listitem">CAD Design</span>
+                <span class="project-tech" role="listitem">Fluid Dynamics</span>
+              </div>
+              <div class="impact-section">
+                <strong>Impact:</strong> Achieved 25% reduction in energy consumption through gravity-fed system optimization and 18% reduction in pressure losses.
+              </div>
+            </div>
+          </article>
+          
+          <!-- Engineering International Student Mentor -->
+          <article class="project-card fade-in-up" role="listitem">
+            <div class="project-card-media">
+              <img src="assets/lab.jpg" 
+                   alt="Engineering mentorship and workshop activities"
+                   loading="lazy"
+                   width="350"
+                   height="200">
+            </div>
+            <div class="project-card-content">
+              <h3>Engineering International Student Mentor</h3>
+              <p><strong>Queen's University</strong><br>
+              <em>July 2022 – Present</em></p>
+              <p>Provided targeted mentoring for international engineering students, focusing on technical skill development and academic success strategies.</p>
+              <div class="project-technologies" role="list" aria-label="Technologies used">
+                <span class="project-tech" role="listitem">SolidWorks</span>
+                <span class="project-tech" role="listitem">MATLAB</span>
+                <span class="project-tech" role="listitem">Programming</span>
+                <span class="project-tech" role="listitem">CAD Modeling</span>
+              </div>
+              <div class="impact-section">
+                <strong>Impact:</strong> Organized peer-led workshops fostering collaborative learning environment for underrepresented student groups.
+              </div>
+            </div>
+          </article>
     
-        <!-- Other Work Experience -->
-        <article class="showcase-box fade-in-up" role="article">
-          <h3><i class="bi bi-shop-window" aria-hidden="true"></i> Manchu Wok General Member</h3>
-          <p><strong>2022 – 2023</strong></p>
-          <ul>
-            <li>Managed high-volume workloads while maintaining a full course schedule, showcasing strong multitasking and time management skills.</li>
-            <li>Optimized daily operations by implementing organizational strategies that improved efficiency during peak service hours.</li>
-            <li>Trained new employees on inventory management and customer service best practices, contributing to overall team performance.</li>
-          </ul>
-        </article>
+          <!-- International Student Ambassador -->
+          <article class="project-card fade-in-up" role="listitem">
+            <div class="project-card-media">
+              <img src="assets/hero-img.jpg" 
+                   alt="Student ambassador activities and university outreach"
+                   loading="lazy"
+                   width="350"
+                   height="200">
+            </div>
+            <div class="project-card-content">
+              <h3>International Student Ambassador</h3>
+              <p><strong>Queen's University</strong><br>
+              <em>January 2023 – Present</em></p>
+              <p>Acted as liaison between prospective students and university, creating targeted presentations and data-driven outreach campaigns.</p>
+              <div class="project-technologies" role="list" aria-label="Technologies used">
+                <span class="project-tech" role="listitem">Data Analysis</span>
+                <span class="project-tech" role="listitem">Presentations</span>
+                <span class="project-tech" role="listitem">Outreach</span>
+                <span class="project-tech" role="listitem">Strategy</span>
+              </div>
+              <div class="impact-section">
+                <strong>Impact:</strong> Streamlined onboarding processes for academic advising and housing, improving new student experience.
+              </div>
+            </div>
+          </article>
+        </div>
       </div>
     </section>
   
