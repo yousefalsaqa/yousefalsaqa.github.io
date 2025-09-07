@@ -890,6 +890,46 @@ body {
     color: #e0e0e0;
 }
 
+/* Tech Stack Preview */
+.tech-stack-preview {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 200px;
+    background: #1c1c1c;
+    border-radius: 12px;
+    position: relative;
+    overflow: hidden;
+}
+
+.tech-stack-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    align-items: center;
+}
+
+.tech-badge {
+    background: rgba(255, 215, 0, 0.2);
+    color: #ffd700;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: 2px solid rgba(255, 215, 0, 0.4);
+    transition: all 0.3s ease;
+}
+
+.tech-badge:hover {
+    background: rgba(255, 215, 0, 0.3);
+    border-color: #ffd700;
+    transform: translateY(-2px);
+}
+
 /* Professional Button Styling */
 .project-card .btn {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
