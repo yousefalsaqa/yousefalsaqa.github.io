@@ -1,87 +1,242 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>AutoDrive Lane Detection - Yousef Alsaqa</title>
-  <meta name="description" content="AutoDrive Project Description">
-  <meta name="keywords" content="AutoDrive, Autonomous Vehicle, Lane Detection, Yousef Alsaqa">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AutoDrive Lane Detection | Yousef Alsaqa</title>
+  <meta name="description" content="Case study: Ultra-Fast Lane Detection achieving 300+ FPS for real-time autonomous vehicle navigation.">
+  <meta name="author" content="Yousef Alsaqa">
+  <meta name="theme-color" content="#0a0a0f">
+
   <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-  <!-- Vendor CSS Files -->
-  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/favicon.png" rel="icon">
+  <link href="assets/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap Icons -->
   <link href="vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="css/style.css" rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link href="css/theme.css" rel="stylesheet">
+  <link href="css/pages/case-study.css" rel="stylesheet">
+  
+  <style>
+    .video-showcase {
+      margin: var(--space-xl) 0;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid var(--border-subtle);
+    }
+    .video-showcase video {
+      width: 100%;
+      display: block;
+    }
+  </style>
 </head>
+
 <body>
-  <section id="autodrive-project-showcase" class="showcase-section">
-    <div class="container">
-      <!-- Overview Section -->
-      <div class="showcase-box">
-        <h2><i class="bi bi-info-circle"></i> Overview</h2>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-inner">
+      <a href="index.html" class="header-logo">Yousef<span>.</span></a>
+      <nav class="header-nav" id="nav">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="projects.html" class="nav-link">Projects</a>
+        <a href="experience.html" class="nav-link">Experience</a>
+        <a href="assets/Yousef_Alsaqa_Resume.pdf" class="btn btn-secondary" target="_blank">
+          <i class="bi bi-file-earmark-text"></i>
+          Resume
+        </a>
+      </nav>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="case-hero">
+      <div class="container">
+        <div class="case-hero-content">
+          <a href="projects.html" class="back-link">
+            <i class="bi bi-arrow-left"></i>
+            Back to Projects
+          </a>
+          <span class="case-category">Autonomous Vehicles</span>
+          <h1>AutoDrive Lane Detection</h1>
+          <p class="case-hero-description">
+            Part of Queen's AutoDrive team's development of a Level 4 autonomous vehicle. I implemented the Ultra-Fast Lane Detection (UFLD) algorithm achieving over 300 FPS for real-time navigation in the vehicle's perception system.
+          </p>
+          <div class="case-meta">
+            <div class="case-meta-item">
+              <div class="case-meta-label">Role</div>
+              <div class="case-meta-value">Perception Engineer</div>
+            </div>
+            <div class="case-meta-item">
+              <div class="case-meta-label">Team</div>
+              <div class="case-meta-value">Queen's AutoDrive</div>
+            </div>
+            <div class="case-meta-item">
+              <div class="case-meta-label">Stack</div>
+              <div class="case-tech">
+                <span class="tag">Python</span>
+                <span class="tag">OpenCV</span>
+                <span class="tag">UFLD</span>
+                <span class="tag">Computer Vision</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Content -->
+    <div class="case-content">
+      
+      <!-- Overview -->
+      <section class="case-section">
+        <h2 class="case-section-title">Overview</h2>
         <p>
-          This project is part of the Queen's AutoDrive team’s efforts in the development of a Level 4 autonomous vehicle. I focused on implementing an advanced lane detection model to enhance the perception system. The Ultra-Fast Lane Detection (UFLD) algorithm allowed the vehicle to detect lanes at high speeds, crucial for safe and effective navigation.
+          Lane detection is a critical component of autonomous vehicle perception systems. The vehicle needs to understand lane boundaries in real-time to navigate safely. Traditional computer vision approaches struggled with speed and accuracy tradeoffs — this project solved that with Ultra-Fast Lane Detection.
         </p>
-      </div>
+        
+        <div class="case-stats">
+          <div class="case-stat">
+            <div class="case-stat-number">300+</div>
+            <div class="case-stat-label">FPS</div>
+          </div>
+          <div class="case-stat">
+            <div class="case-stat-number">Level 4</div>
+            <div class="case-stat-label">Autonomy</div>
+          </div>
+        </div>
+      </section>
 
-      <!-- Project Highlights Section -->
-      <div class="showcase-box">
-        <h2><i class="bi bi-lightning"></i> Project Highlights</h2>
-        <ul>
-          <li>Used <strong>Ultra-Fast Lane Detection (UFLD)</strong> algorithm, achieving over 300 FPS for real-time performance.</li>
-          <li>Integrated the model with onboard vehicle systems for accurate lane tracking in challenging conditions.</li>
-          <li>Optimized the model for embedded deployment, ensuring minimal computational overhead.</li>
-        </ul>
-      </div>
-
-      <!-- Technical Details Section -->
-      <div class="showcase-box">
-        <h2><i class="bi bi-cpu"></i> Technical Details</h2>
+      <!-- Demo Video -->
+      <section class="case-section">
+        <h2 class="case-section-title">Lane Detection in Action</h2>
         <p>
-          The UFLD model employs a row-based classification approach, significantly reducing processing demands compared to traditional pixel-based segmentation. Its lightweight architecture made it ideal for real-time applications on embedded automotive systems.
+          Real-time lane detection on Kingston roads, demonstrating the model's performance in varying conditions.
         </p>
-      </div>
-
-      <!-- Outcome Section -->
-      <div class="showcase-box">
-        <h2><i class="bi bi-trophy"></i> Outcome</h2>
-        <p>
-          With this implementation, the Queen's AutoDrive vehicle demonstrated improved lane detection capabilities, contributing to safer and more reliable autonomous driving in various scenarios.
-        </p>
-      </div>
-
-      <!-- Project Media Section -->
-      <div class="showcase-box text-center">
-        <h2><i class="bi bi-camera-reels"></i> Project Media</h2>
-        <div class="video-container">
+        <div class="video-showcase">
           <video autoplay loop muted playsinline>
             <source src="assets/KingstonLaneDetection.mp4" type="video/mp4">
             Your browser does not support the video tag.
           </video>
         </div>
-      </div>
+      </section>
+
+      <!-- Technical Approach -->
+      <section class="case-section">
+        <h2 class="case-section-title">Technical Approach</h2>
+        
+        <div class="case-highlight">
+          <div class="case-highlight-title">Why UFLD</div>
+          <p>
+            Traditional lane detection uses pixel-by-pixel segmentation, which is computationally expensive. UFLD takes a row-based classification approach — instead of classifying every pixel, it predicts lane positions at fixed horizontal rows. This dramatically reduces computation while maintaining accuracy.
+          </p>
+        </div>
+
+        <h3 style="margin-top: var(--space-xl); margin-bottom: var(--space-md); font-size: 1.1rem;">Key Features</h3>
+        <ul>
+          <li><strong>Row-based Classification:</strong> Predicts lane positions at predetermined row indices, avoiding expensive per-pixel operations</li>
+          <li><strong>Lightweight Architecture:</strong> Optimized for embedded deployment on automotive hardware</li>
+          <li><strong>Robust to Conditions:</strong> Works in varying lighting, weather, and road conditions</li>
+          <li><strong>Real-time Performance:</strong> 300+ FPS enables responsive vehicle control</li>
+        </ul>
+      </section>
+
+      <!-- Integration -->
+      <section class="case-section">
+        <h2 class="case-section-title">Vehicle Integration</h2>
+        <p>
+          The lane detection model was integrated with the AutoDrive vehicle's perception stack, feeding lane boundary information to the path planning and control systems. Key integration work included:
+        </p>
+        <ul>
+          <li>Calibrating model output with vehicle coordinate system</li>
+          <li>Implementing temporal smoothing to reduce frame-to-frame jitter</li>
+          <li>Setting up failsafe behaviors when lane detection confidence is low</li>
+          <li>Optimizing inference pipeline for the vehicle's embedded GPU</li>
+        </ul>
+      </section>
+
+      <!-- Sample Output -->
+      <section class="case-section">
+        <h2 class="case-section-title">Detection Output</h2>
+        <div class="case-image">
+          <img src="assets/initiallanedetection.jpg" alt="Lane detection visualization showing detected lane boundaries overlaid on highway image">
+          <div class="case-image-caption">Lane detection output showing detected lane boundaries</div>
+        </div>
+      </section>
+
+      <!-- Outcome -->
+      <section class="case-section">
+        <h2 class="case-section-title">Outcome</h2>
+        <div class="case-impact">
+          <div class="case-highlight-title">Results</div>
+          <p>
+            The Queen's AutoDrive vehicle demonstrated improved lane detection capabilities with this implementation, contributing to safer and more reliable autonomous driving in competition scenarios.
+          </p>
+        </div>
+      </section>
+
+      <!-- Learnings -->
+      <section class="case-section">
+        <h2 class="case-section-title">What I Learned</h2>
+        <ul>
+          <li><strong>Real-time constraints:</strong> Every millisecond matters in autonomous systems — performance optimization is critical</li>
+          <li><strong>System integration:</strong> A model is only as good as its integration with the rest of the system</li>
+          <li><strong>Edge cases matter:</strong> Lane detection needs to fail gracefully when it can't detect lanes</li>
+          <li><strong>Testing is hard:</strong> Validating perception systems requires diverse, real-world test data</li>
+        </ul>
+      </section>
+
+      <!-- Navigation -->
+      <nav class="case-nav">
+        <div class="case-nav-item">
+          <div class="case-nav-label">Previous Project</div>
+          <a href="eii-project-details.html" class="case-nav-link">
+            <i class="bi bi-arrow-left"></i>
+            EII Predictor
+          </a>
+        </div>
+        <div class="case-nav-item next">
+          <div class="case-nav-label">All Projects</div>
+          <a href="projects.html" class="case-nav-link">
+            View All
+            <i class="bi bi-arrow-right"></i>
+          </a>
+        </div>
+      </nav>
     </div>
-
-    <!-- Back-to-Main Button -->
-    <a href="index.html" id="back-to-main" class="back-to-main">
-      <span>⬅ Main Page</span>
-    </a>
-  </section>
-
+  </main>
 
   <!-- Footer -->
-  <footer id="footer" class="footer">
+  <footer class="footer">
     <div class="container">
-      <p>© 2025 Yousef Alsaqa. All Rights Reserved.</p>
+      <div class="footer-inner">
+        <p class="footer-text">© 2025 Yousef Alsaqa. Built with purpose.</p>
+        <div class="footer-links">
+          <a href="mailto:21ymsa@queensu.ca" class="footer-link">21ymsa@queensu.ca</a>
+          <a href="https://www.linkedin.com/in/yousef-alsaqa-b1ab4822b/" target="_blank" class="footer-link">LinkedIn</a>
+          <a href="https://github.com/yousefalsaqa" target="_blank" class="footer-link">GitHub</a>
+        </div>
+      </div>
     </div>
   </footer>
 
-  <!-- Vendor JS Files -->
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="vendor/aos/aos.js"></script>
-
+  <!-- Scripts -->
+  <script>
+    const navToggle = document.getElementById('navToggle');
+    const nav = document.getElementById('nav');
+    navToggle.addEventListener('click', () => nav.classList.toggle('active'));
+  </script>
 </body>
-
 </html>

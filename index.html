@@ -1,451 +1,371 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Portfolio - Yousef Alsaqa | Mechatronics & Robotics Engineer</title>
-  <meta name="description" content="Portfolio of Yousef Alsaqa — Mechatronics & Robotics Engineering graduate, Fourth-Year Dean's List (2025). Showcasing projects in autonomous systems, AI/ML, and robotics, plus professional experience at Queen's University.">
-  <meta name="keywords" content="Yousef Alsaqa, Mechatronics Engineer, Robotics Engineer, Autonomous Systems, Machine Learning, Control Systems, Portfolio, Queen's University, Engineering Projects">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yousef Alsaqa | Mechatronics & Robotics Engineer</title>
+  <meta name="description" content="Portfolio of Yousef Alsaqa — Mechatronics & Robotics Engineering graduate, Fourth-Year Dean's List (2025). Specializing in autonomous systems, machine learning, and control systems.">
+  <meta name="keywords" content="Yousef Alsaqa, Mechatronics Engineer, Robotics Engineer, Autonomous Systems, Machine Learning, Control Systems, Queen's University">
   <meta name="author" content="Yousef Alsaqa">
   <meta name="robots" content="index, follow">
-  <meta name="theme-color" content="#4b0082">
-  
-  <!-- Open Graph Meta Tags -->
+  <meta name="theme-color" content="#0a0a0f">
+
+  <!-- Open Graph -->
   <meta property="og:title" content="Yousef Alsaqa - Mechatronics & Robotics Engineer">
-  <meta property="og:description" content="Portfolio of Yousef Alsaqa — Mechatronics & Robotics Engineering graduate, Fourth-Year Dean's List (2025). Showcasing projects in autonomous systems, AI/ML, and robotics, plus professional experience at Queen's University.">
+  <meta property="og:description" content="Portfolio showcasing projects in autonomous systems, AI/ML, robotics, and data-driven automation.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://yousefalsaqa.github.io">
   <meta property="og:image" content="https://yousefalsaqa.github.io/assets/Yousef Headshot.jpg">
-  <meta property="og:site_name" content="Yousef Alsaqa Portfolio">
-  
-  <!-- Twitter Card Meta Tags -->
+
+  <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Yousef Alsaqa - Mechatronics & Robotics Engineer">
-  <meta name="twitter:description" content="Portfolio of Yousef Alsaqa — Mechatronics & Robotics Engineering graduate, Fourth-Year Dean's List (2025). Showcasing projects in autonomous systems, AI/ML, and robotics, plus professional experience at Queen's University.">
+  <meta name="twitter:description" content="Portfolio showcasing projects in autonomous systems, AI/ML, robotics, and data-driven automation.">
   <meta name="twitter:image" content="https://yousefalsaqa.github.io/assets/Yousef Headshot.jpg">
 
   <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="assets/favicon.png" rel="icon">
+  <link href="assets/apple-touch-icon.png" rel="apple-touch-icon">
 
-  <!-- Vendor CSS Files -->
-  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap Icons -->
   <link href="vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="vendor/aos/aos.css" rel="stylesheet">
-  <link href="vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
-  <!-- Main CSS File -->
-  <link href="css/style.css" rel="stylesheet">
+  <!-- Stylesheets -->
+  <link href="css/theme.css" rel="stylesheet">
+  <link href="css/pages/home.css" rel="stylesheet">
 </head>
 
-<body data-bs-spy="scroll" data-bs-target="#navbar" data-bs-offset="100">
-  
-
-  <header id="header" class="header d-flex align-items-center sticky-top">
-    <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
-      <!-- Updated Name Section -->
-      <div id="top-name" class="d-flex align-items-center">
-        <h1 class="header-name">Yousef Alsaqa</h1>
-      </div>
-      <!-- Navigation Links -->
-      <nav id="navbar" class="d-flex">
-        <a href="#about" class="nav-link">About</a>
-        <a href="#projects" class="nav-link">Projects</a>
-        <a href="#experience" class="nav-link">Experience</a>
-        <a href="mailto:21ymsa@queensu.ca" class="nav-link">Contact</a>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-inner">
+      <a href="index.html" class="header-logo">Yousef<span>.</span></a>
+      <nav class="header-nav" id="nav">
+        <a href="index.html" class="nav-link active">Home</a>
+        <a href="projects.html" class="nav-link">Projects</a>
+        <a href="experience.html" class="nav-link">Experience</a>
+        <a href="assets/Yousef_Alsaqa_Resume.pdf" class="btn btn-secondary" target="_blank">
+          <i class="bi bi-file-earmark-text"></i>
+          Resume
+        </a>
       </nav>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </div>
   </header>
 
-  <main id="main-content" role="main">
-  
-
-  <!-- Side Slider 
-  <header id="header">
-    <nav id="navbar-scrollspy" class="navbar">
-      <a href="#about" class="nav-link active">About</a>
-      <a href="#projects" class="nav-link">Projects</a>
-      <a href="#experience" class="nav-link">Experience</a>
-    </nav>
-  </header> -->
-
-    <!-- About Section -->
-    <section id="about" class="about-section section" aria-labelledby="about-heading">
+  <main>
+    <!-- Hero Section -->
+    <section class="hero">
       <div class="container">
-        <div class="about-content fade-in-up">
-          <!-- Image Section -->
-          <div class="about-image">
-            <img src="assets/Yousef Headshot.jpg" 
-                 alt="Professional headshot of Yousef Alsaqa, a mechatronics and robotics engineering student"
-                 loading="lazy"
-                 width="280"
-                 height="280">
-          </div>
-
-          <!-- Text Section -->
-          <div class="about-text">
-            <h2 id="about-heading" class="about-heading">Mechatronics & Robotics Engineer</h2>
-            <p class="about-subtitle">
-              I'm a <strong>Mechatronics & Robotics Engineering</strong> graduate (<strong>Fourth-Year Dean's List, 2025</strong>) 
-              with expertise in <strong>autonomous systems</strong>, <strong>machine learning</strong>, and <strong>control</strong>.
+        <div class="hero-content">
+          <div class="hero-text">
+            <p class="hero-greeting">Hi, I'm</p>
+            <h1 class="hero-name">Yousef Alsaqa</h1>
+            <p class="hero-title">Mechatronics & Robotics Engineer · <span>Dean's List 2025</span></p>
+            <p class="hero-description">
+              I build systems that make a difference — from medical training simulators that changed how nursing students learn, to admission analytics that influenced university policy. I specialize in <strong>autonomous systems</strong>, <strong>data-driven automation</strong>, and <strong>control systems</strong>.
             </p>
-            <div class="about-buttons">
-              <a href="#projects" class="about-btn about-btn-primary" aria-describedby="projects-btn-desc">
-                <i class="bi bi-code-square" aria-hidden="true"></i>
-                <span>View Projects</span>
-                <span id="projects-btn-desc" class="sr-only">Explore my engineering projects and technical work</span>
+            <div class="hero-cta">
+              <a href="projects.html" class="btn btn-primary">
+                <i class="bi bi-grid-3x3-gap"></i>
+                View Projects
               </a>
-              <a href="#experience" class="about-btn about-btn-secondary" aria-describedby="experience-btn-desc">
-                <i class="bi bi-briefcase" aria-hidden="true"></i>
-                <span>My Experience</span>
-                <span id="experience-btn-desc" class="sr-only">Learn about my professional work experience</span>
+              <a href="experience.html" class="btn btn-secondary">
+                <i class="bi bi-briefcase"></i>
+                Experience
               </a>
+              <a href="mailto:21ymsa@queensu.ca" class="btn btn-ghost">
+                <i class="bi bi-envelope"></i>
+                Contact
+              </a>
+            </div>
+          </div>
+          <div class="hero-image">
+            <img src="assets/Yousef Headshot.jpg" alt="Yousef Alsaqa - Mechatronics and Robotics Engineer" width="280" height="280">
+            <div class="hero-status">
+              Open to opportunities
             </div>
           </div>
         </div>
       </div>
     </section>
 
-
-    <!-- Projects Section -->
-    <section id="projects" class="projects section" aria-labelledby="projects-heading">
+    <!-- Skills Section -->
+    <section class="skills section">
       <div class="container">
-        <div class="section-title fade-in-up">
-          <h2 id="projects-heading">Projects</h2>
-          <p>Here are some of the innovative engineering projects I have worked on:</p>
+        <div class="section-header">
+          <h2 class="section-title">What I Do</h2>
+          <p class="section-subtitle">Engineering solutions across hardware, software, and data</p>
         </div>
-    
-        <div class="projects-grid" role="list" aria-label="Engineering projects showcase">
-          <!-- Energy Digital Twin Application Project Card -->
-          <article class="project-card fade-in-up" role="listitem">
-            <div class="project-card-media">
-              <div class="tech-stack-preview">
-                <div class="tech-stack-row">
-                  <span class="tech-badge">Python</span>
-                  <span class="tech-badge">EnergyPlus</span>
-                  <span class="tech-badge">FastAPI</span>
-                  <span class="tech-badge">Streamlit</span>
-                </div>
-              </div>
+        <div class="skills-grid">
+          <div class="skill-category">
+            <div class="skill-category-icon">🤖</div>
+            <h3>Robotics & Autonomous Systems</h3>
+            <p>Designing intelligent systems that perceive and act</p>
+            <div class="skill-tags">
+              <span class="skill-tag">ROS</span>
+              <span class="skill-tag">SLAM</span>
+              <span class="skill-tag">Computer Vision</span>
+              <span class="skill-tag">Control Systems</span>
+              <span class="skill-tag">Sensor Fusion</span>
             </div>
-            <div class="project-card-content">
-              <h3>Energy Digital Twin Application</h3>
-              <p>
-                Combines detailed <strong>EnergyPlus modeling</strong> with a baseline-volatility simulation for industrial energy analysis.
-              </p>
-              <div class="project-technologies" role="list" aria-label="Technologies used">
-                <span class="project-tech" role="listitem">Python</span>
-                <span class="project-tech" role="listitem">EnergyPlus</span>
-                <span class="project-tech" role="listitem">FastAPI</span>
-                <span class="project-tech" role="listitem">Streamlit</span>
-              </div>
-              <a href="energy-digital-twin.html" class="btn btn-primary" aria-describedby="energy-twin-desc">
-                <span>Learn More</span>
-                <i class="bi bi-arrow-right" aria-hidden="true"></i>
-                <span id="energy-twin-desc" class="sr-only">View detailed information about the Energy Digital Twin Application project</span>
-              </a>
+          </div>
+          <div class="skill-category">
+            <div class="skill-category-icon">📊</div>
+            <h3>Data Analysis & Automation</h3>
+            <p>Turning raw data into actionable insights and automated workflows</p>
+            <div class="skill-tags">
+              <span class="skill-tag">Python</span>
+              <span class="skill-tag">Pandas</span>
+              <span class="skill-tag">Matplotlib</span>
+              <span class="skill-tag">Selenium</span>
+              <span class="skill-tag">Tkinter</span>
             </div>
-          </article>
-
-          <!-- Energy Intensity Index (EII) Prediction Model Project -->
-          <article class="project-card fade-in-up" role="listitem">
-            <div class="project-card-media">
-              <img src="assets/eii_model.jpg" 
-                   alt="Neural network visualization showing Energy Intensity Index prediction model architecture"
-                   loading="lazy"
-                   width="350"
-                   height="200">
+          </div>
+          <div class="skill-category">
+            <div class="skill-category-icon">🧠</div>
+            <h3>Machine Learning</h3>
+            <p>Building predictive models and intelligent algorithms</p>
+            <div class="skill-tags">
+              <span class="skill-tag">TensorFlow</span>
+              <span class="skill-tag">Scikit-learn</span>
+              <span class="skill-tag">Neural Networks</span>
+              <span class="skill-tag">Random Forest</span>
             </div>
-            <div class="project-card-content">
-              <h3>Energy Intensity Index (EII) Predictor</h3>
-              <p>Machine learning-based model leveraging <strong>neural networks</strong> and <strong>Random Forest</strong> to forecast EII with improved accuracy.</p>
-              <div class="project-technologies" role="list" aria-label="Technologies used">
-                <span class="project-tech" role="listitem">Python</span>
-                <span class="project-tech" role="listitem">TensorFlow</span>
-                <span class="project-tech" role="listitem">Scikit-learn</span>
-                <span class="project-tech" role="listitem">Neural Networks</span>
-              </div>
-              <a href="eii-project-details.html" class="btn btn-primary" aria-describedby="eii-desc">
-                <span>Learn More</span>
-                <i class="bi bi-arrow-right" aria-hidden="true"></i>
-                <span id="eii-desc" class="sr-only">View detailed information about the EII Predictor machine learning project</span>
-              </a>
+          </div>
+          <div class="skill-category">
+            <div class="skill-category-icon">⚡</div>
+            <h3>Embedded Systems</h3>
+            <p>Bridging hardware and software for real-world applications</p>
+            <div class="skill-tags">
+              <span class="skill-tag">Raspberry Pi</span>
+              <span class="skill-tag">Arduino</span>
+              <span class="skill-tag">CAN Bus</span>
+              <span class="skill-tag">RFID</span>
+              <span class="skill-tag">PCB Design</span>
             </div>
-          </article>
-          
-          <!-- AutoDrive Project -->
-          <article class="project-card fade-in-up" role="listitem">
-            <div class="project-card-media">
-              <img src="assets/initiallanedetection.jpg" 
-                   alt="Lane detection visualization showing detected road lanes on a highway"
-                   loading="lazy"
-                   width="350"
-                   height="200">
-            </div>
-            <div class="project-card-content">
-              <h3>AutoDrive Lane Detection</h3>
-              <p>Using <strong>Ultra-Fast Lane Detection (UFLD)</strong> algorithm achieving <strong>300+ FPS</strong> for real-time autonomous vehicle navigation.</p>
-              <div class="project-technologies" role="list" aria-label="Technologies used">
-                <span class="project-tech" role="listitem">Python</span>
-                <span class="project-tech" role="listitem">OpenCV</span>
-                <span class="project-tech" role="listitem">UFLD</span>
-                <span class="project-tech" role="listitem">Computer Vision</span>
-              </div>
-              <a href="autodrive-project.html" class="btn btn-primary" aria-describedby="autodrive-desc">
-                <span>Learn More</span>
-                <i class="bi bi-arrow-right" aria-hidden="true"></i>
-                <span id="autodrive-desc" class="sr-only">View detailed information about the AutoDrive lane detection project</span>
-              </a>
-            </div>
-          </article>
-    
-          <!-- Formula Racing Project -->
-          <article class="project-card fade-in-up" role="listitem">
-            <div class="project-card-media">
-              <img src="assets/queensfsae.png" 
-                   alt="Queen's Formula SAE racing team logo and car"
-                   loading="lazy"
-                   width="350"
-                   height="200">
-            </div>
-            <div class="project-card-content">
-              <h3>Formula Racing Team</h3>
-              <p>Advanced <strong>steering system</strong> with custom PCB, TFT display, and <strong>CAN Bus protocols</strong> for Formula SAE competition.</p>
-              <div class="project-technologies" role="list" aria-label="Technologies used">
-                <span class="project-tech" role="listitem">C++</span>
-                <span class="project-tech" role="listitem">CAN Bus</span>
-                <span class="project-tech" role="listitem">PCB Design</span>
-                <span class="project-tech" role="listitem">Embedded Systems</span>
-              </div>
-              <a href="steering-project.html" class="btn btn-primary" aria-describedby="formula-desc">
-                <span>Learn More</span>
-                <i class="bi bi-arrow-right" aria-hidden="true"></i>
-                <span id="formula-desc" class="sr-only">View detailed information about the Formula SAE steering system project</span>
-              </a>
-            </div>
-          </article>
-    
-          <!-- Terrabot Project -->
-          <article class="project-card fade-in-up" role="listitem">
-            <div class="project-card-media">
-              <img src="assets/203_Rover.jpg" 
-                   alt="Terrabot autonomous robot with sensors for CO2 monitoring"
-                   loading="lazy"
-                   width="350"
-                   height="200">
-            </div>
-            <div class="project-card-content">
-              <h3>MREN 203 Project: Terrabot</h3>
-              <p>An indoor <strong>CO2 monitoring robot</strong> using <strong>SLAM</strong> and sensor fusion to generate air quality heat maps.</p>
-              <div class="project-technologies" role="list" aria-label="Technologies used">
-                <span class="project-tech" role="listitem">ROS</span>
-                <span class="project-tech" role="listitem">Python</span>
-                <span class="project-tech" role="listitem">SLAM</span>
-                <span class="project-tech" role="listitem">Raspberry Pi</span>
-              </div>
-              <a href="terrabot-details.html" class="btn btn-primary" aria-describedby="terrabot-desc">
-                <span>Learn More</span>
-                <i class="bi bi-arrow-right" aria-hidden="true"></i>
-                <span id="terrabot-desc" class="sr-only">View detailed information about the Terrabot CO2 monitoring robot project</span>
-              </a>
-            </div>
-          </article>
-          
-          <!-- MREN 303 Project -->
-          <article class="project-card fade-in-up" role="listitem">
-            <div class="project-card-media">
-              <img src="assets/303bot.jpg" 
-                   alt="Rexcubot competition robot with gripper and scoop mechanisms"
-                   loading="lazy"
-                   width="350"
-                   height="200">
-            </div>
-            <div class="project-card-content">
-              <h3>The Rexcubot</h3>
-              <p>A custom mobile robot with <strong>parallel linkage scoop</strong> and <strong>precision gripper</strong> designed for autonomous navigation and object retrieval.</p>
-              <div class="project-technologies" role="list" aria-label="Technologies used">
-                <span class="project-tech" role="listitem">C++</span>
-                <span class="project-tech" role="listitem">Arduino</span>
-                <span class="project-tech" role="listitem">Mechanical Design</span>
-                <span class="project-tech" role="listitem">Control Systems</span>
-              </div>
-              <a href="rexcubot-details.html" class="btn btn-primary" aria-describedby="rexcubot-desc">
-                <span>Learn More</span>
-                <i class="bi bi-arrow-right" aria-hidden="true"></i>
-                <span id="rexcubot-desc" class="sr-only">View detailed information about the Rexcubot competition robot project</span>
-              </a>
-            </div>
-          </article>
-
-          <!-- QSET ARM -->
-          <article class="project-card fade-in-up" role="listitem">
-            <div class="project-card-media">
-              <img src="assets/qset robot with arm.png" 
-                   alt="QSET robotic arm with six degrees of freedom for space exploration"
-                   loading="lazy"
-                   width="350"
-                   height="200">
-            </div>
-            <div class="project-card-content">
-              <h3>QSET Robotic Arm</h3>
-              <p>Six-DOF robotic arm with advanced <strong>kinematics</strong>, <strong>dynamics analysis</strong>, and robust control architecture for space exploration tasks.</p>
-              <div class="project-technologies" role="list" aria-label="Technologies used">
-                <span class="project-tech" role="listitem">MATLAB</span>
-                <span class="project-tech" role="listitem">SolidWorks</span>
-                <span class="project-tech" role="listitem">Control Systems</span>
-                <span class="project-tech" role="listitem">Kinematics</span>
-              </div>
-              <a href="qsetarm-details.html" class="btn btn-primary" aria-describedby="qset-desc">
-                <span>Learn More</span>
-                <i class="bi bi-arrow-right" aria-hidden="true"></i>
-                <span id="qset-desc" class="sr-only">View detailed information about the QSET robotic arm project</span>
-              </a>
-            </div>
-          </article>
-        
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
-  
-        
-    <!-- Experience Section -->
-    <section id="experience" class="projects section" aria-labelledby="experience-heading">
+    </section>
+
+    <!-- Featured Projects Section -->
+    <section class="featured-projects section">
       <div class="container">
-        <div class="section-title fade-in-up">
-          <h2 id="experience-heading">Experience</h2>
-          <p>My professional experience in engineering, mentoring, and leadership roles:</p>
+        <div class="featured-header">
+          <div class="section-header">
+            <h2 class="section-title">Featured Work</h2>
+            <p class="section-subtitle">Projects that showcase impact and technical depth</p>
+          </div>
+          <a href="projects.html" class="btn btn-ghost">
+            View All Projects
+            <i class="bi bi-arrow-right"></i>
+          </a>
         </div>
-    
-        <div class="projects-grid" role="list" aria-label="Professional experience showcase">
-          <!-- Recruitment Representative -->
-          <article class="project-card fade-in-up" role="listitem">
-            <div class="project-card-media">
-              <img src="assets/queensfsae.png" 
-                   alt="Queen's University recruitment and admissions work"
-                   loading="lazy"
-                   width="350"
-                   height="200">
+        <div class="featured-grid">
+          <!-- CAST Medical Interface - Large Featured -->
+          <article class="project-card-featured large">
+            <div class="project-image">
+              <img src="fi-studentfinal.jpg" alt="CAST Medical Interface student dashboard showing live simulation mode">
+              <div class="project-image-overlay"></div>
             </div>
-            <div class="project-card-content">
-              <h3>Recruitment Representative</h3>
-              <p><strong>Queen's University — Undergraduate Admission & Recruitment</strong><br>
-              <em>2024–Present</em></p>
-              <p>Applied AI-driven analysis (Python, Salesforce, Excel) that informed changes to Commerce admission requirements and streamlined KPI reporting across programs.</p>
-              <div class="project-technologies" role="list" aria-label="Technologies used">
-                <span class="project-tech" role="listitem">Python</span>
-                <span class="project-tech" role="listitem">Salesforce CRM</span>
-                <span class="project-tech" role="listitem">Excel</span>
-                <span class="project-tech" role="listitem">AI/ML</span>
+            <div class="project-content">
+              <span class="project-category">Capstone Project</span>
+              <h3 class="project-title">CAST Medical Interface</h3>
+              <p class="project-description">
+                A patient simulation system for nursing education. Built a custom RFID-enabled stethoscope that plays realistic heart and lung sounds based on instructor-set conditions. <strong>28 medical conditions</strong> (13 heart, 15 lung) simulated through a real-time web interface.
+              </p>
+              <div class="project-tech">
+                <span class="tag">Python</span>
+                <span class="tag">Raspberry Pi</span>
+                <span class="tag">RFID</span>
+                <span class="tag">Flask</span>
               </div>
-              <div class="impact-section">
-                <strong>Impact:</strong> Insights from my analysis contributed to changes in Commerce admission requirements and streamlined KPI reporting across programs.
-              </div>
+              <a href="capstone.html" class="project-link">
+                Read Case Study
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M3 8H13M13 8L8 3M13 8L8 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
             </div>
           </article>
 
-          <!-- Mechanical Engineering Intern -->
-          <article class="project-card fade-in-up" role="listitem">
-            <div class="project-card-media">
-              <img src="assets/BuhasaOil.png" 
-                   alt="Bu Hasa oil field project showing integrated water drainage, compressed air, and fire safety systems infrastructure"
-                   loading="lazy"
-                   width="350"
-                   height="200">
+          <!-- Admission Analysis Dashboard -->
+          <article class="project-card-featured">
+            <div class="project-image">
+              <img src="admission_analysis_Dashboard.jpg" alt="Universal Admission Analysis Dashboard showing data visualization">
+              <div class="project-image-overlay"></div>
             </div>
-            <div class="project-card-content">
-              <h3>Mechanical Engineering Intern</h3>
-              <p><strong>Dorsch Holding GmbH</strong><br>
-              <em>June 2023 – August 2023</em></p>
-              <p>Designed advanced water drainage systems and optimized hydraulic systems for industrial applications, achieving significant energy reductions.</p>
-              <div class="project-technologies" role="list" aria-label="Technologies used">
-                <span class="project-tech" role="listitem">MATLAB</span>
-                <span class="project-tech" role="listitem">SolidWorks</span>
-                <span class="project-tech" role="listitem">CAD Design</span>
-                <span class="project-tech" role="listitem">Fluid Dynamics</span>
+            <div class="project-content">
+              <span class="project-category">Data Analytics</span>
+              <h3 class="project-title">Admission Analysis Dashboard</h3>
+              <p class="project-description">
+                Universal analytics platform analyzing 10 years of admission data (35k students). My analysis directly influenced Commerce admission threshold changes.
+              </p>
+              <div class="project-tech">
+                <span class="tag">Python</span>
+                <span class="tag">Tkinter</span>
+                <span class="tag">Matplotlib</span>
               </div>
-              <div class="impact-section">
-                <strong>Impact:</strong> Achieved 25% reduction in energy consumption through gravity-fed system optimization and 18% reduction in pressure losses.
-              </div>
-            </div>
-          </article>
-          
-          <!-- Engineering International Student Mentor -->
-          <article class="project-card fade-in-up" role="listitem">
-            <div class="project-card-media">
-              <img src="assets/lab.jpg" 
-                   alt="Engineering mentorship and workshop activities"
-                   loading="lazy"
-                   width="350"
-                   height="200">
-            </div>
-            <div class="project-card-content">
-              <h3>Engineering International Student Mentor</h3>
-              <p><strong>Queen's University</strong><br>
-              <em>July 2022 – Present</em></p>
-              <p>Provided targeted mentoring for international engineering students, focusing on technical skill development and academic success strategies.</p>
-              <div class="project-technologies" role="list" aria-label="Technologies used">
-                <span class="project-tech" role="listitem">SolidWorks</span>
-                <span class="project-tech" role="listitem">MATLAB</span>
-                <span class="project-tech" role="listitem">Programming</span>
-                <span class="project-tech" role="listitem">CAD Modeling</span>
-              </div>
-              <div class="impact-section">
-                <strong>Impact:</strong> Organized peer-led workshops fostering collaborative learning environment for underrepresented student groups.
-              </div>
+              <a href="admission-analysis.html" class="project-link">
+                Read Case Study
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M3 8H13M13 8L8 3M13 8L8 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
             </div>
           </article>
-    
-          <!-- International Student Ambassador -->
-          <article class="project-card fade-in-up" role="listitem">
-            <div class="project-card-media">
-              <img src="assets/hero-img.jpg" 
-                   alt="Student ambassador activities and university outreach"
-                   loading="lazy"
-                   width="350"
-                   height="200">
+
+          <!-- AutoDrive Lane Detection -->
+          <article class="project-card-featured">
+            <div class="project-image">
+              <img src="assets/initiallanedetection.jpg" alt="Lane detection visualization on highway">
+              <div class="project-image-overlay"></div>
             </div>
-            <div class="project-card-content">
-              <h3>International Student Ambassador</h3>
-              <p><strong>Queen's University</strong><br>
-              <em>January 2023 – Present</em></p>
-              <p>Acted as liaison between prospective students and university, creating targeted presentations and data-driven outreach campaigns.</p>
-              <div class="project-technologies" role="list" aria-label="Technologies used">
-                <span class="project-tech" role="listitem">Data Analysis</span>
-                <span class="project-tech" role="listitem">Presentations</span>
-                <span class="project-tech" role="listitem">Outreach</span>
-                <span class="project-tech" role="listitem">Strategy</span>
+            <div class="project-content">
+              <span class="project-category">Autonomous Vehicles</span>
+              <h3 class="project-title">AutoDrive Lane Detection</h3>
+              <p class="project-description">
+                Ultra-Fast Lane Detection achieving <strong>300+ FPS</strong> for real-time autonomous vehicle navigation using computer vision.
+              </p>
+              <div class="project-tech">
+                <span class="tag">Python</span>
+                <span class="tag">OpenCV</span>
+                <span class="tag">UFLD</span>
               </div>
-              <div class="impact-section">
-                <strong>Impact:</strong> Streamlined onboarding processes for academic advising and housing, improving new student experience.
-              </div>
+              <a href="autodrive-project.html" class="project-link">
+                Read Case Study
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M3 8H13M13 8L8 3M13 8L8 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
             </div>
           </article>
         </div>
       </div>
     </section>
-  
 
-  
+    <!-- Experience Preview Section -->
+    <section class="experience-preview section">
+      <div class="container">
+        <div class="experience-highlight">
+          <div>
+            <div class="section-header">
+              <h2 class="section-title">Experience</h2>
+              <p class="section-subtitle">Building real-world impact through engineering and automation</p>
+            </div>
+            <div class="experience-stats">
+              <div class="stat-item">
+                <div class="stat-number">10</div>
+                <div class="stat-label">Projects Completed</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-number">3+</div>
+                <div class="stat-label">Years Experience</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-number">35k</div>
+                <div class="stat-label">Data Points Analyzed</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-number">478</div>
+                <div class="stat-label">Documents Automated</div>
+              </div>
+            </div>
+          </div>
+          <div class="experience-roles">
+            <div class="role-preview">
+              <span class="role-date">Dec 2024</span>
+              <div class="role-info">
+                <h4>Admission Coordinator</h4>
+                <p>Queen's University — Automating admission workflows</p>
+              </div>
+            </div>
+            <div class="role-preview">
+              <span class="role-date">2024</span>
+              <div class="role-info">
+                <h4>Recruitment Representative</h4>
+                <p>Queen's University — Built universal admission dashboard</p>
+              </div>
+            </div>
+            <div class="role-preview">
+              <span class="role-date">2023</span>
+              <div class="role-info">
+                <h4>Mechanical Engineering Intern</h4>
+                <p>Dorsch Holding GmbH — 25% energy reduction achieved</p>
+              </div>
+            </div>
+            <a href="experience.html" class="btn btn-secondary" style="margin-top: var(--space-md);">
+              View Full Timeline
+              <i class="bi bi-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+      <div class="container">
+        <div class="cta-content">
+          <h2>Let's Build Something</h2>
+          <p>I'm currently open to new opportunities in robotics, automation, and data-driven engineering.</p>
+          <div class="cta-buttons">
+            <a href="mailto:21ymsa@queensu.ca" class="btn btn-primary">
+              <i class="bi bi-envelope"></i>
+              Get in Touch
+            </a>
+            <a href="https://www.linkedin.com/in/yousef-alsaqa-b1ab4822b/" target="_blank" class="btn btn-secondary">
+              <i class="bi bi-linkedin"></i>
+              LinkedIn
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
   <!-- Footer -->
-  <footer id="footer" class="footer">
+  <footer class="footer">
     <div class="container">
-      <p>© 2025 Yousef Alsaqa. All Rights Reserved. <a href="mailto:21ymsa@queensu.ca" id="contact-button" class="contact-button">Contact Me</a></p>
-      <div class="social-links">
-        <a href="https://www.linkedin.com/in/yousef-alsaqa-b1ab4822b/" class="linkedin"><i class="bi bi-linkedin"></i></a>
+      <div class="footer-inner">
+        <p class="footer-text">© 2025 Yousef Alsaqa. Built with purpose.</p>
+        <div class="footer-links">
+          <a href="mailto:21ymsa@queensu.ca" class="footer-link">21ymsa@queensu.ca</a>
+          <a href="https://www.linkedin.com/in/yousef-alsaqa-b1ab4822b/" target="_blank" class="footer-link">LinkedIn</a>
+          <a href="https://github.com/yousefalsaqa" target="_blank" class="footer-link">GitHub</a>
+        </div>
       </div>
     </div>
   </footer>
 
-  <!-- Vendor JS Files -->
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="vendor/aos/aos.js"></script>
-  <script src="vendor/glightbox/js/glightbox.min.js"></script>
+  <!-- Scripts -->
+  <script>
+    // Mobile nav toggle
+    const navToggle = document.getElementById('navToggle');
+    const nav = document.getElementById('nav');
+    
+    navToggle.addEventListener('click', () => {
+      nav.classList.toggle('active');
+      navToggle.classList.toggle('active');
+    });
 
-  <!-- Main JS File -->
-  <script src="js/scripts.js"></script>
-
+    // Close nav when clicking a link
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        nav.classList.remove('active');
+        navToggle.classList.remove('active');
+      });
+    });
+  </script>
 </body>
-
 </html>

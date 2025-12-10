@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects | Yousef Alsaqa</title>
+  <meta name="description" content="Engineering projects by Yousef Alsaqa — autonomous systems, machine learning, robotics, and data-driven automation.">
+  <meta name="author" content="Yousef Alsaqa">
+  <meta name="theme-color" content="#0a0a0f">
+
+  <!-- Favicons -->
+  <link href="assets/favicon.png" rel="icon">
+  <link href="assets/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap Icons -->
+  <link href="vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link href="css/theme.css" rel="stylesheet">
+  <link href="css/pages/projects.css" rel="stylesheet">
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-inner">
+      <a href="index.html" class="header-logo">Yousef<span>.</span></a>
+      <nav class="header-nav" id="nav">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="projects.html" class="nav-link active">Projects</a>
+        <a href="experience.html" class="nav-link">Experience</a>
+        <a href="assets/Yousef_Alsaqa_Resume.pdf" class="btn btn-secondary" target="_blank">
+          <i class="bi bi-file-earmark-text"></i>
+          Resume
+        </a>
+      </nav>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="projects-hero">
+      <div class="container">
+        <h1>Projects</h1>
+        <p>A collection of engineering work spanning robotics, automation, machine learning, and embedded systems.</p>
+      </div>
+    </section>
+
+    <!-- Filter & Grid -->
+    <section class="section" style="padding-top: 0;">
+      <div class="container">
+        <!-- Filters -->
+        <div class="filter-section">
+          <div class="filter-controls">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="case-study">Case Studies</button>
+            <button class="filter-btn" data-filter="robotics">Robotics</button>
+            <button class="filter-btn" data-filter="data">Data & Analytics</button>
+            <button class="filter-btn" data-filter="ml">Machine Learning</button>
+            <button class="filter-btn" data-filter="embedded">Embedded</button>
+          </div>
+        </div>
+
+        <!-- Projects Grid -->
+        <div class="projects-grid-page" id="projectsGrid">
+          
+          <!-- CAST Medical Interface -->
+          <article class="project-card" data-categories="case-study embedded robotics">
+            <div class="project-card-image">
+              <img src="fi-studentfinal.jpg" alt="CAST Medical Interface student dashboard">
+            </div>
+            <div class="project-card-body">
+              <span class="project-card-category">Capstone Project</span>
+              <h3 class="project-card-title">CAST Medical Interface</h3>
+              <p class="project-card-description">
+                Patient simulation system for nursing education with custom RFID stethoscope. 28 medical conditions simulated through real-time web interface.
+              </p>
+              <div class="project-card-tech">
+                <span class="tag">Python</span>
+                <span class="tag">Raspberry Pi</span>
+                <span class="tag">RFID</span>
+                <span class="tag">Flask</span>
+              </div>
+              <div class="project-card-footer">
+                <a href="capstone.html" class="project-card-link">
+                  View Project
+                  <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L8 3M13 8L8 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+                <span class="case-study-badge">
+                  <i class="bi bi-file-text"></i>
+                  Case Study
+                </span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Admission Analysis Dashboard -->
+          <article class="project-card" data-categories="case-study data">
+            <div class="project-card-image">
+              <img src="admission_analysis_Dashboard.jpg" alt="Universal Admission Analysis Dashboard">
+            </div>
+            <div class="project-card-body">
+              <span class="project-card-category">Data Analytics</span>
+              <h3 class="project-card-title">Admission Analysis Dashboard</h3>
+              <p class="project-card-description">
+                Universal analytics platform analyzing 10 years of admission data (35k students). Directly influenced Commerce admission threshold changes.
+              </p>
+              <div class="project-card-tech">
+                <span class="tag">Python</span>
+                <span class="tag">Tkinter</span>
+                <span class="tag">Matplotlib</span>
+                <span class="tag">Pandas</span>
+              </div>
+              <div class="project-card-footer">
+                <a href="admission-analysis.html" class="project-card-link">
+                  View Project
+                  <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L8 3M13 8L8 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+                <span class="case-study-badge">
+                  <i class="bi bi-file-text"></i>
+                  Case Study
+                </span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Document Automation -->
+          <article class="project-card" data-categories="case-study data">
+            <div class="project-card-placeholder">
+              <div class="project-card-placeholder-content">
+                <i class="bi bi-file-earmark-code"></i>
+              </div>
+            </div>
+            <div class="project-card-body">
+              <span class="project-card-category">Automation</span>
+              <h3 class="project-card-title">Document Automation System</h3>
+              <p class="project-card-description">
+                Selenium-based automation for admission document processing. 478 documents processed in first 21 hours of deployment.
+              </p>
+              <div class="project-card-tech">
+                <span class="tag">Python</span>
+                <span class="tag">Selenium</span>
+                <span class="tag">Chrome Driver</span>
+              </div>
+              <div class="project-card-footer">
+                <a href="document-automation.html" class="project-card-link">
+                  View Project
+                  <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L8 3M13 8L8 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+                <span class="case-study-badge">
+                  <i class="bi bi-file-text"></i>
+                  Case Study
+                </span>
+              </div>
+            </div>
+          </article>
+
+          <!-- EII Predictor -->
+          <article class="project-card" data-categories="case-study ml data">
+            <div class="project-card-image">
+              <img src="assets/eii_model.jpg" alt="Energy Intensity Index prediction model">
+            </div>
+            <div class="project-card-body">
+              <span class="project-card-category">Machine Learning</span>
+              <h3 class="project-card-title">Energy Intensity Index Predictor</h3>
+              <p class="project-card-description">
+                Machine learning model using neural networks and Random Forest to forecast Energy Intensity Index with improved accuracy.
+              </p>
+              <div class="project-card-tech">
+                <span class="tag">Python</span>
+                <span class="tag">TensorFlow</span>
+                <span class="tag">Scikit-learn</span>
+              </div>
+              <div class="project-card-footer">
+                <a href="eii-project-details.html" class="project-card-link">
+                  View Project
+                  <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L8 3M13 8L8 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+                <span class="case-study-badge">
+                  <i class="bi bi-file-text"></i>
+                  Case Study
+                </span>
+              </div>
+            </div>
+          </article>
+
+          <!-- AutoDrive Lane Detection -->
+          <article class="project-card" data-categories="case-study robotics ml">
+            <div class="project-card-image">
+              <img src="assets/initiallanedetection.jpg" alt="Lane detection on highway">
+            </div>
+            <div class="project-card-body">
+              <span class="project-card-category">Autonomous Vehicles</span>
+              <h3 class="project-card-title">AutoDrive Lane Detection</h3>
+              <p class="project-card-description">
+                Ultra-Fast Lane Detection achieving 300+ FPS for real-time autonomous vehicle navigation using computer vision.
+              </p>
+              <div class="project-card-tech">
+                <span class="tag">Python</span>
+                <span class="tag">OpenCV</span>
+                <span class="tag">UFLD</span>
+              </div>
+              <div class="project-card-footer">
+                <a href="autodrive-project.html" class="project-card-link">
+                  View Project
+                  <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L8 3M13 8L8 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+                <span class="case-study-badge">
+                  <i class="bi bi-file-text"></i>
+                  Case Study
+                </span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Energy Digital Twin -->
+          <article class="project-card" data-categories="data ml">
+            <div class="project-card-placeholder">
+              <div class="project-card-placeholder-content">
+                <i class="bi bi-lightning-charge"></i>
+              </div>
+            </div>
+            <div class="project-card-body">
+              <span class="project-card-category">Energy Systems</span>
+              <h3 class="project-card-title">Energy Digital Twin</h3>
+              <p class="project-card-description">
+                Combines EnergyPlus modeling with baseline-volatility simulation for industrial energy analysis.
+              </p>
+              <div class="project-card-tech">
+                <span class="tag">Python</span>
+                <span class="tag">EnergyPlus</span>
+                <span class="tag">FastAPI</span>
+                <span class="tag">Streamlit</span>
+              </div>
+              <div class="project-card-footer">
+                <a href="energy-digital-twin.html" class="project-card-link">
+                  View Project
+                  <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L8 3M13 8L8 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Formula Racing -->
+          <article class="project-card" data-categories="embedded robotics">
+            <div class="project-card-image">
+              <img src="assets/queensfsae.png" alt="Queen's Formula SAE team">
+            </div>
+            <div class="project-card-body">
+              <span class="project-card-category">Embedded Systems</span>
+              <h3 class="project-card-title">Formula Racing Steering System</h3>
+              <p class="project-card-description">
+                Advanced steering system with custom PCB, TFT display, and CAN Bus protocols for Formula SAE competition.
+              </p>
+              <div class="project-card-tech">
+                <span class="tag">C++</span>
+                <span class="tag">CAN Bus</span>
+                <span class="tag">PCB Design</span>
+              </div>
+              <div class="project-card-footer">
+                <a href="steering-project.html" class="project-card-link">
+                  View Project
+                  <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L8 3M13 8L8 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Terrabot -->
+          <article class="project-card" data-categories="robotics">
+            <div class="project-card-image">
+              <img src="assets/203_Rover.jpg" alt="Terrabot autonomous robot">
+            </div>
+            <div class="project-card-body">
+              <span class="project-card-category">Robotics</span>
+              <h3 class="project-card-title">Terrabot CO2 Monitor</h3>
+              <p class="project-card-description">
+                Indoor CO2 monitoring robot using SLAM and sensor fusion to generate air quality heat maps.
+              </p>
+              <div class="project-card-tech">
+                <span class="tag">ROS</span>
+                <span class="tag">Python</span>
+                <span class="tag">SLAM</span>
+                <span class="tag">Raspberry Pi</span>
+              </div>
+              <div class="project-card-footer">
+                <a href="terrabot-details.html" class="project-card-link">
+                  View Project
+                  <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L8 3M13 8L8 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Rexcubot -->
+          <article class="project-card" data-categories="robotics embedded">
+            <div class="project-card-image">
+              <img src="assets/303bot.jpg" alt="Rexcubot competition robot">
+            </div>
+            <div class="project-card-body">
+              <span class="project-card-category">Robotics</span>
+              <h3 class="project-card-title">The Rexcubot</h3>
+              <p class="project-card-description">
+                Custom mobile robot with parallel linkage scoop and precision gripper for autonomous navigation and object retrieval.
+              </p>
+              <div class="project-card-tech">
+                <span class="tag">C++</span>
+                <span class="tag">Arduino</span>
+                <span class="tag">Control Systems</span>
+              </div>
+              <div class="project-card-footer">
+                <a href="rexcubot-details.html" class="project-card-link">
+                  View Project
+                  <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L8 3M13 8L8 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- QSET Robotic Arm -->
+          <article class="project-card" data-categories="robotics">
+            <div class="project-card-image">
+              <img src="assets/qset robot with arm.png" alt="QSET robotic arm">
+            </div>
+            <div class="project-card-body">
+              <span class="project-card-category">Robotics</span>
+              <h3 class="project-card-title">QSET Robotic Arm</h3>
+              <p class="project-card-description">
+                Six-DOF robotic arm with advanced kinematics, dynamics analysis, and robust control architecture for space exploration tasks.
+              </p>
+              <div class="project-card-tech">
+                <span class="tag">MATLAB</span>
+                <span class="tag">SolidWorks</span>
+                <span class="tag">Kinematics</span>
+              </div>
+              <div class="project-card-footer">
+                <a href="qsetarm-details.html" class="project-card-link">
+                  View Project
+                  <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L8 3M13 8L8 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <p class="footer-text">© 2025 Yousef Alsaqa. Built with purpose.</p>
+        <div class="footer-links">
+          <a href="mailto:21ymsa@queensu.ca" class="footer-link">21ymsa@queensu.ca</a>
+          <a href="https://www.linkedin.com/in/yousef-alsaqa-b1ab4822b/" target="_blank" class="footer-link">LinkedIn</a>
+          <a href="https://github.com/yousefalsaqa" target="_blank" class="footer-link">GitHub</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    // Mobile nav toggle
+    const navToggle = document.getElementById('navToggle');
+    const nav = document.getElementById('nav');
+    
+    navToggle.addEventListener('click', () => {
+      nav.classList.toggle('active');
+    });
+
+    // Filter functionality
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const projectCards = document.querySelectorAll('.project-card');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        // Update active button
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const filter = btn.dataset.filter;
+
+        projectCards.forEach(card => {
+          const categories = card.dataset.categories.split(' ');
+          
+          if (filter === 'all' || categories.includes(filter)) {
+            card.style.display = '';
+            card.style.animation = 'fadeInUp 0.4s ease forwards';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
+
