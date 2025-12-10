@@ -17,12 +17,6 @@
   <meta property="og:url" content="https://yousefalsaqa.github.io">
   <meta property="og:image" content="https://yousefalsaqa.github.io/assets/Yousef Headshot.jpg">
 
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Yousef Alsaqa - Mechatronics & Robotics Engineer">
-  <meta name="twitter:description" content="Portfolio showcasing projects in autonomous systems, AI/ML, robotics, and data-driven automation.">
-  <meta name="twitter:image" content="https://yousefalsaqa.github.io/assets/Yousef Headshot.jpg">
-
   <!-- Favicons -->
   <link href="assets/favicon.png" rel="icon">
   <link href="assets/apple-touch-icon.png" rel="apple-touch-icon">
@@ -49,10 +43,7 @@
         <a href="index.html" class="nav-link active">Home</a>
         <a href="projects.html" class="nav-link">Projects</a>
         <a href="experience.html" class="nav-link">Experience</a>
-        <a href="assets/Yousef_Alsaqa_Resume.pdf" class="btn btn-secondary" target="_blank">
-          <i class="bi bi-file-earmark-text"></i>
-          Resume
-        </a>
+        <a href="mailto:21ymsa@queensu.ca" class="nav-link">Contact</a>
       </nav>
       <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
         <span></span>
@@ -68,266 +59,137 @@
       <div class="container">
         <div class="hero-content">
           <div class="hero-text">
-            <p class="hero-greeting">Hi, I'm</p>
             <h1 class="hero-name">Yousef Alsaqa</h1>
-            <p class="hero-title">Mechatronics & Robotics Engineer · <span>Dean's List 2025</span></p>
+            <p class="hero-title">Mechatronics & Robotics Engineer</p>
             <p class="hero-description">
-              I build systems that make a difference — from medical training simulators that changed how nursing students learn, to admission analytics that influenced university policy. I specialize in <strong>autonomous systems</strong>, <strong>data-driven automation</strong>, and <strong>control systems</strong>.
+              Recent Queen's grad (Dean's List '25) who builds things that work. I made a medical training simulator that nursing students actually use, an analytics dashboard that changed university admission policy, and automation that processes hundreds of documents while I sleep.
             </p>
+            <div class="hero-tags">
+              <span>Python</span>
+              <span>Robotics</span>
+              <span>Machine Learning</span>
+              <span>Data Analysis</span>
+              <span>Embedded Systems</span>
+            </div>
             <div class="hero-cta">
-              <a href="projects.html" class="btn btn-primary">
-                <i class="bi bi-grid-3x3-gap"></i>
-                View Projects
-              </a>
-              <a href="experience.html" class="btn btn-secondary">
-                <i class="bi bi-briefcase"></i>
-                Experience
-              </a>
-              <a href="mailto:21ymsa@queensu.ca" class="btn btn-ghost">
-                <i class="bi bi-envelope"></i>
-                Contact
-              </a>
+              <a href="projects.html" class="btn btn-primary">See My Work</a>
+              <a href="mailto:21ymsa@queensu.ca" class="btn btn-secondary">Get in Touch</a>
             </div>
           </div>
           <div class="hero-image">
-            <img src="assets/Yousef Headshot.jpg" alt="Yousef Alsaqa - Mechatronics and Robotics Engineer" width="280" height="280">
-            <div class="hero-status">
-              Open to opportunities
-            </div>
+            <img src="assets/Yousef Headshot.jpg" alt="Yousef Alsaqa" width="300" height="300">
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Skills Section -->
-    <section class="skills section">
+    <!-- Projects Section -->
+    <section class="projects-section section">
       <div class="container">
-        <div class="section-header">
-          <h2 class="section-title">What I Do</h2>
-          <p class="section-subtitle">Engineering solutions across hardware, software, and data</p>
+        <div class="projects-header">
+          <h2>Selected Projects</h2>
+          <a href="projects.html" class="projects-all-link">All projects →</a>
         </div>
-        <div class="skills-grid">
-          <div class="skill-category">
-            <div class="skill-category-icon">🤖</div>
-            <h3>Robotics & Autonomous Systems</h3>
-            <p>Designing intelligent systems that perceive and act</p>
-            <div class="skill-tags">
-              <span class="skill-tag">ROS</span>
-              <span class="skill-tag">SLAM</span>
-              <span class="skill-tag">Computer Vision</span>
-              <span class="skill-tag">Control Systems</span>
-              <span class="skill-tag">Sensor Fusion</span>
+        
+        <div class="projects-list">
+          <!-- CAST Medical Interface -->
+          <a href="capstone.html" class="project-item">
+            <div class="project-item-image">
+              <img src="fi-studentfinal.jpg" alt="CAST Medical Interface">
             </div>
-          </div>
-          <div class="skill-category">
-            <div class="skill-category-icon">📊</div>
-            <h3>Data Analysis & Automation</h3>
-            <p>Turning raw data into actionable insights and automated workflows</p>
-            <div class="skill-tags">
-              <span class="skill-tag">Python</span>
-              <span class="skill-tag">Pandas</span>
-              <span class="skill-tag">Matplotlib</span>
-              <span class="skill-tag">Selenium</span>
-              <span class="skill-tag">Tkinter</span>
+            <div class="project-item-content">
+              <h3>CAST Medical Interface</h3>
+              <p>Built a patient simulator with a custom RFID stethoscope for nursing education. 28 heart and lung conditions, real-time instructor control, actually deployed at Queen's.</p>
+              <div class="project-item-tags">
+                <span>Python</span>
+                <span>Raspberry Pi</span>
+                <span>RFID</span>
+                <span>Flask</span>
+              </div>
             </div>
-          </div>
-          <div class="skill-category">
-            <div class="skill-category-icon">🧠</div>
-            <h3>Machine Learning</h3>
-            <p>Building predictive models and intelligent algorithms</p>
-            <div class="skill-tags">
-              <span class="skill-tag">TensorFlow</span>
-              <span class="skill-tag">Scikit-learn</span>
-              <span class="skill-tag">Neural Networks</span>
-              <span class="skill-tag">Random Forest</span>
-            </div>
-          </div>
-          <div class="skill-category">
-            <div class="skill-category-icon">⚡</div>
-            <h3>Embedded Systems</h3>
-            <p>Bridging hardware and software for real-world applications</p>
-            <div class="skill-tags">
-              <span class="skill-tag">Raspberry Pi</span>
-              <span class="skill-tag">Arduino</span>
-              <span class="skill-tag">CAN Bus</span>
-              <span class="skill-tag">RFID</span>
-              <span class="skill-tag">PCB Design</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+          </a>
 
-    <!-- Featured Projects Section -->
-    <section class="featured-projects section">
-      <div class="container">
-        <div class="featured-header">
-          <div class="section-header">
-            <h2 class="section-title">Featured Work</h2>
-            <p class="section-subtitle">Projects that showcase impact and technical depth</p>
-          </div>
-          <a href="projects.html" class="btn btn-ghost">
-            View All Projects
-            <i class="bi bi-arrow-right"></i>
+          <!-- Admission Analysis -->
+          <a href="admission-analysis.html" class="project-item">
+            <div class="project-item-image">
+              <img src="admission_analysis_Dashboard.jpg" alt="Admission Analysis Dashboard">
+            </div>
+            <div class="project-item-content">
+              <h3>Admission Analysis Dashboard</h3>
+              <p>Analyzed 10 years of admission data. Built a policy simulator that showed what would happen if thresholds changed. The university actually raised Commerce requirements based on my findings.</p>
+              <div class="project-item-tags">
+                <span>Python</span>
+                <span>Tkinter</span>
+                <span>Pandas</span>
+                <span>Matplotlib</span>
+              </div>
+            </div>
+          </a>
+
+          <!-- AutoDrive -->
+          <a href="autodrive-project.html" class="project-item">
+            <div class="project-item-image">
+              <img src="assets/initiallanedetection.jpg" alt="AutoDrive Lane Detection">
+            </div>
+            <div class="project-item-content">
+              <h3>AutoDrive Lane Detection</h3>
+              <p>Implemented Ultra-Fast Lane Detection for Queen's autonomous vehicle team. 300+ FPS on embedded hardware. The car uses this to stay in its lane.</p>
+              <div class="project-item-tags">
+                <span>Python</span>
+                <span>OpenCV</span>
+                <span>Computer Vision</span>
+              </div>
+            </div>
+          </a>
+
+          <!-- Document Automation -->
+          <a href="document-automation.html" class="project-item">
+            <div class="project-item-image placeholder">
+              <i class="bi bi-code-slash"></i>
+            </div>
+            <div class="project-item-content">
+              <h3>Document Automation</h3>
+              <p>Got tired of manually attaching documents to applications. Wrote a Selenium script that did 478 of them in 21 hours. Still running.</p>
+              <div class="project-item-tags">
+                <span>Python</span>
+                <span>Selenium</span>
+                <span>Automation</span>
+              </div>
+            </div>
           </a>
         </div>
-        <div class="featured-grid">
-          <!-- CAST Medical Interface - Large Featured -->
-          <article class="project-card-featured large">
-            <div class="project-image">
-              <img src="fi-studentfinal.jpg" alt="CAST Medical Interface student dashboard showing live simulation mode">
-              <div class="project-image-overlay"></div>
-            </div>
-            <div class="project-content">
-              <span class="project-category">Capstone Project</span>
-              <h3 class="project-title">CAST Medical Interface</h3>
-              <p class="project-description">
-                A patient simulation system for nursing education. Built a custom RFID-enabled stethoscope that plays realistic heart and lung sounds based on instructor-set conditions. <strong>28 medical conditions</strong> (13 heart, 15 lung) simulated through a real-time web interface.
-              </p>
-              <div class="project-tech">
-                <span class="tag">Python</span>
-                <span class="tag">Raspberry Pi</span>
-                <span class="tag">RFID</span>
-                <span class="tag">Flask</span>
-              </div>
-              <a href="capstone.html" class="project-link">
-                Read Case Study
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M3 8H13M13 8L8 3M13 8L8 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </a>
-            </div>
-          </article>
-
-          <!-- Admission Analysis Dashboard -->
-          <article class="project-card-featured">
-            <div class="project-image">
-              <img src="admission_analysis_Dashboard.jpg" alt="Universal Admission Analysis Dashboard showing data visualization">
-              <div class="project-image-overlay"></div>
-            </div>
-            <div class="project-content">
-              <span class="project-category">Data Analytics</span>
-              <h3 class="project-title">Admission Analysis Dashboard</h3>
-              <p class="project-description">
-                Universal analytics platform analyzing 10 years of admission data (35k students). My analysis directly influenced Commerce admission threshold changes.
-              </p>
-              <div class="project-tech">
-                <span class="tag">Python</span>
-                <span class="tag">Tkinter</span>
-                <span class="tag">Matplotlib</span>
-              </div>
-              <a href="admission-analysis.html" class="project-link">
-                Read Case Study
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M3 8H13M13 8L8 3M13 8L8 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </a>
-            </div>
-          </article>
-
-          <!-- AutoDrive Lane Detection -->
-          <article class="project-card-featured">
-            <div class="project-image">
-              <img src="assets/initiallanedetection.jpg" alt="Lane detection visualization on highway">
-              <div class="project-image-overlay"></div>
-            </div>
-            <div class="project-content">
-              <span class="project-category">Autonomous Vehicles</span>
-              <h3 class="project-title">AutoDrive Lane Detection</h3>
-              <p class="project-description">
-                Ultra-Fast Lane Detection achieving <strong>300+ FPS</strong> for real-time autonomous vehicle navigation using computer vision.
-              </p>
-              <div class="project-tech">
-                <span class="tag">Python</span>
-                <span class="tag">OpenCV</span>
-                <span class="tag">UFLD</span>
-              </div>
-              <a href="autodrive-project.html" class="project-link">
-                Read Case Study
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M3 8H13M13 8L8 3M13 8L8 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </a>
-            </div>
-          </article>
-        </div>
       </div>
     </section>
 
-    <!-- Experience Preview Section -->
-    <section class="experience-preview section">
+    <!-- Experience Section -->
+    <section class="experience-section section">
       <div class="container">
-        <div class="experience-highlight">
-          <div>
-            <div class="section-header">
-              <h2 class="section-title">Experience</h2>
-              <p class="section-subtitle">Building real-world impact through engineering and automation</p>
-            </div>
-            <div class="experience-stats">
-              <div class="stat-item">
-                <div class="stat-number">10</div>
-                <div class="stat-label">Projects Completed</div>
-              </div>
-              <div class="stat-item">
-                <div class="stat-number">3+</div>
-                <div class="stat-label">Years Experience</div>
-              </div>
-              <div class="stat-item">
-                <div class="stat-number">35k</div>
-                <div class="stat-label">Data Points Analyzed</div>
-              </div>
-              <div class="stat-item">
-                <div class="stat-number">478</div>
-                <div class="stat-label">Documents Automated</div>
-              </div>
-            </div>
-          </div>
-          <div class="experience-roles">
-            <div class="role-preview">
-              <span class="role-date">Dec 2024</span>
-              <div class="role-info">
-                <h4>Admission Coordinator</h4>
-                <p>Queen's University — Automating admission workflows</p>
-              </div>
-            </div>
-            <div class="role-preview">
-              <span class="role-date">2024</span>
-              <div class="role-info">
-                <h4>Recruitment Representative</h4>
-                <p>Queen's University — Built universal admission dashboard</p>
-              </div>
-            </div>
-            <div class="role-preview">
-              <span class="role-date">2023</span>
-              <div class="role-info">
-                <h4>Mechanical Engineering Intern</h4>
-                <p>Dorsch Holding GmbH — 25% energy reduction achieved</p>
-              </div>
-            </div>
-            <a href="experience.html" class="btn btn-secondary" style="margin-top: var(--space-md);">
-              View Full Timeline
-              <i class="bi bi-arrow-right"></i>
-            </a>
-          </div>
+        <div class="experience-header">
+          <h2>Where I've Worked</h2>
+          <a href="experience.html" class="experience-all-link">Full timeline →</a>
         </div>
-      </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="cta-section">
-      <div class="container">
-        <div class="cta-content">
-          <h2>Let's Build Something</h2>
-          <p>I'm currently open to new opportunities in robotics, automation, and data-driven engineering.</p>
-          <div class="cta-buttons">
-            <a href="mailto:21ymsa@queensu.ca" class="btn btn-primary">
-              <i class="bi bi-envelope"></i>
-              Get in Touch
-            </a>
-            <a href="https://www.linkedin.com/in/yousef-alsaqa-b1ab4822b/" target="_blank" class="btn btn-secondary">
-              <i class="bi bi-linkedin"></i>
-              LinkedIn
-            </a>
+        
+        <div class="experience-list">
+          <div class="experience-item">
+            <div class="experience-item-date">Now</div>
+            <div class="experience-item-content">
+              <h3>Admission Coordinator</h3>
+              <p>Queen's University</p>
+            </div>
+          </div>
+          <div class="experience-item">
+            <div class="experience-item-date">2024</div>
+            <div class="experience-item-content">
+              <h3>Recruitment Representative</h3>
+              <p>Queen's University — Built the admission dashboard</p>
+            </div>
+          </div>
+          <div class="experience-item">
+            <div class="experience-item-date">2023</div>
+            <div class="experience-item-content">
+              <h3>Mechanical Engineering Intern</h3>
+              <p>Dorsch Holding GmbH — Abu Dhabi</p>
+            </div>
           </div>
         </div>
       </div>
@@ -337,20 +199,26 @@
   <!-- Footer -->
   <footer class="footer">
     <div class="container">
-      <div class="footer-inner">
-        <p class="footer-text">© 2025 Yousef Alsaqa. Built with purpose.</p>
-        <div class="footer-links">
-          <a href="mailto:21ymsa@queensu.ca" class="footer-link">21ymsa@queensu.ca</a>
-          <a href="https://www.linkedin.com/in/yousef-alsaqa-b1ab4822b/" target="_blank" class="footer-link">LinkedIn</a>
-          <a href="https://github.com/yousefalsaqa" target="_blank" class="footer-link">GitHub</a>
+      <div class="footer-content">
+        <div class="footer-main">
+          <h2>Let's talk.</h2>
+          <p>I'm looking for full-time opportunities in robotics, automation, or anywhere I can build things that matter.</p>
+          <a href="mailto:21ymsa@queensu.ca" class="footer-email">21ymsa@queensu.ca</a>
         </div>
+        <div class="footer-links">
+          <a href="https://www.linkedin.com/in/yousef-alsaqa-b1ab4822b/" target="_blank">LinkedIn</a>
+          <a href="https://github.com/yousefalsaqa" target="_blank">GitHub</a>
+          <a href="assets/Yousef_Alsaqa_Resume.pdf" target="_blank">Resume</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 Yousef Alsaqa</p>
       </div>
     </div>
   </footer>
 
   <!-- Scripts -->
   <script>
-    // Mobile nav toggle
     const navToggle = document.getElementById('navToggle');
     const nav = document.getElementById('nav');
     
@@ -359,7 +227,6 @@
       navToggle.classList.toggle('active');
     });
 
-    // Close nav when clicking a link
     document.querySelectorAll('.nav-link').forEach(link => {
       link.addEventListener('click', () => {
         nav.classList.remove('active');
