@@ -1,80 +1,194 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terrabot Project Showcase</title>
-    <link rel="stylesheet" href="css/style.css"> <!-- Link to your CSS file -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- Icons -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terrabot CO2 Monitor | Yousef Alsaqa</title>
+  <meta name="description" content="Autonomous indoor robot for CO2 monitoring using SLAM navigation and sensor fusion to generate air quality heat maps.">
+  <meta name="author" content="Yousef Alsaqa">
+  <meta name="theme-color" content="#0a0a0f">
+
+  <link href="assets/favicon.png" rel="icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="css/theme.css" rel="stylesheet">
+  <link href="css/pages/case-study.css" rel="stylesheet">
 </head>
+
 <body>
-    <!-- Main Container -->
-    <div id="terrabot-container" class="container">
-        <!-- Project Header -->
-        <header id="terrabot-header">
-            <h1>Terrabot Project</h1>
-            <p>By Terraforma Corporation for Q-PMC</p>
-            <img src="assets/203_Rover.jpg" alt="Terrabot Project" class="header-image">
-        </header>
-
-        <!-- Executive Summary -->
-        <section id="terrabot-executive-summary" class="showcase-section">
-            <div class="text-content">
-                <h2><i class="fas fa-clipboard-list"></i> Executive Summary</h2>
-                <p>The Terrabot project involves the design and development of a robot for CO2 monitoring in indoor environments. Using SLAM and CO2 sensors, it generates a “heat map” of CO2 distribution, enhancing air quality management. This solution is expected to reduce costs associated with air quality monitoring while ensuring a healthier indoor environment.</p>
-            </div>
-        </section>
-
-        <!-- System Architecture -->
-        <section id="terrabot-system-architecture" class="showcase-section">
-            <img src="assets/SystemArchitecture.png" alt="System Architecture" class="showcase-image">
-            <div class="text-content">
-                <h2><i class="fas fa-cogs"></i> System Architecture</h2>
-                <p>The Terrabot uses a Raspberry Pi for data processing and connects to various sensors, including LiDAR for SLAM and a CO2 sensor. Key components communicate through ROS nodes. Navigation modes (autonomous or remote control) are selectable, and the robot utilizes Dijkstra's Algorithm for effective mapping.</p>
-            </div>
-        </section>
-
-        <!-- CO2 Mapping Details -->
-        <section id="terrabot-co2-mapping" class="showcase-section">
-            <div class="text-content">
-                <h2><i class="fas fa-map-marked-alt"></i> CO2 Mapping</h2>
-                <p>The CO2 mapping feature employs a heatmap visualization technique, using measured CO2 concentration data at specific coordinates. Data interpolation fills gaps between measurements, creating a comprehensive visual representation of CO2 distribution in the environment.</p>
-                <img src="assets/CO2.png" alt="CO2 Heat Map" class="showcase-image">
-            </div>
-        </section>
-
-        <!-- Room Mapping Details -->
-        <section id="terrabot-room-mapping" class="showcase-section">
-            <img src="SLAMmap.png" alt="Room Mapping with Hector SLAM" class="showcase-image">
-            <div class="text-content">
-                <h2><i class="fas fa-map"></i> Room Mapping</h2>
-                <p>The room mapping feature is powered by Hector SLAM, which uses LiDAR data to build a real-time 2D occupancy grid map. This allows the robot to autonomously navigate the room while avoiding obstacles, ensuring efficient and accurate mapping for CO2 heatmap generation.</p>
-            </div>
-        </section>
-
-        <!-- Hardware Section -->
-        <section id="terrabot-hardware" class="showcase-section">
-            <div class="text-content">
-                <h2><i class="fas fa-tools"></i> Hardware</h2>
-                <ul>
-                    <li>Raspberry Pi v4</li>
-                    <li>Arduino Uno Wifi Rev2</li>
-                    <li>360-Degree LiDAR Sensor</li>
-                    <li>SCD30 Air Quality Sensor</li>
-                    <li>SHARP Distance Sensor</li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- Footer -->
-        <footer id="terrabot-footer">
-            <p>&copy; 2025 Terraforma Corporation. All Rights Reserved.</p>
-        </footer>
+  <header class="header">
+    <div class="header-inner">
+      <a href="index.html" class="header-logo">Yousef<span>.</span></a>
+      <nav class="header-nav" id="nav">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="projects.html" class="nav-link">Projects</a>
+        <a href="experience.html" class="nav-link">Experience</a>
+        <a href="mailto:21ymsa@queensu.ca" class="nav-link">Contact</a>
+      </nav>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
     </div>
+  </header>
 
-    <!-- Back-to-Main Button -->
-    <a href="index.html" id="back-to-main" class="back-to-main">
-        <span>⬅ Main Page</span>
-    </a>
+  <main>
+    <section class="case-hero">
+      <div class="container">
+        <div class="case-hero-content">
+          <a href="projects.html" class="back-link"><i class="bi bi-arrow-left"></i> Back to Projects</a>
+          <span class="case-category">Robotics</span>
+          <h1>Terrabot CO2 Monitor</h1>
+          <p class="case-hero-description">
+            An autonomous indoor robot that maps room CO2 levels to identify ventilation dead zones. Using SLAM for navigation and a precision air quality sensor, Terrabot generates heat maps showing CO2 distribution — helping facility managers optimize HVAC systems and improve air quality.
+          </p>
+          <div class="case-meta">
+            <div class="case-meta-item">
+              <div class="case-meta-label">Course</div>
+              <div class="case-meta-value">MREN 203</div>
+            </div>
+            <div class="case-meta-item">
+              <div class="case-meta-label">Team</div>
+              <div class="case-meta-value">Terraforma Corp.</div>
+            </div>
+            <div class="case-meta-item">
+              <div class="case-meta-label">Stack</div>
+              <div class="case-tech">
+                <span class="tag">ROS</span>
+                <span class="tag">Python</span>
+                <span class="tag">SLAM</span>
+                <span class="tag">Raspberry Pi</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="case-content">
+      <section class="case-section">
+        <h2 class="case-section-title">The Problem</h2>
+        <p>
+          Poor indoor air quality is a hidden problem. High CO2 levels cause drowsiness, reduced cognitive function, and discomfort — but building occupants usually can't perceive it until levels are dangerously high. Traditional air quality monitoring uses fixed sensors that miss localized problems.
+        </p>
+        <p>
+          We asked: what if a robot could autonomously survey an entire room and create a map of where CO2 accumulates? This would reveal ventilation dead zones, overcrowded areas, and HVAC inefficiencies that fixed sensors miss.
+        </p>
+      </section>
+
+      <section class="case-section">
+        <h2 class="case-section-title">The Robot</h2>
+        <div class="case-image">
+          <img src="assets/203_Rover.jpg" alt="Terrabot robot showing chassis with sensors mounted">
+          <div class="case-image-caption">Terrabot with LiDAR, CO2 sensor, and Raspberry Pi mounted</div>
+        </div>
+        <p>
+          Terrabot is built on a differential-drive platform with two powered wheels and a castor. The chassis is custom-designed to mount all sensors at optimal heights — the LiDAR at chest height for obstacle detection, and the CO2 sensor at breathing height where air quality matters most.
+        </p>
+      </section>
+
+      <section class="case-section">
+        <h2 class="case-section-title">SLAM Navigation</h2>
+        <p>
+          The robot uses Hector SLAM to simultaneously map the room and track its position. A 360-degree LiDAR sensor provides the raw distance measurements, which the SLAM algorithm processes to build an occupancy grid map in real-time.
+        </p>
+        <div class="case-image">
+          <img src="assets/SLAMmap.png" alt="SLAM-generated occupancy grid map of a room">
+          <div class="case-image-caption">Real-time map generated by Hector SLAM from LiDAR data</div>
+        </div>
+        <p>
+          Navigation uses Dijkstra's algorithm to plan paths through the mapped space. The robot can operate in two modes: autonomous exploration (covering the entire accessible area) or remote control for targeted measurements in specific locations.
+        </p>
+      </section>
+
+      <section class="case-section">
+        <h2 class="case-section-title">CO2 Mapping</h2>
+        <p>
+          As Terrabot navigates, it continuously logs CO2 readings with their corresponding map coordinates. After surveying a room, this data is processed to generate a heat map visualization:
+        </p>
+        <div class="case-image">
+          <img src="assets/CO2.png" alt="CO2 heat map showing concentration variations across a room">
+          <div class="case-image-caption">Heat map showing CO2 distribution — red indicates high concentration areas</div>
+        </div>
+        <p>
+          The visualization uses interpolation to fill gaps between measurement points, creating a continuous surface that facility managers can immediately understand. High-CO2 zones appear in red, indicating areas that need better ventilation or reduced occupancy.
+        </p>
+      </section>
+
+      <section class="case-section">
+        <h2 class="case-section-title">System Architecture</h2>
+        <div class="case-image">
+          <img src="assets/SystemArchitecture.png" alt="System architecture diagram showing ROS nodes and communication">
+          <div class="case-image-caption">ROS-based architecture with separate nodes for SLAM, sensing, and control</div>
+        </div>
+        <p>
+          The software runs on ROS (Robot Operating System), with separate nodes handling:
+        </p>
+        <ul>
+          <li><strong>SLAM Node:</strong> Processes LiDAR data and maintains the map</li>
+          <li><strong>CO2 Node:</strong> Reads from the SCD30 sensor and publishes timestamped measurements</li>
+          <li><strong>Navigation Node:</strong> Plans paths and sends motor commands</li>
+          <li><strong>Control Node:</strong> Handles mode switching and user interface</li>
+        </ul>
+      </section>
+
+      <section class="case-section">
+        <h2 class="case-section-title">Hardware</h2>
+        <div class="case-highlight">
+          <div class="case-highlight-title">Components</div>
+          <ul style="margin: 0; padding-left: var(--space-lg);">
+            <li><strong>Raspberry Pi 4:</strong> Main compute unit running ROS</li>
+            <li><strong>Arduino Uno WiFi Rev2:</strong> Low-level motor control and sensor interface</li>
+            <li><strong>RPLiDAR A1:</strong> 360-degree scanning at 8000 samples/second</li>
+            <li><strong>Sensirion SCD30:</strong> CO2, temperature, and humidity sensor with ±30ppm accuracy</li>
+            <li><strong>Sharp IR Sensors:</strong> Close-range obstacle detection for collision avoidance</li>
+          </ul>
+        </div>
+        <p>
+          The dual-processor architecture splits responsibilities: the Pi handles computation-heavy tasks (SLAM, path planning, data logging) while the Arduino manages real-time motor control and sensor polling. Communication between them uses serial over USB.
+        </p>
+      </section>
+
+      <section class="case-section">
+        <h2 class="case-section-title">Results</h2>
+        <p>
+          Terrabot successfully demonstrated autonomous room surveying and CO2 mapping. In testing, it identified ventilation dead zones that weren't apparent from building plans — areas where CO2 accumulated 40% higher than the room average.
+        </p>
+        <p>
+          The project showed me how to integrate multiple complex systems (SLAM, sensor fusion, path planning) into a working robot. The ROS architecture skills transferred directly to my later work on autonomous vehicles.
+        </p>
+      </section>
+
+      <nav class="case-nav">
+        <div class="case-nav-item">
+          <div class="case-nav-label">Previous</div>
+          <a href="steering-project.html" class="case-nav-link"><i class="bi bi-arrow-left"></i> Formula SAE</a>
+        </div>
+        <div class="case-nav-item next">
+          <div class="case-nav-label">Next</div>
+          <a href="rexcubot-details.html" class="case-nav-link">Rexcubot <i class="bi bi-arrow-right"></i></a>
+        </div>
+      </nav>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <p class="footer-text">© 2025 Yousef Alsaqa</p>
+        <div class="footer-links">
+          <a href="mailto:21ymsa@queensu.ca" class="footer-link">21ymsa@queensu.ca</a>
+          <a href="https://www.linkedin.com/in/yousef-alsaqa-b1ab4822b/" target="_blank" class="footer-link">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const navToggle = document.getElementById('navToggle');
+    const nav = document.getElementById('nav');
+    navToggle.addEventListener('click', () => nav.classList.toggle('active'));
+  </script>
 </body>
 </html>

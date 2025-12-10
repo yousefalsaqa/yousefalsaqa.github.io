@@ -1,115 +1,196 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rexcubot Project Details</title>
-  <link rel="stylesheet" href="css/style.css">
+  <title>The Rexcubot | Yousef Alsaqa</title>
+  <meta name="description" content="Competition robot with parallel linkage scoop and precision gripper for autonomous navigation and object retrieval.">
+  <meta name="author" content="Yousef Alsaqa">
+  <meta name="theme-color" content="#0a0a0f">
+
+  <link href="assets/favicon.png" rel="icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="css/theme.css" rel="stylesheet">
+  <link href="css/pages/case-study.css" rel="stylesheet">
 </head>
+
 <body>
-  <header id="rexcubot-header">
-    <h1 id="rexcubot-title">Tronassic Park: Team Rexcubot</h1>
-    <p id="rexcubot-subtitle">Advanced robotic design and implementation for precision and adaptability.</p>
+  <header class="header">
+    <div class="header-inner">
+      <a href="index.html" class="header-logo">Yousef<span>.</span></a>
+      <nav class="header-nav" id="nav">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="projects.html" class="nav-link">Projects</a>
+        <a href="experience.html" class="nav-link">Experience</a>
+        <a href="mailto:21ymsa@queensu.ca" class="nav-link">Contact</a>
+      </nav>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </header>
 
-  <main id="rexcubot-main">
-    <!-- Introduction Section -->
-    <section id="rexcubot-intro">
-      <div id="rexcubot-intro-text">
-        <p>
-          Rexcubot was designed for the Tronassic Park competition to autonomously navigate and complete precision-based tasks. The competition demanded innovation in design, electronics, and control, focusing on object retrieval and autonomous navigation. 
-        </p>
-      </div>
-      <div id="rexcubot-intro-image">
-        <img src="assets/303_Rexcubot_Main.jpg" alt="Fully Assembled Rexcubot">
-        <p class="image-caption">Rexcubot in its final assembly, ready for competition.</p>
-      </div>
-    </section>
-
-    <!-- Scoop Mechanism Section -->
-    <section id="rexcubot-scoop">
-      <h2>Scoop Mechanism</h2>
-      <div id="rexcubot-scoop-text">
-        <p>
-          The scoop mechanism was designed using a <b>parallel linkage system</b> to ensure uniform motion throughout its range. This approach provided stability and consistent force distribution, crucial for retrieving scattered objects efficiently. 
-        </p>
-        <p>
-          The lightweight aluminum arms of the linkage reduced the inertial load on the servo motor, optimizing energy consumption while maintaining structural integrity. Testing ensured the scoop could retrieve multiple objects in a single motion without mechanical failure.
-        </p>
-      </div>
-      <div id="rexcubot-scoop-image">
-        <img src="assets/303_Scoop.jpg" alt="Scoop Mechanism Design">
-        <p class="image-caption">The parallel linkage-based scoop mechanism, engineered for precision and durability.</p>
-      </div>
-    </section>
-
-    <!-- Claw Assembly Section -->
-    <section id="rexcubot-claw">
-      <h2>Claw Assembly</h2>
-      <div id="rexcubot-claw-text">
-        <p>
-          The claw assembly was designed for tasks requiring high precision, such as rescuing the Ken doll from a pit. The gripper's actuation was controlled via a high-torque servo, ensuring smooth operation under variable load conditions.
-        </p>
-        <p>
-          The gripper’s geometry was optimized to handle a wide range of object shapes and sizes. Stress analysis ensured the assembly could withstand repeated use without deformation or loss of grip strength.
-        </p>
-      </div>
-      <div id="rexcubot-claw-image">
-        <img src="assets/303_Gripper.jpg" alt="Claw Mechanism Design">
-        <p class="image-caption">Precision gripper mechanism for reliable object manipulation.</p>
+  <main>
+    <section class="case-hero">
+      <div class="container">
+        <div class="case-hero-content">
+          <a href="projects.html" class="back-link"><i class="bi bi-arrow-left"></i> Back to Projects</a>
+          <span class="case-category">Robotics</span>
+          <h1>The Rexcubot</h1>
+          <p class="case-hero-description">
+            A competition robot designed for the "Tronassic Park" challenge — autonomously navigating an arena to retrieve scattered objects and rescue a target from a pit. Features a parallel linkage scoop for bulk collection and a precision gripper for delicate extraction tasks.
+          </p>
+          <div class="case-meta">
+            <div class="case-meta-item">
+              <div class="case-meta-label">Course</div>
+              <div class="case-meta-value">MREN 303</div>
+            </div>
+            <div class="case-meta-item">
+              <div class="case-meta-label">Competition</div>
+              <div class="case-meta-value">Tronassic Park</div>
+            </div>
+            <div class="case-meta-item">
+              <div class="case-meta-label">Stack</div>
+              <div class="case-tech">
+                <span class="tag">C++</span>
+                <span class="tag">Arduino</span>
+                <span class="tag">Control Systems</span>
+                <span class="tag">CAD</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- Control Systems Section -->
-    <section id="rexcubot-control">
-      <h2>Control Systems</h2>
-      <div id="rexcubot-control-text">
+    <div class="case-content">
+      <section class="case-section">
+        <h2 class="case-section-title">The Competition</h2>
         <p>
-          Rexcubot featured a hybrid control system, combining autonomous navigation with manual gamepad control. The <b>IR sensors</b> facilitated precise line-following capabilities, while the ultrasonic sensors provided obstacle detection and avoidance.
+          Tronassic Park is an annual robotics competition at Queen's where teams build autonomous robots to complete a series of tasks in a themed arena. Our challenge: collect scattered "dinosaur eggs" (ping pong balls), deposit them in a nest, and rescue "Ken" (a doll) from a pit — all within a time limit.
         </p>
         <p>
-          The software architecture was developed in C++, incorporating state machines for task transitions. A UDP-based communication protocol enabled seamless real-time control via a Python gamepad interface.
+          The scoring system rewarded both speed and precision. Eggs in the nest earned points, but dropping Ken would cost us heavily. This meant we needed two different manipulation mechanisms: a fast bulk collector for eggs, and a careful gripper for the rescue.
         </p>
-      </div>
-      <div id="rexcubot-control-image">
-        <img src="assets/electric_schematic_303.png" alt="Control Systems Schematic">
-        <p class="image-caption">Wiring and control system schematic for Rexcubot.</p>
-      </div>
-    </section>
+      </section>
 
-    <!-- Research Report Section -->
-    <section id="rexcubot-report">
-      <h2>Research Report</h2>
-      <p>
-        The comprehensive research report details the design process, testing phases, and results of Rexcubot's competition performance. It highlights innovations in robotic systems integration and lessons learned for future projects.
-      </p>
-      <div id="rexcubot-report-viewer">
-        <iframe src="assets/303botreport.pdf" width="100%" height="500px" frameborder="0"></iframe>
-        <p class="report-note">
-          If the embedded document doesn’t load, <a href="assets/303botreport.pdf" download>download the report here</a>.
+      <section class="case-section">
+        <h2 class="case-section-title">The Robot</h2>
+        <div class="case-image">
+          <img src="assets/303bot.jpg" alt="Rexcubot fully assembled showing scoop and gripper mechanisms">
+          <div class="case-image-caption">Rexcubot with deployed scoop (front) and raised gripper arm</div>
+        </div>
+        <p>
+          Rexcubot uses a four-wheel differential drive base with high-torque DC motors. The chassis is laser-cut acrylic with aluminum standoffs — light enough for speed but rigid enough to support the manipulation mechanisms.
         </p>
-      </div>
-    </section>
+      </section>
 
-    <!-- Poster Section -->
-    <section id="rexcubot-poster">
-      <h2>Project Poster</h2>
-      <p>
-        A visually engaging poster summarizing Rexcubot’s key features and competition performance.
-      </p>
-      <div id="rexcubot-poster-image">
-        <img src="assets/303bot_poster.jpg" alt="Project Poster">
-        <p class="image-caption">Rexcubot competition poster highlighting key achievements.</p>
-      </div>
-    </section>
+      <section class="case-section">
+        <h2 class="case-section-title">Scoop Mechanism</h2>
+        <div class="case-image">
+          <img src="assets/scoop303bot.png" alt="Close-up of the parallel linkage scoop mechanism">
+          <div class="case-image-caption">Parallel linkage scoop — maintains level orientation throughout motion</div>
+        </div>
+        <p>
+          The scoop uses a parallel linkage design that keeps the collection surface horizontal as it raises and lowers. This is critical — if the scoop tilted during lifting, eggs would roll out.
+        </p>
+        <div class="case-highlight">
+          <div class="case-highlight-title">Design Decision</div>
+          <p>We chose aluminum arms for the linkage to minimize weight and inertia. Lower inertia means the servo motor can move the scoop faster without overshooting, and uses less battery power. The linkage geometry was optimized in SolidWorks to maximize lift height while fitting within competition size constraints.</p>
+        </div>
+        <p>
+          A single high-torque servo actuates the linkage. The scoop can collect 6-8 eggs in one sweep, dramatically faster than picking them up individually.
+        </p>
+      </section>
+
+      <section class="case-section">
+        <h2 class="case-section-title">Gripper Assembly</h2>
+        <div class="case-image">
+          <img src="assets/303gripper.jpg" alt="Gripper mechanism showing finger geometry and servo actuation">
+          <div class="case-image-caption">Precision gripper designed for secure but gentle Ken extraction</div>
+        </div>
+        <p>
+          The gripper needed to reach into a pit, grab Ken firmly, and lift without dropping him. We designed custom finger profiles that conform to Ken's torso shape, maximizing contact area for a secure grip.
+        </p>
+        <p>
+          The gripper mounts on a rotational arm that swings from stowed position (above the chassis) to reach position (extended over the pit). Servo control allows precise positioning — we programmed specific angles for reach, grab, and retract motions.
+        </p>
+      </section>
+
+      <section class="case-section">
+        <h2 class="case-section-title">Control System</h2>
+        <p>
+          Rexcubot operates in a hybrid control mode: autonomous line following with manual override for complex maneuvers. The navigation system uses:
+        </p>
+        <ul>
+          <li><strong>IR Sensors:</strong> Array of 5 infrared reflectance sensors for line following</li>
+          <li><strong>Ultrasonic Sensors:</strong> Obstacle detection to avoid arena walls and other robots</li>
+          <li><strong>Gamepad Control:</strong> UDP communication from a Python interface for manual control</li>
+        </ul>
+        <div class="case-image">
+          <img src="assets/electric schematic 303mren.png" alt="Electrical schematic showing sensor and motor connections">
+          <div class="case-image-caption">Control system schematic — Arduino Mega handles all sensing and actuation</div>
+        </div>
+        <p>
+          The firmware implements a state machine architecture with distinct modes for each competition task. Transitions between states are triggered by sensor readings (detecting the nest area, reaching the pit edge) or manual commands.
+        </p>
+      </section>
+
+      <section class="case-section">
+        <h2 class="case-section-title">Results</h2>
+        <div class="case-impact">
+          <div class="case-highlight-title">Competition Performance</div>
+          <p>Rexcubot completed all required tasks during competition runs. The parallel linkage scoop proved especially effective — we could clear the egg field in under 30 seconds, leaving plenty of time for the precision rescue operation.</p>
+        </div>
+        <p>
+          The project reinforced the value of mechanism design. Getting the scoop linkage geometry right made the difference between a robot that worked and one that struggled. The gripper finger profile went through four iterations before we got the grip strength right.
+        </p>
+      </section>
+
+      <section class="case-section">
+        <h2 class="case-section-title">Documentation</h2>
+        <p>Full technical report documenting design decisions, analysis, and results:</p>
+        <div class="case-highlight">
+          <iframe src="assets/303botreport.pdf" width="100%" height="500px" style="border: none; border-radius: var(--radius-md);"></iframe>
+          <p style="text-align: center; margin-top: var(--space-md); font-size: 0.9rem; color: var(--text-muted);">
+            <a href="assets/303botreport.pdf" download>Download the full report</a>
+          </p>
+        </div>
+      </section>
+
+      <nav class="case-nav">
+        <div class="case-nav-item">
+          <div class="case-nav-label">Previous</div>
+          <a href="terrabot-details.html" class="case-nav-link"><i class="bi bi-arrow-left"></i> Terrabot</a>
+        </div>
+        <div class="case-nav-item next">
+          <div class="case-nav-label">Next</div>
+          <a href="qsetarm-details.html" class="case-nav-link">QSET Arm <i class="bi bi-arrow-right"></i></a>
+        </div>
+      </nav>
+    </div>
   </main>
 
-    <a href="index.html" id="back-to-main" class="back-to-main">
-        <span>⬅ Main Page</span>
-    </a>
-
-  <footer id="rexcubot-footer">
-    <p>© 2025 Team Rexcubot | Tronassic Park Competition</p>
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <p class="footer-text">© 2025 Yousef Alsaqa</p>
+        <div class="footer-links">
+          <a href="mailto:21ymsa@queensu.ca" class="footer-link">21ymsa@queensu.ca</a>
+          <a href="https://www.linkedin.com/in/yousef-alsaqa-b1ab4822b/" target="_blank" class="footer-link">LinkedIn</a>
+        </div>
+      </div>
+    </div>
   </footer>
+
+  <script>
+    const navToggle = document.getElementById('navToggle');
+    const nav = document.getElementById('nav');
+    navToggle.addEventListener('click', () => nav.classList.toggle('active'));
+  </script>
 </body>
 </html>
+
