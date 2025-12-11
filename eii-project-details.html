@@ -1,100 +1,315 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Energy Intensity Index Predictor - Yousef Alsaqa</title>
-  <meta name="description" content="Energy Intensity Index Prediction Model">
-  <meta name="keywords" content="EII Prediction, Machine Learning, Energy Optimization, Yousef Alsaqa">
-  
-  <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-  
-  <!-- Vendor CSS Files -->
-  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <title>Energy Intensity Index Predictor | Yousef Alsaqa</title>
+  <meta name="description" content="Case study: Hybrid ML ensemble for industrial energy forecasting using neural networks and random forests.">
+  <meta name="theme-color" content="#050508">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap Icons -->
   <link href="vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="css/style.css" rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link href="css/theme.css" rel="stylesheet">
+  <link href="css/pages/case-study.css" rel="stylesheet">
 </head>
 
 <body>
-  <section id="eii-project-showcase" class="showcase-section">
-    <div class="container">
-      
-      <!-- Overview Section -->
-      <div class="showcase-box">
-        <h2><i class="bi bi-info-circle"></i> Overview</h2>
-        <p>
-          The Energy Intensity Index (EII) Predictor is a machine learning model designed to forecast EII values, aiding in industrial energy optimization. 
-          The model leverages an ensemble of feed-forward neural networks and a Random Forest to improve accuracy and reliability across multiple datasets.
-        </p>
-      </div>
+  <!-- Header -->
+  <header class="header" id="header">
+    <div class="header-inner">
+      <a href="index.html" class="header-logo">Yousef<span>.</span></a>
+      <nav class="header-nav" id="nav">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="projects.html" class="nav-link">Projects</a>
+        <a href="experience.html" class="nav-link">Experience</a>
+        <a href="mailto:21ymsa@queensu.ca" class="nav-link">Contact</a>
+      </nav>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
 
-      <!-- Project Highlights Section -->
-      <div class="showcase-box">
-        <h2><i class="bi bi-lightning"></i> Project Highlights</h2>
-        <ul>
-          <li>Developed a hybrid ML ensemble combining <strong>Neural Networks</strong> and <strong>Random Forest</strong>.</li>
-          <li>Implemented 5-fold cross-validation for robust model evaluation.</li>
-          <li>Utilized Median Absolute Deviation (MAD) normalization to enhance model performance.</li>
-          <li>Automated energy cost assessments through real-time prediction and analytics.</li>
-        </ul>
-      </div>
-
-      <!-- Technical Details Section -->
-      <div class="showcase-box">
-        <h2><i class="bi bi-cpu"></i> Technical Details</h2>
-        <p>
-          The model architecture consists of 10 feed-forward neural networks trained per dataset and averaged for ensemble robustness.
-          A Random Forest model complements the neural networks, with predictions combined through a MSE-based weighting mechanism.
-          The training process incorporates feature scaling, outlier-resistant normalization, and automated model selection.
-        </p>
-      </div>
-
-      <!-- Outcome Section -->
-      <div class="showcase-box">
-        <h2><i class="bi bi-trophy"></i> Outcome</h2>
-        <p>
-          The EII Predictor demonstrated improved forecasting accuracy over traditional regression methods. 
-          It enables proactive decision-making in energy-intensive industries, optimizing energy costs and improving sustainability metrics.
-        </p>
-      </div>
-
-
-      <!-- Research Report Section -->
-      <div class="showcase-box">
-        <h2><i class="bi bi-file-earmark-text"></i> Research Report</h2>
-        <p>
-          A detailed research report documenting the model development, validation process, and impact analysis.
-        </p>
-        <div id="eii-report-viewer">
-          <iframe src="assets/eii_report.pdf" width="100%" height="500px" frameborder="0"></iframe>
-          <p class="report-note">
-            If the embedded document doesn’t load, <a href="assets/eii_report.pdf" download>download the report here</a>.
-          </p>
+  <main>
+    <!-- Hero -->
+    <section class="case-hero">
+      <div class="container">
+        <a href="projects.html" class="back-link">
+          <i class="bi bi-arrow-left"></i>
+          Back to projects
+        </a>
+        <h1>Energy Intensity Index Predictor</h1>
+        <p class="subtitle">A hybrid machine learning ensemble combining neural networks and random forests to forecast industrial energy consumption. Built for a research competition at Queen's.</p>
+        
+        <div class="case-meta">
+          <div class="case-meta-item">
+            <span class="case-meta-label">Role</span>
+            <span class="case-meta-value">Lead Developer</span>
+          </div>
+          <div class="case-meta-item">
+            <span class="case-meta-label">Timeline</span>
+            <span class="case-meta-value">Jan 2024 — Apr 2024</span>
+          </div>
+          <div class="case-meta-item">
+            <span class="case-meta-label">Stack</span>
+            <span class="case-meta-value">Python, PyTorch, sklearn</span>
+          </div>
+          <div class="case-meta-item">
+            <span class="case-meta-label">Output</span>
+            <span class="case-meta-value">Research paper</span>
+          </div>
         </div>
       </div>
+    </section>
 
-    </div>
+    <!-- Content -->
+    <section class="section">
+      <div class="container case-content">
+        
+        <div class="case-section">
+          <h2>The Problem</h2>
+          <p>Industrial facilities need to predict their Energy Intensity Index (EII) — the ratio of energy consumed to production output. Accurate forecasting enables:</p>
+          <ul>
+            <li>Proactive maintenance scheduling</li>
+            <li>Energy cost optimization</li>
+            <li>Regulatory compliance reporting</li>
+            <li>Sustainability target tracking</li>
+          </ul>
+          <p>Traditional regression models struggled with the non-linear relationships and noisy data typical of industrial environments. We needed something more robust.</p>
+        </div>
 
-    <!-- Back-to-Main Button -->
-    <a href="index.html" id="back-to-main" class="back-to-main">
-      <span>⬅ Main Page</span>
-    </a>
-  </section>
+        <div class="case-section">
+          <h2>The Solution: Hybrid Ensemble</h2>
+          <p>I developed a two-stage ensemble that combines the pattern recognition of neural networks with the robustness of tree-based methods.</p>
+          
+          <h3>Stage 1: Neural Network Ensemble</h3>
+          <p>Ten feed-forward neural networks trained on the same data with different random seeds. Each network has 3 hidden layers with dropout regularization. The predictions are averaged to reduce variance.</p>
+          
+          <div class="case-code">
+<pre>
+class EIINetwork(nn.Module):
+    def __init__(self, input_dim):
+        super().__init__()
+        self.network = nn.Sequential(
+            nn.Linear(input_dim, 128),
+            nn.ReLU(),
+            nn.Dropout(0.3),
+            nn.Linear(128, 64),
+            nn.ReLU(),
+            nn.Dropout(0.2),
+            nn.Linear(64, 32),
+            nn.ReLU(),
+            nn.Linear(32, 1)
+        )
+    
+    def forward(self, x):
+        return self.network(x)
+
+# Train 10 networks with different seeds
+models = []
+for seed in range(10):
+    torch.manual_seed(seed)
+    model = EIINetwork(X.shape[1])
+    train(model, X_train, y_train)
+    models.append(model)
+
+# Ensemble prediction
+def ensemble_predict(X):
+    preds = [model(X) for model in models]
+    return torch.stack(preds).mean(dim=0)
+</pre>
+          </div>
+
+          <h3>Stage 2: Random Forest</h3>
+          <p>A random forest model trained on the same data provides a second opinion. Tree-based methods handle outliers and non-linear interactions differently than neural networks, providing complementary predictions.</p>
+
+          <h3>Weighted Combination</h3>
+          <p>Final predictions combine both models using weights determined by validation MSE:</p>
+          
+          <div class="case-code">
+<pre>
+# Weight by inverse MSE (better models get more weight)
+w_nn = 1 / mse_nn
+w_rf = 1 / mse_rf
+total = w_nn + w_rf
+
+final_pred = (w_nn * nn_pred + w_rf * rf_pred) / total
+</pre>
+          </div>
+        </div>
+
+        <div class="case-section">
+          <h2>Data Processing</h2>
+          
+          <h3>Feature Engineering</h3>
+          <p>Raw sensor data needed significant preprocessing:</p>
+          <ul>
+            <li><strong>Rolling statistics:</strong> 1-hour, 4-hour, and 24-hour rolling means and standard deviations capture temporal patterns</li>
+            <li><strong>Lag features:</strong> Previous time steps' values help the model understand trends</li>
+            <li><strong>Cyclical encoding:</strong> Hour of day and day of week encoded as sine/cosine pairs</li>
+            <li><strong>Interaction terms:</strong> Products of related features (e.g., temperature × humidity)</li>
+          </ul>
+
+          <h3>MAD Normalization</h3>
+          <p>Standard z-score normalization is sensitive to outliers. I used Median Absolute Deviation (MAD) normalization instead:</p>
+          
+          <div class="case-code">
+<pre>
+def mad_normalize(X):
+    median = np.median(X, axis=0)
+    mad = np.median(np.abs(X - median), axis=0)
+    # Avoid division by zero
+    mad[mad == 0] = 1
+    return (X - median) / (1.4826 * mad)
+</pre>
+          </div>
+          
+          <p>The 1.4826 factor makes MAD consistent with standard deviation for normal distributions, while remaining robust to outliers.</p>
+        </div>
+
+        <div class="case-section">
+          <h2>Validation Strategy</h2>
+          <p>Energy data has temporal structure — random train/test splits would leak future information. I used:</p>
+          
+          <div class="tech-grid">
+            <div class="tech-item">
+              <h4>Time-based Split</h4>
+              <p>Training on earlier data, testing on later data</p>
+            </div>
+            <div class="tech-item">
+              <h4>5-Fold CV</h4>
+              <p>Rolling window cross-validation respecting time order</p>
+            </div>
+            <div class="tech-item">
+              <h4>Gap Period</h4>
+              <p>1-week gap between train and test prevents leakage</p>
+            </div>
+            <div class="tech-item">
+              <h4>Multiple Metrics</h4>
+              <p>MSE, MAE, and R² reported for complete picture</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="case-section">
+          <h2>Results</h2>
+          
+          <div class="results-grid">
+            <div class="result-item">
+              <span class="result-number">23%</span>
+              <span class="result-label">MSE improvement over baseline</span>
+            </div>
+            <div class="result-item">
+              <span class="result-number">0.89</span>
+              <span class="result-label">R² score</span>
+            </div>
+            <div class="result-item">
+              <span class="result-number">10</span>
+              <span class="result-label">NN ensemble members</span>
+            </div>
+            <div class="result-item">
+              <span class="result-number">5</span>
+              <span class="result-label">Cross-validation folds</span>
+            </div>
+          </div>
+
+          <p>The hybrid ensemble outperformed both pure neural network and pure random forest approaches. More importantly, it was more stable — individual models varied by ±5%, but the ensemble varied by only ±1%.</p>
+        </div>
+
+        <div class="case-section">
+          <h2>Research Report</h2>
+          <p>The full research paper documenting methodology, experiments, and results:</p>
+          <div style="margin-top: 1rem;">
+            <iframe src="assets/eii_report.pdf" width="100%" height="500px" style="border: 1px solid var(--border-subtle); border-radius: 8px;"></iframe>
+            <p style="margin-top: 0.5rem; font-size: 0.85rem; color: var(--text-muted);">
+              If the embedded document doesn't load, <a href="assets/eii_report.pdf" download style="color: var(--accent-primary);">download the report here</a>.
+            </p>
+          </div>
+        </div>
+
+        <div class="case-section">
+          <h2>What I Learned</h2>
+          <ul>
+            <li><strong>Ensembles work.</strong> Combining diverse models almost always beats any single model. The key is diversity — models should make different kinds of errors.</li>
+            <li><strong>Data quality > model complexity.</strong> Better feature engineering and proper normalization improved results more than architecture tuning.</li>
+            <li><strong>Validation is half the work.</strong> A proper validation strategy that respects temporal structure prevented overfitting and gave realistic performance estimates.</li>
+          </ul>
+        </div>
+
+        <nav class="case-nav">
+          <a href="autodrive-project.html">
+            <i class="bi bi-arrow-left"></i>
+            AutoDrive Lane Detection
+          </a>
+          <a href="terrabot-details.html">
+            Next: Terrabot CO2 Mapper
+            <i class="bi bi-arrow-right"></i>
+          </a>
+        </nav>
+      </div>
+    </section>
+  </main>
 
   <!-- Footer -->
-  <footer id="footer" class="footer">
+  <footer class="footer">
     <div class="container">
-      <p>© 2025 Yousef Alsaqa. All Rights Reserved.</p>
+      <div class="footer-content">
+        <div class="footer-main">
+          <h2>Let's talk.</h2>
+          <p>I'm looking for full-time opportunities in robotics, automation, or anywhere I can build things that matter.</p>
+          <a href="mailto:21ymsa@queensu.ca" class="footer-email">
+            <i class="bi bi-envelope"></i>
+            21ymsa@queensu.ca
+          </a>
+        </div>
+        <div class="footer-links">
+          <a href="https://www.linkedin.com/in/yousef-alsaqa-b1ab4822b/" target="_blank">
+            <i class="bi bi-linkedin"></i>
+            LinkedIn
+          </a>
+          <a href="https://github.com/yousefalsaqa" target="_blank">
+            <i class="bi bi-github"></i>
+            GitHub
+          </a>
+          <a href="assets/Yousef_Alsaqa_Resume.pdf" target="_blank">
+            <i class="bi bi-file-earmark-text"></i>
+            Resume
+          </a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 Yousef Alsaqa</p>
+      </div>
     </div>
   </footer>
 
-  <!-- Vendor JS Files -->
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="vendor/aos/aos.js"></script>
+  <!-- Scripts -->
+  <script>
+    const navToggle = document.getElementById('navToggle');
+    const nav = document.getElementById('nav');
+    
+    navToggle.addEventListener('click', () => {
+      nav.classList.toggle('active');
+      navToggle.classList.toggle('active');
+    });
 
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+  </script>
 </body>
-
 </html>

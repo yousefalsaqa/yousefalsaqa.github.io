@@ -1,90 +1,328 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="css/style.css">
-  <title>QSET Robotic Arm Showcase</title>
+  <title>QSET Robotic Arm | Yousef Alsaqa</title>
+  <meta name="description" content="Case study: 6-DOF robotic arm for space exploration applications with DH kinematics and Lagrangian dynamics.">
+  <meta name="theme-color" content="#050508">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap Icons -->
+  <link href="vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link href="css/theme.css" rel="stylesheet">
+  <link href="css/pages/case-study.css" rel="stylesheet">
 </head>
+
 <body>
-  <div id="qset-showcase-container" class="container">
-    <!-- Showcase Title -->
-    <div id="qset-title">
-      <h1>QSET Robotic Arm</h1>
-      <h2>Advanced Engineering for Space Exploration</h2>
+  <!-- Header -->
+  <header class="header" id="header">
+    <div class="header-inner">
+      <a href="index.html" class="header-logo">Yousef<span>.</span></a>
+      <nav class="header-nav" id="nav">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="projects.html" class="nav-link">Projects</a>
+        <a href="experience.html" class="nav-link">Experience</a>
+        <a href="mailto:21ymsa@queensu.ca" class="nav-link">Contact</a>
+      </nav>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </div>
+  </header>
 
-    <!-- Design Overview Section -->
-    <div class="showcase-box" id="qset-design-section">
-      <h3>Design Overview</h3>
-      <p>
-        The QSET robotic arm was engineered for high-performance operations in space environments. Leveraging 
-        a six-degree-of-freedom architecture, it features precision control through gear-driven actuators and a 
-        modular design to adapt to a range of payloads and tasks.
-      </p>
-      <div class="showcase-images">
-        <img src="assets/qset_arm_drawing.png" alt="QSET Robotic Arm Design" id="qset-arm-drawing">
+  <main>
+    <!-- Hero -->
+    <section class="case-hero">
+      <div class="container">
+        <a href="projects.html" class="back-link">
+          <i class="bi bi-arrow-left"></i>
+          Back to projects
+        </a>
+        <h1>QSET Robotic Arm</h1>
+        <p class="subtitle">A 6-DOF robotic manipulator designed for space exploration rovers. Featuring precision control via DH kinematics, Lagrangian dynamics for torque optimization, and CAN bus communication.</p>
+        
+        <div class="case-meta">
+          <div class="case-meta-item">
+            <span class="case-meta-label">Role</span>
+            <span class="case-meta-value">Controls Engineer</span>
+          </div>
+          <div class="case-meta-item">
+            <span class="case-meta-label">Timeline</span>
+            <span class="case-meta-value">2022 — 2023</span>
+          </div>
+          <div class="case-meta-item">
+            <span class="case-meta-label">Team</span>
+            <span class="case-meta-value">Queen's Space Eng Team</span>
+          </div>
+          <div class="case-meta-item">
+            <span class="case-meta-label">Competition</span>
+            <span class="case-meta-value">CIRC 2023</span>
+          </div>
+        </div>
       </div>
-      <p>
-        The end-effector employs a rotational wrist mechanism capable of fine-grained manipulation, allowing 
-        the arm to interact with delicate or dynamic objects. The design integrates parallel-linkage 
-        systems to maximize torque while minimizing mechanical stress.
-      </p>
-    </div>
+    </section>
 
-    <!-- System Architecture Section -->
-    <div class="showcase-box" id="qset-system-section">
-      <h3>System Architecture</h3>
-      <p>
-        At the heart of the robotic arm's functionality lies a robust system architecture. A real-time STM32F407 
-        microcontroller is responsible for precise coordination of actuators and sensors. Communication is 
-        handled via a CAN protocol, enabling synchronized data exchange between components.
-      </p>
-      <img src="assets/qsetsystemarchitecture.png" alt="System Architecture Diagram" id="qset-system-diagram">
-      <p>
-        The architecture integrates key features:
-      </p>
-      <ul>
-        <li><strong>Linear Actuators:</strong> Offer high-torque movement for larger joints.</li>
-        <li><strong>Guidance Lasers:</strong> Assist with alignment during object interaction.</li>
-        <li><strong>Voltage Regulation:</strong> Step-down modules maintain stable operation under load.</li>
-        <li><strong>CAN Transceiver:</strong> Ensures robust communication across the arm and robotic platform.</li>
-      </ul>
-    </div>
+    <!-- Content -->
+    <section class="section">
+      <div class="container case-content">
+        
+        <div class="case-section">
+          <h2>The Challenge</h2>
+          <p>The Canadian International Rover Challenge (CIRC) requires rovers to complete manipulation tasks: turning valves, picking up samples, operating switches, and typing on keyboards. These tasks require:</p>
+          <ul>
+            <li>Reach of 1+ meters to access control panels</li>
+            <li>Fine manipulation at the end effector</li>
+            <li>Enough strength to lift 5kg samples</li>
+            <li>Precision positioning within 1cm</li>
+          </ul>
+          <p>Previous QSET arms were under-powered and lacked the reach needed for many tasks. We needed a complete redesign.</p>
+        </div>
 
-    <!-- Kinematics and Dynamics Section -->
-    <div class="showcase-box" id="qset-math-section">
-      <h3>Kinematics and Dynamics</h3>
-      <p>
-        The kinematic model of the robotic arm utilizes Denavit-Hartenberg (DH) parameters to define joint 
-        transformations. This approach ensures precise calculation of positional and orientational relationships 
-        between each segment.
-      </p>
-      <div class="math-section">
-        <img src="assets/arm_math1.png" alt="Rotation Matrices" id="qset-rotation-math">
-        <p class="math-caption">Rotation matrices applied for forward kinematics.</p>
+        <figure class="case-image">
+          <img src="assets/qset_arm_drawing.png" alt="QSET robotic arm CAD model">
+          <figcaption>CAD model showing the 6-DOF configuration with linear actuators</figcaption>
+        </figure>
+
+        <div class="case-section">
+          <h2>Mechanical Architecture</h2>
+          <p>The arm uses a 6-axis configuration with a mix of rotary and linear actuators:</p>
+          
+          <div class="tech-grid">
+            <div class="tech-item">
+              <h4>Joint 1: Base Rotation</h4>
+              <p>Planetary gearbox with stepper motor, 360° rotation</p>
+            </div>
+            <div class="tech-item">
+              <h4>Joint 2: Shoulder</h4>
+              <p>High-torque linear actuator for heavy lifting</p>
+            </div>
+            <div class="tech-item">
+              <h4>Joint 3: Elbow</h4>
+              <p>Linear actuator with parallel linkage for consistent torque</p>
+            </div>
+            <div class="tech-item">
+              <h4>Joints 4-6: Wrist</h4>
+              <p>Compact servo assembly for orientation control</p>
+            </div>
+          </div>
+
+          <p>The shoulder and elbow use linear actuators instead of rotary motors because:</p>
+          <ul>
+            <li>Higher force-to-weight ratio for heavy lifting</li>
+            <li>Self-locking when unpowered (no holding current needed)</li>
+            <li>Simpler mechanical design (no gearbox required)</li>
+          </ul>
+        </div>
+
+        <div class="case-section">
+          <h2>Kinematics: DH Parameters</h2>
+          <p>Robot arm kinematics convert between joint angles and end-effector position. We used the Denavit-Hartenberg (DH) convention to define the arm geometry.</p>
+          
+          <figure class="case-image">
+            <img src="assets/arm_math1.png" alt="DH parameter rotation matrices">
+            <figcaption>Rotation matrices defining joint transformations</figcaption>
+          </figure>
+
+          <h3>Forward Kinematics</h3>
+          <p>Given joint angles θ₁...θ₆, compute the end-effector pose:</p>
+
+          <div class="case-code">
+<pre>
+def forward_kinematics(theta):
+    """Compute end-effector pose from joint angles."""
+    T = np.eye(4)  # Start with identity transform
+    
+    for i in range(6):
+        # DH transformation matrix for joint i
+        a, alpha, d, theta_offset = DH_PARAMS[i]
+        theta_i = theta[i] + theta_offset
+        
+        T_i = np.array([
+            [cos(theta_i), -sin(theta_i)*cos(alpha), sin(theta_i)*sin(alpha), a*cos(theta_i)],
+            [sin(theta_i), cos(theta_i)*cos(alpha), -cos(theta_i)*sin(alpha), a*sin(theta_i)],
+            [0, sin(alpha), cos(alpha), d],
+            [0, 0, 0, 1]
+        ])
+        
+        T = T @ T_i
+    
+    return T  # 4x4 homogeneous transform
+</pre>
+          </div>
+
+          <h3>Inverse Kinematics</h3>
+          <p>The harder problem: given desired end-effector pose, compute joint angles. For a 6-DOF arm, analytical solutions exist but are complex. We implemented a hybrid approach:</p>
+          <ul>
+            <li>Analytical solution for the first 3 joints (position)</li>
+            <li>Numerical optimization for the wrist (orientation)</li>
+          </ul>
+        </div>
+
+        <div class="case-section">
+          <h2>Dynamics: Lagrangian Analysis</h2>
+          <p>Knowing kinematics isn't enough — we need to know how much torque each joint requires. This determines motor sizing and ensures the arm can actually lift the specified loads.</p>
+
+          <figure class="case-image">
+            <img src="assets/arm_math3.png" alt="Force analysis diagram">
+            <figcaption>Torque analysis for motor sizing</figcaption>
+          </figure>
+
+          <p>The Lagrangian approach:</p>
+          <ol>
+            <li>Compute kinetic energy T = ½Σmᵢvᵢ² + ½Σωᵢ·Iᵢ·ωᵢ</li>
+            <li>Compute potential energy V = Σmᵢghᵢ</li>
+            <li>Form Lagrangian L = T - V</li>
+            <li>Apply Euler-Lagrange equations: τ = d/dt(∂L/∂θ̇) - ∂L/∂θ</li>
+          </ol>
+
+          <p>This gives us the equation of motion: τ = M(θ)θ̈ + C(θ,θ̇)θ̇ + G(θ)</p>
+          <p>Where M is the mass matrix, C captures Coriolis/centrifugal effects, and G is gravity compensation.</p>
+        </div>
+
+        <figure class="case-image">
+          <img src="assets/arm_fbd.png" alt="Free body diagram">
+          <figcaption>Free body diagram for static load analysis</figcaption>
+        </figure>
+
+        <div class="case-section">
+          <h2>Control System</h2>
+          
+          <figure class="case-image">
+            <img src="assets/qsetsystemarchitecture.png" alt="System architecture">
+            <figcaption>Control system architecture with CAN bus communication</figcaption>
+          </figure>
+
+          <div class="tech-grid">
+            <div class="tech-item">
+              <h4>STM32F407</h4>
+              <p>Main controller running trajectory planning and kinematics</p>
+            </div>
+            <div class="tech-item">
+              <h4>CAN Bus</h4>
+              <p>Communication between main controller and joint controllers</p>
+            </div>
+            <div class="tech-item">
+              <h4>PID Control</h4>
+              <p>Position control at each joint with feedforward gravity compensation</p>
+            </div>
+            <div class="tech-item">
+              <h4>Guidance Laser</h4>
+              <p>Visual feedback for operator during precision tasks</p>
+            </div>
+          </div>
+
+          <h3>Trajectory Planning</h3>
+          <p>Straight-line Cartesian paths are generated using linear interpolation in task space, then converted to joint space via inverse kinematics. Trapezoidal velocity profiles ensure smooth acceleration.</p>
+        </div>
+
+        <div class="case-section">
+          <h2>Results</h2>
+          
+          <div class="results-grid">
+            <div class="result-item">
+              <span class="result-number">1.2m</span>
+              <span class="result-label">Maximum reach</span>
+            </div>
+            <div class="result-item">
+              <span class="result-number">5kg</span>
+              <span class="result-label">Payload capacity</span>
+            </div>
+            <div class="result-item">
+              <span class="result-number">6</span>
+              <span class="result-label">Degrees of freedom</span>
+            </div>
+            <div class="result-item">
+              <span class="result-number">±5mm</span>
+              <span class="result-label">Positioning accuracy</span>
+            </div>
+          </div>
+
+          <p>The arm successfully completed all manipulation tasks at CIRC 2023, including the challenging keyboard typing task that many teams couldn't attempt. The combination of reach, precision, and strength made it one of the more capable arms in the competition.</p>
+        </div>
+
+        <div class="case-section">
+          <h2>What I Learned</h2>
+          <ul>
+            <li><strong>Theory matters.</strong> Proper kinematic and dynamic analysis upfront prevented endless trial-and-error with motor sizing and trajectory planning.</li>
+            <li><strong>Linear actuators have tradeoffs.</strong> Great for force and self-locking, but the nonlinear relationship between extension and joint angle complicates control.</li>
+            <li><strong>Gravity compensation is essential.</strong> Without feedforward gravity terms, the PID controller fights a losing battle against the arm's own weight.</li>
+          </ul>
+        </div>
+
+        <nav class="case-nav">
+          <a href="rexcubot-details.html">
+            <i class="bi bi-arrow-left"></i>
+            Rexcubot Competition Robot
+          </a>
+          <a href="energy-digital-twin.html">
+            Next: Energy Digital Twin
+            <i class="bi bi-arrow-right"></i>
+          </a>
+        </nav>
       </div>
-      <p>
-        Homogeneous transformation matrices were employed to model the arm's motion within a 3D workspace, while 
-        dynamic analysis using Lagrangian equations optimized torque allocation.
-      </p>
-      <img src="assets/arm_math3.png" alt="Force Analysis" id="qset-force-math">
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-main">
+          <h2>Let's talk.</h2>
+          <p>I'm looking for full-time opportunities in robotics, automation, or anywhere I can build things that matter.</p>
+          <a href="mailto:21ymsa@queensu.ca" class="footer-email">
+            <i class="bi bi-envelope"></i>
+            21ymsa@queensu.ca
+          </a>
+        </div>
+        <div class="footer-links">
+          <a href="https://www.linkedin.com/in/yousef-alsaqa-b1ab4822b/" target="_blank">
+            <i class="bi bi-linkedin"></i>
+            LinkedIn
+          </a>
+          <a href="https://github.com/yousefalsaqa" target="_blank">
+            <i class="bi bi-github"></i>
+            GitHub
+          </a>
+          <a href="assets/Yousef_Alsaqa_Resume.pdf" target="_blank">
+            <i class="bi bi-file-earmark-text"></i>
+            Resume
+          </a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 Yousef Alsaqa</p>
+      </div>
     </div>
+  </footer>
 
-    <!-- Free Body Diagram Section -->
-    <div class="showcase-box" id="qset-fbd-section">
-      <h3>Free Body Diagram (FBD)</h3>
-      <p>
-        The Free Body Diagram (FBD) illustrates the force and moment distribution across the robotic arm. This 
-        analysis was instrumental in material selection and structural optimization to withstand the operational 
-        loads experienced during tasks.
-      </p>
-      <img src="assets/arm_fbd.png" alt="Free Body Diagram" id="qset-fbd-diagram">
-    </div>
+  <!-- Scripts -->
+  <script>
+    const navToggle = document.getElementById('navToggle');
+    const nav = document.getElementById('nav');
+    
+    navToggle.addEventListener('click', () => {
+      nav.classList.toggle('active');
+      navToggle.classList.toggle('active');
+    });
 
-    <!-- Back to Main Page Button -->
-    <a href="index.html" id="qset-back-to-main" class="back-to-main">← Main Page</a>
-
-  </div>
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+  </script>
 </body>
 </html>

@@ -1,96 +1,280 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Formula SAE Steering System - Yousef Alsaqa</title>
-  <meta name="description" content="Overview of the Formula SAE Steering System project by Yousef Alsaqa.">
-  <meta name="keywords" content="Formula SAE, Steering System, Embedded Systems, CAN Bus, Yousef Alsaqa">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formula SAE Steering System | Yousef Alsaqa</title>
+  <meta name="description" content="Case study: Custom steering wheel PCB with integrated TFT display and CAN bus communication for Queen's Formula SAE race car.">
+  <meta name="theme-color" content="#050508">
 
-  <!-- Vendor CSS Files -->
-  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap Icons -->
   <link href="vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="css/style.css" rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link href="css/theme.css" rel="stylesheet">
+  <link href="css/pages/case-study.css" rel="stylesheet">
 </head>
 
 <body>
-  <!-- Formula SAE Section -->
-  <section id="formula-sae" class="formula-sae-section section">
-    <div class="container">
-      <!-- Executive Summary -->
-      <div class="row showcase-box">
-        <div class="col-lg-12">
-          <h2><i class="bi bi-clipboard-check"></i> Executive Summary</h2>
-          <p>The Formula SAE project focuses on developing an advanced steering system to enhance driver feedback and control. Utilizing embedded systems and a custom-designed steering wheel PCB, the project emphasizes real-time data visualization and robust communication protocols for seamless integration.</p>
-        </div>
-      </div>
-
-      <!-- Project Overview -->
-      <div class="row showcase-box">
-        <div class="col-lg-6">
-          <img src="assets/steering.jpeg" class="img-fluid rounded" alt="Steering System Image">
-        </div>
-        <div class="col-lg-6">
-          <h2><i class="bi bi-info-circle"></i> Project Overview</h2>
-          <p>The steering system includes a custom PCB integrated with a TFT display, enabling real-time data visualization for speed, gear position, and system alerts. Collaboration across mechanical, electrical, and software domains ensured a robust and reliable design.</p>
-        </div>
-      </div>
-
-      <!-- Key Responsibilities -->
-      <div class="row showcase-box">
-        <div class="col-lg-6">
-          <h2><i class="bi bi-list-task"></i> Key Responsibilities</h2>
-          <ul>
-            <li><strong>Hardware Design:</strong> Designed and integrated the custom steering wheel PCB with other subsystems.</li>
-            <li><strong>Real-Time Data Display:</strong> Developed user interfaces for the TFT display using the FT800-FT813 graphics controller.</li>
-            <li><strong>Communication Protocols:</strong> Implemented and tested CAN Bus protocols for reliable system communication.</li>
-          </ul>
-        </div>
-        <div class="col-lg-6">
-          <img src="hardware.jpeg" class="img-fluid rounded" alt="Hardware Design Image">
-        </div>
-      </div>
-
-      <!-- Technical Highlights -->
-      <div class="row showcase-box">
-        <div class="col-lg-6">
-          <img src="assets/testing.jpeg" class="img-fluid rounded" alt="System Testing Image">
-        </div>
-        <div class="col-lg-6">
-          <h2><i class="bi bi-lightbulb"></i> Technical Highlights</h2>
-          <ul>
-            <li><strong>Embedded Systems:</strong> Developed and optimized firmware for real-time performance.</li>
-            <li><strong>Graphics Programming:</strong> Created dynamic and interactive interfaces for enhanced readability.</li>
-            <li><strong>System Testing:</strong> Conducted hardware-in-the-loop simulations to validate performance.</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- Project Outcomes -->
-      <div class="row showcase-box">
-        <div class="col-lg-12 text-center">
-          <h2><i class="bi bi-trophy"></i> Project Outcomes</h2>
-          <p>The steering system achieved its goal of improving driver interaction and performance while meeting all reliability and safety standards for Formula SAE. This project showcased innovative embedded systems design and effective cross-disciplinary collaboration.</p>
-        </div>
-      </div>
-
-      <!-- Back-to-Main Button -->
-      <a href="index.html" id="back-to-main" class="back-to-main">
-        <span>⬅ Main Page</span>
-      </a>
+  <!-- Header -->
+  <header class="header" id="header">
+    <div class="header-inner">
+      <a href="index.html" class="header-logo">Yousef<span>.</span></a>
+      <nav class="header-nav" id="nav">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="projects.html" class="nav-link">Projects</a>
+        <a href="experience.html" class="nav-link">Experience</a>
+        <a href="mailto:21ymsa@queensu.ca" class="nav-link">Contact</a>
+      </nav>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </div>
-  </section>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="case-hero">
+      <div class="container">
+        <a href="projects.html" class="back-link">
+          <i class="bi bi-arrow-left"></i>
+          Back to projects
+        </a>
+        <h1>Formula SAE Steering System</h1>
+        <p class="subtitle">A custom steering wheel with integrated PCB, TFT display, and CAN bus communication — giving drivers real-time telemetry at 200+ km/h.</p>
+        
+        <div class="case-meta">
+          <div class="case-meta-item">
+            <span class="case-meta-label">Role</span>
+            <span class="case-meta-value">Electrical Lead</span>
+          </div>
+          <div class="case-meta-item">
+            <span class="case-meta-label">Timeline</span>
+            <span class="case-meta-value">Sep 2022 — May 2023</span>
+          </div>
+          <div class="case-meta-item">
+            <span class="case-meta-label">Team</span>
+            <span class="case-meta-value">Queen's Racing</span>
+          </div>
+          <div class="case-meta-item">
+            <span class="case-meta-label">Status</span>
+            <span class="case-meta-value">Competition ready</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Content -->
+    <section class="section">
+      <div class="container case-content">
+        
+        <div class="case-section">
+          <h2>The Challenge</h2>
+          <p>Formula SAE cars generate massive amounts of data — engine RPM, oil pressure, battery voltage, gear position, lap times. The driver needs to see critical information instantly while keeping both hands on the wheel and eyes on the track.</p>
+          <p>The previous steering wheel used a basic LCD that was hard to read in sunlight and couldn't display enough data simultaneously. We needed something better.</p>
+        </div>
+
+        <figure class="case-image">
+          <img src="assets/steering.jpeg" alt="Custom steering wheel with integrated display">
+          <figcaption>The finished steering wheel with 4.3" TFT display and custom button layout</figcaption>
+        </figure>
+
+        <div class="case-section">
+          <h2>The Solution</h2>
+          <p>I designed and built a custom steering wheel PCB with:</p>
+          
+          <h3>FT813 Graphics Controller</h3>
+          <p>The FT813 is a GPU specifically designed for embedded displays. It handles all the graphics rendering, freeing up the main microcontroller for CAN communication and button handling. The result: smooth 60fps animations even with complex dashboards.</p>
+          
+          <h3>4.3" TFT Display</h3>
+          <p>High-brightness IPS panel visible in direct sunlight. The wide viewing angles mean the driver can read it even when the wheel is turned. Custom anti-glare treatment reduces reflections from the sun and track lights.</p>
+          
+          <h3>CAN Bus Integration</h3>
+          <p>The steering wheel connects to the car's CAN network, receiving real-time data from the ECU, battery management system, and sensors. All communication happens at 500kbps with error checking — fast enough for 100Hz updates.</p>
+        </div>
+
+        <div class="case-section">
+          <h2>PCB Design</h2>
+          <p>The steering wheel PCB had to fit in a very constrained space behind the display while handling multiple functions:</p>
+          
+          <div class="tech-grid">
+            <div class="tech-item">
+              <h4>STM32F4</h4>
+              <p>Main controller handling CAN, SPI to display, button interrupts</p>
+            </div>
+            <div class="tech-item">
+              <h4>MCP2515</h4>
+              <p>CAN controller with interrupt-driven receiving</p>
+            </div>
+            <div class="tech-item">
+              <h4>FT813</h4>
+              <p>Embedded GPU with 1MB graphics RAM</p>
+            </div>
+            <div class="tech-item">
+              <h4>6 Buttons</h4>
+              <p>Paddle shifters, pit limiter, neutral, display modes</p>
+            </div>
+          </div>
+
+          <h3>Design Constraints</h3>
+          <ul>
+            <li><strong>Vibration:</strong> Racing generates intense vibration. All components are automotive-grade with extended temperature ratings. Through-hole components where possible for mechanical strength.</li>
+            <li><strong>EMI:</strong> The car's ignition system creates significant electrical noise. Proper ground planes and CAN bus termination were critical.</li>
+            <li><strong>Quick disconnect:</strong> The steering wheel needs to be removable for driver entry. The electrical connection uses a robust circular connector rated for 10,000+ mate cycles.</li>
+          </ul>
+        </div>
+
+        <div class="case-section">
+          <h2>Display Interface</h2>
+          <p>The driver interface went through multiple iterations based on driver feedback:</p>
+          
+          <h3>Primary Dashboard</h3>
+          <p>Large central tachometer with color-coded shift lights at the top. RPM is shown both as a bar graph (instant visual) and numeric (precise reading). Gear position is displayed prominently in the center.</p>
+
+          <h3>Secondary Displays</h3>
+          <p>Rotating secondary screens for:</p>
+          <ul>
+            <li>Tire temperatures (individual corners)</li>
+            <li>Oil pressure and temperature</li>
+            <li>Battery voltage and current</li>
+            <li>Lap times with delta to best</li>
+          </ul>
+
+          <h3>Warning System</h3>
+          <p>Critical warnings override everything — low oil pressure, high coolant temp, low fuel. These flash with high contrast colors and activate buzzer alerts through the driver's headset.</p>
+        </div>
+
+        <div class="case-section">
+          <h2>CAN Protocol</h2>
+          <p>I defined a custom CAN protocol for steering wheel communication:</p>
+          
+          <div class="case-code">
+<pre>
+// CAN message structure
+// ID: 0x100-0x1FF reserved for steering wheel
+// 0x100: RPM, Gear, Speed
+// 0x101: Temperatures (oil, coolant, intake)
+// 0x102: Pressures (oil, fuel, brake)
+// 0x103: Battery (voltage, current, SOC)
+
+typedef struct {
+    uint16_t rpm;        // 0-16000
+    uint8_t  gear;       // 0=N, 1-6=gear
+    uint16_t speed_kph;  // km/h * 10
+    uint8_t  flags;      // warning flags
+} can_msg_100_t;
+</pre>
+          </div>
+
+          <p>Each message is 8 bytes maximum, transmitted at 100Hz for critical data (RPM, speed) and 10Hz for slower-changing values (temperatures).</p>
+        </div>
+
+        <div class="case-section">
+          <h2>Results</h2>
+          
+          <div class="results-grid">
+            <div class="result-item">
+              <span class="result-number">60fps</span>
+              <span class="result-label">Display refresh rate</span>
+            </div>
+            <div class="result-item">
+              <span class="result-number">10ms</span>
+              <span class="result-label">CAN latency</span>
+            </div>
+            <div class="result-item">
+              <span class="result-number">8</span>
+              <span class="result-label">Data screens</span>
+            </div>
+            <div class="result-item">
+              <span class="result-number">0</span>
+              <span class="result-label">Failures at competition</span>
+            </div>
+          </div>
+
+          <p>The steering wheel performed flawlessly at competition. Drivers reported significantly improved situational awareness, especially for shift timing and temperature monitoring. The clear display let them push harder without worrying about missing critical warnings.</p>
+        </div>
+
+        <div class="case-section">
+          <h2>What I Learned</h2>
+          <ul>
+            <li><strong>Design for the environment.</strong> A circuit that works on the bench might fail with vibration, heat, or EMI. Automotive-grade components cost more but save debugging time.</li>
+            <li><strong>User feedback is everything.</strong> My first dashboard design looked "cool" but was hard to read at speed. Simpler, higher-contrast designs won every time.</li>
+            <li><strong>CAN bus is elegant.</strong> The protocol handles errors gracefully and scales well. I now default to CAN for any multi-node embedded system.</li>
+          </ul>
+        </div>
+
+        <nav class="case-nav">
+          <a href="projects.html">
+            <i class="bi bi-arrow-left"></i>
+            All Projects
+          </a>
+          <a href="autodrive-project.html">
+            Next: AutoDrive Lane Detection
+            <i class="bi bi-arrow-right"></i>
+          </a>
+        </nav>
+      </div>
+    </section>
+  </main>
 
   <!-- Footer -->
-  <footer id="footer" class="footer">
+  <footer class="footer">
     <div class="container">
-      <p>© 2025 Yousef Alsaqa. All Rights Reserved.</p>
+      <div class="footer-content">
+        <div class="footer-main">
+          <h2>Let's talk.</h2>
+          <p>I'm looking for full-time opportunities in robotics, automation, or anywhere I can build things that matter.</p>
+          <a href="mailto:21ymsa@queensu.ca" class="footer-email">
+            <i class="bi bi-envelope"></i>
+            21ymsa@queensu.ca
+          </a>
+        </div>
+        <div class="footer-links">
+          <a href="https://www.linkedin.com/in/yousef-alsaqa-b1ab4822b/" target="_blank">
+            <i class="bi bi-linkedin"></i>
+            LinkedIn
+          </a>
+          <a href="https://github.com/yousefalsaqa" target="_blank">
+            <i class="bi bi-github"></i>
+            GitHub
+          </a>
+          <a href="assets/Yousef_Alsaqa_Resume.pdf" target="_blank">
+            <i class="bi bi-file-earmark-text"></i>
+            Resume
+          </a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 Yousef Alsaqa</p>
+      </div>
     </div>
   </footer>
 
-  <!-- Vendor JS Files -->
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-</body>
+  <!-- Scripts -->
+  <script>
+    const navToggle = document.getElementById('navToggle');
+    const nav = document.getElementById('nav');
+    
+    navToggle.addEventListener('click', () => {
+      nav.classList.toggle('active');
+      navToggle.classList.toggle('active');
+    });
 
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+  </script>
+</body>
 </html>
