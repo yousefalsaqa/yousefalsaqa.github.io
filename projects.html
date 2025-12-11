@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects | Yousef Alsaqa</title>
+  <meta name="description" content="Engineering projects by Yousef Alsaqa — robotics, autonomous systems, machine learning, and automation.">
+  <meta name="theme-color" content="#0a0a0f">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap Icons -->
+  <link href="vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link href="css/theme.css" rel="stylesheet">
+  <link href="css/pages/projects.css" rel="stylesheet">
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-inner">
+      <a href="index.html" class="header-logo">Yousef<span>.</span></a>
+      <nav class="header-nav" id="nav">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="projects.html" class="nav-link active">Projects</a>
+        <a href="experience.html" class="nav-link">Experience</a>
+        <a href="mailto:21ymsa@queensu.ca" class="nav-link">Contact</a>
+      </nav>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="projects-hero">
+      <div class="container">
+        <h1>Projects</h1>
+        <p>Systems I've built — from medical simulators to autonomous vehicles to scripts that save me hours every week.</p>
+      </div>
+    </section>
+
+    <!-- Projects Grid -->
+    <section class="section">
+      <div class="container">
+        <div class="projects-filters">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="robotics">Robotics</button>
+          <button class="filter-btn" data-filter="ml">ML/AI</button>
+          <button class="filter-btn" data-filter="embedded">Embedded</button>
+          <button class="filter-btn" data-filter="data">Data</button>
+          <button class="filter-btn" data-filter="automation">Automation</button>
+        </div>
+
+        <div class="projects-grid">
+          <!-- CAST Medical Interface -->
+          <div class="project-card" data-category="embedded">
+            <div class="project-card-image">
+              <img src="fi-studentfinal.jpg" alt="CAST Medical Interface">
+            </div>
+            <div class="project-card-content">
+              <span class="project-card-category">Embedded / Medical</span>
+              <h3>CAST Medical Interface</h3>
+              <p>Patient simulator with custom RFID stethoscope for nursing education. 28 conditions, real-time control, deployed at Queen's.</p>
+              <div class="project-card-tags">
+                <span>Python</span>
+                <span>Raspberry Pi</span>
+                <span>RFID</span>
+                <span>Flask</span>
+              </div>
+              <a href="capstone.html" class="project-card-link">View case study <i class="bi bi-arrow-right"></i></a>
+            </div>
+          </div>
+
+          <!-- Admission Analysis -->
+          <div class="project-card" data-category="data">
+            <div class="project-card-image">
+              <img src="admission_analysis_Dashboard.jpg" alt="Admission Analysis Dashboard">
+            </div>
+            <div class="project-card-content">
+              <span class="project-card-category">Data Analysis</span>
+              <h3>Admission Analysis Dashboard</h3>
+              <p>10 years of admission data. Policy simulator that influenced Commerce requirements at Queen's.</p>
+              <div class="project-card-tags">
+                <span>Python</span>
+                <span>Tkinter</span>
+                <span>Pandas</span>
+                <span>Matplotlib</span>
+              </div>
+              <a href="admission-analysis.html" class="project-card-link">View case study <i class="bi bi-arrow-right"></i></a>
+            </div>
+          </div>
+
+          <!-- Document Automation -->
+          <div class="project-card" data-category="automation">
+            <div class="project-card-image placeholder">
+              <i class="bi bi-code-slash"></i>
+            </div>
+            <div class="project-card-content">
+              <span class="project-card-category">Automation</span>
+              <h3>Document Automation</h3>
+              <p>Selenium script that automates document attachment for admissions. 478 documents in 21 hours.</p>
+              <div class="project-card-tags">
+                <span>Python</span>
+                <span>Selenium</span>
+                <span>Chrome Driver</span>
+              </div>
+              <a href="document-automation.html" class="project-card-link">View case study <i class="bi bi-arrow-right"></i></a>
+            </div>
+          </div>
+
+          <!-- AutoDrive -->
+          <div class="project-card" data-category="ml">
+            <div class="project-card-image">
+              <img src="assets/initiallanedetection.jpg" alt="AutoDrive Lane Detection">
+            </div>
+            <div class="project-card-content">
+              <span class="project-card-category">Computer Vision</span>
+              <h3>AutoDrive Lane Detection</h3>
+              <p>Ultra-Fast Lane Detection for Queen's autonomous vehicle. 300+ FPS on embedded hardware.</p>
+              <div class="project-card-tags">
+                <span>Python</span>
+                <span>OpenCV</span>
+                <span>UFLD</span>
+              </div>
+              <a href="autodrive-project.html" class="project-card-link">View project <i class="bi bi-arrow-right"></i></a>
+            </div>
+          </div>
+
+          <!-- Energy Digital Twin -->
+          <div class="project-card" data-category="data">
+            <div class="project-card-image placeholder">
+              <i class="bi bi-lightning-charge"></i>
+            </div>
+            <div class="project-card-content">
+              <span class="project-card-category">Simulation</span>
+              <h3>Energy Digital Twin</h3>
+              <p>EnergyPlus simulation with FastAPI backend and Streamlit dashboard for industrial energy analysis.</p>
+              <div class="project-card-tags">
+                <span>Python</span>
+                <span>EnergyPlus</span>
+                <span>FastAPI</span>
+                <span>Streamlit</span>
+              </div>
+              <a href="energy-digital-twin.html" class="project-card-link">View project <i class="bi bi-arrow-right"></i></a>
+            </div>
+          </div>
+
+          <!-- EII Predictor -->
+          <div class="project-card" data-category="ml">
+            <div class="project-card-image">
+              <img src="assets/eii_model.jpg" alt="EII Predictor">
+            </div>
+            <div class="project-card-content">
+              <span class="project-card-category">Machine Learning</span>
+              <h3>EII Predictor</h3>
+              <p>Neural network and Random Forest model for Energy Intensity Index forecasting.</p>
+              <div class="project-card-tags">
+                <span>Python</span>
+                <span>TensorFlow</span>
+                <span>Scikit-learn</span>
+              </div>
+              <a href="eii-project-details.html" class="project-card-link">View project <i class="bi bi-arrow-right"></i></a>
+            </div>
+          </div>
+
+          <!-- Formula SAE Steering -->
+          <div class="project-card" data-category="embedded">
+            <div class="project-card-image">
+              <img src="assets/queensfsae.png" alt="Formula SAE Steering">
+            </div>
+            <div class="project-card-content">
+              <span class="project-card-category">Embedded Systems</span>
+              <h3>Formula SAE Steering</h3>
+              <p>Custom PCB, TFT display, and CAN bus integration for Queen's Formula racing team.</p>
+              <div class="project-card-tags">
+                <span>C++</span>
+                <span>CAN Bus</span>
+                <span>PCB Design</span>
+              </div>
+              <a href="steering-project.html" class="project-card-link">View project <i class="bi bi-arrow-right"></i></a>
+            </div>
+          </div>
+
+          <!-- Terrabot -->
+          <div class="project-card" data-category="robotics">
+            <div class="project-card-image">
+              <img src="assets/203_Rover.jpg" alt="Terrabot">
+            </div>
+            <div class="project-card-content">
+              <span class="project-card-category">Robotics</span>
+              <h3>Terrabot</h3>
+              <p>Indoor CO2 monitoring robot using SLAM and sensor fusion to generate air quality heat maps.</p>
+              <div class="project-card-tags">
+                <span>ROS</span>
+                <span>Python</span>
+                <span>SLAM</span>
+                <span>Raspberry Pi</span>
+              </div>
+              <a href="terrabot-details.html" class="project-card-link">View project <i class="bi bi-arrow-right"></i></a>
+            </div>
+          </div>
+
+          <!-- Rexcubot -->
+          <div class="project-card" data-category="robotics">
+            <div class="project-card-image">
+              <img src="assets/303bot.jpg" alt="Rexcubot">
+            </div>
+            <div class="project-card-content">
+              <span class="project-card-category">Robotics</span>
+              <h3>Rexcubot</h3>
+              <p>Competition robot with parallel linkage scoop and precision gripper for autonomous object retrieval.</p>
+              <div class="project-card-tags">
+                <span>C++</span>
+                <span>Arduino</span>
+                <span>Mechanical Design</span>
+              </div>
+              <a href="rexcubot-details.html" class="project-card-link">View project <i class="bi bi-arrow-right"></i></a>
+            </div>
+          </div>
+
+          <!-- QSET Arm -->
+          <div class="project-card" data-category="robotics">
+            <div class="project-card-image">
+              <img src="assets/qset robot with arm.png" alt="QSET Robotic Arm">
+            </div>
+            <div class="project-card-content">
+              <span class="project-card-category">Robotics</span>
+              <h3>QSET Robotic Arm</h3>
+              <p>Six-DOF robotic arm with forward/inverse kinematics and Lagrangian dynamics for space exploration.</p>
+              <div class="project-card-tags">
+                <span>MATLAB</span>
+                <span>SolidWorks</span>
+                <span>Kinematics</span>
+              </div>
+              <a href="qsetarm-details.html" class="project-card-link">View project <i class="bi bi-arrow-right"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-main">
+          <h2>Let's talk.</h2>
+          <p>I'm looking for full-time opportunities in robotics, automation, or anywhere I can build things that matter.</p>
+          <a href="mailto:21ymsa@queensu.ca" class="footer-email">21ymsa@queensu.ca</a>
+        </div>
+        <div class="footer-links">
+          <a href="https://www.linkedin.com/in/yousef-alsaqa-b1ab4822b/" target="_blank">LinkedIn</a>
+          <a href="https://github.com/yousefalsaqa" target="_blank">GitHub</a>
+          <a href="assets/Yousef_Alsaqa_Resume.pdf" target="_blank">Resume</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 Yousef Alsaqa</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    // Mobile nav toggle
+    const navToggle = document.getElementById('navToggle');
+    const nav = document.getElementById('nav');
+    
+    navToggle.addEventListener('click', () => {
+      nav.classList.toggle('active');
+      navToggle.classList.toggle('active');
+    });
+
+    // Filter functionality
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const projectCards = document.querySelectorAll('.project-card');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        // Update active button
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const filter = btn.dataset.filter;
+
+        projectCards.forEach(card => {
+          if (filter === 'all' || card.dataset.category === filter) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
+

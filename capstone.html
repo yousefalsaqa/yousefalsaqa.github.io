@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CAST Medical Interface | Yousef Alsaqa</title>
+  <meta name="description" content="Case study: A patient simulator with custom RFID stethoscope for nursing education at Queen's University.">
+  <meta name="theme-color" content="#0a0a0f">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap Icons -->
+  <link href="vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link href="css/theme.css" rel="stylesheet">
+  <link href="css/pages/case-study.css" rel="stylesheet">
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-inner">
+      <a href="index.html" class="header-logo">Yousef<span>.</span></a>
+      <nav class="header-nav" id="nav">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="projects.html" class="nav-link">Projects</a>
+        <a href="experience.html" class="nav-link">Experience</a>
+        <a href="mailto:21ymsa@queensu.ca" class="nav-link">Contact</a>
+      </nav>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="case-hero">
+      <div class="container">
+        <a href="projects.html" class="back-link"><i class="bi bi-arrow-left"></i> Back to projects</a>
+        <h1>CAST Medical Interface</h1>
+        <p class="subtitle">A patient simulator that lets nursing students practice auscultation on a manikin — with real heart and lung sounds played through a custom RFID stethoscope. Built for Queen's University School of Nursing.</p>
+        
+        <div class="case-meta">
+          <div class="case-meta-item">
+            <span class="case-meta-label">Role</span>
+            <span class="case-meta-value">Lead Developer</span>
+          </div>
+          <div class="case-meta-item">
+            <span class="case-meta-label">Timeline</span>
+            <span class="case-meta-value">Sep 2024 — Apr 2025</span>
+          </div>
+          <div class="case-meta-item">
+            <span class="case-meta-label">Team</span>
+            <span class="case-meta-value">4 Engineers</span>
+          </div>
+          <div class="case-meta-item">
+            <span class="case-meta-label">Status</span>
+            <span class="case-meta-value">Deployed at Queen's</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Content -->
+    <section class="section">
+      <div class="container case-content">
+        
+        <div class="case-section">
+          <h2>The Problem</h2>
+          <p>Nursing students need to learn auscultation — using a stethoscope to listen to heart and lung sounds. But practicing on real patients is limited and risky. Existing simulators are either too expensive ($50K+) or too simple (just audio files on a laptop).</p>
+          <p>Queen's School of Nursing needed something in between: realistic enough to teach proper technique, affordable enough to deploy in labs, and robust enough for daily student use.</p>
+        </div>
+
+        <figure class="case-image">
+          <img src="capstone full picture.jpg" alt="CAST system overview showing the manikin, stethoscope, and interface">
+          <figcaption>The complete CAST system with manikin, custom stethoscope, and feedback interface</figcaption>
+        </figure>
+
+        <div class="case-section">
+          <h2>The Solution</h2>
+          <p>We built CAST — Clinical Auscultation Simulation Training. The system has three main parts:</p>
+          
+          <h3>1. Custom RFID Stethoscope</h3>
+          <p>I designed a stethoscope with an embedded RFID reader in the chest piece. When placed on the manikin, it reads RFID tags hidden under the "skin" at specific auscultation points. Each location triggers the appropriate heart or lung sound.</p>
+          
+          <figure class="case-image">
+            <img src="stethoscope-iii.png" alt="Custom RFID stethoscope design">
+            <figcaption>The custom stethoscope with integrated RFID reader and speaker</figcaption>
+          </figure>
+
+          <h3>2. Instructor Control Interface</h3>
+          <p>A Flask-based web app lets instructors select from 28 different conditions — from normal heart sounds to arrhythmias, from clear lungs to pneumonia. They can change conditions in real-time during simulation exercises.</p>
+
+          <h3>3. Student Feedback Interface</h3>
+          <p>Students see a simplified interface that shows which location they're examining and logs their findings. Instructors can review the session later to assess technique and accuracy.</p>
+        </div>
+
+        <div class="case-image-grid">
+          <figure class="case-image">
+            <img src="feedbackinterface-final.jpg" alt="Instructor feedback interface">
+            <figcaption>Instructor control panel</figcaption>
+          </figure>
+          <figure class="case-image">
+            <img src="fi-studentfinal.jpg" alt="Student interface">
+            <figcaption>Student view during examination</figcaption>
+          </figure>
+        </div>
+
+        <div class="case-section">
+          <h2>Technical Deep Dive</h2>
+          
+          <div class="tech-grid">
+            <div class="tech-item">
+              <h4>Raspberry Pi 4</h4>
+              <p>Central controller running the Flask server and audio system</p>
+            </div>
+            <div class="tech-item">
+              <h4>MFRC522 RFID</h4>
+              <p>Reader module in stethoscope, communicating via SPI</p>
+            </div>
+            <div class="tech-item">
+              <h4>Flask + Socket.IO</h4>
+              <p>Real-time web interface for instructor control</p>
+            </div>
+            <div class="tech-item">
+              <h4>Pygame</h4>
+              <p>Audio playback with low-latency switching</p>
+            </div>
+          </div>
+
+          <h3>The Audio Challenge</h3>
+          <p>Heart and lung sounds need to loop seamlessly and switch instantly when the stethoscope moves. I used Pygame's mixer with pre-loaded audio channels, achieving sub-100ms switching time. Each sound file was edited to create perfect loop points.</p>
+
+          <h3>RFID Tag Layout</h3>
+          <p>The manikin has 8 auscultation points — 4 cardiac and 4 pulmonary. Each has an RFID tag embedded at the correct anatomical location. The stethoscope reads the tag ID and maps it to the appropriate sound based on the instructor's selected condition.</p>
+        </div>
+
+        <div class="case-section">
+          <h2>Impact</h2>
+          
+          <div class="results-grid">
+            <div class="result-item">
+              <span class="result-number">28</span>
+              <span class="result-label">Conditions simulated</span>
+            </div>
+            <div class="result-item">
+              <span class="result-number">8</span>
+              <span class="result-label">Auscultation points</span>
+            </div>
+            <div class="result-item">
+              <span class="result-number">&lt;$500</span>
+              <span class="result-label">Build cost</span>
+            </div>
+            <div class="result-item">
+              <span class="result-number">100×</span>
+              <span class="result-label">Cheaper than commercial</span>
+            </div>
+          </div>
+
+          <p>The system is now in use at Queen's School of Nursing. Students can practice identifying abnormal sounds without waiting for clinical placements with patients who happen to have the right conditions.</p>
+        </div>
+
+        <div class="case-section">
+          <h2>What I Learned</h2>
+          <ul>
+            <li><strong>Audio is harder than it looks.</strong> Latency, loop points, and speaker placement all affect how realistic the simulation feels.</li>
+            <li><strong>Talk to users early.</strong> Our first prototype had the speaker in the wrong place — nursing instructors caught it immediately.</li>
+            <li><strong>Robust > fancy.</strong> The final design uses fewer features than planned, but everything that's there works reliably.</li>
+          </ul>
+        </div>
+
+        <nav class="case-nav">
+          <a href="projects.html"><i class="bi bi-arrow-left"></i> All Projects</a>
+          <a href="admission-analysis.html">Next: Admission Analysis <i class="bi bi-arrow-right"></i></a>
+        </nav>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-main">
+          <h2>Let's talk.</h2>
+          <p>I'm looking for full-time opportunities in robotics, automation, or anywhere I can build things that matter.</p>
+          <a href="mailto:21ymsa@queensu.ca" class="footer-email">21ymsa@queensu.ca</a>
+        </div>
+        <div class="footer-links">
+          <a href="https://www.linkedin.com/in/yousef-alsaqa-b1ab4822b/" target="_blank">LinkedIn</a>
+          <a href="https://github.com/yousefalsaqa" target="_blank">GitHub</a>
+          <a href="assets/Yousef_Alsaqa_Resume.pdf" target="_blank">Resume</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 Yousef Alsaqa</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    const navToggle = document.getElementById('navToggle');
+    const nav = document.getElementById('nav');
+    
+    navToggle.addEventListener('click', () => {
+      nav.classList.toggle('active');
+      navToggle.classList.toggle('active');
+    });
+  </script>
+</body>
+</html>
+

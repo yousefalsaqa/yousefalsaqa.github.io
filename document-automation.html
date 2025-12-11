@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document Automation | Yousef Alsaqa</title>
+  <meta name="description" content="Case study: A Selenium script that automates document attachment for university admissions.">
+  <meta name="theme-color" content="#0a0a0f">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap Icons -->
+  <link href="vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link href="css/theme.css" rel="stylesheet">
+  <link href="css/pages/case-study.css" rel="stylesheet">
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-inner">
+      <a href="index.html" class="header-logo">Yousef<span>.</span></a>
+      <nav class="header-nav" id="nav">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="projects.html" class="nav-link">Projects</a>
+        <a href="experience.html" class="nav-link">Experience</a>
+        <a href="mailto:21ymsa@queensu.ca" class="nav-link">Contact</a>
+      </nav>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="case-hero">
+      <div class="container">
+        <a href="projects.html" class="back-link"><i class="bi bi-arrow-left"></i> Back to projects</a>
+        <h1>Document Automation</h1>
+        <p class="subtitle">A Selenium script that attaches documents to student applications automatically. 478 documents in 21 hours, no manual clicking required.</p>
+        
+        <div class="case-meta">
+          <div class="case-meta-item">
+            <span class="case-meta-label">Role</span>
+            <span class="case-meta-value">Sole Developer</span>
+          </div>
+          <div class="case-meta-item">
+            <span class="case-meta-label">Timeline</span>
+            <span class="case-meta-value">Built in 1 day</span>
+          </div>
+          <div class="case-meta-item">
+            <span class="case-meta-label">Stack</span>
+            <span class="case-meta-value">Python, Selenium</span>
+          </div>
+          <div class="case-meta-item">
+            <span class="case-meta-label">Status</span>
+            <span class="case-meta-value">Still running</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Content -->
+    <section class="section">
+      <div class="container case-content">
+        
+        <div class="case-section">
+          <h2>The Problem</h2>
+          <p>In the admission office, we receive documents that need to be attached to student applications in our CRM (Salesforce). Transcripts, recommendation letters, test scores — hundreds of files.</p>
+          <p>The manual process:</p>
+          <ol>
+            <li>Open a document from the shared folder</li>
+            <li>Find the student ID in the filename</li>
+            <li>Search for that student in Salesforce</li>
+            <li>Navigate to their application</li>
+            <li>Upload the document</li>
+            <li>Repeat 500 times</li>
+          </ol>
+          <p>Each document takes 2-3 minutes manually. At peak times, we'd have backlogs of 500+ documents. That's potentially 25 hours of clicking.</p>
+        </div>
+
+        <div class="case-section">
+          <h2>The Solution</h2>
+          <p>I wrote a Python script using Selenium that automates the entire workflow. Point it at a folder of documents, let it run, come back to find everything attached.</p>
+          
+          <h3>How It Works</h3>
+          <ol>
+            <li><strong>Parse filenames:</strong> Extract student ID and document type from standardized filenames</li>
+            <li><strong>Authenticate:</strong> Log into Salesforce (handles MFA with user input once at start)</li>
+            <li><strong>Search and navigate:</strong> Find each student's application automatically</li>
+            <li><strong>Upload:</strong> Attach the document to the correct record</li>
+            <li><strong>Log everything:</strong> Track successes, failures, and edge cases</li>
+          </ol>
+        </div>
+
+        <div class="case-code">
+<pre>
+# Core workflow (simplified)
+def process_document(filepath):
+    student_id, doc_type = parse_filename(filepath)
+    
+    # Search for student
+    driver.get(f"{SALESFORCE_URL}/search?q={student_id}")
+    wait_for_results()
+    
+    # Navigate to application
+    click_first_result()
+    navigate_to_documents_tab()
+    
+    # Upload
+    upload_file(filepath)
+    
+    # Verify and log
+    if verify_upload():
+        log_success(student_id, doc_type)
+        move_to_completed(filepath)
+    else:
+        log_failure(student_id, doc_type)
+        move_to_review(filepath)
+</pre>
+        </div>
+
+        <div class="case-section">
+          <h2>Technical Challenges</h2>
+          
+          <h3>Salesforce's Dynamic DOM</h3>
+          <p>Salesforce loads content dynamically with unpredictable element IDs. I couldn't rely on static selectors. Solution: wait for specific text content and use relative XPath queries based on visible labels.</p>
+
+          <h3>Rate Limiting</h3>
+          <p>Too fast and Salesforce throttles you. Too slow and you're not saving time. I added randomized delays (2-5 seconds between actions) that feel "human" and avoid triggering rate limits.</p>
+
+          <h3>Error Recovery</h3>
+          <p>Networks fail. Pages timeout. Students don't exist. The script handles all of this gracefully:</p>
+          <ul>
+            <li>Automatic retry on network errors (up to 3 times)</li>
+            <li>Screenshots on failure for debugging</li>
+            <li>Separate folders for completed, failed, and needs-review documents</li>
+            <li>Resume from where it left off if interrupted</li>
+          </ul>
+
+          <h3>Filename Parsing</h3>
+          <p>Document filenames aren't always consistent. I built a parser that handles multiple formats:</p>
+          <ul>
+            <li><code>12345678_Transcript.pdf</code></li>
+            <li><code>Transcript_12345678.pdf</code></li>
+            <li><code>12345678 - Official Transcript (1).pdf</code></li>
+          </ul>
+        </div>
+
+        <div class="case-section">
+          <h2>Impact</h2>
+          
+          <div class="results-grid">
+            <div class="result-item">
+              <span class="result-number">478</span>
+              <span class="result-label">Documents processed (first run)</span>
+            </div>
+            <div class="result-item">
+              <span class="result-number">21hr</span>
+              <span class="result-label">Runtime (unattended)</span>
+            </div>
+            <div class="result-item">
+              <span class="result-number">~25hr</span>
+              <span class="result-label">Manual time saved</span>
+            </div>
+            <div class="result-item">
+              <span class="result-number">97%</span>
+              <span class="result-label">Success rate</span>
+            </div>
+          </div>
+
+          <p>The script runs overnight or on weekends. Documents that would have taken a full workday to process are done without any human intervention.</p>
+          <p>The 3% failure rate is mostly edge cases — students who withdrew, duplicate submissions, corrupt files. These get flagged for human review, which is exactly what a human should be spending time on.</p>
+        </div>
+
+        <div class="case-highlight">
+          <p><strong>Still running:</strong> I built this as a Recruitment Rep. Now as an Admission Coordinator, I'm still using it — and extending it to handle new document types.</p>
+        </div>
+
+        <div class="case-section">
+          <h2>What I Learned</h2>
+          <ul>
+            <li><strong>Automation doesn't have to be perfect.</strong> 97% automated with good logging beats 0% automated while waiting for a "proper" solution.</li>
+            <li><strong>Build for maintenance.</strong> Clear logging and error handling mean I can debug issues months later without remembering every detail.</li>
+            <li><strong>Sometimes the boring solution is the right one.</strong> Selenium isn't elegant, but it works with any web interface without API access.</li>
+          </ul>
+        </div>
+
+        <nav class="case-nav">
+          <a href="admission-analysis.html"><i class="bi bi-arrow-left"></i> Admission Analysis</a>
+          <a href="projects.html">All Projects <i class="bi bi-arrow-right"></i></a>
+        </nav>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-main">
+          <h2>Let's talk.</h2>
+          <p>I'm looking for full-time opportunities in robotics, automation, or anywhere I can build things that matter.</p>
+          <a href="mailto:21ymsa@queensu.ca" class="footer-email">21ymsa@queensu.ca</a>
+        </div>
+        <div class="footer-links">
+          <a href="https://www.linkedin.com/in/yousef-alsaqa-b1ab4822b/" target="_blank">LinkedIn</a>
+          <a href="https://github.com/yousefalsaqa" target="_blank">GitHub</a>
+          <a href="assets/Yousef_Alsaqa_Resume.pdf" target="_blank">Resume</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 Yousef Alsaqa</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    const navToggle = document.getElementById('navToggle');
+    const nav = document.getElementById('nav');
+    
+    navToggle.addEventListener('click', () => {
+      nav.classList.toggle('active');
+      navToggle.classList.toggle('active');
+    });
+  </script>
+</body>
+</html>
+

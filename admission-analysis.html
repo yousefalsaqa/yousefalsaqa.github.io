@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admission Analysis Dashboard | Yousef Alsaqa</title>
+  <meta name="description" content="Case study: A data analysis dashboard that influenced university admission policy at Queen's.">
+  <meta name="theme-color" content="#0a0a0f">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap Icons -->
+  <link href="vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link href="css/theme.css" rel="stylesheet">
+  <link href="css/pages/case-study.css" rel="stylesheet">
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-inner">
+      <a href="index.html" class="header-logo">Yousef<span>.</span></a>
+      <nav class="header-nav" id="nav">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="projects.html" class="nav-link">Projects</a>
+        <a href="experience.html" class="nav-link">Experience</a>
+        <a href="mailto:21ymsa@queensu.ca" class="nav-link">Contact</a>
+      </nav>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="case-hero">
+      <div class="container">
+        <a href="projects.html" class="back-link"><i class="bi bi-arrow-left"></i> Back to projects</a>
+        <h1>Admission Analysis Dashboard</h1>
+        <p class="subtitle">A data analysis tool that processed 10 years of admission data, simulated policy changes, and contributed to the university raising Commerce admission thresholds.</p>
+        
+        <div class="case-meta">
+          <div class="case-meta-item">
+            <span class="case-meta-label">Role</span>
+            <span class="case-meta-value">Sole Developer</span>
+          </div>
+          <div class="case-meta-item">
+            <span class="case-meta-label">Timeline</span>
+            <span class="case-meta-value">Sep 2024 — Dec 2024</span>
+          </div>
+          <div class="case-meta-item">
+            <span class="case-meta-label">Stack</span>
+            <span class="case-meta-value">Python, Tkinter, Pandas</span>
+          </div>
+          <div class="case-meta-item">
+            <span class="case-meta-label">Impact</span>
+            <span class="case-meta-value">Policy change</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Content -->
+    <section class="section">
+      <div class="container case-content">
+        
+        <div class="case-section">
+          <h2>The Problem</h2>
+          <p>Working in Queen's admission office, I noticed something: we had years of data but no good way to explore it. Every question — "How many international students from UAE applied last year?" or "What's the acceptance rate trend for Commerce?" — required manual spreadsheet work.</p>
+          <p>Worse, when policy discussions came up, decisions were often made on intuition rather than data. "What if we raised the Commerce cutoff by 2%?" Nobody could answer that quickly.</p>
+        </div>
+
+        <figure class="case-image">
+          <img src="admission_analysis_Dashboard.jpg" alt="Admission Analysis Dashboard interface">
+          <figcaption>The main dashboard interface with filtering and visualization</figcaption>
+        </figure>
+
+        <div class="case-section">
+          <h2>The Solution</h2>
+          <p>I built a desktop application that connects to our admission database and lets anyone explore the data through an intuitive interface.</p>
+          
+          <h3>Core Features</h3>
+          <ul>
+            <li><strong>Multi-dimensional filtering:</strong> Filter by year, program, country, school, citizenship status, admission status — any combination.</li>
+            <li><strong>Instant visualization:</strong> Charts update in real-time as you adjust filters. See trends over time, distributions by category, comparisons between groups.</li>
+            <li><strong>Policy simulator:</strong> "What-if" analysis. Adjust admission thresholds and see how many students would have been affected in previous years.</li>
+            <li><strong>Export everything:</strong> Any view can be exported to Excel or PDF for reports and presentations.</li>
+          </ul>
+        </div>
+
+        <div class="case-highlight">
+          <p><strong>The moment it mattered:</strong> During a policy meeting about Commerce program capacity, I ran a simulation showing that raising the threshold by 2% would have reduced admissions by ~15% over the past 5 years. The data was in front of decision-makers within minutes, not days.</p>
+        </div>
+
+        <div class="case-section">
+          <h2>Technical Details</h2>
+          
+          <div class="tech-grid">
+            <div class="tech-item">
+              <h4>Python + Tkinter</h4>
+              <p>Desktop app with native look and feel</p>
+            </div>
+            <div class="tech-item">
+              <h4>Pandas</h4>
+              <p>Data manipulation and aggregation</p>
+            </div>
+            <div class="tech-item">
+              <h4>Matplotlib</h4>
+              <p>Embedded charts and visualizations</p>
+            </div>
+            <div class="tech-item">
+              <h4>SQLite</h4>
+              <p>Local database for fast querying</p>
+            </div>
+          </div>
+
+          <h3>Performance Optimization</h3>
+          <p>With 10 years of data (100K+ records), naive filtering was too slow. I implemented:</p>
+          <ul>
+            <li>Indexed SQLite queries instead of Pandas filtering for initial loads</li>
+            <li>Lazy loading for charts — only render visible data</li>
+            <li>Cached aggregations for common query patterns</li>
+          </ul>
+          <p>Result: sub-second response for most queries.</p>
+
+          <h3>Policy Simulator Logic</h3>
+          <p>The simulator doesn't just apply cutoffs retroactively. It accounts for:</p>
+          <ul>
+            <li>Grade inflation trends over time</li>
+            <li>Different grading scales by country/province</li>
+            <li>Conditional vs. final offers</li>
+          </ul>
+        </div>
+
+        <figure class="case-image">
+          <img src="course_analysis_dashboard.jpg" alt="Course-level analysis view">
+          <figcaption>Drill-down view showing program-specific trends</figcaption>
+        </figure>
+
+        <div class="case-section">
+          <h2>Impact</h2>
+          
+          <div class="results-grid">
+            <div class="result-item">
+              <span class="result-number">10</span>
+              <span class="result-label">Years of data analyzed</span>
+            </div>
+            <div class="result-item">
+              <span class="result-number">100K+</span>
+              <span class="result-label">Application records</span>
+            </div>
+            <div class="result-item">
+              <span class="result-number">3%</span>
+              <span class="result-label">Commerce threshold increase</span>
+            </div>
+            <div class="result-item">
+              <span class="result-number">&lt;1s</span>
+              <span class="result-label">Query response time</span>
+            </div>
+          </div>
+
+          <p>The dashboard is now used regularly by the admission team for reporting and analysis. The policy simulation feature has been used in multiple program reviews.</p>
+          <p>Most significantly: the Commerce program raised its admission threshold based on analysis done with this tool. Data-driven decisions instead of guesswork.</p>
+        </div>
+
+        <div class="case-section">
+          <h2>What I Learned</h2>
+          <ul>
+            <li><strong>Build for the question, not the data.</strong> Users don't care about your database schema. They have questions they need answered quickly.</li>
+            <li><strong>Simulations need trust.</strong> The policy simulator was only useful because I could explain exactly how it worked and what assumptions it made.</li>
+            <li><strong>Desktop apps aren't dead.</strong> For internal tools with sensitive data, a local application is often simpler and more secure than a web app.</li>
+          </ul>
+        </div>
+
+        <nav class="case-nav">
+          <a href="capstone.html"><i class="bi bi-arrow-left"></i> CAST Medical Interface</a>
+          <a href="document-automation.html">Next: Document Automation <i class="bi bi-arrow-right"></i></a>
+        </nav>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-main">
+          <h2>Let's talk.</h2>
+          <p>I'm looking for full-time opportunities in robotics, automation, or anywhere I can build things that matter.</p>
+          <a href="mailto:21ymsa@queensu.ca" class="footer-email">21ymsa@queensu.ca</a>
+        </div>
+        <div class="footer-links">
+          <a href="https://www.linkedin.com/in/yousef-alsaqa-b1ab4822b/" target="_blank">LinkedIn</a>
+          <a href="https://github.com/yousefalsaqa" target="_blank">GitHub</a>
+          <a href="assets/Yousef_Alsaqa_Resume.pdf" target="_blank">Resume</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 Yousef Alsaqa</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    const navToggle = document.getElementById('navToggle');
+    const nav = document.getElementById('nav');
+    
+    navToggle.addEventListener('click', () => {
+      nav.classList.toggle('active');
+      navToggle.classList.toggle('active');
+    });
+  </script>
+</body>
+</html>
+
