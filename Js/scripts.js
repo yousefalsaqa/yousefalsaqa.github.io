@@ -8,6 +8,16 @@ if (typeof AOS !== 'undefined') {
     });
 }
 
+// Header scroll effect
+const header = document.getElementById('header');
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+        header?.classList.add('scrolled');
+    } else {
+        header?.classList.remove('scrolled');
+    }
+});
+
 // Professional scroll animations
 function initScrollAnimations() {
     const observerOptions = {
