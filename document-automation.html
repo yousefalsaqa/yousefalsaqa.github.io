@@ -77,12 +77,12 @@
         
         <div class="case-section">
           <h2>The Problem</h2>
-          <p>In the admission office, we receive documents that need to be attached to student applications in our CRM (Salesforce). Transcripts, recommendation letters, test scores — hundreds of files.</p>
+          <p>In the admission office, we receive documents that need to be attached to student applications in PeopleSoft. Transcripts, recommendation letters, test scores — hundreds of files.</p>
           <p>The manual process:</p>
           <ol>
             <li>Open a document from the shared folder</li>
             <li>Find the student ID in the filename</li>
-            <li>Search for that student in Salesforce</li>
+            <li>Search for that student in PeopleSoft</li>
             <li>Navigate to their application</li>
             <li>Upload the document</li>
             <li>Repeat 500 times</li>
@@ -97,7 +97,7 @@
           <h3>How It Works</h3>
           <ol>
             <li><strong>Parse filenames:</strong> Extract student ID and document type from standardized filenames</li>
-            <li><strong>Authenticate:</strong> Log into Salesforce (handles MFA with user input once at start)</li>
+            <li><strong>Authenticate:</strong> Log into PeopleSoft (handles login with user input once at start)</li>
             <li><strong>Search and navigate:</strong> Find each student's application automatically</li>
             <li><strong>Upload:</strong> Attach the document to the correct record</li>
             <li><strong>Log everything:</strong> Track successes, failures, and edge cases</li>
@@ -111,7 +111,7 @@ def process_document(filepath):
     student_id, doc_type = parse_filename(filepath)
     
     # Search for student
-    driver.get(f"{SALESFORCE_URL}/search?q={student_id}")
+    driver.get(f"{PEOPLESOFT_URL}/search?q={student_id}")
     wait_for_results()
     
     # Navigate to application
@@ -134,11 +134,11 @@ def process_document(filepath):
         <div class="case-section">
           <h2>Technical Challenges</h2>
           
-          <h3>Salesforce's Dynamic DOM</h3>
-          <p>Salesforce loads content dynamically with unpredictable element IDs. I couldn't rely on static selectors. Solution: wait for specific text content and use relative XPath queries based on visible labels.</p>
+          <h3>PeopleSoft's Dynamic DOM</h3>
+          <p>PeopleSoft loads content dynamically with unpredictable element IDs. I couldn't rely on static selectors. Solution: wait for specific text content and use relative XPath queries based on visible labels.</p>
 
           <h3>Rate Limiting</h3>
-          <p>Too fast and Salesforce throttles you. Too slow and you're not saving time. I added randomized delays (2-5 seconds between actions) that feel "human" and avoid triggering rate limits.</p>
+          <p>Too fast and PeopleSoft throttles you. Too slow and you're not saving time. I added randomized delays (2-5 seconds between actions) that feel "human" and avoid triggering rate limits.</p>
 
           <h3>Error Recovery</h3>
           <p>Networks fail. Pages timeout. Students don't exist. The script handles all of this gracefully:</p>

@@ -27,7 +27,7 @@
   font-weight: 700;
   margin-bottom: var(--space-lg);
   opacity: 0;
-  animation: fadeInUp 0.8s ease forwards;
+  animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .projects-hero h1 span {
@@ -43,7 +43,7 @@
   max-width: 600px;
   line-height: 1.7;
   opacity: 0;
-  animation: fadeInUp 0.8s ease 0.15s forwards;
+  animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.15s forwards;
 }
 
 /* ---------- Filter Buttons ---------- */
@@ -53,7 +53,7 @@
   gap: var(--space-sm);
   margin-bottom: var(--space-3xl);
   opacity: 0;
-  animation: fadeInUp 0.6s ease 0.3s forwards;
+  animation: fadeInUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.25s forwards;
 }
 
 .filter-btn {
@@ -61,11 +61,10 @@
   font-size: 0.85rem;
   font-weight: 500;
   color: var(--text-muted);
-  background: var(--bg-card);
+  background: var(--bg-secondary);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-full);
-  backdrop-filter: blur(12px);
-  transition: all var(--transition-base);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   cursor: pointer;
 }
 
@@ -90,27 +89,26 @@
 }
 
 .project-card {
-  background: var(--bg-card);
+  background: var(--bg-secondary);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-lg);
   overflow: hidden;
-  backdrop-filter: blur(12px);
-  transition: all var(--transition-base);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
   opacity: 0;
-  animation: fadeInUp 0.6s ease forwards;
+  animation: fadeInUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-.project-card:nth-child(1) { animation-delay: 0.1s; }
-.project-card:nth-child(2) { animation-delay: 0.15s; }
-.project-card:nth-child(3) { animation-delay: 0.2s; }
-.project-card:nth-child(4) { animation-delay: 0.25s; }
-.project-card:nth-child(5) { animation-delay: 0.3s; }
-.project-card:nth-child(6) { animation-delay: 0.35s; }
-.project-card:nth-child(7) { animation-delay: 0.4s; }
-.project-card:nth-child(8) { animation-delay: 0.45s; }
-.project-card:nth-child(9) { animation-delay: 0.5s; }
-.project-card:nth-child(10) { animation-delay: 0.55s; }
+.project-card:nth-child(1) { animation-delay: 0.35s; }
+.project-card:nth-child(2) { animation-delay: 0.4s; }
+.project-card:nth-child(3) { animation-delay: 0.45s; }
+.project-card:nth-child(4) { animation-delay: 0.5s; }
+.project-card:nth-child(5) { animation-delay: 0.55s; }
+.project-card:nth-child(6) { animation-delay: 0.6s; }
+.project-card:nth-child(7) { animation-delay: 0.65s; }
+.project-card:nth-child(8) { animation-delay: 0.7s; }
+.project-card:nth-child(9) { animation-delay: 0.75s; }
+.project-card:nth-child(10) { animation-delay: 0.8s; }
 
 .project-card::before {
   content: '';
@@ -127,7 +125,7 @@
 
 .project-card:hover {
   border-color: var(--border-accent);
-  transform: translateY(-8px);
+  transform: translate3d(0, -8px, 0);
   box-shadow: var(--shadow-glow);
 }
 
@@ -155,11 +153,11 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform var(--transition-slow);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .project-card:hover .project-card-image img {
-  transform: scale(1.08);
+  transform: scale3d(1.05, 1.05, 1);
 }
 
 .project-card-image.placeholder {
