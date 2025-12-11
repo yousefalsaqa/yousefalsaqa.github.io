@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document Automation | Yousef Alsaqa</title>
   <meta name="description" content="Case study: A Selenium script that automates document attachment for university admissions.">
-  <meta name="theme-color" content="#0a0a0f">
+  <meta name="theme-color" content="#050508">
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,7 +22,7 @@
 
 <body>
   <!-- Header -->
-  <header class="header">
+  <header class="header" id="header">
     <div class="header-inner">
       <a href="index.html" class="header-logo">Yousef<span>.</span></a>
       <nav class="header-nav" id="nav">
@@ -43,7 +43,10 @@
     <!-- Hero -->
     <section class="case-hero">
       <div class="container">
-        <a href="projects.html" class="back-link"><i class="bi bi-arrow-left"></i> Back to projects</a>
+        <a href="projects.html" class="back-link">
+          <i class="bi bi-arrow-left"></i>
+          Back to projects
+        </a>
         <h1>Document Automation</h1>
         <p class="subtitle">A Selenium script that attaches documents to student applications automatically. 478 documents in 21 hours, no manual clicking required.</p>
         
@@ -195,8 +198,14 @@ def process_document(filepath):
         </div>
 
         <nav class="case-nav">
-          <a href="admission-analysis.html"><i class="bi bi-arrow-left"></i> Admission Analysis</a>
-          <a href="projects.html">All Projects <i class="bi bi-arrow-right"></i></a>
+          <a href="admission-analysis.html">
+            <i class="bi bi-arrow-left"></i>
+            Admission Analysis
+          </a>
+          <a href="projects.html">
+            All Projects
+            <i class="bi bi-arrow-right"></i>
+          </a>
         </nav>
       </div>
     </section>
@@ -209,12 +218,24 @@ def process_document(filepath):
         <div class="footer-main">
           <h2>Let's talk.</h2>
           <p>I'm looking for full-time opportunities in robotics, automation, or anywhere I can build things that matter.</p>
-          <a href="mailto:21ymsa@queensu.ca" class="footer-email">21ymsa@queensu.ca</a>
+          <a href="mailto:21ymsa@queensu.ca" class="footer-email">
+            <i class="bi bi-envelope"></i>
+            21ymsa@queensu.ca
+          </a>
         </div>
         <div class="footer-links">
-          <a href="https://www.linkedin.com/in/yousef-alsaqa-b1ab4822b/" target="_blank">LinkedIn</a>
-          <a href="https://github.com/yousefalsaqa" target="_blank">GitHub</a>
-          <a href="assets/Yousef_Alsaqa_Resume.pdf" target="_blank">Resume</a>
+          <a href="https://www.linkedin.com/in/yousef-alsaqa-b1ab4822b/" target="_blank">
+            <i class="bi bi-linkedin"></i>
+            LinkedIn
+          </a>
+          <a href="https://github.com/yousefalsaqa" target="_blank">
+            <i class="bi bi-github"></i>
+            GitHub
+          </a>
+          <a href="assets/Yousef_Alsaqa_Resume.pdf" target="_blank">
+            <i class="bi bi-file-earmark-text"></i>
+            Resume
+          </a>
         </div>
       </div>
       <div class="footer-bottom">
@@ -232,7 +253,15 @@ def process_document(filepath):
       nav.classList.toggle('active');
       navToggle.classList.toggle('active');
     });
+
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
   </script>
 </body>
 </html>
-
