@@ -1,212 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Energy Intensity Index Predictor | Yousef Alsaqa</title>
-  <meta name="description" content="Case study: Machine learning model for Energy Intensity Index prediction using neural networks and Random Forest ensemble.">
-  <meta name="author" content="Yousef Alsaqa">
-  <meta name="theme-color" content="#0a0a0f">
-
+  <title>Energy Intensity Index Predictor - Yousef Alsaqa</title>
+  <meta name="description" content="Energy Intensity Index Prediction Model">
+  <meta name="keywords" content="EII Prediction, Machine Learning, Energy Optimization, Yousef Alsaqa">
+  
   <!-- Favicons -->
-  <link href="assets/favicon.png" rel="icon">
-  <link href="assets/apple-touch-icon.png" rel="apple-touch-icon">
-
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-
-  <!-- Bootstrap Icons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  
+  <!-- Vendor CSS Files -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-
-  <!-- Stylesheets -->
-  <link href="css/theme.css" rel="stylesheet">
-  <link href="css/pages/case-study.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
 </head>
 
 <body>
-  <!-- Header -->
-  <header class="header">
-    <div class="header-inner">
-      <a href="index.html" class="header-logo">Yousef<span>.</span></a>
-      <nav class="header-nav" id="nav">
-        <a href="index.html" class="nav-link">Home</a>
-        <a href="projects.html" class="nav-link">Projects</a>
-        <a href="experience.html" class="nav-link">Experience</a>
-        <a href="assets/Yousef_Alsaqa_Resume.pdf" class="btn btn-secondary" target="_blank">
-          <i class="bi bi-file-earmark-text"></i>
-          Resume
-        </a>
-      </nav>
-      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-    </div>
-  </header>
+  <section id="eii-project-showcase" class="showcase-section">
+    <div class="container">
+      
+      <!-- Overview Section -->
+      <div class="showcase-box">
+        <h2><i class="bi bi-info-circle"></i> Overview</h2>
+        <p>
+          The Energy Intensity Index (EII) Predictor is a machine learning model designed to forecast EII values, aiding in industrial energy optimization. 
+          The model leverages an ensemble of feed-forward neural networks and a Random Forest to improve accuracy and reliability across multiple datasets.
+        </p>
+      </div>
 
-  <main>
-    <!-- Hero -->
-    <section class="case-hero">
-      <div class="container">
-        <div class="case-hero-content">
-          <a href="projects.html" class="back-link">
-            <i class="bi bi-arrow-left"></i>
-            Back to Projects
-          </a>
-          <span class="case-category">Machine Learning</span>
-          <h1>Energy Intensity Index Predictor</h1>
-          <p class="case-hero-description">
-            A machine learning model designed to forecast Energy Intensity Index values for industrial energy optimization. The hybrid ensemble combines neural networks and Random Forest to improve prediction accuracy and reliability.
+      <!-- Project Highlights Section -->
+      <div class="showcase-box">
+        <h2><i class="bi bi-lightning"></i> Project Highlights</h2>
+        <ul>
+          <li>Developed a hybrid ML ensemble combining <strong>Neural Networks</strong> and <strong>Random Forest</strong>.</li>
+          <li>Implemented 5-fold cross-validation for robust model evaluation.</li>
+          <li>Utilized Median Absolute Deviation (MAD) normalization to enhance model performance.</li>
+          <li>Automated energy cost assessments through real-time prediction and analytics.</li>
+        </ul>
+      </div>
+
+      <!-- Technical Details Section -->
+      <div class="showcase-box">
+        <h2><i class="bi bi-cpu"></i> Technical Details</h2>
+        <p>
+          The model architecture consists of 10 feed-forward neural networks trained per dataset and averaged for ensemble robustness.
+          A Random Forest model complements the neural networks, with predictions combined through a MSE-based weighting mechanism.
+          The training process incorporates feature scaling, outlier-resistant normalization, and automated model selection.
+        </p>
+      </div>
+
+      <!-- Outcome Section -->
+      <div class="showcase-box">
+        <h2><i class="bi bi-trophy"></i> Outcome</h2>
+        <p>
+          The EII Predictor demonstrated improved forecasting accuracy over traditional regression methods. 
+          It enables proactive decision-making in energy-intensive industries, optimizing energy costs and improving sustainability metrics.
+        </p>
+      </div>
+
+
+      <!-- Research Report Section -->
+      <div class="showcase-box">
+        <h2><i class="bi bi-file-earmark-text"></i> Research Report</h2>
+        <p>
+          A detailed research report documenting the model development, validation process, and impact analysis.
+        </p>
+        <div id="eii-report-viewer">
+          <iframe src="assets/eii_report.pdf" width="100%" height="500px" frameborder="0"></iframe>
+          <p class="report-note">
+            If the embedded document doesn’t load, <a href="assets/eii_report.pdf" download>download the report here</a>.
           </p>
-          <div class="case-meta">
-            <div class="case-meta-item">
-              <div class="case-meta-label">Role</div>
-              <div class="case-meta-value">ML Developer</div>
-            </div>
-            <div class="case-meta-item">
-              <div class="case-meta-label">Domain</div>
-              <div class="case-meta-value">Energy Systems</div>
-            </div>
-            <div class="case-meta-item">
-              <div class="case-meta-label">Stack</div>
-              <div class="case-tech">
-                <span class="tag">Python</span>
-                <span class="tag">TensorFlow</span>
-                <span class="tag">Scikit-learn</span>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
-    </section>
 
-    <!-- Content -->
-    <div class="case-content">
-      
-      <!-- Overview -->
-      <section class="case-section">
-        <h2 class="case-section-title">Overview</h2>
-        <p>
-          The Energy Intensity Index (EII) is a key metric for measuring energy efficiency in industrial processes. Accurate EII prediction enables proactive decision-making for energy optimization and cost reduction.
-        </p>
-        <p>
-          This project developed a hybrid ensemble model that combines the pattern recognition capabilities of neural networks with the robustness of Random Forest algorithms, delivering improved forecasting accuracy over traditional regression methods.
-        </p>
-      </section>
-
-      <!-- Technical Approach -->
-      <section class="case-section">
-        <h2 class="case-section-title">Technical Approach</h2>
-        
-        <div class="case-stats">
-          <div class="case-stat">
-            <div class="case-stat-number">10</div>
-            <div class="case-stat-label">Neural Networks</div>
-          </div>
-          <div class="case-stat">
-            <div class="case-stat-number">5</div>
-            <div class="case-stat-label">Fold Validation</div>
-          </div>
-        </div>
-
-        <h3 style="margin-top: var(--space-xl); margin-bottom: var(--space-md); font-size: 1.1rem;">Model Architecture</h3>
-        <ul>
-          <li><strong>Neural Network Ensemble:</strong> 10 feed-forward networks trained per dataset, predictions averaged for ensemble robustness</li>
-          <li><strong>Random Forest Component:</strong> Complements neural networks with different inductive bias</li>
-          <li><strong>MSE-based Weighting:</strong> Final predictions combine both models weighted by their validation performance</li>
-        </ul>
-
-        <h3 style="margin-top: var(--space-lg); margin-bottom: var(--space-md); font-size: 1.1rem;">Data Processing</h3>
-        <ul>
-          <li><strong>MAD Normalization:</strong> Median Absolute Deviation scaling for outlier resistance</li>
-          <li><strong>Feature Engineering:</strong> Automated feature selection based on correlation analysis</li>
-          <li><strong>Cross-Validation:</strong> 5-fold CV ensures model generalizes across different data splits</li>
-        </ul>
-      </section>
-
-      <!-- Model Visualization -->
-      <section class="case-section">
-        <h2 class="case-section-title">Model Architecture</h2>
-        <div class="case-image">
-          <img src="assets/eii_model.jpg" alt="Neural network visualization showing the EII prediction model architecture">
-          <div class="case-image-caption">Ensemble architecture combining neural networks and Random Forest</div>
-        </div>
-      </section>
-
-      <!-- Results -->
-      <section class="case-section">
-        <h2 class="case-section-title">Outcome</h2>
-        <div class="case-impact">
-          <div class="case-highlight-title">Results</div>
-          <p>
-            The EII Predictor demonstrated improved forecasting accuracy over traditional regression methods, enabling proactive decision-making in energy-intensive industries. The model supports real-time prediction for operational energy management.
-          </p>
-        </div>
-        
-        <p>Applications include:</p>
-        <ul>
-          <li>Automated energy cost assessments</li>
-          <li>Real-time prediction and analytics dashboards</li>
-          <li>Sustainability metric optimization</li>
-        </ul>
-      </section>
-
-      <!-- Research Report -->
-      <section class="case-section">
-        <h2 class="case-section-title">Research Report</h2>
-        <p>
-          A detailed research report documenting the model development, validation process, and impact analysis is available below.
-        </p>
-        <div class="case-highlight">
-          <iframe src="assets/eii_report.pdf" width="100%" height="500px" style="border: none; border-radius: var(--radius-md);"></iframe>
-          <p style="text-align: center; margin-top: var(--space-md); font-size: 0.9rem; color: var(--text-muted);">
-            If the document doesn't load, <a href="assets/eii_report.pdf" download>download the report here</a>.
-          </p>
-        </div>
-      </section>
-
-      <!-- Navigation -->
-      <nav class="case-nav">
-        <div class="case-nav-item">
-          <div class="case-nav-label">Previous Project</div>
-          <a href="document-automation.html" class="case-nav-link">
-            <i class="bi bi-arrow-left"></i>
-            Document Automation
-          </a>
-        </div>
-        <div class="case-nav-item next">
-          <div class="case-nav-label">Next Project</div>
-          <a href="autodrive-project.html" class="case-nav-link">
-            AutoDrive Lane Detection
-            <i class="bi bi-arrow-right"></i>
-          </a>
-        </div>
-      </nav>
     </div>
-  </main>
+
+    <!-- Back-to-Main Button -->
+    <a href="index.html" id="back-to-main" class="back-to-main">
+      <span>⬅ Main Page</span>
+    </a>
+  </section>
 
   <!-- Footer -->
-  <footer class="footer">
+  <footer id="footer" class="footer">
     <div class="container">
-      <div class="footer-inner">
-        <p class="footer-text">© 2025 Yousef Alsaqa. Built with purpose.</p>
-        <div class="footer-links">
-          <a href="mailto:21ymsa@queensu.ca" class="footer-link">21ymsa@queensu.ca</a>
-          <a href="https://www.linkedin.com/in/yousef-alsaqa-b1ab4822b/" target="_blank" class="footer-link">LinkedIn</a>
-          <a href="https://github.com/yousefalsaqa" target="_blank" class="footer-link">GitHub</a>
-        </div>
-      </div>
+      <p>© 2025 Yousef Alsaqa. All Rights Reserved.</p>
     </div>
   </footer>
 
-  <!-- Scripts -->
-  <script>
-    const navToggle = document.getElementById('navToggle');
-    const nav = document.getElementById('nav');
-    navToggle.addEventListener('click', () => nav.classList.toggle('active'));
-  </script>
+  <!-- Vendor JS Files -->
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="vendor/aos/aos.js"></script>
+
 </body>
+
 </html>

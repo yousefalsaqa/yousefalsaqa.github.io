@@ -1,176 +1,222 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Energy Digital Twin | Yousef Alsaqa</title>
-  <meta name="description" content="Digital twin application for industrial energy simulation and analysis using EnergyPlus integration.">
-  <meta name="author" content="Yousef Alsaqa">
-  <meta name="theme-color" content="#0a0a0f">
-
-  <link href="assets/favicon.png" rel="icon">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link href="vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="css/theme.css" rel="stylesheet">
-  <link href="css/pages/case-study.css" rel="stylesheet">
+  <title>Energy Digital Twin Application</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* Basic styling for the technical report */
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #121212;
+      color: #e0e0e0;
+      padding: 20px;
+      line-height: 1.6;
+    }
+    header, footer {
+      text-align: center;
+      padding: 20px;
+      background: #4b0082;
+      color: #ffd700;
+      border-radius: 8px;
+    }
+    h1, h2, h3 {
+      color: #ffd700;
+    }
+    section {
+      margin-bottom: 40px;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+    }
+    pre {
+      background-color: #1c1c1c;
+      color: #ffffff;
+      padding: 15px;
+      border-radius: 5px;
+      overflow-x: auto;
+      font-size: 0.9rem;
+    }
+    code {
+      font-family: monospace;
+    }
+    a.back-to-main {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #0078d7;
+      color: #ffffff;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+    a.back-to-main:hover {
+      background: #0056b3;
+    }
+  </style>
 </head>
-
 <body>
-  <header class="header">
-    <div class="header-inner">
-      <a href="index.html" class="header-logo">Yousef<span>.</span></a>
-      <nav class="header-nav" id="nav">
-        <a href="index.html" class="nav-link">Home</a>
-        <a href="projects.html" class="nav-link">Projects</a>
-        <a href="experience.html" class="nav-link">Experience</a>
-        <a href="mailto:21ymsa@queensu.ca" class="nav-link">Contact</a>
-      </nav>
-      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
+  <header>
+    <h1>Energy Digital Twin Application</h1>
+    <p>Technical Report &amp; Code Integration<br>Yousef Alsaqa | February 20, 2025</p>
   </header>
 
-  <main>
-    <section class="case-hero">
-      <div class="container">
-        <div class="case-hero-content">
-          <a href="projects.html" class="back-link"><i class="bi bi-arrow-left"></i> Back to Projects</a>
-          <span class="case-category">Energy Systems</span>
-          <h1>Energy Digital Twin Application</h1>
-          <p class="case-hero-description">
-            A full-stack digital twin platform that combines EnergyPlus building simulation with custom predictive analytics. The system lets engineers model building energy consumption, run what-if scenarios, and forecast future usage patterns through an interactive dashboard.
-          </p>
-          <div class="case-meta">
-            <div class="case-meta-item">
-              <div class="case-meta-label">Type</div>
-              <div class="case-meta-value">Research Project</div>
-            </div>
-            <div class="case-meta-item">
-              <div class="case-meta-label">Domain</div>
-              <div class="case-meta-value">Industrial Energy</div>
-            </div>
-            <div class="case-meta-item">
-              <div class="case-meta-label">Stack</div>
-              <div class="case-tech">
-                <span class="tag">Python</span>
-                <span class="tag">FastAPI</span>
-                <span class="tag">EnergyPlus</span>
-                <span class="tag">Streamlit</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+  <section id="introduction">
+    <h2>1. Introduction</h2>
+    <p>
+      This document provides a technical analysis of the Energy Digital Twin Application. The application integrates a simulation engine, a predictive analytics module, and a building energy simulation integration using EnergyPlus. The system is implemented with a modular architecture including a FastAPI backend, a Streamlit frontend, and Python modules for simulation and prediction.
+    </p>
+  </section>
 
-    <div class="case-content">
-      <section class="case-section">
-        <h2 class="case-section-title">The Problem</h2>
-        <p>
-          Building energy management is complex. Facility managers need to understand how changes to HVAC settings, occupancy patterns, or equipment schedules affect energy consumption — but testing these changes in real buildings is expensive and disruptive.
-        </p>
-        <p>
-          Traditional energy modeling tools like EnergyPlus are powerful but require expertise to use. There's a gap between the detailed simulation capabilities and what non-experts can access for day-to-day decision making.
-        </p>
-      </section>
-
-      <section class="case-section">
-        <h2 class="case-section-title">The Solution</h2>
-        <p>
-          I built a digital twin application that wraps EnergyPlus simulation with a modern web interface and adds predictive capabilities on top. The system has three main components:
-        </p>
-        <ul>
-          <li><strong>Simulation Engine:</strong> Generates energy consumption data using configurable baseline and volatility parameters, or runs full EnergyPlus building simulations</li>
-          <li><strong>Prediction Module:</strong> Trains machine learning models on simulation data to forecast future consumption patterns</li>
-          <li><strong>Interactive Dashboard:</strong> Streamlit frontend that lets users configure simulations, visualize results, and explore predictions</li>
-        </ul>
-      </section>
-
-      <section class="case-section">
-        <h2 class="case-section-title">Architecture</h2>
-        <div class="case-highlight">
-          <div class="case-highlight-title">System Design</div>
-          <p>The backend exposes RESTful API endpoints via FastAPI. The simulation module can run in two modes: a lightweight baseline-volatility model for quick what-if analysis, or a full EnergyPlus simulation for detailed building modeling. The Eppy library handles IDF file manipulation for EnergyPlus integration.</p>
-        </div>
-        
-        <div class="case-code">
-          <pre>
+  <section id="architecture">
+    <h2>2. System Architecture</h2>
+    <p>
+      The system is divided into two main components:
+    </p>
+    <ul>
+      <li><strong>Backend:</strong> Implements simulation, prediction, and EnergyPlus integration with RESTful API endpoints via FastAPI.</li>
+      <li><strong>Frontend:</strong> Provides an interactive dashboard for simulation visualization and control using Streamlit.</li>
+    </ul>
+    <p>Project file structure:</p>
+    <pre><code>
 digital_twin_app/
 ├── backend/
-│   ├── main.py                   # FastAPI endpoints
+│   ├── main.py                   # FastAPI API endpoints
 │   ├── simulation.py             # Energy simulation module
-│   ├── prediction.py             # ML prediction module
-│   └── energyplus_integration.py # EnergyPlus wrapper
+│   ├── prediction.py             # Predictive model module
+│   └── energyplus_integration.py # EnergyPlus integration module
 ├── frontend/
-│   └── dashboard.py              # Streamlit UI
-└── requirements.txt</pre>
-        </div>
-      </section>
+│   └── dashboard.py              # Streamlit dashboard
+├── requirements.txt              # Dependencies list
+└── README.md                     # Project instructions
+    </code></pre>
+  </section>
 
-      <section class="case-section">
-        <h2 class="case-section-title">Technical Details</h2>
-        
-        <h3 style="margin-top: var(--space-lg); margin-bottom: var(--space-md); font-size: 1.1rem;">Simulation Module</h3>
-        <p>
-          The simulation engine generates time-series energy data using stochastic modeling. Users specify baseline consumption, volatility (how much the consumption varies), and simulation duration. The output feeds into both visualization and the prediction pipeline.
-        </p>
+  <section id="software-components">
+    <h2>3. Software Components</h2>
 
-        <h3 style="margin-top: var(--space-lg); margin-bottom: var(--space-md); font-size: 1.1rem;">EnergyPlus Integration</h3>
-        <p>
-          For detailed building simulation, the system modifies IDF (Input Data File) templates to adjust parameters like thermostat setpoints, then runs EnergyPlus as a subprocess. Output CSV files are parsed back into the application for analysis. This allows modeling of specific buildings with real weather data.
-        </p>
+    <h3>3.1 Backend Modules</h3>
+    <p><strong>Simulation Module:</strong> Generates time-series data for energy consumption using three parameters: baseline, volatility, and time steps.</p>
+    <p>Example:</p>
+    <pre><code>
+// simulation.py
+def simulate_energy(baseline: float, volatility: float, time_steps: int, seed: int = 42) -> pd.DataFrame:
+    np.random.seed(seed)
+    time = np.arange(time_steps)
+    noise = np.random.randn(time_steps) * volatility
+    energy = baseline + noise
+    return pd.DataFrame({'Time': time, 'Energy': energy})
+    </code></pre>
 
-        <h3 style="margin-top: var(--space-lg); margin-bottom: var(--space-md); font-size: 1.1rem;">Predictive Analytics</h3>
-        <p>
-          The prediction module trains a linear regression model on simulation outputs. While simple, this provides a baseline for forecasting. The architecture is designed to be extensible — swapping in more sophisticated models (LSTM, Prophet) requires minimal changes.
-        </p>
-      </section>
+    <h3>3.2 Predictive Module</h3>
+    <p>This module trains a linear regression model on simulation data and predicts future energy consumption.</p>
+    <pre><code>
+// prediction.py
+def train_predictive_model(data: pd.DataFrame):
+    X = data[['Time']]
+    y = data['Energy']
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+    model = LinearRegression()
+    model.fit(X_train, y_train)
+    y_pred = model.predict(X_test)
+    mse = mean_squared_error(y_test, y_pred)
+    return model, mse
+    </code></pre>
 
-      <section class="case-section">
-        <h2 class="case-section-title">Results</h2>
-        <p>
-          The platform provides a unified interface for energy analysis that previously required juggling multiple tools. Engineers can:
-        </p>
-        <ul>
-          <li>Run quick what-if scenarios in seconds using the baseline model</li>
-          <li>Execute detailed EnergyPlus simulations for specific buildings</li>
-          <li>Train predictive models on historical or simulated data</li>
-          <li>Visualize consumption patterns and predictions interactively</li>
-        </ul>
-      </section>
+    <h3>3.3 EnergyPlus Integration Module</h3>
+    <p>This module uses the Eppy library to modify IDF files, run EnergyPlus simulations, and parse output data.</p>
+    <pre><code>
+// energyplus_integration.py
+def run_energyplus_simulation():
+    idf = IDF(idf_template)
+    for thermostat in idf.idfobjects.get("ThermostatSetpoint:DualSetpoint", []):
+        thermostat.Heating_Setpoint_Temperature = 20.0
+        thermostat.Cooling_Setpoint_Temperature = 25.0
+    modified_idf = "modified_building.idf"
+    idf.saveas(modified_idf)
+    simulation_output_dir = "output"
+    if not os.path.exists(simulation_output_dir):
+        os.makedirs(simulation_output_dir)
+    command = [
+        energyplus_path,
+        "-w", weather_file,
+        "-d", simulation_output_dir,
+        modified_idf
+    ]
+    result = subprocess.run(command, capture_output=True, text=True)
+    if result.returncode != 0:
+        print("Simulation error:", result.stderr)
+    else:
+        print("Simulation completed successfully.")
+    output_csv = os.path.join(simulation_output_dir, "eplusout.csv")
+    if os.path.exists(output_csv):
+        simulation_data = pd.read_csv(output_csv)
+        return simulation_data
+    else:
+        print("Output CSV not found.")
+        return None
+    </code></pre>
 
-      <nav class="case-nav">
-        <div class="case-nav-item">
-          <div class="case-nav-label">Previous</div>
-          <a href="projects.html" class="case-nav-link"><i class="bi bi-arrow-left"></i> All Projects</a>
-        </div>
-        <div class="case-nav-item next">
-          <div class="case-nav-label">Next</div>
-          <a href="steering-project.html" class="case-nav-link">Formula SAE <i class="bi bi-arrow-right"></i></a>
-        </div>
-      </nav>
-    </div>
-  </main>
+    <h3>3.4 API Server</h3>
+    <p>The FastAPI server exposes endpoints for simulation, training, and prediction using Pydantic for data validation.</p>
+    <pre><code>
+// main.py
+@app.post("/simulate", response_model=SimulationResponse)
+def run_simulation(request: SimulationRequest):
+    global simulation_data
+    simulation_data = simulate_energy(request.baseline, request.volatility, request.time_steps)
+    return SimulationResponse(time=simulation_data['Time'].tolist(), energy=simulation_data['Energy'].tolist())
+    </code></pre>
+  </section>
 
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-inner">
-        <p class="footer-text">© 2025 Yousef Alsaqa</p>
-        <div class="footer-links">
-          <a href="mailto:21ymsa@queensu.ca" class="footer-link">21ymsa@queensu.ca</a>
-          <a href="https://www.linkedin.com/in/yousef-alsaqa-b1ab4822b/" target="_blank" class="footer-link">LinkedIn</a>
-        </div>
-      </div>
-    </div>
+  <section id="implementation">
+    <h2>4. Implementation Details</h2>
+    <p>
+      The implementation leverages Python libraries such as NumPy, Pandas, and scikit-learn. The EnergyPlus integration is performed through Eppy and subprocess calls, ensuring detailed building simulation. The modular code design enables independent testing and deployment of each component.
+    </p>
+  </section>
+
+  <section id="deployment">
+    <h2>5. Deployment Instructions</h2>
+    <ol>
+      <li>Install Python 3.8+ and EnergyPlus. Configure the EnergyPlus executable path in the code.</li>
+      <li>Install dependencies using:
+        <pre><code>pip install -r requirements.txt</code></pre>
+      </li>
+      <li>Start the backend API:
+        <pre><code>cd backend
+uvicorn main:app --reload</code></pre>
+      </li>
+      <li>Launch the frontend dashboard:
+        <pre><code>cd frontend
+streamlit run dashboard.py</code></pre>
+      </li>
+      <li>Run the EnergyPlus integration:
+        <pre><code>python energyplus_integration.py</code></pre>
+      </li>
+    </ol>
+  </section>
+
+  <section id="testing">
+    <h2>6. Testing Procedures</h2>
+    <p>
+      Unit tests (using frameworks like pytest) validate the simulation and prediction outputs. Integration tests (via Postman or automated scripts) ensure API endpoints function as expected.
+    </p>
+  </section>
+
+  <section id="conclusion">
+    <h2>7. Conclusion</h2>
+    <p>
+      The Energy Digital Twin Application integrates detailed EnergyPlus modeling with a lightweight baseline-volatility simulation. Its modular design, RESTful API, and interactive dashboard provide a comprehensive platform for industrial energy analysis.
+    </p>
+  </section>
+
+  <a href="index.html" class="back-to-main">⬅ Main Page</a>
+
+  <footer>
+    <p>© 2024 Energy Digital Twin Application. All Rights Reserved.</p>
   </footer>
-
-  <script>
-    const navToggle = document.getElementById('navToggle');
-    const nav = document.getElementById('nav');
-    navToggle.addEventListener('click', () => nav.classList.toggle('active'));
-  </script>
 </body>
 </html>

@@ -1,198 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>QSET Robotic Arm | Yousef Alsaqa</title>
-  <meta name="description" content="Six-DOF robotic arm for space exploration applications with advanced kinematics, dynamics analysis, and robust control architecture.">
-  <meta name="author" content="Yousef Alsaqa">
-  <meta name="theme-color" content="#0a0a0f">
-
-  <link href="assets/favicon.png" rel="icon">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link href="vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="css/theme.css" rel="stylesheet">
-  <link href="css/pages/case-study.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <title>QSET Robotic Arm Showcase</title>
 </head>
-
 <body>
-  <header class="header">
-    <div class="header-inner">
-      <a href="index.html" class="header-logo">Yousef<span>.</span></a>
-      <nav class="header-nav" id="nav">
-        <a href="index.html" class="nav-link">Home</a>
-        <a href="projects.html" class="nav-link">Projects</a>
-        <a href="experience.html" class="nav-link">Experience</a>
-        <a href="mailto:21ymsa@queensu.ca" class="nav-link">Contact</a>
-      </nav>
-      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
-        <span></span><span></span><span></span>
-      </button>
+  <div id="qset-showcase-container" class="container">
+    <!-- Showcase Title -->
+    <div id="qset-title">
+      <h1>QSET Robotic Arm</h1>
+      <h2>Advanced Engineering for Space Exploration</h2>
     </div>
-  </header>
 
-  <main>
-    <section class="case-hero">
-      <div class="container">
-        <div class="case-hero-content">
-          <a href="projects.html" class="back-link"><i class="bi bi-arrow-left"></i> Back to Projects</a>
-          <span class="case-category">Robotics</span>
-          <h1>QSET Robotic Arm</h1>
-          <p class="case-hero-description">
-            A six-degree-of-freedom robotic arm designed for Queen's Space Engineering Team's Mars rover. The arm handles sample collection, instrument deployment, and maintenance tasks in simulated planetary environments. I led the kinematics and dynamics analysis, ensuring precise control and structural integrity.
-          </p>
-          <div class="case-meta">
-            <div class="case-meta-item">
-              <div class="case-meta-label">Team</div>
-              <div class="case-meta-value">QSET</div>
-            </div>
-            <div class="case-meta-item">
-              <div class="case-meta-label">Competition</div>
-              <div class="case-meta-value">URC/CIRC</div>
-            </div>
-            <div class="case-meta-item">
-              <div class="case-meta-label">Tools</div>
-              <div class="case-tech">
-                <span class="tag">MATLAB</span>
-                <span class="tag">SolidWorks</span>
-                <span class="tag">Kinematics</span>
-                <span class="tag">Dynamics</span>
-              </div>
-            </div>
-          </div>
-        </div>
+    <!-- Design Overview Section -->
+    <div class="showcase-box" id="qset-design-section">
+      <h3>Design Overview</h3>
+      <p>
+        The QSET robotic arm was engineered for high-performance operations in space environments. Leveraging 
+        a six-degree-of-freedom architecture, it features precision control through gear-driven actuators and a 
+        modular design to adapt to a range of payloads and tasks.
+      </p>
+      <div class="showcase-images">
+        <img src="assets/qset_arm_drawing.png" alt="QSET Robotic Arm Design" id="qset-arm-drawing">
       </div>
-    </section>
-
-    <div class="case-content">
-      <section class="case-section">
-        <h2 class="case-section-title">The Competition</h2>
-        <p>
-          University Rover Challenge (URC) and Canadian International Rover Challenge (CIRC) test student-built Mars rovers on tasks mimicking real planetary exploration. The robotic arm is critical for:
-        </p>
-        <ul>
-          <li><strong>Science Tasks:</strong> Collecting soil samples and delivering them to onboard analysis instruments</li>
-          <li><strong>Equipment Servicing:</strong> Operating switches, turning valves, and connecting cables on mock equipment panels</li>
-          <li><strong>Autonomous Operation:</strong> Performing pick-and-place tasks with minimal human input</li>
-        </ul>
-        <p>
-          The arm needs to be strong enough to lift samples, precise enough to flip small switches, and reliable enough to work in dusty outdoor conditions.
-        </p>
-      </section>
-
-      <section class="case-section">
-        <h2 class="case-section-title">Arm Design</h2>
-        <div class="case-image">
-          <img src="assets/qset robot with arm.png" alt="Full QSET rover with robotic arm extended">
-          <div class="case-image-caption">QSET rover with the 6-DOF arm in extended configuration</div>
-        </div>
-        <p>
-          The arm uses a 6-DOF serial manipulator configuration — three joints for positioning (shoulder, elbow, wrist pitch) and three for orientation (wrist roll, wrist yaw, gripper rotation). This provides the dexterity needed for complex manipulation tasks.
-        </p>
-        <div class="case-image">
-          <img src="assets/qset arm drawing.png" alt="CAD drawing of the robotic arm showing joint configuration">
-          <div class="case-image-caption">Arm design showing joint placement and link dimensions</div>
-        </div>
-      </section>
-
-      <section class="case-section">
-        <h2 class="case-section-title">Kinematics Analysis</h2>
-        <p>
-          I developed the complete kinematic model using Denavit-Hartenberg parameters. The forward kinematics calculate end-effector position and orientation from joint angles — essential for knowing where the gripper is in space.
-        </p>
-        <div class="case-image">
-          <img src="assets/arm math1.png" alt="Rotation matrices for forward kinematics">
-          <div class="case-image-caption">Rotation matrices defining joint transformations</div>
-        </div>
-        <p>
-          Homogeneous transformation matrices chain together to map from base frame to end-effector frame. Each joint contributes a rotation and translation according to its DH parameters.
-        </p>
-        <div class="case-highlight">
-          <div class="case-highlight-title">Inverse Kinematics</div>
-          <p>The inverse problem — finding joint angles to reach a desired end-effector pose — is solved numerically using the Jacobian pseudoinverse method. This allows the arm to follow smooth trajectories in Cartesian space while respecting joint limits.</p>
-        </div>
-      </section>
-
-      <section class="case-section">
-        <h2 class="case-section-title">Dynamics & Structural Analysis</h2>
-        <p>
-          Beyond kinematics, I analyzed the forces and torques throughout the arm structure. Using Lagrangian mechanics, I derived the equations of motion to understand how much torque each motor needs at different arm configurations.
-        </p>
-        <div class="case-image">
-          <img src="assets/arm math3.png" alt="Force and torque analysis equations">
-          <div class="case-image-caption">Dynamics analysis for motor torque requirements</div>
-        </div>
-        <p>
-          The worst-case loading occurs when the arm is fully extended horizontally while holding a sample. This configuration maximizes the moment arm at the shoulder joint. Motor selection was based on providing 50% torque margin above this worst case.
-        </p>
-        <div class="case-image">
-          <img src="assets/arm fbd.png" alt="Free body diagram of arm under load">
-          <div class="case-image-caption">Free body diagram showing forces and moments on each link</div>
-        </div>
-      </section>
-
-      <section class="case-section">
-        <h2 class="case-section-title">System Architecture</h2>
-        <div class="case-image">
-          <img src="assets/qsetsystemarchitecture.png" alt="Control system architecture diagram">
-          <div class="case-image-caption">Control architecture showing communication between components</div>
-        </div>
-        <p>
-          The arm control system runs on an STM32F407 microcontroller coordinating:
-        </p>
-        <ul>
-          <li><strong>Linear Actuators:</strong> High-force actuators for shoulder and elbow joints</li>
-          <li><strong>Servo Motors:</strong> Precision servos for wrist articulation</li>
-          <li><strong>Position Feedback:</strong> Potentiometers and encoders for closed-loop control</li>
-          <li><strong>CAN Communication:</strong> Integration with rover's main computer</li>
-        </ul>
-        <p>
-          The modular architecture allows testing the arm independently from the rover, speeding up development and debugging.
-        </p>
-      </section>
-
-      <section class="case-section">
-        <h2 class="case-section-title">Results</h2>
-        <div class="case-impact">
-          <div class="case-highlight-title">Competition Performance</div>
-          <p>The arm successfully completed science and equipment servicing tasks at CIRC. The kinematics model accurately predicted end-effector positions, and the structural analysis ensured no joint exceeded torque limits even under maximum loading.</p>
-        </div>
-        <p>
-          This project gave me deep experience in robotic manipulator design — from the math of kinematics and dynamics through to practical considerations like cable routing and dust protection. The analytical skills transfer directly to any robotic arm application, from manufacturing to surgical robots.
-        </p>
-      </section>
-
-      <nav class="case-nav">
-        <div class="case-nav-item">
-          <div class="case-nav-label">Previous</div>
-          <a href="rexcubot-details.html" class="case-nav-link"><i class="bi bi-arrow-left"></i> Rexcubot</a>
-        </div>
-        <div class="case-nav-item next">
-          <div class="case-nav-label">All Projects</div>
-          <a href="projects.html" class="case-nav-link">View All <i class="bi bi-arrow-right"></i></a>
-        </div>
-      </nav>
+      <p>
+        The end-effector employs a rotational wrist mechanism capable of fine-grained manipulation, allowing 
+        the arm to interact with delicate or dynamic objects. The design integrates parallel-linkage 
+        systems to maximize torque while minimizing mechanical stress.
+      </p>
     </div>
-  </main>
 
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-inner">
-        <p class="footer-text">© 2025 Yousef Alsaqa</p>
-        <div class="footer-links">
-          <a href="mailto:21ymsa@queensu.ca" class="footer-link">21ymsa@queensu.ca</a>
-          <a href="https://www.linkedin.com/in/yousef-alsaqa-b1ab4822b/" target="_blank" class="footer-link">LinkedIn</a>
-        </div>
+    <!-- System Architecture Section -->
+    <div class="showcase-box" id="qset-system-section">
+      <h3>System Architecture</h3>
+      <p>
+        At the heart of the robotic arm's functionality lies a robust system architecture. A real-time STM32F407 
+        microcontroller is responsible for precise coordination of actuators and sensors. Communication is 
+        handled via a CAN protocol, enabling synchronized data exchange between components.
+      </p>
+      <img src="assets/qsetsystemarchitecture.png" alt="System Architecture Diagram" id="qset-system-diagram">
+      <p>
+        The architecture integrates key features:
+      </p>
+      <ul>
+        <li><strong>Linear Actuators:</strong> Offer high-torque movement for larger joints.</li>
+        <li><strong>Guidance Lasers:</strong> Assist with alignment during object interaction.</li>
+        <li><strong>Voltage Regulation:</strong> Step-down modules maintain stable operation under load.</li>
+        <li><strong>CAN Transceiver:</strong> Ensures robust communication across the arm and robotic platform.</li>
+      </ul>
+    </div>
+
+    <!-- Kinematics and Dynamics Section -->
+    <div class="showcase-box" id="qset-math-section">
+      <h3>Kinematics and Dynamics</h3>
+      <p>
+        The kinematic model of the robotic arm utilizes Denavit-Hartenberg (DH) parameters to define joint 
+        transformations. This approach ensures precise calculation of positional and orientational relationships 
+        between each segment.
+      </p>
+      <div class="math-section">
+        <img src="assets/arm_math1.png" alt="Rotation Matrices" id="qset-rotation-math">
+        <p class="math-caption">Rotation matrices applied for forward kinematics.</p>
       </div>
+      <p>
+        Homogeneous transformation matrices were employed to model the arm's motion within a 3D workspace, while 
+        dynamic analysis using Lagrangian equations optimized torque allocation.
+      </p>
+      <img src="assets/arm_math3.png" alt="Force Analysis" id="qset-force-math">
     </div>
-  </footer>
 
-  <script>
-    const navToggle = document.getElementById('navToggle');
-    const nav = document.getElementById('nav');
-    navToggle.addEventListener('click', () => nav.classList.toggle('active'));
-  </script>
+    <!-- Free Body Diagram Section -->
+    <div class="showcase-box" id="qset-fbd-section">
+      <h3>Free Body Diagram (FBD)</h3>
+      <p>
+        The Free Body Diagram (FBD) illustrates the force and moment distribution across the robotic arm. This 
+        analysis was instrumental in material selection and structural optimization to withstand the operational 
+        loads experienced during tasks.
+      </p>
+      <img src="assets/arm_fbd.png" alt="Free Body Diagram" id="qset-fbd-diagram">
+    </div>
+
+    <!-- Back to Main Page Button -->
+    <a href="index.html" id="qset-back-to-main" class="back-to-main">← Main Page</a>
+
+  </div>
 </body>
 </html>

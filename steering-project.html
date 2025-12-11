@@ -1,186 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Formula SAE Steering System | Yousef Alsaqa</title>
-  <meta name="description" content="Custom steering wheel system with integrated PCB, TFT display, and CAN Bus communication for Queen's Formula SAE racing team.">
-  <meta name="author" content="Yousef Alsaqa">
-  <meta name="theme-color" content="#0a0a0f">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Formula SAE Steering System - Yousef Alsaqa</title>
+  <meta name="description" content="Overview of the Formula SAE Steering System project by Yousef Alsaqa.">
+  <meta name="keywords" content="Formula SAE, Steering System, Embedded Systems, CAN Bus, Yousef Alsaqa">
 
-  <link href="assets/favicon.png" rel="icon">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <!-- Vendor CSS Files -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="css/theme.css" rel="stylesheet">
-  <link href="css/pages/case-study.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
 </head>
 
 <body>
-  <header class="header">
-    <div class="header-inner">
-      <a href="index.html" class="header-logo">Yousef<span>.</span></a>
-      <nav class="header-nav" id="nav">
-        <a href="index.html" class="nav-link">Home</a>
-        <a href="projects.html" class="nav-link">Projects</a>
-        <a href="experience.html" class="nav-link">Experience</a>
-        <a href="mailto:21ymsa@queensu.ca" class="nav-link">Contact</a>
-      </nav>
-      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </header>
-
-  <main>
-    <section class="case-hero">
-      <div class="container">
-        <div class="case-hero-content">
-          <a href="projects.html" class="back-link"><i class="bi bi-arrow-left"></i> Back to Projects</a>
-          <span class="case-category">Embedded Systems</span>
-          <h1>Formula SAE Steering System</h1>
-          <p class="case-hero-description">
-            Designed and built the steering wheel electronics for Queen's Formula SAE racing team. The system features a custom PCB, integrated TFT display showing real-time telemetry, and CAN Bus communication with the vehicle's ECU and data acquisition system.
-          </p>
-          <div class="case-meta">
-            <div class="case-meta-item">
-              <div class="case-meta-label">Team</div>
-              <div class="case-meta-value">Queen's Formula SAE</div>
-            </div>
-            <div class="case-meta-item">
-              <div class="case-meta-label">Role</div>
-              <div class="case-meta-value">Electronics Lead</div>
-            </div>
-            <div class="case-meta-item">
-              <div class="case-meta-label">Stack</div>
-              <div class="case-tech">
-                <span class="tag">C++</span>
-                <span class="tag">CAN Bus</span>
-                <span class="tag">PCB Design</span>
-                <span class="tag">Embedded</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <div class="case-content">
-      <section class="case-section">
-        <h2 class="case-section-title">The Challenge</h2>
-        <p>
-          Formula SAE is a collegiate engineering competition where students design and build formula-style race cars. The steering wheel is the primary interface between driver and machine — it needs to display critical information (speed, gear, temperatures, warnings) while being compact, reliable, and easy to read at high speed.
-        </p>
-        <p>
-          The previous steering wheel system was outdated and lacked integration with the car's data acquisition system. The team needed a new solution that could display real-time telemetry and communicate reliably with other vehicle systems.
-        </p>
-      </section>
-
-      <section class="case-section">
-        <h2 class="case-section-title">My Role</h2>
-        <p>I was responsible for the complete electronics package:</p>
-        <ul>
-          <li><strong>PCB Design:</strong> Designed and routed a custom 4-layer PCB to fit within the steering wheel housing, integrating microcontroller, display driver, CAN transceiver, and power regulation</li>
-          <li><strong>Display Interface:</strong> Programmed graphics using the FT800/FT813 GPU to render gauges, shift lights, and warning indicators at 60fps</li>
-          <li><strong>CAN Integration:</strong> Implemented the CAN Bus protocol stack to receive data from the ECU and transmit button states to the data acquisition system</li>
-          <li><strong>Firmware:</strong> Wrote all embedded code in C++, including display rendering, CAN message parsing, and state machine logic for different display modes</li>
-        </ul>
-      </section>
-
-      <section class="case-section">
-        <h2 class="case-section-title">Display System</h2>
-        <div class="case-image">
-          <img src="assets/steering.jpeg" alt="Steering wheel showing TFT display with telemetry data">
-          <div class="case-image-caption">Steering wheel with integrated TFT display showing real-time telemetry</div>
-        </div>
-        <p>
-          The TFT display shows the driver everything they need at a glance:
-        </p>
-        <ul>
-          <li><strong>Center:</strong> Current gear position (large, easy to read)</li>
-          <li><strong>Top bar:</strong> RPM indicator with color-coded shift lights</li>
-          <li><strong>Left gauge:</strong> Coolant temperature with warning threshold</li>
-          <li><strong>Right gauge:</strong> Oil temperature and pressure</li>
-          <li><strong>Bottom:</strong> Speed, lap time, and system status</li>
-        </ul>
-        <p>
-          Graphics rendering uses the FT813 GPU's hardware acceleration for smooth animations even during rapid data updates. The shift lights transition from green through yellow to red as RPM approaches the shift point, giving the driver intuitive feedback.
-        </p>
-      </section>
-
-      <section class="case-section">
-        <h2 class="case-section-title">CAN Bus Communication</h2>
-        <div class="case-highlight">
-          <div class="case-highlight-title">Protocol Implementation</div>
-          <p>
-            The steering wheel communicates on the vehicle's CAN network at 500kbps. It receives telemetry broadcasts from the ECU (RPM, temperatures, gear position) and transmits button states when the driver activates controls like pit limiter or traction control adjustment.
-          </p>
-        </div>
-        <p>
-          Message filtering ensures the microcontroller only processes relevant CAN IDs, reducing CPU load. Error handling includes automatic bus-off recovery and watchdog monitoring to maintain reliability during races.
-        </p>
-      </section>
-
-      <section class="case-section">
-        <h2 class="case-section-title">Hardware Design</h2>
-        <p>
-          The custom PCB packs significant functionality into a compact form factor:
-        </p>
-        <ul>
-          <li><strong>Microcontroller:</strong> STM32F4 running at 168MHz with hardware CAN peripheral</li>
-          <li><strong>Display Driver:</strong> FTDI FT813 graphics controller with SPI interface</li>
-          <li><strong>CAN Transceiver:</strong> MCP2551 with ESD protection for automotive environment</li>
-          <li><strong>Power:</strong> Switched-mode regulator accepts 12V vehicle power, outputs 3.3V and 5V rails</li>
-          <li><strong>Buttons:</strong> Debounced inputs for paddle shifters and auxiliary controls</li>
-        </ul>
-        <p>
-          The PCB design went through three revisions before finalizing. Key lessons included proper ground plane separation between digital and analog sections, and adequate decoupling on the power rails to prevent noise from affecting display quality.
-        </p>
-      </section>
-
-      <section class="case-section">
-        <h2 class="case-section-title">Results</h2>
-        <div class="case-impact">
-          <div class="case-highlight-title">Competition Performance</div>
-          <p>
-            The steering system performed reliably throughout the competition season with zero electronic failures. Drivers reported improved awareness of vehicle state, particularly appreciating the intuitive shift light progression and clear warning indicators.
-          </p>
-        </div>
-        <p>
-          This project taught me the full embedded systems development cycle — from schematic capture and PCB layout through firmware development and on-vehicle testing. The skills transferred directly to my later work on the AutoDrive autonomous vehicle team.
-        </p>
-      </section>
-
-      <nav class="case-nav">
-        <div class="case-nav-item">
-          <div class="case-nav-label">Previous</div>
-          <a href="energy-digital-twin.html" class="case-nav-link"><i class="bi bi-arrow-left"></i> Energy Digital Twin</a>
-        </div>
-        <div class="case-nav-item next">
-          <div class="case-nav-label">Next</div>
-          <a href="terrabot-details.html" class="case-nav-link">Terrabot <i class="bi bi-arrow-right"></i></a>
-        </div>
-      </nav>
-    </div>
-  </main>
-
-  <footer class="footer">
+  <!-- Formula SAE Section -->
+  <section id="formula-sae" class="formula-sae-section section">
     <div class="container">
-      <div class="footer-inner">
-        <p class="footer-text">© 2025 Yousef Alsaqa</p>
-        <div class="footer-links">
-          <a href="mailto:21ymsa@queensu.ca" class="footer-link">21ymsa@queensu.ca</a>
-          <a href="https://www.linkedin.com/in/yousef-alsaqa-b1ab4822b/" target="_blank" class="footer-link">LinkedIn</a>
+      <!-- Executive Summary -->
+      <div class="row showcase-box">
+        <div class="col-lg-12">
+          <h2><i class="bi bi-clipboard-check"></i> Executive Summary</h2>
+          <p>The Formula SAE project focuses on developing an advanced steering system to enhance driver feedback and control. Utilizing embedded systems and a custom-designed steering wheel PCB, the project emphasizes real-time data visualization and robust communication protocols for seamless integration.</p>
         </div>
       </div>
+
+      <!-- Project Overview -->
+      <div class="row showcase-box">
+        <div class="col-lg-6">
+          <img src="assets/steering.jpeg" class="img-fluid rounded" alt="Steering System Image">
+        </div>
+        <div class="col-lg-6">
+          <h2><i class="bi bi-info-circle"></i> Project Overview</h2>
+          <p>The steering system includes a custom PCB integrated with a TFT display, enabling real-time data visualization for speed, gear position, and system alerts. Collaboration across mechanical, electrical, and software domains ensured a robust and reliable design.</p>
+        </div>
+      </div>
+
+      <!-- Key Responsibilities -->
+      <div class="row showcase-box">
+        <div class="col-lg-6">
+          <h2><i class="bi bi-list-task"></i> Key Responsibilities</h2>
+          <ul>
+            <li><strong>Hardware Design:</strong> Designed and integrated the custom steering wheel PCB with other subsystems.</li>
+            <li><strong>Real-Time Data Display:</strong> Developed user interfaces for the TFT display using the FT800-FT813 graphics controller.</li>
+            <li><strong>Communication Protocols:</strong> Implemented and tested CAN Bus protocols for reliable system communication.</li>
+          </ul>
+        </div>
+        <div class="col-lg-6">
+          <img src="hardware.jpeg" class="img-fluid rounded" alt="Hardware Design Image">
+        </div>
+      </div>
+
+      <!-- Technical Highlights -->
+      <div class="row showcase-box">
+        <div class="col-lg-6">
+          <img src="assets/testing.jpeg" class="img-fluid rounded" alt="System Testing Image">
+        </div>
+        <div class="col-lg-6">
+          <h2><i class="bi bi-lightbulb"></i> Technical Highlights</h2>
+          <ul>
+            <li><strong>Embedded Systems:</strong> Developed and optimized firmware for real-time performance.</li>
+            <li><strong>Graphics Programming:</strong> Created dynamic and interactive interfaces for enhanced readability.</li>
+            <li><strong>System Testing:</strong> Conducted hardware-in-the-loop simulations to validate performance.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Project Outcomes -->
+      <div class="row showcase-box">
+        <div class="col-lg-12 text-center">
+          <h2><i class="bi bi-trophy"></i> Project Outcomes</h2>
+          <p>The steering system achieved its goal of improving driver interaction and performance while meeting all reliability and safety standards for Formula SAE. This project showcased innovative embedded systems design and effective cross-disciplinary collaboration.</p>
+        </div>
+      </div>
+
+      <!-- Back-to-Main Button -->
+      <a href="index.html" id="back-to-main" class="back-to-main">
+        <span>⬅ Main Page</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer id="footer" class="footer">
+    <div class="container">
+      <p>© 2025 Yousef Alsaqa. All Rights Reserved.</p>
     </div>
   </footer>
 
-  <script>
-    const navToggle = document.getElementById('navToggle');
-    const nav = document.getElementById('nav');
-    navToggle.addEventListener('click', () => nav.classList.toggle('active'));
-  </script>
+  <!-- Vendor JS Files -->
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
