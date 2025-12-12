@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AutoDrive Lane Detection | Yousef Alsaqa</title>
-  <meta name="description" content="Case study: Ultra-fast lane detection for Queen's AutoDrive Level 4 autonomous vehicle.">
+  <title>Queen's AutoDrive | Yousef Alsaqa</title>
+  <meta name="description" content="Two years with Queen's AutoDrive: Lane perception and system integration for the SAE AutoDrive Challenge.">
   <meta name="theme-color" content="#050508">
 
   <!-- Fonts -->
@@ -47,25 +47,25 @@
           <i class="bi bi-arrow-left"></i>
           Back to projects
         </a>
-        <h1>AutoDrive Lane Detection</h1>
-        <p class="subtitle">Implementing Ultra-Fast Lane Detection for a Level 4 autonomous vehicle. 300+ FPS inference on embedded hardware, reliable in rain, shadows, and night driving.</p>
+        <h1>Queen's AutoDrive</h1>
+        <p class="subtitle">Two years building a Level 4 autonomous vehicle for the SAE AutoDrive Challenge — from training neural networks to debugging why the car decided to ram a table.</p>
         
         <div class="case-meta">
           <div class="case-meta-item">
-            <span class="case-meta-label">Role</span>
-            <span class="case-meta-value">Perception Developer</span>
+            <span class="case-meta-label">Roles</span>
+            <span class="case-meta-value">Lane Perception → System Integration</span>
           </div>
           <div class="case-meta-item">
-            <span class="case-meta-label">Timeline</span>
-            <span class="case-meta-value">Jan 2023 — Aug 2023</span> <!-- [VERIFY DATES] -->
+            <span class="case-meta-label">Year 1</span>
+            <span class="case-meta-value">Sep 2021 — May 2022</span>
+          </div>
+          <div class="case-meta-item">
+            <span class="case-meta-label">Year 2</span>
+            <span class="case-meta-value">Sep 2023 — May 2024</span>
           </div>
           <div class="case-meta-item">
             <span class="case-meta-label">Team</span>
             <span class="case-meta-value">Queen's AutoDrive</span>
-          </div>
-          <div class="case-meta-item">
-            <span class="case-meta-label">Status</span>
-            <span class="case-meta-value">Deployed</span>
           </div>
         </div>
       </div>
@@ -77,40 +77,39 @@
         
         <div class="case-section">
           <h2>The Challenge</h2>
-          <p>Queen's AutoDrive is building a Level 4 autonomous vehicle for the SAE AutoDrive Challenge. Level 4 means the car drives itself in defined conditions — no human backup required. Lane detection is critical: the car needs to know where the road is, constantly.</p>
-          <p>Traditional approaches use pixel-by-pixel segmentation. They're accurate but slow — maybe 30fps on a powerful GPU. We needed something that could run at high framerates on embedded hardware while maintaining accuracy in challenging conditions.</p>
+          <p>Queen's AutoDrive competes in the SAE AutoDrive Challenge, a multi-year competition to develop a Level 4 autonomous vehicle. Level 4 means the car drives itself in defined conditions — no human backup required.</p>
+          <p>I joined the team for two separate years, working on different parts of the system each time. First year was all about teaching the car to see the road. Second year was about making all the pieces talk to each other without exploding.</p>
         </div>
 
         <div class="case-section">
-          <h2>The Solution: UFLD</h2>
-          <p>I implemented Ultra-Fast Lane Detection (UFLD), a model that reformulates lane detection as a row-based classification problem instead of pixel segmentation.</p>
+          <h2>Year 1: Lane Perception (2021-2022)</h2>
+          <p>My first year was on the perception team, specifically lane detection. The car needs to know where the road is at all times — sounds simple until you realize lane markings are faded, construction zones have conflicting lines, and Kingston winters mean half the year the lines are buried under snow.</p>
           
-          <h3>How It Works</h3>
-          <p>Instead of classifying every pixel, UFLD divides each row of the image into grid cells and predicts which cell contains the lane. This reduces the problem from millions of pixel classifications to thousands of row classifications.</p>
+          <h3>Neural Network Training</h3>
+          <p>We used a UFLD (Ultra-Fast Lane Detection) architecture that treats lane finding as a row classification problem instead of pixel segmentation. My job was training and fine-tuning the model on our custom dataset — hours of driving footage from around Kingston, annotated frame by frame.</p>
+          
+          <p>Training involved a lot of trial and error. Learning rate too high? Model diverges. Too low? Takes forever. Augmentation not aggressive enough? Model only works in sunny weather. Too aggressive? It thinks everything is a lane. I spent weeks tuning hyperparameters and staring at loss curves.</p>
+        </div>
+
+        <div class="case-section">
+          <h3>How UFLD Works</h3>
+          <p>Instead of classifying every pixel (slow), UFLD divides each row of the image into grid cells and predicts which cell contains the lane. This reduces the problem from millions of pixel classifications to thousands of row classifications — way faster on embedded hardware.</p>
           
           <div class="case-code">
 <pre>
 # Traditional segmentation: O(H × W × C) per frame
 # UFLD: O(H × G × L) per frame
 # Where G = grid cells (~200), L = lanes (typically 4)
-# 10-100x fewer predictions needed
 
 def process_lanes(image):
-    # Resize to model input (288 x 800)
     resized = cv2.resize(image, (800, 288))
-    
-    # Run inference
-    predictions = model(resized)  # Shape: [num_rows, grid_cells, lanes]
-    
-    # Decode row-wise predictions to lane coordinates
+    predictions = model(resized)
     lanes = decode_predictions(predictions)
-    
     return lanes
 </pre>
           </div>
 
-          <h3>Model Architecture</h3>
-          <p>The backbone is a lightweight ResNet-18, chosen for speed over accuracy. The classification head outputs probabilities for each grid cell in each row. Lane coordinates are extracted by finding the maximum probability cell per row, then fitting a polynomial.</p>
+          <p>The backbone is a lightweight ResNet-18, chosen for speed. On our Jetson Xavier NX, we hit around 30fps with ~85% detection accuracy on the test set — not competition-winning numbers, but solid for a student team still building out the rest of the pipeline.</p>
         </div>
 
         <figure class="case-image">
@@ -122,68 +121,45 @@ def process_lanes(image):
         </figure>
 
         <div class="case-section">
-          <h2>Technical Challenges</h2>
+          <h2>Year 2: System Integration (2023-2024)</h2>
+          <p>After my Formula SAE experience with CAN bus, I came back to AutoDrive on the system integration team. Different challenge, same car: making all the subsystems communicate reliably.</p>
           
-          <h3>Edge Cases</h3>
-          <p>Lane detection sounds simple until you encounter:</p>
-          <ul>
-            <li><strong>Worn lane markings:</strong> Faded or partially obscured lines</li>
-            <li><strong>Construction zones:</strong> Temporary yellow lines conflicting with permanent white</li>
-            <li><strong>Shadows:</strong> Tree shadows creating false edges</li>
-            <li><strong>Weather:</strong> Rain reflections, snow covering lines</li>
-            <li><strong>Night driving:</strong> Limited visibility, headlight glare</li>
-          </ul>
-          
-          <p>We augmented the training data heavily — random brightness, contrast, shadows, rain effects. The model learned to look for lane structure, not just white pixels.</p>
-
-          <h3>Embedded Deployment</h3>
-          <p>The vehicle uses an NVIDIA Jetson AGX Xavier. I optimized the model using TensorRT:</p>
+          <h3>CAN Bus Deep Dive</h3>
+          <p>An autonomous vehicle is essentially a rolling network. Cameras, LiDAR, radar, GPS, IMU — all generating data that needs to reach the compute stack. Then commands flow back out to steering, throttle, brakes. Most of this happens over CAN bus, and understanding the message protocols became my specialty.</p>
           
           <div class="tech-grid">
             <div class="tech-item">
-              <h4>FP16 Quantization</h4>
-              <p>Half precision reduces memory bandwidth with minimal accuracy loss</p>
+              <h4>Message Decoding</h4>
+              <p>Reverse-engineering proprietary CAN IDs and data formats from vehicle ECUs</p>
             </div>
             <div class="tech-item">
-              <h4>Layer Fusion</h4>
-              <p>TensorRT combines consecutive operations into single kernels</p>
+              <h4>Protocol Design</h4>
+              <p>Defining custom message formats for our added sensors and actuators</p>
             </div>
             <div class="tech-item">
-              <h4>Batch Processing</h4>
-              <p>Process multiple cameras simultaneously when possible</p>
+              <h4>Bus Monitoring</h4>
+              <p>Building diagnostic tools to trace message flow and catch errors</p>
             </div>
             <div class="tech-item">
-              <h4>CUDA Streams</h4>
-              <p>Overlap preprocessing, inference, and postprocessing</p>
+              <h4>Safety Interlocks</h4>
+              <p>Implementing watchdog systems to kill autonomy if communication fails</p>
             </div>
           </div>
 
-          <h3>Temporal Consistency</h3>
-          <p>Raw frame-by-frame predictions can be jittery. I added a Kalman filter to smooth lane positions over time. The filter predicts where lanes should be based on vehicle motion, then corrects with the detected positions.</p>
+          <h3>The Diagnostic Challenge</h3>
+          <p>When something breaks in an autonomous vehicle, it could be anywhere — sensor, network, compute, actuator. My job was building the tooling to isolate problems quickly. CAN sniffers, log analyzers, real-time dashboards. When messages stop flowing, you need to know which node died and why.</p>
         </div>
 
         <div class="case-section">
-          <h2>Integration</h2>
-          <p>Lane detection feeds into the path planning system. The detected lanes define the drivable corridor, which the planner uses along with obstacle detection to generate trajectories.</p>
+          <h2>The Stories That Stick</h2>
           
-          <h3>ROS2 Node</h3>
-          <p>The lane detector runs as a ROS2 node, publishing lane polynomial coefficients at 30Hz. The message format includes confidence scores so downstream systems can weight the information appropriately.</p>
+          <h3>The Table Incident</h3>
+          <p>We were in the garage testing some new protocol changes. The team lead was in the driver's seat — safety protocols required someone ready to hit the emergency stop. We sent a test command. The car lurched forward, accelerated, and plowed straight into a workbench.</p>
+          <p>Nobody was hurt (thankfully), and the car was fine (mostly). But we spent the next week tracing exactly what happened: a malformed CAN message that the vehicle ECU interpreted as "go." It was humbling. Autonomous vehicles aren't toys, and even in a controlled environment, things can go very wrong very fast.</p>
 
-          <div class="case-code">
-<pre>
-# Lane message structure
-lane_msg:
-  header: timestamp + frame_id
-  lanes:
-    - id: 0 (left lane)
-      coefficients: [a0, a1, a2, a3]  # 3rd order polynomial
-      confidence: 0.95
-      start_y: 0.3  # normalized image coords
-      end_y: 0.9
-    - id: 1 (right lane)
-      ...
-</pre>
-          </div>
+          <h3>The Great Fuse Hunt</h3>
+          <p>For months, we chased a bug where the car would randomly lose communication with half its sensors. We checked wiring, swapped boards, reviewed code, ran signal integrity analysis. Nothing. The problem was intermittent and infuriating.</p>
+          <p>Turns out it was a blown fuse in the power distribution unit. One fuse. We'd walked past it a hundred times without checking because "it's probably software." Lesson learned: always check the simple things first, even when the problem looks complex.</p>
         </div>
 
         <div class="case-section">
@@ -191,32 +167,33 @@ lane_msg:
           
           <div class="results-grid">
             <div class="result-item">
-              <span class="result-number">300+</span> <!-- [YOUR ACTUAL FPS] -->
-              <span class="result-label">FPS on Jetson Xavier</span>
+              <span class="result-number">~30fps</span>
+              <span class="result-label">Lane detection on Jetson</span>
             </div>
             <div class="result-item">
-              <span class="result-number">95%</span> <!-- [YOUR ACTUAL ACCURACY] -->
+              <span class="result-number">~85%</span>
               <span class="result-label">Detection accuracy</span>
             </div>
             <div class="result-item">
-              <span class="result-number">3.3ms</span> <!-- [YOUR ACTUAL LATENCY] -->
-              <span class="result-label">Inference latency</span>
+              <span class="result-number">2</span>
+              <span class="result-label">Years on the team</span>
             </div>
             <div class="result-item">
-              <span class="result-number">4</span> <!-- [VERIFY THIS] -->
-              <span class="result-label">Simultaneous lanes</span>
+              <span class="result-number">1</span>
+              <span class="result-label">Table destroyed</span>
             </div>
           </div>
 
-          <p>The lane detection system has been running reliably in the test vehicle. It's a core component of the perception stack and has handled everything from sunny highways to rainy city streets.</p> <!-- [VERIFY/UPDATE THIS DESCRIPTION] -->
+          <p><strong>How we got those numbers:</strong> The ~30fps comes from our Jetson Xavier NX running the UFLD model with TensorRT optimization (FP16 quantization, layer fusion). The ~85% accuracy is from our test set — annotated driving footage from around Kingston. Real-world performance varies with conditions, but that's what we could reliably measure.</p>
         </div>
 
         <div class="case-section">
           <h2>What I Learned</h2>
           <ul>
-            <li><strong>Speed vs. accuracy is a real tradeoff.</strong> For real-time systems, a fast model that's 95% accurate beats a slow model that's 99% accurate. You can handle the 5% with temporal filtering.</li>
-            <li><strong>Training data is everything.</strong> The model is only as good as its training set. Heavy augmentation and real-world data collection made more difference than architecture changes.</li>
-            <li><strong>Embedded constraints change the game.</strong> Algorithms that work on desktop GPUs often need fundamental rethinking for edge deployment.</li>
+            <li><strong>Check the fuse.</strong> Seriously. Before you spend three months debugging software, check the hardware. The simplest explanation is often right.</li>
+            <li><strong>Safety isn't optional.</strong> The table incident could have been worse. Autonomous vehicles require paranoid-level safety thinking at every stage.</li>
+            <li><strong>Training data is everything.</strong> For the perception work, heavy augmentation and real-world data collection made more difference than architecture changes.</li>
+            <li><strong>Integration is harder than development.</strong> Getting one system to work is straightforward. Getting ten systems to work together reliably is where the real engineering happens.</li>
           </ul>
         </div>
 

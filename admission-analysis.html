@@ -47,8 +47,8 @@
           <i class="bi bi-arrow-left"></i>
           Back to projects
         </a>
-        <h1>Admission Analysis Dashboard</h1>
-        <p class="subtitle">A data analysis tool that processed 10 years of admission data, simulated policy changes, and contributed to the university raising Commerce admission thresholds.</p>
+        <h1>Admission Analysis Dashboards</h1>
+        <p class="subtitle">Two data tools I built during my recruitment rep role: one to explore 170K applications, another to analyze what actually predicts student success — and the findings that led Commerce to raise their thresholds.</p>
         
         <div class="case-meta">
           <div class="case-meta-item">
@@ -57,11 +57,11 @@
           </div>
           <div class="case-meta-item">
             <span class="case-meta-label">Timeline</span>
-            <span class="case-meta-value">Sep 2024 — Dec 2024</span>
+            <span class="case-meta-value">May 2025 — Jan 2026</span>
           </div>
           <div class="case-meta-item">
             <span class="case-meta-label">Stack</span>
-            <span class="case-meta-value">Python, Tkinter, Pandas</span>
+            <span class="case-meta-value">Python, Pandas, Scikit-learn</span>
           </div>
           <div class="case-meta-item">
             <span class="case-meta-label">Impact</span>
@@ -77,8 +77,8 @@
         
         <div class="case-section">
           <h2>The Problem</h2>
-          <p>Working in Queen's admission office, I noticed something: we had years of data but no good way to explore it. Every question — "How many international students from UAE applied last year?" or "What's the acceptance rate trend for Commerce?" — required manual spreadsheet work.</p>
-          <p>Worse, when policy discussions came up, decisions were often made on intuition rather than data. "What if we raised the Commerce cutoff by 2%?" Nobody could answer that quickly.</p>
+          <p>Working as a recruitment rep at Queen's, I had access to years of admission data — but it was all trapped in Excel files. Brutal to work with. Every question required manual filtering and pivot tables.</p>
+          <p>"How many international students from UAE applied to Engineering last year?" "What schools send us the most Commerce applicants?" Simple questions that took an hour to answer. And bigger questions — like what actually predicts student success — nobody had time to dig into.</p>
         </div>
 
         <figure class="case-image">
@@ -87,99 +87,135 @@
         </figure>
 
         <div class="case-section">
-          <h2>The Solution</h2>
-          <p>I built a desktop application that connects to our admission database and lets anyone explore the data through an intuitive interface.</p>
+          <h2>Tool 1: General Admission Explorer</h2>
+          <p>The first thing I built was a dashboard to explore the raw admission data — 5 years, roughly 170,000 applications. I pulled the Excel files into SQLite (way faster for queries) and built a Tkinter interface on top.</p>
           
-          <h3>Core Features</h3>
+          <h3>What You Could Query</h3>
           <ul>
-            <li><strong>Multi-dimensional filtering:</strong> Filter by year, program, country, school, citizenship status, admission status — any combination.</li>
-            <li><strong>Instant visualization:</strong> Charts update in real-time as you adjust filters. See trends over time, distributions by category, comparisons between groups.</li>
-            <li><strong>Policy simulator:</strong> "What-if" analysis. Adjust admission thresholds and see how many students would have been affected in previous years.</li>
-            <li><strong>Export everything:</strong> Any view can be exported to Excel or PDF for reports and presentations.</li>
+            <li><strong>Demographics:</strong> Country of origin, citizenship, which high school they attended</li>
+            <li><strong>Application data:</strong> Programs applied to, admission status (accepted/rejected/waitlisted)</li>
+            <li><strong>Responses:</strong> Why they accepted or declined offers, where else they applied</li>
           </ul>
+          <p>Instead of spending an hour in Excel, you could answer questions in seconds. The team started using it for reports and presentations almost immediately.</p>
         </div>
 
-        <div class="case-highlight">
-          <p><strong>The moment it mattered:</strong> During a policy meeting about Commerce program capacity, my analysis helped inform the discussion.</p> <!-- [ADD YOUR ACTUAL STORY/IMPACT] -->
+        <figure class="case-image">
+          <img src="admission_analysis_Dashboard.jpg" alt="Admission Analysis Dashboard interface">
+          <figcaption>The general admission dashboard — filter, visualize, export</figcaption>
+        </figure>
+
+        <div class="case-section">
+          <h2>Tool 2: Commerce Success Predictor</h2>
+          <p>This is the one that got interesting. I got access to 10 years of Commerce student data — about 35,000 students — with both their admission info AND their first-year GPA. The question: what actually predicts success in Commerce?</p>
+          
+          <h3>The Analysis</h3>
+          <p>I built a 4-tab dashboard where you could explore correlations:</p>
+          <ul>
+            <li><strong>Overall high school average vs. first-year GPA</strong></li>
+            <li><strong>Math grade vs. first-year GPA</strong></li>
+            <li><strong>English grade vs. first-year GPA</strong></li>
+            <li><strong>Supplementary application score vs. first-year GPA</strong></li>
+          </ul>
+          <p>Plus a config file system so the same tool could be adapted for different programs without code changes.</p>
         </div>
 
         <div class="case-section">
-          <h2>Technical Details</h2>
+          <h2>The Findings</h2>
+          <p>I used a Random Forest model to identify which factors were the best predictors of first-year success. The results surprised people:</p>
+          
+          <div class="case-highlight">
+            <p><strong>Best predictor:</strong> Overall high school average (no surprise)<br>
+            <strong>Second:</strong> Math grade<br>
+            <strong>Third:</strong> English grade<br>
+            <strong>Fourth:</strong> Supplementary application score — and it had a <em>negative</em> correlation</p>
+          </div>
+
+          <p>That last one caught everyone off guard. The supp app — essays, extracurriculars, the "soft" stuff — actually had a slight negative correlation with first-year GPA. Students who wrote great applications weren't necessarily performing better. Maybe they were better at selling themselves than doing the work. Maybe the graders were looking for the wrong things. Either way, it was data worth discussing.</p>
+        </div>
+
+        <div class="case-section">
+          <h2>The Impact</h2>
+          <p>I'm not going to claim I walked into a room and said "change your thresholds" and they did it. That's not how universities work. But the analysis was part of the conversation.</p>
+          <p>The Commerce program eventually raised their admission thresholds:</p>
+          <ul>
+            <li>Math and English minimums: 80% → 85%</li>
+            <li>Overall high school average: 87% → 90%</li>
+          </ul>
+          <p>Was that directly because of my analysis? I don't know. But the data was there, people saw it, and the change aligned with what the numbers suggested. That felt meaningful.</p>
+        </div>
+
+        <div class="case-section">
+          <h2>Technical Stack</h2>
           
           <div class="tech-grid">
             <div class="tech-item">
               <h4>Python + Tkinter</h4>
-              <p>Desktop app with native look and feel</p>
+              <p>Desktop app for sensitive internal data</p>
             </div>
             <div class="tech-item">
-              <h4>Pandas</h4>
-              <p>Data manipulation and aggregation</p>
-            </div>
-            <div class="tech-item">
-              <h4>Matplotlib</h4>
-              <p>Embedded charts and visualizations</p>
+              <h4>Pandas + openpyxl</h4>
+              <p>Wrangling brutal Excel files into usable data</p>
             </div>
             <div class="tech-item">
               <h4>SQLite</h4>
-              <p>Local database for fast querying</p>
+              <p>Local database for fast querying (way better than filtering in memory)</p>
+            </div>
+            <div class="tech-item">
+              <h4>Scikit-learn</h4>
+              <p>Random Forest for predictor analysis</p>
+            </div>
+            <div class="tech-item">
+              <h4>Matplotlib</h4>
+              <p>Embedded visualizations and scatter plots</p>
+            </div>
+            <div class="tech-item">
+              <h4>Config Files</h4>
+              <p>JSON configs so the tool works for multiple programs</p>
             </div>
           </div>
-
-          <h3>Performance Optimization</h3>
-          <p>With 10 years of data (100K+ records), naive filtering was too slow. I implemented:</p>
-          <ul>
-            <li>Indexed SQLite queries instead of Pandas filtering for initial loads</li>
-            <li>Lazy loading for charts — only render visible data</li>
-            <li>Cached aggregations for common query patterns</li>
-          </ul>
-          <p>Result: sub-second response for most queries.</p>
-
-          <h3>Policy Simulator Logic</h3>
-          <p>The simulator doesn't just apply cutoffs retroactively. It accounts for:</p>
-          <ul>
-            <li>Grade inflation trends over time</li>
-            <li>Different grading scales by country/province</li>
-            <li>Conditional vs. final offers</li>
-          </ul>
         </div>
 
         <figure class="case-image">
           <img src="course_analysis_dashboard.jpg" alt="Course-level analysis view">
-          <figcaption>Drill-down view showing program-specific trends</figcaption>
+          <figcaption>Commerce predictor analysis — correlating admission factors with first-year performance</figcaption>
         </figure>
 
         <div class="case-section">
-          <h2>Impact</h2>
+          <h2>By the Numbers</h2>
           
           <div class="results-grid">
             <div class="result-item">
-              <span class="result-number">10</span> <!-- [YOUR ACTUAL YEARS OF DATA] -->
-              <span class="result-label">Years of data analyzed</span>
+              <span class="result-number">170K</span>
+              <span class="result-label">General applications analyzed</span>
             </div>
             <div class="result-item">
-              <span class="result-number">100K+</span> <!-- [YOUR ACTUAL RECORD COUNT] -->
-              <span class="result-label">Application records</span>
+              <span class="result-number">35K</span>
+              <span class="result-label">Commerce students tracked</span>
             </div>
             <div class="result-item">
-              <span class="result-number">3%</span> <!-- [YOUR ACTUAL THRESHOLD CHANGE] -->
-              <span class="result-label">Commerce threshold increase</span>
+              <span class="result-number">10</span>
+              <span class="result-label">Years of Commerce data</span>
             </div>
             <div class="result-item">
-              <span class="result-number">&lt;1s</span> <!-- [YOUR ACTUAL RESPONSE TIME] -->
-              <span class="result-label">Query response time</span>
+              <span class="result-number">+3-5%</span>
+              <span class="result-label">Threshold increases</span>
             </div>
           </div>
+        </div>
 
-          <p>The dashboard is now used regularly by the admission team for reporting and analysis. The policy simulation feature has been used in multiple program reviews.</p>
-          <p>Most significantly: the Commerce program raised its admission threshold based on analysis done with this tool. Data-driven decisions instead of guesswork.</p>
+        <div class="case-section">
+          <h2>The Struggle: Learning to See Data</h2>
+          <p>The hardest part wasn't the coding — it was learning how to analyze. Before this, I thought data analysis was just making charts. It's not. It's asking the right questions, checking your assumptions, understanding what correlations actually mean (and don't mean).</p>
+          <p>I spent a lot of time second-guessing myself. "Is this correlation real or did I mess something up?" "Does this p-value actually matter?" "Am I seeing a pattern or just noise?" Learning to look at things from different angles — controlling for variables, checking for confounders — that was the real education.</p>
         </div>
 
         <div class="case-section">
           <h2>What I Learned</h2>
           <ul>
-            <li><strong>Build for the question, not the data.</strong> Users don't care about your database schema. They have questions they need answered quickly.</li>
-            <li><strong>Simulations need trust.</strong> The policy simulator was only useful because I could explain exactly how it worked and what assumptions it made.</li>
-            <li><strong>Desktop apps aren't dead.</strong> For internal tools with sensitive data, a local application is often simpler and more secure than a web app.</li>
+            <li><strong>Data doesn't speak for itself.</strong> You have to ask the right questions. The same dataset can tell different stories depending on how you slice it.</li>
+            <li><strong>Correlation isn't causation (but it's still useful).</strong> I can't prove the supp app causes worse performance. But the correlation is worth investigating.</li>
+            <li><strong>Build tools that answer questions.</strong> Users don't care about your database schema. They have questions — make the tool answer them fast.</li>
+            <li><strong>Excel is brutal at scale.</strong> 170K rows across multiple files? Never again. SQLite saved my sanity.</li>
           </ul>
         </div>
 

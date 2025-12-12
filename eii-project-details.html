@@ -48,24 +48,24 @@
           Back to projects
         </a>
         <h1>Energy Intensity Index Predictor</h1>
-        <p class="subtitle">A hybrid machine learning ensemble combining neural networks and random forests to forecast industrial energy consumption. Built for a research competition at Queen's.</p>
+        <p class="subtitle">A machine learning model that predicts EII for a chemical refinery's 4 plants — matching manual calculations that took 2.5 weeks, with 99.3% accuracy.</p>
         
         <div class="case-meta">
           <div class="case-meta-item">
             <span class="case-meta-label">Role</span>
-            <span class="case-meta-value">Lead Developer</span>
+            <span class="case-meta-value">Sole Developer</span>
           </div>
           <div class="case-meta-item">
             <span class="case-meta-label">Timeline</span>
-            <span class="case-meta-value">Jan 2024 — Apr 2024</span> <!-- [VERIFY DATES] -->
+            <span class="case-meta-value">Jan 2024 — Apr 2024</span>
           </div>
           <div class="case-meta-item">
             <span class="case-meta-label">Stack</span>
             <span class="case-meta-value">Python, PyTorch, sklearn</span>
           </div>
           <div class="case-meta-item">
-            <span class="case-meta-label">Output</span>
-            <span class="case-meta-value">Research paper</span>
+            <span class="case-meta-label">Context</span>
+            <span class="case-meta-value">Freelance project</span>
           </div>
         </div>
       </div>
@@ -77,22 +77,16 @@
         
         <div class="case-section">
           <h2>The Problem</h2>
-          <p>Industrial facilities need to predict their Energy Intensity Index (EII) — the ratio of energy consumed to production output. Accurate forecasting enables:</p>
-          <ul>
-            <li>Proactive maintenance scheduling</li>
-            <li>Energy cost optimization</li>
-            <li>Regulatory compliance reporting</li>
-            <li>Sustainability target tracking</li>
-          </ul>
-          <p>Traditional regression models struggled with the non-linear relationships and noisy data typical of industrial environments. We needed something more robust.</p>
+          <p>A chemical refinery with 4 plants needed to calculate their Energy Intensity Index (EII) regularly — it's a key metric for regulatory compliance and internal efficiency tracking. The problem? The manual calculation process took about 2.5 weeks every time.</p>
+          <p>They had years of historical data and all the input parameters they normally used for EII calculations. The question was whether machine learning could speed up the process while maintaining accuracy.</p>
         </div>
 
         <div class="case-section">
-          <h2>The Solution: Hybrid Ensemble</h2>
-          <p>I developed a two-stage ensemble that combines the pattern recognition of neural networks with the robustness of tree-based methods.</p>
+          <h2>The Solution</h2>
+          <p>I built a model that takes the same inputs they'd use for manual EII calculations — production volumes, energy consumption by type, equipment utilization, ambient conditions — plus historical data from previous years. The model learns the relationship between these inputs and the final EII values.</p>
           
-          <h3>Stage 1: Neural Network Ensemble</h3>
-          <p>Ten feed-forward neural networks trained on the same data with different random seeds. Each network has 3 hidden layers with dropout regularization. The predictions are averaged to reduce variance.</p>
+          <h3>Approach: Try Everything, Keep What Works</h3>
+          <p>I tried both neural networks and random forests. Neural networks are great at capturing complex non-linear relationships. Random forests are more robust to outliers and easier to interpret. I ended up using both and combining their predictions — each catches things the other misses.</p>
           
           <div class="case-code">
 <pre>
@@ -205,24 +199,20 @@ def mad_normalize(X):
           
           <div class="results-grid">
             <div class="result-item">
-              <span class="result-number">23%</span> <!-- [YOUR ACTUAL MSE IMPROVEMENT] -->
-              <span class="result-label">MSE improvement over baseline</span>
+              <span class="result-number">99.3%</span>
+              <span class="result-label">Accuracy vs. manual calculation</span>
             </div>
             <div class="result-item">
-              <span class="result-number">0.89</span> <!-- [YOUR ACTUAL R² SCORE] -->
-              <span class="result-label">R² score</span>
+              <span class="result-number">4</span>
+              <span class="result-label">Plants modeled</span>
             </div>
             <div class="result-item">
-              <span class="result-number">10</span> <!-- [VERIFY THIS] -->
-              <span class="result-label">NN ensemble members</span>
-            </div>
-            <div class="result-item">
-              <span class="result-number">5</span> <!-- [VERIFY THIS] -->
-              <span class="result-label">Cross-validation folds</span>
+              <span class="result-number">2.5 weeks → minutes</span>
+              <span class="result-label">Time saved</span>
             </div>
           </div>
 
-          <p>The hybrid ensemble outperformed both pure neural network and pure random forest approaches. More importantly, it was more stable — individual models varied by ±5%, but the ensemble varied by only ±1%.</p>
+          <p>The model matched their manual calculations to within 0.7%. That's close enough for regulatory reporting and internal tracking. What used to take 2.5 weeks of spreadsheet work now runs in minutes.</p>
         </div>
 
         <div class="case-section">
@@ -237,11 +227,18 @@ def mad_normalize(X):
         </div>
 
         <div class="case-section">
+          <h2>The Struggle: ML Is Educated Guessing</h2>
+          <p>Here's what nobody tells you about machine learning: it's a lot of informed guessing. Change the learning rate? Maybe it gets better, maybe worse. Add a layer? Flip a coin. Different random seed? Completely different results.</p>
+          <p>I spent hours tweaking hyperparameters, trying different architectures, adjusting regularization. Most changes made no difference. Some made things worse. A few made things better, and I couldn't always explain why.</p>
+          <p>Eventually I learned to be systematic about it — grid search over parameters, track every experiment, trust the validation metrics over intuition. But there's still an element of trial and error that feels unscientific. You just have to make peace with it.</p>
+        </div>
+
+        <div class="case-section">
           <h2>What I Learned</h2>
           <ul>
-            <li><strong>Ensembles work.</strong> Combining diverse models almost always beats any single model. The key is diversity — models should make different kinds of errors.</li>
-            <li><strong>Data quality > model complexity.</strong> Better feature engineering and proper normalization improved results more than architecture tuning.</li>
-            <li><strong>Validation is half the work.</strong> A proper validation strategy that respects temporal structure prevented overfitting and gave realistic performance estimates.</li>
+            <li><strong>Track everything.</strong> When you're trying 50 different configurations, you need logs. What parameters, what results, what changed. Otherwise you're wandering in the dark.</li>
+            <li><strong>Data quality > model complexity.</strong> Better feature engineering improved results more than fancy architectures. Clean data in, useful predictions out.</li>
+            <li><strong>Combine approaches.</strong> Neural networks and random forests make different kinds of mistakes. Using both and averaging catches errors neither would catch alone.</li>
           </ul>
         </div>
 

@@ -57,7 +57,7 @@
           </div>
           <div class="case-meta-item">
             <span class="case-meta-label">Timeline</span>
-            <span class="case-meta-value">Sep 2022 — May 2023</span> <!-- [VERIFY DATES] -->
+            <span class="case-meta-value">Sep 2022 — May 2023</span>
           </div>
           <div class="case-meta-item">
             <span class="case-meta-label">Team</span>
@@ -138,13 +138,13 @@
           <h3>Primary Dashboard</h3>
           <p>Large central tachometer with color-coded shift lights at the top. RPM is shown both as a bar graph (instant visual) and numeric (precise reading). Gear position is displayed prominently in the center.</p>
 
-          <h3>Secondary Displays</h3>
-          <p>Rotating secondary screens for:</p>
+          <h3>Data Layout</h3>
+          <p>Everything the driver needs on one screen — RPM bar with shift lights, current gear in big numbers, speed, and warning indicators around the edges. No menu diving, no mode switching during a run. The display shows:</p>
           <ul>
-            <li>Tire temperatures (individual corners)</li>
-            <li>Oil pressure and temperature</li>
-            <li>Battery voltage and current</li>
-            <li>Lap times with delta to best</li>
+            <li>RPM bar graph with color-coded shift lights</li>
+            <li>Current gear (large, center)</li>
+            <li>Speed in km/h</li>
+            <li>Warning indicators for oil pressure, coolant temp, battery</li>
           </ul>
 
           <h3>Warning System</h3>
@@ -173,7 +173,7 @@ typedef struct {
 </pre>
           </div>
 
-          <p>Each message is 8 bytes maximum, transmitted at 100Hz for critical data (RPM, speed) and 10Hz for slower-changing values (temperatures).</p> <!-- [VERIFY THESE RATES] -->
+          <p>Each message is 8 bytes maximum. We ran critical data (RPM, speed, gear) at 100Hz to keep the display responsive during quick shifts, while slower-changing values like temperatures updated at 10Hz — no point hammering the bus for data that changes once a second.</p>
         </div>
 
         <div class="case-section">
@@ -181,24 +181,29 @@ typedef struct {
           
           <div class="results-grid">
             <div class="result-item">
-              <span class="result-number">60fps</span> <!-- [YOUR ACTUAL FPS] -->
+              <span class="result-number">~30fps</span>
               <span class="result-label">Display refresh rate</span>
             </div>
             <div class="result-item">
-              <span class="result-number">10ms</span> <!-- [YOUR ACTUAL LATENCY] -->
+              <span class="result-number">~5ms</span>
               <span class="result-label">CAN latency</span>
             </div>
             <div class="result-item">
-              <span class="result-number">8</span> <!-- [YOUR ACTUAL NUMBER] -->
-              <span class="result-label">Data screens</span>
-            </div>
-            <div class="result-item">
-              <span class="result-number">0</span> <!-- [VERIFY THIS] -->
-              <span class="result-label">Failures at competition</span>
+              <span class="result-number">1</span>
+              <span class="result-label">Telemetry dashboard</span>
             </div>
           </div>
 
-          <p>The steering wheel performed flawlessly at competition. Drivers reported significantly improved situational awareness, especially for shift timing and temperature monitoring. The clear display let them push harder without worrying about missing critical warnings.</p>
+          <p><strong>How we got there:</strong> The ~30fps refresh rate comes from the FT813 controller pushing updates to the 4.3" TFT at the display's native refresh interval — fast enough that RPM changes look smooth during hard acceleration. The ~5ms CAN latency is typical for our 500kbps bus with proper message prioritization; critical data like RPM and gear position gets higher priority IDs so it's never waiting behind temperature readings.</p>
+          
+          <p>The steering wheel electronics did their job. Drivers could see exactly what they needed when they needed it. The rest of the car... that's a different story, but the display never let us down.</p>
+        </div>
+
+        <div class="case-section">
+          <h2>The Struggle</h2>
+          <p>Honestly? Getting CAN to work was brutal. I spent three weeks staring at an oscilloscope wondering why messages were disappearing. Turns out the bus termination resistors were the wrong value — 100Ω instead of 120Ω — and at higher speeds the signal reflections were corrupting random messages. Classic rookie mistake, but one of those things you only learn by doing.</p>
+          <p>There was also the night before our first test day when I realized the display looked great in the shop but was completely washed out in sunlight. Cue a frantic trip to get anti-glare film at 10pm and praying it would work. It did. Barely.</p>
+          <p>FSAE teaches you that nothing works the first time, and the gap between "works on the bench" and "works in the car" is about 80% of the actual work.</p>
         </div>
 
         <div class="case-section">

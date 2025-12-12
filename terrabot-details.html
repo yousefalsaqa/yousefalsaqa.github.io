@@ -48,20 +48,20 @@
           Back to projects
         </a>
         <h1>Terrabot CO2 Mapper</h1>
-        <p class="subtitle">An autonomous robot that maps indoor CO2 distribution using SLAM and air quality sensors. Built for Q-PMC to identify ventilation problems in buildings.</p>
+        <p class="subtitle">A robot that maps indoor CO2 distribution in real-time — and the project where I fell in love with system integration.</p>
         
         <div class="case-meta">
           <div class="case-meta-item">
             <span class="case-meta-label">Role</span>
-            <span class="case-meta-value">Software Lead</span>
+            <span class="case-meta-value">Software & Integration Lead</span>
           </div>
           <div class="case-meta-item">
             <span class="case-meta-label">Timeline</span>
-            <span class="case-meta-value">ELEC 203 Project</span>
+            <span class="case-meta-value">Jan 2023 — May 2023</span>
           </div>
           <div class="case-meta-item">
-            <span class="case-meta-label">Team</span>
-            <span class="case-meta-value">Terraforma Corp (4)</span>
+            <span class="case-meta-label">Course</span>
+            <span class="case-meta-value">MREN 203 Design</span>
           </div>
           <div class="case-meta-item">
             <span class="case-meta-label">Platform</span>
@@ -93,15 +93,18 @@
 
         <div class="case-section">
           <h2>The Solution</h2>
-          <p>Terrabot is a mobile robot that autonomously navigates indoor spaces while continuously sampling CO2 levels. It generates a heatmap overlay on the floor plan, showing exactly where ventilation is working and where it isn't.</p>
+          <p>We built a custom robot from scratch — a square chassis with four wheels, carrying LiDAR for mapping, a CO2 sensor for air quality, and proximity sensors for obstacle avoidance. Manual control via a game controller, with all the sensor data feeding into ROS for real-time visualization.</p>
           
-          <h3>How It Works</h3>
-          <ol>
-            <li><strong>SLAM Navigation:</strong> Terrabot builds a map of the environment using LiDAR while simultaneously tracking its position within that map.</li>
-            <li><strong>Systematic Coverage:</strong> A path planner generates routes that cover the entire accessible area with minimal overlap.</li>
-            <li><strong>CO2 Sampling:</strong> As it moves, the SCD30 sensor logs CO2 concentration with GPS-like position data from SLAM.</li>
-            <li><strong>Heatmap Generation:</strong> Post-processing interpolates between sample points to create a continuous CO2 distribution map.</li>
-          </ol>
+          <h3>The System</h3>
+          <p>What made this project special wasn't any single component — it was getting them all to work together:</p>
+          <ul>
+            <li><strong>SLAM:</strong> Building a map of the room while tracking the robot's position</li>
+            <li><strong>CO2 sensing:</strong> Logging air quality values with location data</li>
+            <li><strong>Proximity sensors:</strong> Obstacle detection for safety</li>
+            <li><strong>Controller integration:</strong> Mapping a game controller for manual navigation (which I had to configure and integrate myself)</li>
+            <li><strong>Live visualization:</strong> Real-time map display with CO2 overlay</li>
+          </ul>
+          <p>All of this running in ROS, with nodes talking to each other, data flowing between subsystems. When it finally worked — when I could drive the robot around and watch the map build itself with CO2 values updating live — that was the moment I understood why system integration is its own discipline.</p>
         </div>
 
         <figure class="case-image">
@@ -154,20 +157,28 @@ hector_mapping:
           
           <div class="tech-grid">
             <div class="tech-item">
-              <h4>Raspberry Pi 4</h4>
-              <p>Main computer running ROS Noetic and all processing</p>
+              <h4>Raspberry Pi</h4>
+              <p>Main computer running ROS and all processing</p>
             </div>
             <div class="tech-item">
-              <h4>RPLiDAR A1</h4>
-              <p>360° LiDAR, 8m range, 8000 samples/sec</p>
+              <h4>LiDAR</h4>
+              <p>360° scanning for SLAM mapping</p>
             </div>
             <div class="tech-item">
-              <h4>SCD30</h4>
-              <p>CO2 sensor with ±30ppm accuracy, I2C interface</p>
+              <h4>CO2 Sensor</h4>
+              <p>Air quality measurements with location tagging</p>
             </div>
             <div class="tech-item">
-              <h4>Arduino Uno WiFi</h4>
-              <p>Motor control and low-level sensor interface</p>
+              <h4>Proximity Sensors</h4>
+              <p>Obstacle detection for collision avoidance</p>
+            </div>
+            <div class="tech-item">
+              <h4>Game Controller</h4>
+              <p>Manual navigation input (mapped and integrated)</p>
+            </div>
+            <div class="tech-item">
+              <h4>Custom Chassis</h4>
+              <p>Square frame with 4-wheel drive</p>
             </div>
           </div>
 
@@ -235,35 +246,25 @@ def interpolate_heatmap(samples, resolution=0.1):
 
         <div class="case-section">
           <h2>Results</h2>
+          <p>It worked. The robot drove around, the map built itself in real-time, and CO2 values populated as colored overlays showing air quality across the space. You could actually see where ventilation was good and where it wasn't.</p>
           
-          <div class="results-grid">
-            <div class="result-item">
-              <span class="result-number">100m²</span> <!-- [YOUR ACTUAL COVERAGE] -->
-              <span class="result-label">Max coverage area</span>
-            </div>
-            <div class="result-item">
-              <span class="result-number">2hr</span> <!-- [YOUR ACTUAL RUNTIME] -->
-              <span class="result-label">Battery runtime</span>
-            </div>
-            <div class="result-item">
-              <span class="result-number">±10cm</span> <!-- [YOUR ACTUAL ACCURACY] -->
-              <span class="result-label">Position accuracy</span>
-            </div>
-            <div class="result-item">
-              <span class="result-number">10cm</span> <!-- [YOUR ACTUAL RESOLUTION] -->
-              <span class="result-label">Heatmap resolution</span>
-            </div>
-          </div>
+          <p>For a second-year design course project, getting all those systems integrated and running together was the real victory. The images above show actual outputs from our testing — the SLAM-generated map and the CO2 heatmap overlay.</p>
+        </div>
+        </div>
 
-          <p>Terrabot successfully mapped the test environment and identified areas with elevated CO2 levels.</p> <!-- [ADD YOUR ACTUAL RESULTS/FINDINGS] -->
+        <div class="case-section">
+          <h2>The Moment It Clicked</h2>
+          <p>This was my first real system integration project. Before this, I'd built individual components — a motor controller here, a sensor reading there. But Terrabot was the first time I had to make multiple independent systems work together in real-time.</p>
+          <p>The SLAM node publishing maps. The CO2 node publishing readings. The controller node publishing movement commands. The visualization node subscribing to all of them. Each piece worked in isolation, but making them work together — that was a different challenge entirely.</p>
+          <p>When it finally came together, I got it. This is what engineering actually is: not building components, but building systems. That realization shaped everything I did after — Formula SAE, AutoDrive, the capstone project. Integration is where the real work happens.</p>
         </div>
 
         <div class="case-section">
           <h2>What I Learned</h2>
           <ul>
-            <li><strong>SLAM is mature technology.</strong> Off-the-shelf packages like Hector SLAM work remarkably well. The challenge is integration, not algorithms.</li>
-            <li><strong>Sensor placement matters.</strong> CO2 readings varied significantly with sensor height. We settled on 30cm above ground to capture occupied-zone air.</li>
-            <li><strong>Battery management is critical.</strong> More than once we lost data because the robot died mid-mission. Adding low-battery return-to-home was essential.</li>
+            <li><strong>Integration is its own skill.</strong> Making things work together is harder than making them work alone. ROS helped, but the mental model of nodes-and-messages took time to internalize.</li>
+            <li><strong>Test subsystems independently.</strong> We wasted hours debugging integration issues that were actually single-node bugs. Test each piece first.</li>
+            <li><strong>ROS is powerful but opinionated.</strong> Once you understand the publisher/subscriber model, it makes complex systems manageable. But there's a learning curve.</li>
           </ul>
         </div>
 

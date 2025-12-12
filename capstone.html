@@ -53,19 +53,19 @@
         <div class="case-meta">
           <div class="case-meta-item">
             <span class="case-meta-label">Role</span>
-            <span class="case-meta-value">Lead Developer</span>
+            <span class="case-meta-value">Software Lead & Integration</span>
           </div>
           <div class="case-meta-item">
             <span class="case-meta-label">Timeline</span>
-            <span class="case-meta-value">Sep 2024 — Apr 2025</span>
+            <span class="case-meta-value">Sep 2024 — May 2025</span>
           </div>
           <div class="case-meta-item">
             <span class="case-meta-label">Team</span>
-            <span class="case-meta-value">4 Engineers</span>
+            <span class="case-meta-value">Senior Capstone Group</span>
           </div>
           <div class="case-meta-item">
             <span class="case-meta-label">Status</span>
-            <span class="case-meta-value">Deployed at Queen's</span>
+            <span class="case-meta-value">In use at Queen's</span>
           </div>
         </div>
       </div>
@@ -88,21 +88,29 @@
 
         <div class="case-section">
           <h2>The Solution</h2>
-          <p>We built CAST — Clinical Auscultation Simulation Training. The system has three main parts:</p>
+          <p>We built CAST — Clinical Auscultation Simulation Training. The full system had two modules: auscultation (listening with a stethoscope) and palpation (physical examination by touch). I owned everything software and handled all hardware-software integration for the auscultation side.</p>
           
           <h3>1. Custom RFID Stethoscope</h3>
-          <p>I designed a stethoscope with an embedded RFID reader in the chest piece. When placed on the manikin, it reads RFID tags hidden under the "skin" at specific auscultation points. Each location triggers the appropriate heart or lung sound.</p>
+          <p>I built a stethoscope housing containing an MFRC522 RFID reader connected to a Raspberry Pi. Earphones plug into the Pi for audio output — it looks and feels like using a real stethoscope, but the sounds come from the manikin's "condition" rather than actual vibrations.</p>
           
           <figure class="case-image">
             <img src="stethoscope-iii.png" alt="Custom RFID stethoscope design">
-            <figcaption>The custom stethoscope with integrated RFID reader and speaker</figcaption>
+            <figcaption>The custom stethoscope with integrated RFID reader connected to Raspberry Pi</figcaption>
           </figure>
 
-          <h3>2. Instructor Control Interface</h3>
-          <p>A Flask-based web app lets instructors select from 28 different conditions — from normal heart sounds to arrhythmias, from clear lungs to pneumonia. They can change conditions in real-time during simulation exercises.</p>
+          <h3>2. RFID-Tagged Manikin</h3>
+          <p>We took an old CPR manikin from Queen's Clinical Simulation Center and embedded 12 RFID tags at anatomically correct positions:</p>
+          <ul>
+            <li><strong>Heart valves (H1-H6):</strong> Aortic, pulmonic, tricuspid, mitral, and additional cardiac positions</li>
+            <li><strong>Lung positions (L1-L6):</strong> Anterior and posterior listening points for both lungs</li>
+          </ul>
+          <p>When the stethoscope touches any of these spots, the RFID reader identifies the location and plays the appropriate sound for the current "scenario."</p>
 
-          <h3>3. Student Feedback Interface</h3>
-          <p>Students see a simplified interface that shows which location they're examining and logs their findings. Instructors can review the session later to assess technique and accuracy.</p>
+          <h3>3. Instructor Control Interface</h3>
+          <p>A Flask-based web app lets instructors first select auscultation or palpation mode. For auscultation, they choose the organ (heart or lungs) and then select from 28 different sounds — everything from normal heartbeat to various murmurs and respiratory conditions. The interface shows real-time feedback: exactly where the student is listening and what sound is playing.</p>
+
+          <h3>4. Student Interface</h3>
+          <p>Students see a simpler view — whether the mode is live, and feedback on their examination. There's also a <strong>quiz mode</strong> where either the program randomly selects a scenario or students can choose specific sounds to practice on their own.</p>
         </div>
 
         <div class="case-image-grid">
@@ -142,7 +150,7 @@
           <p>Heart and lung sounds need to loop seamlessly and switch instantly when the stethoscope moves. I used Pygame's mixer with pre-loaded audio channels for fast switching.</p> <!-- [VERIFY TECHNICAL DETAILS - ADD YOUR ACTUAL SWITCHING TIME IF KNOWN] -->
 
           <h3>RFID Tag Layout</h3>
-          <p>The manikin has 8 auscultation points — 4 cardiac and 4 pulmonary. Each has an RFID tag embedded at the correct anatomical location. The stethoscope reads the tag ID and maps it to the appropriate sound based on the instructor's selected condition.</p>
+          <p>12 auscultation points total — 6 cardiac (H1-H6) and 6 pulmonary (L1-L6). Each RFID tag has a unique ID that maps to an anatomical position. The software maintains a lookup table connecting tag IDs to positions, and positions to the appropriate sound file based on the active scenario.</p>
         </div>
 
         <div class="case-section">
@@ -150,32 +158,43 @@
           
           <div class="results-grid">
             <div class="result-item">
-              <span class="result-number">28</span> <!-- [YOUR ACTUAL # OF CONDITIONS] -->
-              <span class="result-label">Conditions simulated</span>
+              <span class="result-number">28</span>
+              <span class="result-label">Audio scenarios</span>
             </div>
             <div class="result-item">
-              <span class="result-number">8</span> <!-- [YOUR ACTUAL # OF POINTS] -->
+              <span class="result-number">12</span>
               <span class="result-label">Auscultation points</span>
             </div>
             <div class="result-item">
-              <span class="result-number">&lt;$500</span> <!-- [YOUR ACTUAL COST] -->
-              <span class="result-label">Build cost</span>
+              <span class="result-number">~$250</span>
+              <span class="result-label">Total build cost</span>
             </div>
             <div class="result-item">
-              <span class="result-number">100×</span> <!-- [VERIFY THIS COMPARISON] -->
+              <span class="result-number">200×</span>
               <span class="result-label">Cheaper than commercial</span>
             </div>
           </div>
 
-          <p>The system is now in use at Queen's School of Nursing. Students can practice identifying abnormal sounds without waiting for clinical placements with patients who happen to have the right conditions.</p>
+          <p><strong>How we got there:</strong> The $250 breaks down to ~$180 for the manikin (donated from the simulation center, but that's replacement value) and ~$70 for the cheapest Raspberry Pi plus the MFRC522 reader. Commercial patient simulators with auscultation capabilities start around $50K.</p>
+
+          <p><strong>User feedback:</strong> The nursing instructors loved the speed and smooth transitions between sounds. They particularly appreciated having real clinical audio recordings. One note: they suggested calling them "audio scenarios" instead of "conditions" — because things like normal heartbeat or normal breath sounds aren't conditions, just reference baselines. Fair point.</p>
+        </div>
+
+        <div class="case-section">
+          <h2>The Struggle: Speaking Different Languages</h2>
+          <p>The hardest part of this project wasn't the code — it was communication. Working with non-engineers means constantly translating between "what they want" and "what's physically possible."</p>
+          <p>One instructor asked if we could make skin that heals itself after needle injections. Like, the student pokes it, and it closes back up. I had to explain that while self-healing materials exist, they're expensive, slow, and not something we could integrate into a $250 system. Managing expectations without crushing enthusiasm is its own skill.</p>
+          
+          <h2>The Win: Documentation</h2>
+          <p>I'm proud of the code, but I'm more proud of the documentation. This system will be maintained by people who weren't on the team, possibly years from now. I wrote it assuming the reader knows nothing — architecture diagrams, wiring schematics, troubleshooting guides, the works. If the next person can pick it up without calling me, I did my job right.</p>
         </div>
 
         <div class="case-section">
           <h2>What I Learned</h2>
           <ul>
-            <li><strong>Audio is harder than it looks.</strong> Latency, loop points, and speaker placement all affect how realistic the simulation feels.</li>
-            <li><strong>Talk to users early.</strong> Our first prototype had the speaker in the wrong place — nursing instructors caught it immediately.</li>
-            <li><strong>Robust > fancy.</strong> The final design uses fewer features than planned, but everything that's there works reliably.</li>
+            <li><strong>Users know what they need, not what they want.</strong> "I want self-healing skin" means "I need something durable for repeated use." Dig for the underlying need.</li>
+            <li><strong>Document like you're leaving tomorrow.</strong> Because eventually, you are. Good documentation is a gift to future maintainers.</li>
+            <li><strong>Integration is the project.</strong> Getting the RFID, audio, web server, and UI to work together smoothly took longer than building any single piece.</li>
           </ul>
         </div>
 

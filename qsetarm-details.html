@@ -48,16 +48,16 @@
           Back to projects
         </a>
         <h1>QSET Robotic Arm</h1>
-        <p class="subtitle">A 6-DOF robotic manipulator designed for space exploration rovers. Featuring precision control via DH kinematics, Lagrangian dynamics for torque optimization, and CAN bus communication.</p>
+        <p class="subtitle">A robotic arm for Queen's Space Engineering Team's Mars rover. My first design team where the work was all math and mechanical — no code, just kinematics, dynamics, and hands-on building.</p>
         
         <div class="case-meta">
           <div class="case-meta-item">
             <span class="case-meta-label">Role</span>
-            <span class="case-meta-value">Controls Engineer</span>
+            <span class="case-meta-value">Mechanical Design & Kinematics</span>
           </div>
           <div class="case-meta-item">
             <span class="case-meta-label">Timeline</span>
-            <span class="case-meta-value">2022 — 2023</span> <!-- [VERIFY DATES] -->
+            <span class="case-meta-value">Sep 2024 — May 2025</span>
           </div>
           <div class="case-meta-item">
             <span class="case-meta-label">Team</span>
@@ -65,7 +65,7 @@
           </div>
           <div class="case-meta-item">
             <span class="case-meta-label">Competition</span>
-            <span class="case-meta-value">CIRC 2023</span>
+            <span class="case-meta-value">CIRC</span>
           </div>
         </div>
       </div>
@@ -88,39 +88,40 @@
         </div>
 
         <figure class="case-image">
-          <img src="assets/qset_arm_drawing.png" alt="QSET robotic arm CAD model">
+          <img src="assets/qset arm drawing.png" alt="QSET robotic arm CAD model">
           <figcaption>CAD model showing the 6-DOF configuration with linear actuators</figcaption>
         </figure>
 
         <div class="case-section">
           <h2>Mechanical Architecture</h2>
-          <p>The arm uses a 6-axis configuration with a mix of rotary and linear actuators:</p>
+          <p>The arm I worked on has 5 degrees of freedom plus an end effector:</p>
           
           <div class="tech-grid">
             <div class="tech-item">
-              <h4>Joint 1: Base Rotation</h4>
-              <p>Planetary gearbox with stepper motor, 360° rotation</p>
+              <h4>Joint 1: Base Pan (q₁)</h4>
+              <p>Rotation around the vertical axis</p>
             </div>
             <div class="tech-item">
-              <h4>Joint 2: Shoulder</h4>
-              <p>High-torque linear actuator for heavy lifting</p>
+              <h4>Joint 2: Shoulder (q₂)</h4>
+              <p>Lifts the upper arm</p>
             </div>
             <div class="tech-item">
-              <h4>Joint 3: Elbow</h4>
-              <p>Linear actuator with parallel linkage for consistent torque</p>
+              <h4>Joint 3: Elbow (q₃)</h4>
+              <p>Extends/retracts the forearm</p>
             </div>
             <div class="tech-item">
-              <h4>Joints 4-6: Wrist</h4>
-              <p>Compact servo assembly for orientation control</p>
+              <h4>Joint 4: Forearm Rotation (q₄)</h4>
+              <p>Rotates the forearm around its axis</p>
+            </div>
+            <div class="tech-item">
+              <h4>End Effector: Wrist (q₅)</h4>
+              <p>Pitch control for the gripper</p>
+            </div>
+            <div class="tech-item">
+              <h4>End Effector: Rotation (q₆)</h4>
+              <p>Roll control for precise positioning</p>
             </div>
           </div>
-
-          <p>The shoulder and elbow use linear actuators instead of rotary motors because:</p>
-          <ul>
-            <li>Higher force-to-weight ratio for heavy lifting</li>
-            <li>Self-locking when unpowered (no holding current needed)</li>
-            <li>Simpler mechanical design (no gearbox required)</li>
-          </ul>
         </div>
 
         <div class="case-section">
@@ -229,32 +230,31 @@ def forward_kinematics(theta):
           
           <div class="results-grid">
             <div class="result-item">
-              <span class="result-number">1.2m</span> <!-- [YOUR ACTUAL REACH] -->
-              <span class="result-label">Maximum reach</span>
-            </div>
-            <div class="result-item">
-              <span class="result-number">5kg</span> <!-- [YOUR ACTUAL PAYLOAD] -->
-              <span class="result-label">Payload capacity</span>
-            </div>
-            <div class="result-item">
-              <span class="result-number">6</span> <!-- [VERIFY DOF] -->
+              <span class="result-number">5+1</span>
               <span class="result-label">Degrees of freedom</span>
             </div>
             <div class="result-item">
-              <span class="result-number">±5mm</span> <!-- [YOUR ACTUAL ACCURACY] -->
-              <span class="result-label">Positioning accuracy</span>
+              <span class="result-number">100%</span>
+              <span class="result-label">Math, no code</span>
             </div>
           </div>
 
-          <p>The arm was used in competition tasks at CIRC.</p> <!-- [ADD YOUR ACTUAL COMPETITION RESULTS AND EXPERIENCES] -->
+          <p>The arm design and all the kinematic analysis was completed and handed off to the controls team for implementation. This project was ongoing through the 2024-2025 academic year for competition.</p>
+        </div>
+
+        <div class="case-section">
+          <h2>A Different Kind of Challenge</h2>
+          <p>This was my first design team where I wasn't writing code. No Python scripts, no ROS nodes, no debugging serial connections. Just math, CAD, and hands-on mechanical work.</p>
+          <p>It was a reset. I'd gotten comfortable being "the software person" who integrates everything. Here I had to be useful in a completely different way — deriving rotation matrices by hand, calculating torque requirements, sketching coordinate frames on graph paper.</p>
+          <p>Turns out, understanding the math behind robotics makes you better at implementing it too. The kinematics I derived here? Same concepts I used in every other robot project. I just finally understood them properly.</p>
         </div>
 
         <div class="case-section">
           <h2>What I Learned</h2>
           <ul>
-            <li><strong>Theory matters.</strong> Proper kinematic and dynamic analysis upfront prevented endless trial-and-error with motor sizing and trajectory planning.</li>
-            <li><strong>Linear actuators have tradeoffs.</strong> Great for force and self-locking, but the nonlinear relationship between extension and joint angle complicates control.</li>
-            <li><strong>Gravity compensation is essential.</strong> Without feedforward gravity terms, the PID controller fights a losing battle against the arm's own weight.</li>
+            <li><strong>Math isn't just for classes.</strong> Those rotation matrices I learned in linear algebra? They're literally how robots understand orientation. Seeing theory applied to a real arm made it click.</li>
+            <li><strong>Mechanical intuition takes time.</strong> Software gives you instant feedback. Mechanical design requires you to think through everything before you cut metal. Different mindset.</li>
+            <li><strong>Kinematics is the foundation.</strong> Before you can control an arm, you need to know where it is and where it can go. DH parameters, forward/inverse kinematics — this is the language of robot arms.</li>
           </ul>
         </div>
 
