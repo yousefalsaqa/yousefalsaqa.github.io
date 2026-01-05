@@ -156,6 +156,13 @@
   transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+/* SVG diagrams should not be cropped */
+.project-card-image img[src$=".svg"] {
+  object-fit: contain;
+  padding: var(--space-md);
+  background: var(--bg-tertiary);
+}
+
 .project-card:hover .project-card-image img {
   transform: scale3d(1.05, 1.05, 1);
 }

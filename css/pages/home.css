@@ -349,8 +349,19 @@
   transition: transform var(--transition-slow);
 }
 
+/* SVG diagrams should not be cropped */
+.project-item-image img[src$=".svg"] {
+  object-fit: contain;
+  padding: var(--space-sm);
+  background: var(--bg-tertiary);
+}
+
 .project-item:hover .project-item-image img {
   transform: scale3d(1.05, 1.05, 1);
+}
+
+.project-item:hover .project-item-image img[src$=".svg"] {
+  transform: none;
 }
 
 .project-item-image.placeholder {
