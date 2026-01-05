@@ -99,7 +99,7 @@
     </section>
 
     <!-- Projects Section -->
-    <section class="projects-section section">
+    <section class="projects-section section reveal">
       <div class="container">
         <div class="projects-header">
           <h2>Selected <span>Projects</span></h2>
@@ -109,7 +109,7 @@
           </a>
         </div>
         
-        <div class="projects-list">
+        <div class="projects-list reveal-stagger">
           <!-- CAST Medical Interface -->
           <a href="capstone.html" class="project-item">
             <div class="project-item-image">
@@ -163,8 +163,8 @@
 
           <!-- Document Automation -->
           <a href="document-automation.html" class="project-item">
-            <div class="project-item-image placeholder">
-              <i class="bi bi-code-slash"></i>
+            <div class="project-item-image">
+              <img src="assets/document-automation-flow.svg" alt="Document Automation Workflow">
             </div>
             <div class="project-item-content">
               <h3>Document Automation</h3>
@@ -181,7 +181,7 @@
     </section>
 
     <!-- Experience Section -->
-    <section class="experience-section section">
+    <section class="experience-section section reveal">
       <div class="container">
         <div class="experience-header">
           <h2>Where I've Worked</h2>
@@ -191,11 +191,11 @@
           </a>
         </div>
         
-        <div class="experience-list">
+        <div class="experience-list reveal-stagger">
           <div class="experience-item">
             <div class="experience-item-date">2026</div>
             <div class="experience-item-content">
-              <h3>Admission Coordinator</h3>
+              <h3>Admission Coordinator <span class="status-badge">Current</span></h3>
               <p>Queen's University — Running my automation scripts daily</p>
             </div>
           </div>
@@ -212,6 +212,99 @@
               <h3>Mechanical Engineering Intern</h3>
               <p>Dorsch Holding GmbH — Abu Dhabi</p>
             </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="skills-section section reveal">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-label">What I Work With</span>
+          <h2 class="section-title">Technical <span>Skills</span></h2>
+        </div>
+        
+        <div class="skills-grid reveal-stagger">
+          <!-- System Integration & Embedded -->
+          <div class="skill-category">
+            <h3><i class="bi bi-cpu"></i> Embedded & Integration</h3>
+            <div class="skill-tags">
+              <span class="skill-tag">CAN Bus</span>
+              <span class="skill-tag">STM32</span>
+              <span class="skill-tag">Raspberry Pi</span>
+              <span class="skill-tag">Arduino</span>
+              <span class="skill-tag">RFID</span>
+              <span class="skill-tag">PCB Design</span>
+            </div>
+            <p class="skill-project-link">Used in: <a href="steering-project.html">FSAE Steering</a>, <a href="capstone.html">CAST</a></p>
+          </div>
+
+          <!-- Robotics & Autonomy -->
+          <div class="skill-category">
+            <h3><i class="bi bi-robot"></i> Robotics & Autonomy</h3>
+            <div class="skill-tags">
+              <span class="skill-tag">ROS / ROS2</span>
+              <span class="skill-tag">SLAM</span>
+              <span class="skill-tag">Computer Vision</span>
+              <span class="skill-tag">TensorRT</span>
+              <span class="skill-tag">Kinematics</span>
+              <span class="skill-tag">PID Control</span>
+            </div>
+            <p class="skill-project-link">Used in: <a href="autodrive-project.html">AutoDrive</a>, <a href="terrabot-details.html">Terrabot</a>, <a href="qsetarm-details.html">QSET Arm</a></p>
+          </div>
+
+          <!-- Data & ML -->
+          <div class="skill-category">
+            <h3><i class="bi bi-graph-up"></i> Data & Machine Learning</h3>
+            <div class="skill-tags">
+              <span class="skill-tag">Python</span>
+              <span class="skill-tag">Pandas</span>
+              <span class="skill-tag">Scikit-learn</span>
+              <span class="skill-tag">PyTorch</span>
+              <span class="skill-tag">Random Forest</span>
+              <span class="skill-tag">SQLite</span>
+            </div>
+            <p class="skill-project-link">Used in: <a href="admission-analysis.html">Admission Analysis</a>, <a href="eii-project-details.html">EII Predictor</a></p>
+          </div>
+
+          <!-- Automation & Web -->
+          <div class="skill-category">
+            <h3><i class="bi bi-gear"></i> Automation & Web</h3>
+            <div class="skill-tags">
+              <span class="skill-tag">Selenium</span>
+              <span class="skill-tag">Flask</span>
+              <span class="skill-tag">Socket.IO</span>
+              <span class="skill-tag">REST APIs</span>
+              <span class="skill-tag">Git</span>
+            </div>
+            <p class="skill-project-link">Used in: <a href="document-automation.html">Doc Automation</a>, <a href="capstone.html">CAST Interface</a></p>
+          </div>
+
+          <!-- CAD & Mechanical -->
+          <div class="skill-category">
+            <h3><i class="bi bi-tools"></i> Design & CAD</h3>
+            <div class="skill-tags">
+              <span class="skill-tag">SolidWorks</span>
+              <span class="skill-tag">AutoCAD</span>
+              <span class="skill-tag">MATLAB</span>
+              <span class="skill-tag">Simulink</span>
+              <span class="skill-tag">3D Printing</span>
+            </div>
+            <p class="skill-project-link">Used in: <a href="qsetarm-details.html">QSET Arm</a>, <a href="rexcubot-details.html">Rexcubot</a></p>
+          </div>
+
+          <!-- Languages -->
+          <div class="skill-category">
+            <h3><i class="bi bi-code-slash"></i> Languages</h3>
+            <div class="skill-tags">
+              <span class="skill-tag">Python</span>
+              <span class="skill-tag">C/C++</span>
+              <span class="skill-tag">MATLAB</span>
+              <span class="skill-tag">SQL</span>
+              <span class="skill-tag">HTML/CSS/JS</span>
+            </div>
+            <p class="skill-project-link">Across all projects</p>
           </div>
         </div>
       </div>
@@ -246,7 +339,7 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <p>© 2025 Yousef Alsaqa</p>
+        <p>© 2026 Yousef Alsaqa</p>
       </div>
     </div>
   </footer>
@@ -278,6 +371,22 @@
         header.classList.remove('scrolled');
       }
     });
+
+    // Scroll reveal animation (lightweight IntersectionObserver)
+    const revealElements = document.querySelectorAll('.reveal, .reveal-stagger');
+    
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    });
+
+    revealElements.forEach(el => revealObserver.observe(el));
   </script>
 </body>
 </html>
