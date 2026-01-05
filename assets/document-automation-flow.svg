@@ -1,11 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 300" fill="none">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 280" fill="none" preserveAspectRatio="xMidYMid meet">
   <defs>
     <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" style="stop-color:#00d4ff"/>
       <stop offset="100%" style="stop-color:#00ff88"/>
     </linearGradient>
     <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feGaussianBlur stdDeviation="2" result="blur"/>
       <feMerge>
         <feMergeNode in="blur"/>
         <feMergeNode in="SourceGraphic"/>
@@ -14,55 +14,56 @@
   </defs>
   
   <!-- Background -->
-  <rect width="800" height="300" fill="#0c0c12"/>
+  <rect width="900" height="280" fill="#0c0c12"/>
   
   <!-- Step 1: Source Folder -->
-  <rect x="30" y="100" width="120" height="100" rx="12" fill="#141420" stroke="#00d4ff" stroke-width="2"/>
-  <text x="90" y="140" fill="#ffffff" font-family="Inter, sans-serif" font-size="14" font-weight="600" text-anchor="middle">Source</text>
-  <text x="90" y="160" fill="#94a3b8" font-family="Inter, sans-serif" font-size="12" text-anchor="middle">Folder</text>
-  <text x="90" y="185" fill="#00d4ff" font-family="JetBrains Mono, monospace" font-size="11" text-anchor="middle">~300 docs</text>
+  <rect x="50" y="90" width="130" height="100" rx="12" fill="#141420" stroke="#00d4ff" stroke-width="2"/>
+  <text x="115" y="130" fill="#ffffff" font-family="system-ui, sans-serif" font-size="14" font-weight="600" text-anchor="middle">Source</text>
+  <text x="115" y="150" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="12" text-anchor="middle">Folder</text>
+  <text x="115" y="175" fill="#00d4ff" font-family="monospace" font-size="11" text-anchor="middle">~500 docs</text>
   
   <!-- Arrow 1 -->
-  <path d="M155 150 L195 150" stroke="url(#accentGrad)" stroke-width="3" stroke-linecap="round" filter="url(#glow)"/>
-  <polygon points="195,145 205,150 195,155" fill="#00d4ff"/>
+  <path d="M185 140 L235 140" stroke="url(#accentGrad)" stroke-width="3" stroke-linecap="round" filter="url(#glow)"/>
+  <polygon points="235,135 248,140 235,145" fill="#00d4ff"/>
   
   <!-- Step 2: Script -->
-  <rect x="210" y="100" width="120" height="100" rx="12" fill="#141420" stroke="#00d4ff" stroke-width="2"/>
-  <text x="270" y="135" fill="#ffffff" font-family="Inter, sans-serif" font-size="14" font-weight="600" text-anchor="middle">Automation</text>
-  <text x="270" y="155" fill="#94a3b8" font-family="Inter, sans-serif" font-size="12" text-anchor="middle">Script</text>
-  <text x="270" y="180" fill="#00ff88" font-family="JetBrains Mono, monospace" font-size="10" text-anchor="middle">Python + Selenium</text>
+  <rect x="255" y="90" width="140" height="100" rx="12" fill="#141420" stroke="#00d4ff" stroke-width="2"/>
+  <text x="325" y="125" fill="#ffffff" font-family="system-ui, sans-serif" font-size="14" font-weight="600" text-anchor="middle">Automation</text>
+  <text x="325" y="145" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="12" text-anchor="middle">Script</text>
+  <text x="325" y="172" fill="#00ff88" font-family="monospace" font-size="10" text-anchor="middle">Python + Selenium</text>
   
   <!-- Arrow 2 -->
-  <path d="M335 150 L375 150" stroke="url(#accentGrad)" stroke-width="3" stroke-linecap="round" filter="url(#glow)"/>
-  <polygon points="375,145 385,150 375,155" fill="#00d4ff"/>
+  <path d="M400 140 L450 140" stroke="url(#accentGrad)" stroke-width="3" stroke-linecap="round" filter="url(#glow)"/>
+  <polygon points="450,135 463,140 450,145" fill="#00d4ff"/>
   
   <!-- Step 3: System -->
-  <rect x="390" y="100" width="120" height="100" rx="12" fill="#141420" stroke="#00d4ff" stroke-width="2"/>
-  <text x="450" y="140" fill="#ffffff" font-family="Inter, sans-serif" font-size="14" font-weight="600" text-anchor="middle">Target</text>
-  <text x="450" y="160" fill="#94a3b8" font-family="Inter, sans-serif" font-size="12" text-anchor="middle">System</text>
-  <text x="450" y="185" fill="#00d4ff" font-family="JetBrains Mono, monospace" font-size="11" text-anchor="middle">Web Portal</text>
+  <rect x="470" y="90" width="130" height="100" rx="12" fill="#141420" stroke="#00d4ff" stroke-width="2"/>
+  <text x="535" y="130" fill="#ffffff" font-family="system-ui, sans-serif" font-size="14" font-weight="600" text-anchor="middle">Target</text>
+  <text x="535" y="150" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="12" text-anchor="middle">System</text>
+  <text x="535" y="175" fill="#00d4ff" font-family="monospace" font-size="11" text-anchor="middle">Web Portal</text>
   
-  <!-- Arrow 3 (splits) -->
-  <path d="M515 130 L555 130 L555 80 L595 80" stroke="url(#accentGrad)" stroke-width="3" stroke-linecap="round" fill="none" filter="url(#glow)"/>
-  <polygon points="595,75 605,80 595,85" fill="#00d4ff"/>
+  <!-- Arrow 3 (splits to success) -->
+  <path d="M605 120 L650 120 L650 70 L700 70" stroke="#00ff88" stroke-width="2" stroke-linecap="round" fill="none"/>
+  <polygon points="700,65 713,70 700,75" fill="#00ff88"/>
   
-  <path d="M515 170 L555 170 L555 220 L595 220" stroke="#ef4444" stroke-width="3" stroke-linecap="round" fill="none"/>
-  <polygon points="595,215 605,220 595,225" fill="#ef4444"/>
+  <!-- Arrow 4 (splits to error) -->
+  <path d="M605 160 L650 160 L650 210 L700 210" stroke="#ef4444" stroke-width="2" stroke-linecap="round" fill="none"/>
+  <polygon points="700,205 713,210 700,215" fill="#ef4444"/>
   
   <!-- Success box -->
-  <rect x="610" y="50" width="150" height="60" rx="12" fill="#141420" stroke="#00ff88" stroke-width="2"/>
-  <text x="685" y="75" fill="#00ff88" font-family="Inter, sans-serif" font-size="13" font-weight="600" text-anchor="middle">✓ Success</text>
-  <text x="685" y="95" fill="#94a3b8" font-family="Inter, sans-serif" font-size="11" text-anchor="middle">Attached to record</text>
+  <rect x="720" y="40" width="130" height="60" rx="10" fill="#141420" stroke="#00ff88" stroke-width="2"/>
+  <text x="785" y="65" fill="#00ff88" font-family="system-ui, sans-serif" font-size="13" font-weight="600" text-anchor="middle">✓ Success</text>
+  <text x="785" y="85" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="11" text-anchor="middle">Attached to record</text>
   
   <!-- Error box -->
-  <rect x="610" y="190" width="150" height="60" rx="12" fill="#141420" stroke="#ef4444" stroke-width="2"/>
-  <text x="685" y="215" fill="#ef4444" font-family="Inter, sans-serif" font-size="13" font-weight="600" text-anchor="middle">✗ Error</text>
-  <text x="685" y="235" fill="#94a3b8" font-family="Inter, sans-serif" font-size="11" text-anchor="middle">Logged + moved</text>
+  <rect x="720" y="180" width="130" height="60" rx="10" fill="#141420" stroke="#ef4444" stroke-width="2"/>
+  <text x="785" y="205" fill="#ef4444" font-family="system-ui, sans-serif" font-size="13" font-weight="600" text-anchor="middle">✗ Error</text>
+  <text x="785" y="225" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="11" text-anchor="middle">Logged + moved</text>
   
-  <!-- Labels -->
-  <text x="575" y="65" fill="#00ff88" font-family="Inter, sans-serif" font-size="10" text-anchor="middle">OK</text>
-  <text x="575" y="245" fill="#ef4444" font-family="Inter, sans-serif" font-size="10" text-anchor="middle">FAIL</text>
+  <!-- Labels on arrows -->
+  <text x="665" y="55" fill="#00ff88" font-family="system-ui, sans-serif" font-size="10" font-weight="500" text-anchor="middle">OK</text>
+  <text x="665" y="235" fill="#ef4444" font-family="system-ui, sans-serif" font-size="10" font-weight="500" text-anchor="middle">FAIL</text>
   
   <!-- Bottom info -->
-  <text x="400" y="280" fill="#64748b" font-family="Inter, sans-serif" font-size="11" text-anchor="middle">Runs daily • Unattended • CSV error log</text>
+  <text x="450" y="265" fill="#64748b" font-family="system-ui, sans-serif" font-size="11" text-anchor="middle">Runs daily • Unattended • CSV error log</text>
 </svg>
