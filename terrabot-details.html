@@ -48,7 +48,7 @@
           Back to projects
         </a>
         <h1>Terrabot CO2 Mapper</h1>
-        <p class="subtitle">A robot that maps indoor CO2 distribution in real-time — and the project where I fell in love with system integration.</p>
+        <p class="subtitle">A robot that maps indoor CO2 distribution in real-time, and the project where I fell in love with system integration.</p>
         
         <div class="case-meta">
           <div class="case-meta-item">
@@ -57,7 +57,7 @@
           </div>
           <div class="case-meta-item">
             <span class="case-meta-label">Timeline</span>
-            <span class="case-meta-value">Jan 2023 — May 2023</span>
+            <span class="case-meta-value">Jan 2023 to May 2023</span>
           </div>
           <div class="case-meta-item">
             <span class="case-meta-label">Course</span>
@@ -93,10 +93,10 @@
 
         <div class="case-section">
           <h2>The Solution</h2>
-          <p>We built a custom robot from scratch — a square chassis with four wheels, carrying LiDAR for mapping, a CO2 sensor for air quality, and proximity sensors for obstacle avoidance. Manual control via a game controller, with all the sensor data feeding into ROS for real-time visualization.</p>
+          <p>We built a custom robot from scratch, a square chassis with four wheels, carrying LiDAR for mapping, a CO2 sensor for air quality, and proximity sensors for obstacle avoidance. Manual control via a game controller, with all the sensor data feeding into ROS for real-time visualization.</p>
           
           <h3>The System</h3>
-          <p>What made this project special wasn't any single component — it was getting them all to work together:</p>
+          <p>What made this project special wasn't any single component, it was getting them all to work together:</p>
           <ul>
             <li><strong>SLAM:</strong> Building a map of the room while tracking the robot's position</li>
             <li><strong>CO2 sensing:</strong> Logging air quality values with location data</li>
@@ -104,7 +104,7 @@
             <li><strong>Controller integration:</strong> Mapping a game controller for manual navigation (which I had to configure and integrate myself)</li>
             <li><strong>Live visualization:</strong> Real-time map display with CO2 overlay</li>
           </ul>
-          <p>All of this running in ROS, with nodes talking to each other, data flowing between subsystems. When it finally worked — when I could drive the robot around and watch the map build itself with CO2 values updating live — that was the moment I understood why system integration is its own discipline.</p>
+          <p>All of this running in ROS, with nodes talking to each other, data flowing between subsystems. When it finally worked, when I could drive the robot around and watch the map build itself with CO2 values updating live, that was the moment I understood why system integration is its own discipline.</p>
         </div>
 
         <figure class="case-image">
@@ -138,7 +138,7 @@ hector_mapping:
           </div>
 
           <h3>Localization Accuracy</h3>
-          <p>We achieved reasonable position accuracy in typical indoor environments.</p> <!-- [ADD YOUR ACTUAL ACCURACY AND OBSERVATIONS] -->
+          <p>We achieved reasonable position accuracy in typical indoor environments.</p>
         </div>
 
         <div class="case-image-grid">
@@ -216,7 +216,7 @@ def generate_coverage_path(occupancy_map, robot_width):
 
         <div class="case-section">
           <h2>Heatmap Generation</h2>
-          <p>Raw CO2 samples are sparse — maybe one reading every 20cm of travel. We interpolated between samples using inverse distance weighting:</p>
+          <p>Raw CO2 samples are sparse, maybe one reading every 20cm of travel. We interpolated between samples using inverse distance weighting:</p>
           
           <div class="case-code">
 <pre>
@@ -248,15 +248,15 @@ def interpolate_heatmap(samples, resolution=0.1):
           <h2>Results</h2>
           <p>It worked. The robot drove around, the map built itself in real-time, and CO2 values populated as colored overlays showing air quality across the space. You could actually see where ventilation was good and where it wasn't.</p>
           
-          <p>For a second-year design course project, getting all those systems integrated and running together was the real victory. The images above show actual outputs from our testing — the SLAM-generated map and the CO2 heatmap overlay.</p>
+          <p>For a second-year design course project, getting all those systems integrated and running together was the real victory. The images above show actual outputs from our testing, the SLAM-generated map and the CO2 heatmap overlay.</p>
         </div>
         </div>
 
         <div class="case-section">
           <h2>The Moment It Clicked</h2>
-          <p>This was my first real system integration project. Before this, I'd built individual components — a motor controller here, a sensor reading there. But Terrabot was the first time I had to make multiple independent systems work together in real-time.</p>
-          <p>The SLAM node publishing maps. The CO2 node publishing readings. The controller node publishing movement commands. The visualization node subscribing to all of them. Each piece worked in isolation, but making them work together — that was a different challenge entirely.</p>
-          <p>When it finally came together, I got it. This is what engineering actually is: not building components, but building systems. That realization shaped everything I did after — Formula SAE, AutoDrive, the capstone project. Integration is where the real work happens.</p>
+          <p>This was my first real system integration project. Before this, I'd built individual components, a motor controller here, a sensor reading there. But Terrabot was the first time I had to make multiple independent systems work together in real-time.</p>
+          <p>The SLAM node publishing maps. The CO2 node publishing readings. The controller node publishing movement commands. The visualization node subscribing to all of them. Each piece worked in isolation, but making them work together, that was a different challenge entirely.</p>
+          <p>When it finally came together, I got it. This is what engineering actually is: not building components, but building systems. That realization shaped everything I did after, Formula SAE, AutoDrive, the capstone project. Integration is where the real work happens.</p>
         </div>
 
         <div class="case-section">

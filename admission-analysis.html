@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admission Analysis Dashboard | Yousef Alsaqa</title>
-  <meta name="description" content="Case study: A data analysis dashboard that influenced university admission policy at Queen's.">
+  <meta name="description" content="Case study: Random Forest analysis of admitted Commerce and Engineering students at Queen's, with first-year GPA as the success metric.">
   <meta name="theme-color" content="#050508">
 
   <!-- Fonts -->
@@ -47,8 +47,8 @@
           <i class="bi bi-arrow-left"></i>
           Back to projects
         </a>
-        <h1>Admission Analysis Dashboards</h1>
-        <p class="subtitle">Two data tools I built during my recruitment rep role: one to explore 170K applications, another to analyze what actually predicts student success — and the findings that led Commerce to raise their thresholds.</p>
+        <h1>Admission Analysis Dashboard</h1>
+        <p class="subtitle">A predictor tool that analyzes admitted Commerce and Engineering students against their first-year GPAs. Built with Random Forest to find what actually predicts success at Queen's, and the Commerce findings led to higher admission thresholds.</p>
         
         <div class="case-meta">
           <div class="case-meta-item">
@@ -57,15 +57,15 @@
           </div>
           <div class="case-meta-item">
             <span class="case-meta-label">Timeline</span>
-            <span class="case-meta-value">May 2025 — Jan 2026</span>
+            <span class="case-meta-value">May 2025 to Present</span>
           </div>
           <div class="case-meta-item">
             <span class="case-meta-label">Stack</span>
-            <span class="case-meta-value">Python, Pandas, Scikit-learn</span>
+            <span class="case-meta-value">Python, Pandas, Scikit-learn, Tkinter</span>
           </div>
           <div class="case-meta-item">
             <span class="case-meta-label">Impact</span>
-            <span class="case-meta-value">Policy change</span>
+            <span class="case-meta-value">Policy change (Commerce)</span>
           </div>
         </div>
       </div>
@@ -76,72 +76,63 @@
       <div class="container case-content">
         
         <div class="case-section">
-          <h2>The Problem</h2>
-          <p>Working as a recruitment rep at Queen's, I had access to years of admission data — but it was all trapped in Excel files. Brutal to work with. Every question required manual filtering and pivot tables.</p>
-          <p>"How many international students from UAE applied to Engineering last year?" "What schools send us the most Commerce applicants?" Simple questions that took an hour to answer. And bigger questions — like what actually predicts student success — nobody had time to dig into.</p>
+          <h2>The Question</h2>
+          <p>Queen's collects mountains of data on every admitted student: high school average, individual subject grades, supplementary application scores, where they came from, what they applied to. After they enroll, the university tracks their first-year GPA. The question nobody had time to answer properly: which of those admission inputs actually correlate with first-year performance?</p>
+          <p>I built a predictor tool that takes the admission data and the first-year GPAs, and runs a Random Forest model to rank what predicts success. Same architecture for both Commerce and Engineering, different datasets and different findings.</p>
+        </div>
+
+        <div class="case-section">
+          <h2>Tool 1: Commerce Predictor</h2>
+          <p>The first version. I got access to 10 years of Commerce student data, around 5,600 students, with both their admission inputs and their first-year GPAs. I built a 4-tab dashboard for exploring the relationships:</p>
+          <ul>
+            <li>Overall high school average vs. first-year GPA</li>
+            <li>Math grade vs. first-year GPA</li>
+            <li>English grade vs. first-year GPA</li>
+            <li>Supplementary application score vs. first-year GPA</li>
+          </ul>
+          <p>Plus a config-file system so the same tool could be retargeted at any program without code changes. That's what made adapting it for Engineering trivial later on.</p>
         </div>
 
         <figure class="case-image">
-          <img src="admission_analysis_Dashboard.jpg" alt="Admission Analysis Dashboard interface">
-          <figcaption>The main dashboard interface with filtering and visualization</figcaption>
+          <img src="admission_analysis_Dashboard.jpg" alt="Commerce predictor dashboard">
+          <figcaption>Commerce predictor dashboard, correlating admission factors against first-year GPA</figcaption>
         </figure>
 
         <div class="case-section">
-          <h2>Tool 1: General Admission Explorer</h2>
-          <p>The first thing I built was a dashboard to explore the raw admission data — 5 years, roughly 170,000 applications. I pulled the Excel files into SQLite (way faster for queries) and built a Tkinter interface on top.</p>
-          
-          <h3>What You Could Query</h3>
-          <ul>
-            <li><strong>Demographics:</strong> Country of origin, citizenship, which high school they attended</li>
-            <li><strong>Application data:</strong> Programs applied to, admission status (accepted/rejected/waitlisted)</li>
-            <li><strong>Responses:</strong> Why they accepted or declined offers, where else they applied</li>
-          </ul>
-          <p>Instead of spending an hour in Excel, you could answer questions in seconds. The team started using it for reports and presentations almost immediately.</p>
-        </div>
-
-        <figure class="case-image">
-          <img src="admission_analysis_Dashboard.jpg" alt="Admission Analysis Dashboard interface">
-          <figcaption>The general admission dashboard — filter, visualize, export</figcaption>
-        </figure>
-
-        <div class="case-section">
-          <h2>Tool 2: Commerce Success Predictor</h2>
-          <p>This is the one that got interesting. I got access to 10 years of Commerce student data — about 35,000 students — with both their admission info AND their first-year GPA. The question: what actually predicts success in Commerce?</p>
-          
-          <h3>The Analysis</h3>
-          <p>I built a 4-tab dashboard where you could explore correlations:</p>
-          <ul>
-            <li><strong>Overall high school average vs. first-year GPA</strong></li>
-            <li><strong>Math grade vs. first-year GPA</strong></li>
-            <li><strong>English grade vs. first-year GPA</strong></li>
-            <li><strong>Supplementary application score vs. first-year GPA</strong></li>
-          </ul>
-          <p>Plus a config file system so the same tool could be adapted for different programs without code changes.</p>
-        </div>
-
-        <div class="case-section">
-          <h2>The Findings</h2>
-          <p>I used a Random Forest model to identify which factors were the best predictors of first-year success. The results surprised people:</p>
+          <h2>Commerce Findings</h2>
+          <p>I used a Random Forest model to rank which factors were the best predictors of first-year success. The results surprised people:</p>
           
           <div class="case-highlight">
             <p><strong>Best predictor:</strong> Overall high school average (no surprise)<br>
             <strong>Second:</strong> Math grade<br>
             <strong>Third:</strong> English grade<br>
-            <strong>Fourth:</strong> Supplementary application score — and it had a <em>negative</em> correlation</p>
+            <strong>Fourth:</strong> Supplementary application score, and it had a <em>negative</em> correlation</p>
           </div>
 
-          <p>That last one caught everyone off guard. The supp app — essays, extracurriculars, the "soft" stuff — actually had a slight negative correlation with first-year GPA. Students who wrote great applications weren't necessarily performing better. Maybe they were better at selling themselves than doing the work. Maybe the graders were looking for the wrong things. Either way, it was data worth discussing.</p>
+          <p>That last one caught everyone off guard. The supp app, essays and extracurriculars and all the "soft" stuff, actually had a slight negative correlation with first-year GPA. Students who wrote great applications weren't necessarily performing better. Maybe they were better at selling themselves than doing the work. Maybe the graders were looking for the wrong things. Either way, it was data worth discussing.</p>
         </div>
 
         <div class="case-section">
-          <h2>The Impact</h2>
+          <h2>Commerce Impact</h2>
           <p>I'm not going to claim I walked into a room and said "change your thresholds" and they did it. That's not how universities work. But the analysis was part of the conversation.</p>
           <p>The Commerce program eventually raised their admission thresholds:</p>
           <ul>
-            <li>Math and English minimums: 80% → 85%</li>
-            <li>Overall high school average: 87% → 90%</li>
+            <li>Math and English minimums: 80% to 85%</li>
+            <li>Overall high school average: 87% to 90%</li>
           </ul>
           <p>Was that directly because of my analysis? I don't know. But the data was there, people saw it, and the change aligned with what the numbers suggested. That felt meaningful.</p>
+        </div>
+
+        <figure class="case-image">
+          <img src="course_analysis_dashboard.jpg" alt="Commerce course-level analysis view">
+          <figcaption>Commerce course-level analysis, breaking down predictor strength by tab</figcaption>
+        </figure>
+
+        <div class="case-section">
+          <h2>Tool 2: Engineering Predictor</h2>
+          <p>Once the Commerce version was working, I pointed the same tool at Engineering: 10 years of admitted students, around 8,700 of them, same kind of admission inputs against first-year GPA.</p>
+          <p>The dataset is bigger and the program structure is different (six common-first-year disciplines vs. one Commerce track), so the analysis required some rethinking around the predictor variables and how to handle program transfers.</p>
+          <p>The model is built and running. The findings are still being reviewed and no policy changes have come from it yet. I'd rather not publish numbers I'm still validating, so this section will stay light until the analysis is signed off.</p>
         </div>
 
         <div class="case-section">
@@ -149,16 +140,16 @@
           
           <div class="tech-grid">
             <div class="tech-item">
-              <h4>Python + Tkinter</h4>
-              <p>Desktop app for sensitive internal data</p>
+              <h4>Python and Tkinter</h4>
+              <p>Desktop app for sensitive internal data, no cloud anything</p>
             </div>
             <div class="tech-item">
-              <h4>Pandas + openpyxl</h4>
-              <p>Wrangling brutal Excel files into usable data</p>
+              <h4>Pandas and openpyxl</h4>
+              <p>Wrangling brutal Excel exports into usable dataframes</p>
             </div>
             <div class="tech-item">
               <h4>SQLite</h4>
-              <p>Local database for fast querying (way better than filtering in memory)</p>
+              <p>Local database for fast querying, way better than filtering in memory</p>
             </div>
             <div class="tech-item">
               <h4>Scikit-learn</h4>
@@ -170,62 +161,57 @@
             </div>
             <div class="tech-item">
               <h4>Config Files</h4>
-              <p>JSON configs so the tool works for multiple programs</p>
+              <p>JSON configs so the same tool works for any program</p>
             </div>
           </div>
         </div>
-
-        <figure class="case-image">
-          <img src="course_analysis_dashboard.jpg" alt="Course-level analysis view">
-          <figcaption>Commerce predictor analysis — correlating admission factors with first-year performance</figcaption>
-        </figure>
 
         <div class="case-section">
           <h2>By the Numbers</h2>
           
           <div class="results-grid">
             <div class="result-item">
-              <span class="result-number">170K</span>
-              <span class="result-label">General applications analyzed</span>
+              <span class="result-number">5,600</span>
+              <span class="result-label">Commerce students analyzed</span>
             </div>
             <div class="result-item">
-              <span class="result-number">35K</span>
-              <span class="result-label">Commerce students tracked</span>
+              <span class="result-number">8,700</span>
+              <span class="result-label">Engineering students analyzed</span>
             </div>
             <div class="result-item">
               <span class="result-number">10</span>
-              <span class="result-label">Years of Commerce data</span>
+              <span class="result-label">Years of data per program</span>
             </div>
             <div class="result-item">
-              <span class="result-number">+3-5%</span>
-              <span class="result-label">Threshold increases</span>
+              <span class="result-number">+3 to 5%</span>
+              <span class="result-label">Commerce threshold increases</span>
             </div>
           </div>
         </div>
 
         <div class="case-section">
           <h2>The Struggle: Learning to See Data</h2>
-          <p>The hardest part wasn't the coding — it was learning how to analyze. Before this, I thought data analysis was just making charts. It's not. It's asking the right questions, checking your assumptions, understanding what correlations actually mean (and don't mean).</p>
-          <p>I spent a lot of time second-guessing myself. "Is this correlation real or did I mess something up?" "Does this p-value actually matter?" "Am I seeing a pattern or just noise?" Learning to look at things from different angles — controlling for variables, checking for confounders — that was the real education.</p>
+          <p>The hardest part wasn't the coding, it was learning how to analyze. Before this, I thought data analysis was just making charts. It's not. It's asking the right questions, checking your assumptions, understanding what correlations actually mean (and don't mean).</p>
+          <p>I spent a lot of time second-guessing myself. "Is this correlation real or did I mess something up?" "Does this p-value actually matter?" "Am I seeing a pattern or just noise?" Learning to look at things from different angles, controlling for variables, checking for confounders, that was the real education.</p>
         </div>
 
         <div class="case-section">
           <h2>What I Learned</h2>
           <ul>
             <li><strong>Data doesn't speak for itself.</strong> You have to ask the right questions. The same dataset can tell different stories depending on how you slice it.</li>
-            <li><strong>Correlation isn't causation (but it's still useful).</strong> I can't prove the supp app causes worse performance. But the correlation is worth investigating.</li>
-            <li><strong>Build tools that answer questions.</strong> Users don't care about your database schema. They have questions — make the tool answer them fast.</li>
-            <li><strong>Excel is brutal at scale.</strong> 170K rows across multiple files? Never again. SQLite saved my sanity.</li>
+            <li><strong>Correlation isn't causation, but it's still useful.</strong> I can't prove the supp app causes worse performance. But the correlation is worth investigating.</li>
+            <li><strong>Build tools that answer questions.</strong> Users don't care about your database schema. They have questions, make the tool answer them fast.</li>
+            <li><strong>Config-driven beats hardcoded every time.</strong> Pointing the same tool at Engineering took an afternoon, not a rewrite.</li>
           </ul>
         </div>
 
         <nav class="case-nav">
-          <a href="capstone.html">
+          <a href="university-application-dashboard.html">
             <i class="bi bi-arrow-left"></i>
-            CAST Medical Interface
+            University Application Dashboard
           </a>
-          <a href="document-automation.html">
-            Next: Document Automation
+          <a href="admission-coordinator-assistant.html">
+            Next: Admission Coordinator Assistant
             <i class="bi bi-arrow-right"></i>
           </a>
         </nav>

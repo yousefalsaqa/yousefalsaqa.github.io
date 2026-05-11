@@ -48,7 +48,7 @@
           Back to projects
         </a>
         <h1>CAST Medical Interface</h1>
-        <p class="subtitle">A patient simulator that lets nursing students practice auscultation on a manikin — with real heart and lung sounds played through a custom RFID stethoscope. Built for Queen's University School of Nursing.</p>
+        <p class="subtitle">A patient simulator that lets nursing students practice auscultation on a manikin, with real heart and lung sounds played through a custom RFID stethoscope. Built for Queen's University School of Nursing.</p>
         
         <div class="case-meta">
           <div class="case-meta-item">
@@ -57,7 +57,7 @@
           </div>
           <div class="case-meta-item">
             <span class="case-meta-label">Timeline</span>
-            <span class="case-meta-value">Sep 2024 — May 2025</span>
+            <span class="case-meta-value">Sep 2024 to May 2025</span>
           </div>
           <div class="case-meta-item">
             <span class="case-meta-label">Team</span>
@@ -77,7 +77,7 @@
         
         <div class="case-section">
           <h2>The Problem</h2>
-          <p>Nursing students need to learn auscultation — using a stethoscope to listen to heart and lung sounds. But practicing on real patients is limited and risky. Existing simulators are either too expensive ($50K+) or too simple (just audio files on a laptop).</p>
+          <p>Nursing students need to learn auscultation, using a stethoscope to listen to heart and lung sounds. But practicing on real patients is limited and risky. Existing simulators are either too expensive ($50K+) or too simple (just audio files on a laptop).</p>
           <p>Queen's School of Nursing needed something in between: realistic enough to teach proper technique, affordable enough to deploy in labs, and robust enough for daily student use.</p>
         </div>
 
@@ -88,10 +88,10 @@
 
         <div class="case-section">
           <h2>The Solution</h2>
-          <p>We built CAST — Clinical Auscultation Simulation Training. The full system had two modules: auscultation (listening with a stethoscope) and palpation (physical examination by touch). I owned everything software and handled all hardware-software integration for the auscultation side.</p>
+          <p>We built CAST, Clinical Auscultation Simulation Training. The full system had two modules: auscultation (listening with a stethoscope) and palpation (physical examination by touch). I owned everything software and handled all hardware-software integration for the auscultation side.</p>
           
           <h3>1. Custom RFID Stethoscope</h3>
-          <p>I built a stethoscope housing containing an MFRC522 RFID reader connected to a Raspberry Pi. Earphones plug into the Pi for audio output — it looks and feels like using a real stethoscope, but the sounds come from the manikin's "condition" rather than actual vibrations.</p>
+          <p>I built a stethoscope housing containing an MFRC522 RFID reader connected to a Raspberry Pi. Earphones plug into the Pi for audio output, it looks and feels like using a real stethoscope, but the sounds come from the manikin's "condition" rather than actual vibrations.</p>
           
           <figure class="case-image">
             <img src="stethoscope-iii.png" alt="Custom RFID stethoscope design">
@@ -107,10 +107,10 @@
           <p>When the stethoscope touches any of these spots, the RFID reader identifies the location and plays the appropriate sound for the current "scenario."</p>
 
           <h3>3. Instructor Control Interface</h3>
-          <p>A Flask-based web app lets instructors first select auscultation or palpation mode. For auscultation, they choose the organ (heart or lungs) and then select from 28 different sounds — everything from normal heartbeat to various murmurs and respiratory conditions. The interface shows real-time feedback: exactly where the student is listening and what sound is playing.</p>
+          <p>A Flask-based web app lets instructors first select auscultation or palpation mode. For auscultation, they choose the organ (heart or lungs) and then select from 28 different sounds, everything from normal heartbeat to various murmurs and respiratory conditions. The interface shows real-time feedback: exactly where the student is listening and what sound is playing.</p>
 
           <h3>4. Student Interface</h3>
-          <p>Students see a simpler view — whether the mode is live, and feedback on their examination. There's also a <strong>quiz mode</strong> where either the program randomly selects a scenario or students can choose specific sounds to practice on their own.</p>
+          <p>Students see a simpler view, whether the mode is live, and feedback on their examination. There's also a <strong>quiz mode</strong> where either the program randomly selects a scenario or students can choose specific sounds to practice on their own.</p>
         </div>
 
         <div class="case-image-grid">
@@ -147,10 +147,10 @@
           </div>
 
           <h3>The Audio Challenge</h3>
-          <p>Heart and lung sounds need to loop seamlessly and switch instantly when the stethoscope moves. I used Pygame's mixer with pre-loaded audio channels for fast switching.</p> <!-- [VERIFY TECHNICAL DETAILS - ADD YOUR ACTUAL SWITCHING TIME IF KNOWN] -->
+          <p>Heart and lung sounds need to loop seamlessly and switch instantly when the stethoscope moves. I used Pygame's mixer with pre-loaded audio channels, hitting switching times under 260ms.</p>
 
           <h3>RFID Tag Layout</h3>
-          <p>12 auscultation points total — 6 cardiac (H1-H6) and 6 pulmonary (L1-L6). Each RFID tag has a unique ID that maps to an anatomical position. The software maintains a lookup table connecting tag IDs to positions, and positions to the appropriate sound file based on the active scenario.</p>
+          <p>12 auscultation points total, 6 cardiac (H1-H6) and 6 pulmonary (L1-L6). Each RFID tag has a unique ID that maps to an anatomical position. The software maintains a lookup table connecting tag IDs to positions, and positions to the appropriate sound file based on the active scenario.</p>
         </div>
 
         <div class="case-section">
@@ -177,16 +177,16 @@
 
           <p><strong>How we got there:</strong> The $250 breaks down to ~$180 for the manikin (donated from the simulation center, but that's replacement value) and ~$70 for the cheapest Raspberry Pi plus the MFRC522 reader. Commercial patient simulators with auscultation capabilities start around $50K.</p>
 
-          <p><strong>User feedback:</strong> The nursing instructors loved the speed and smooth transitions between sounds. They particularly appreciated having real clinical audio recordings. One note: they suggested calling them "audio scenarios" instead of "conditions" — because things like normal heartbeat or normal breath sounds aren't conditions, just reference baselines. Fair point.</p>
+          <p><strong>User feedback:</strong> The nursing instructors loved the speed and smooth transitions between sounds. They particularly appreciated having real clinical audio recordings. One note: they suggested calling them "audio scenarios" instead of "conditions", because things like normal heartbeat or normal breath sounds aren't conditions, just reference baselines. Fair point.</p>
         </div>
 
         <div class="case-section">
           <h2>The Struggle: Speaking Different Languages</h2>
-          <p>The hardest part of this project wasn't the code — it was communication. Working with non-engineers means constantly translating between "what they want" and "what's physically possible."</p>
+          <p>The hardest part of this project wasn't the code, it was communication. Working with non-engineers means constantly translating between "what they want" and "what's physically possible."</p>
           <p>One instructor asked if we could make skin that heals itself after needle injections. Like, the student pokes it, and it closes back up. I had to explain that while self-healing materials exist, they're expensive, slow, and not something we could integrate into a $250 system. Managing expectations without crushing enthusiasm is its own skill.</p>
           
           <h2>The Win: Documentation</h2>
-          <p>I'm proud of the code, but I'm more proud of the documentation. This system will be maintained by people who weren't on the team, possibly years from now. I wrote it assuming the reader knows nothing — architecture diagrams, wiring schematics, troubleshooting guides, the works. If the next person can pick it up without calling me, I did my job right.</p>
+          <p>I'm proud of the code, but I'm more proud of the documentation. This system will be maintained by people who weren't on the team, possibly years from now. I wrote it assuming the reader knows nothing, architecture diagrams, wiring schematics, troubleshooting guides, the works. If the next person can pick it up without calling me, I did my job right.</p>
         </div>
 
         <div class="case-section">

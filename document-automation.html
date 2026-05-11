@@ -57,7 +57,7 @@
           </div>
           <div class="case-meta-item">
             <span class="case-meta-label">Timeline</span>
-            <span class="case-meta-value">Jan 2026 — Present</span>
+            <span class="case-meta-value">Jan 2026 to Present</span>
           </div>
           <div class="case-meta-item">
             <span class="case-meta-label">Stack</span>
@@ -77,7 +77,7 @@
         
         <div class="case-section">
           <h2>The Problem</h2>
-          <p>As an Admission Coordinator, part of my job is attaching documents to student records in PeopleSoft. Transcripts, test scores, recommendation letters — they come into a shared folder and need to be linked to the right student application.</p>
+          <p>As an Admission Coordinator, part of my job is attaching documents to student records in PeopleSoft. Transcripts, test scores, recommendation letters, they come into a shared folder and need to be linked to the right student application.</p>
           <p>The manual process:</p>
           <ol>
             <li>Open a document from the shared folder</li>
@@ -138,14 +138,14 @@ def process_document(filepath):
           <p>PeopleSoft loads content dynamically with unpredictable element IDs. I couldn't rely on static selectors. Solution: wait for specific text content and use relative XPath queries based on visible labels.</p>
 
           <h3>Rate Limiting</h3>
-          <p>Too fast and PeopleSoft throttles you. Too slow and you're not saving time. I added randomized delays (2-5 seconds between actions) that feel "human" and avoid triggering rate limits.</p>
+          <p>Too fast and PeopleSoft throttles you. Too slow and you're not saving time. I added randomized delays (2 to 5 seconds between actions) that feel "human" and avoid triggering rate limits.</p>
 
           <h3>Error Recovery</h3>
           <p>Networks fail. Pages timeout. Students don't exist. The script handles all of this gracefully:</p>
           <ul>
             <li>Automatic retry on network errors (up to 3 times)</li>
             <li>Failed documents moved to an "errors" folder</li>
-            <li>Detailed CSV log — every failure includes why it failed, so I can fix the root cause instead of just retrying blindly</li>
+            <li>Detailed CSV log, every failure includes why it failed, so I can fix the root cause instead of just retrying blindly</li>
             <li>Resume from where it left off if interrupted</li>
           </ul>
 
@@ -180,13 +180,13 @@ def process_document(filepath):
             </div>
           </div>
 
-          <p>I hit enter, walk away, and the script handles the day's documents while I do work that actually requires a brain. The error folder usually has a handful that need manual attention — students who withdrew, filename typos, corrupt files. That's maybe 10 minutes of cleanup instead of 8 hours of clicking.</p>
+          <p>I hit enter, walk away, and the script handles the day's documents while I do work that actually requires a brain. The error folder usually has a handful that need manual attention, students who withdrew, filename typos, corrupt files. That's maybe 10 minutes of cleanup instead of 8 hours of clicking.</p>
         </div>
 
         <div class="case-section">
           <h2>The Lesson: Automation Is a Conversation</h2>
           <p>Here's what I didn't expect: automation changes your relationship with a process. Before the script, I'd click through documents without thinking. After? I started noticing patterns. Why do these files keep failing? Because the naming convention from this source is inconsistent. Why are these taking longer? Because that PeopleSoft page loads slower than others.</p>
-          <p>The script forced me to understand the process deeply — every edge case, every failure mode. And that understanding led to improvements beyond just the automation. I started pushing back on inconsistent naming conventions. I flagged slow pages to IT. The automation wasn't just about saving time; it was about exposing everything that was broken in the workflow.</p>
+          <p>The script forced me to understand the process deeply, every edge case, every failure mode. And that understanding led to improvements beyond just the automation. I started pushing back on inconsistent naming conventions. I flagged slow pages to IT. The automation wasn't just about saving time; it was about exposing everything that was broken in the workflow.</p>
           <p>That's the thing about automation: it doesn't hide problems, it amplifies them. Every exception you have to handle is a question about why that exception exists in the first place.</p>
         </div>
 

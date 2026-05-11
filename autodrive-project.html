@@ -48,7 +48,7 @@
           Back to projects
         </a>
         <h1>Queen's AutoDrive</h1>
-        <p class="subtitle">Two years building a Level 4 autonomous vehicle for the SAE AutoDrive Challenge — from training neural networks to debugging why the car decided to ram a table.</p>
+        <p class="subtitle">Two years building a Level 4 autonomous vehicle for the SAE AutoDrive Challenge, from training neural networks to debugging why the car decided to ram a table.</p>
         
         <div class="case-meta">
           <div class="case-meta-item">
@@ -57,11 +57,11 @@
           </div>
           <div class="case-meta-item">
             <span class="case-meta-label">Year 1</span>
-            <span class="case-meta-value">Sep 2021 — May 2022</span>
+            <span class="case-meta-value">Sep 2021 to May 2022</span>
           </div>
           <div class="case-meta-item">
             <span class="case-meta-label">Year 2</span>
-            <span class="case-meta-value">Sep 2023 — May 2024</span>
+            <span class="case-meta-value">Sep 2023 to May 2024</span>
           </div>
           <div class="case-meta-item">
             <span class="case-meta-label">Team</span>
@@ -77,23 +77,23 @@
         
         <div class="case-section">
           <h2>The Challenge</h2>
-          <p>Queen's AutoDrive competes in the SAE AutoDrive Challenge, a multi-year competition to develop a Level 4 autonomous vehicle. Level 4 means the car drives itself in defined conditions — no human backup required.</p>
+          <p>Queen's AutoDrive competes in the SAE AutoDrive Challenge, a multi-year competition to develop a Level 4 autonomous vehicle. Level 4 means the car drives itself in defined conditions, no human backup required.</p>
           <p>I joined the team for two separate years, working on different parts of the system each time. First year was all about teaching the car to see the road. Second year was about making all the pieces talk to each other without exploding.</p>
         </div>
 
         <div class="case-section">
-          <h2>Year 1: Lane Perception (2021-2022)</h2>
-          <p>My first year was on the perception team, specifically lane detection. The car needs to know where the road is at all times — sounds simple until you realize lane markings are faded, construction zones have conflicting lines, and Kingston winters mean half the year the lines are buried under snow.</p>
+          <h2>Year 1: Lane Perception (2021 to 2022)</h2>
+          <p>My first year was on the perception team, specifically lane detection. The car needs to know where the road is at all times, sounds simple until you realize lane markings are faded, construction zones have conflicting lines, and Kingston winters mean half the year the lines are buried under snow.</p>
           
           <h3>Neural Network Training</h3>
-          <p>We used a UFLD (Ultra-Fast Lane Detection) architecture that treats lane finding as a row classification problem instead of pixel segmentation. My job was training and fine-tuning the model on our custom dataset — hours of driving footage from around Kingston, annotated frame by frame.</p>
+          <p>We used a UFLD (Ultra-Fast Lane Detection) architecture that treats lane finding as a row classification problem instead of pixel segmentation. My job was training and fine-tuning the model on our custom dataset, hours of driving footage from around Kingston, annotated frame by frame.</p>
           
           <p>Training involved a lot of trial and error. Learning rate too high? Model diverges. Too low? Takes forever. Augmentation not aggressive enough? Model only works in sunny weather. Too aggressive? It thinks everything is a lane. I spent weeks tuning hyperparameters and staring at loss curves.</p>
         </div>
 
         <div class="case-section">
           <h3>How UFLD Works</h3>
-          <p>Instead of classifying every pixel (slow), UFLD divides each row of the image into grid cells and predicts which cell contains the lane. This reduces the problem from millions of pixel classifications to thousands of row classifications — way faster on embedded hardware.</p>
+          <p>Instead of classifying every pixel (slow), UFLD divides each row of the image into grid cells and predicts which cell contains the lane. This reduces the problem from millions of pixel classifications to thousands of row classifications, way faster on embedded hardware.</p>
           
           <div class="case-code">
 <pre>
@@ -109,7 +109,7 @@ def process_lanes(image):
 </pre>
           </div>
 
-          <p>The backbone is a lightweight ResNet-18, chosen for speed. On our Jetson Xavier NX, we hit around 30fps with ~85% detection accuracy on the test set — not competition-winning numbers, but solid for a student team still building out the rest of the pipeline.</p>
+          <p>The backbone is a lightweight ResNet-18, chosen for speed. On our Jetson Xavier NX, we hit around 30fps with ~85% detection accuracy on the test set, not competition-winning numbers, but solid for a student team still building out the rest of the pipeline.</p>
         </div>
 
         <figure class="case-image">
@@ -121,11 +121,11 @@ def process_lanes(image):
         </figure>
 
         <div class="case-section">
-          <h2>Year 2: System Integration (2023-2024)</h2>
+          <h2>Year 2: System Integration (2023 to 2024)</h2>
           <p>After my Formula SAE experience with CAN bus, I came back to AutoDrive on the system integration team. Different challenge, same car: making all the subsystems communicate reliably.</p>
           
           <h3>CAN Bus Deep Dive</h3>
-          <p>An autonomous vehicle is essentially a rolling network. Cameras, LiDAR, radar, GPS, IMU — all generating data that needs to reach the compute stack. Then commands flow back out to steering, throttle, brakes. Most of this happens over CAN bus, and understanding the message protocols became my specialty.</p>
+          <p>An autonomous vehicle is essentially a rolling network. Cameras, LiDAR, radar, GPS, IMU, all generating data that needs to reach the compute stack. Then commands flow back out to steering, throttle, brakes. Most of this happens over CAN bus, and understanding the message protocols became my specialty.</p>
           
           <div class="tech-grid">
             <div class="tech-item">
@@ -147,14 +147,14 @@ def process_lanes(image):
           </div>
 
           <h3>The Diagnostic Challenge</h3>
-          <p>When something breaks in an autonomous vehicle, it could be anywhere — sensor, network, compute, actuator. My job was building the tooling to isolate problems quickly. CAN sniffers, log analyzers, real-time dashboards. When messages stop flowing, you need to know which node died and why.</p>
+          <p>When something breaks in an autonomous vehicle, it could be anywhere, sensor, network, compute, actuator. My job was building the tooling to isolate problems quickly. CAN sniffers, log analyzers, real-time dashboards. When messages stop flowing, you need to know which node died and why.</p>
         </div>
 
         <div class="case-section">
           <h2>The Stories That Stick</h2>
           
           <h3>The Table Incident</h3>
-          <p>We were in the garage testing some new protocol changes. The team lead was in the driver's seat — safety protocols required someone ready to hit the emergency stop. We sent a test command. The car lurched forward, accelerated, and plowed straight into a workbench.</p>
+          <p>We were in the garage testing some new protocol changes. The team lead was in the driver's seat, safety protocols required someone ready to hit the emergency stop. We sent a test command. The car lurched forward, accelerated, and plowed straight into a workbench.</p>
           <p>Nobody was hurt (thankfully), and the car was fine (mostly). But we spent the next week tracing exactly what happened: a malformed CAN message that the vehicle ECU interpreted as "go." It was humbling. Autonomous vehicles aren't toys, and even in a controlled environment, things can go very wrong very fast.</p>
 
           <h3>The Great Fuse Hunt</h3>
@@ -184,7 +184,7 @@ def process_lanes(image):
             </div>
           </div>
 
-          <p><strong>How we got those numbers:</strong> The ~30fps comes from our Jetson Xavier NX running the UFLD model with TensorRT optimization (FP16 quantization, layer fusion). The ~85% accuracy is from our test set — annotated driving footage from around Kingston. Real-world performance varies with conditions, but that's what we could reliably measure.</p>
+          <p><strong>How we got those numbers:</strong> The ~30fps comes from our Jetson Xavier NX running the UFLD model with TensorRT optimization (FP16 quantization, layer fusion). The ~85% accuracy is from our test set, annotated driving footage from around Kingston. Real-world performance varies with conditions, but that's what we could reliably measure.</p>
         </div>
 
         <div class="case-section">

@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admission Coordinator Assistant | Yousef Alsaqa</title>
+  <meta name="description" content="Case study: A Tkinter and Selenium tool that semi-automates the admission decision workflow at Queen's, from data entry to document sign-off.">
+  <meta name="theme-color" content="#050508">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap Icons -->
+  <link href="vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link href="css/theme.css" rel="stylesheet">
+  <link href="css/pages/case-study.css" rel="stylesheet">
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="header" id="header">
+    <div class="header-inner">
+      <a href="index.html" class="header-logo">Yousef<span>.</span></a>
+      <nav class="header-nav" id="nav">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="projects.html" class="nav-link">Projects</a>
+        <a href="experience.html" class="nav-link">Experience</a>
+        <a href="mailto:21ymsa@queensu.ca" class="nav-link">Contact</a>
+      </nav>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="case-hero">
+      <div class="container">
+        <a href="projects.html" class="back-link">
+          <i class="bi bi-arrow-left"></i>
+          Back to projects
+        </a>
+        <h1>Admission Coordinator Assistant</h1>
+        <p class="subtitle">A Tkinter and Selenium tool that takes the entire admission decision workflow off the coordinator's hands except for the one part that still needs a human: reading the documents and calculating the average. Everything else gets handled automatically and the tool moves to the next student.</p>
+        
+        <div class="case-meta">
+          <div class="case-meta-item">
+            <span class="case-meta-label">Role</span>
+            <span class="case-meta-value">Sole Developer</span>
+          </div>
+          <div class="case-meta-item">
+            <span class="case-meta-label">Timeline</span>
+            <span class="case-meta-value">Jan 2026 to Present</span>
+          </div>
+          <div class="case-meta-item">
+            <span class="case-meta-label">Stack</span>
+            <span class="case-meta-value">Python, Tkinter, Selenium</span>
+          </div>
+          <div class="case-meta-item">
+            <span class="case-meta-label">Status</span>
+            <span class="case-meta-value">In daily use</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Content -->
+    <section class="section">
+      <div class="container case-content">
+        
+        <div class="case-section">
+          <h2>The Problem</h2>
+          <p>Reviewing an admission file isn't one job, it's about a dozen. The coordinator has to open a folder of documents, calculate an average from the transcripts, enter that average into PeopleSoft, sign the document off, possibly change the curriculum if the student is being moved between programs, possibly add or remove a document requirement on their record, then click through to the next student in the queue.</p>
+          <p>The actual judgment, looking at the transcripts and figuring out the average, is maybe 10% of the work. The other 90% is mechanical clicking that a computer should be doing. Multiply by hundreds of students.</p>
+        </div>
+
+        <div class="case-section">
+          <h2>The Solution</h2>
+          <p>I built a tool that handles everything except the part that requires actual judgment.</p>
+          
+          <h3>The New Workflow</h3>
+          <ol>
+            <li>Tool loads the next student in the queue and opens their documents</li>
+            <li>Coordinator reads the docs and calculates the average</li>
+            <li>Coordinator types the average into the tool</li>
+            <li>Tool does the rest: enters the data into PeopleSoft, signs the documents off, applies any curriculum changes, updates document requirements, and advances to the next student</li>
+          </ol>
+          <p>The coordinator's day goes from "open, search, type, click, click, sign, click, change curriculum, save, next" to "read, calculate, type number, repeat." The boring stuff is gone.</p>
+        </div>
+
+        <div class="case-section">
+          <h2>What It Handles</h2>
+          
+          <div class="tech-grid">
+            <div class="tech-item">
+              <h4>Document Opening</h4>
+              <p>Pulls the right documents for the next student in the queue and opens them in order so the coordinator can read straight through</p>
+            </div>
+            <div class="tech-item">
+              <h4>Data Entry</h4>
+              <p>Takes the calculated average and pushes it into the right PeopleSoft fields for the right application</p>
+            </div>
+            <div class="tech-item">
+              <h4>Document Sign-Off</h4>
+              <p>Marks documents as reviewed and signed off without manual clicking through each one</p>
+            </div>
+            <div class="tech-item">
+              <h4>Curriculum Changes</h4>
+              <p>Handles program transfers and curriculum updates as part of the same flow</p>
+            </div>
+            <div class="tech-item">
+              <h4>Document Requirements</h4>
+              <p>Adds, removes, or modifies document requirements on a student's record without leaving the tool</p>
+            </div>
+            <div class="tech-item">
+              <h4>Queue Management</h4>
+              <p>Auto-advances to the next student so there's no context switching back to PeopleSoft to find them</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="case-section">
+          <h2>How It's Built</h2>
+          
+          <h3>Tkinter Front End</h3>
+          <p>The coordinator-facing piece is a small Tkinter window: which student is up, what documents are loaded, where to type the average, what mode the tool is in (standard review, curriculum change, doc requirement update). Tkinter is unglamorous, but it ships, runs on whatever laptop the coordinator has, and doesn't need IT to approve a deployment.</p>
+
+          <h3>Selenium Back End</h3>
+          <p>Behind the scenes, Selenium drives PeopleSoft the way a coordinator would, with the same logged-in browser session. Each action (data entry, sign-off, curriculum change, requirement edit) is its own routine with its own retry and logging path.</p>
+
+          <h3>State Per Student</h3>
+          <p>Every student in the queue is a small state object: which docs are open, what's been entered, what's been signed off, what curriculum or requirement changes are pending. If anything fails partway through, the tool knows where it stopped and either retries or kicks the student into a manual-review pile so nothing falls silently through the cracks.</p>
+        </div>
+
+        <div class="case-section">
+          <h2>Built On Top of the Document Automation Script</h2>
+          <p>The original document-attachment script (the Selenium tool that just attached documents to records) was the seed. Once that proved the PeopleSoft side was automatable, this tool extended the same pattern across the rest of the workflow: reading queues, entering data, signing things off, moving things between programs.</p>
+          <p>The attachment script is still in daily use. The Coordinator Assistant is what came next, the same idea applied to everything else the role spends time on.</p>
+        </div>
+
+        <div class="case-section">
+          <h2>By the Numbers</h2>
+          
+          <div class="results-grid">
+            <div class="result-item">
+              <span class="result-number">~1,200</span>
+              <span class="result-label">Applications processed</span>
+            </div>
+            <div class="result-item">
+              <span class="result-number">1</span>
+              <span class="result-label">Coordinator using it (so far)</span>
+            </div>
+            <div class="result-item">
+              <span class="result-number">90%</span>
+              <span class="result-label">Of the workflow off the coordinator</span>
+            </div>
+            <div class="result-item">
+              <span class="result-number">Daily</span>
+              <span class="result-label">Usage frequency</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="case-section">
+          <h2>What's Next</h2>
+          <p>The tool is currently used by me, in my own role. The natural next step is rolling it out to other coordinators and using it as a training aid for new hires, since it enforces the workflow and removes the parts where new coordinators tend to make data-entry mistakes. That's a conversation for the coming months.</p>
+        </div>
+
+        <div class="case-section">
+          <h2>What I Learned</h2>
+          <ul>
+            <li><strong>Automate around the human, not the human.</strong> The coordinator's judgment is the valuable part. Build tools that hand off everything except that.</li>
+            <li><strong>Selenium is glue, not a strategy.</strong> No API access? Selenium works. But every Selenium step is a future maintenance bill, so log everything and design for graceful failure.</li>
+            <li><strong>Tools change roles.</strong> Once the mechanical work is gone, the role becomes "make decisions and keep the queue moving." That's a different (and better) job than it started as.</li>
+            <li><strong>Build it for one user first.</strong> Don't generalize until you've used it in your own role for months. Generalizing too early bakes in assumptions that don't survive contact with a second user.</li>
+          </ul>
+        </div>
+
+        <nav class="case-nav">
+          <a href="admission-analysis.html">
+            <i class="bi bi-arrow-left"></i>
+            Admission Analysis Dashboard
+          </a>
+          <a href="document-automation.html">
+            Next: Document Automation
+            <i class="bi bi-arrow-right"></i>
+          </a>
+        </nav>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-main">
+          <h2>Let's talk.</h2>
+          <p>I'm looking for full-time opportunities in robotics, automation, or anywhere I can build things that matter.</p>
+          <a href="mailto:21ymsa@queensu.ca" class="footer-email">
+            <i class="bi bi-envelope"></i>
+            21ymsa@queensu.ca
+          </a>
+        </div>
+        <div class="footer-links">
+          <a href="https://www.linkedin.com/in/yousef-alsaqa-b1ab4822b/" target="_blank">
+            <i class="bi bi-linkedin"></i>
+            LinkedIn
+          </a>
+          <a href="https://github.com/yousefalsaqa" target="_blank">
+            <i class="bi bi-github"></i>
+            GitHub
+          </a>
+          <a href="assets/Yousef_Alsaqa_Resume.pdf" target="_blank">
+            <i class="bi bi-file-earmark-text"></i>
+            Resume
+          </a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 Yousef Alsaqa</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    const navToggle = document.getElementById('navToggle');
+    const nav = document.getElementById('nav');
+    
+    navToggle.addEventListener('click', () => {
+      nav.classList.toggle('active');
+      navToggle.classList.toggle('active');
+    });
+
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+  </script>
+</body>
+</html>

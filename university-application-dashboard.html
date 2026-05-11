@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>University Application Dashboard | Yousef Alsaqa</title>
+  <meta name="description" content="Case study: A desktop dashboard exploring 5 years of all applications to Queen's, with feeder school and conversion analysis.">
+  <meta name="theme-color" content="#050508">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap Icons -->
+  <link href="vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link href="css/theme.css" rel="stylesheet">
+  <link href="css/pages/case-study.css" rel="stylesheet">
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="header" id="header">
+    <div class="header-inner">
+      <a href="index.html" class="header-logo">Yousef<span>.</span></a>
+      <nav class="header-nav" id="nav">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="projects.html" class="nav-link">Projects</a>
+        <a href="experience.html" class="nav-link">Experience</a>
+        <a href="mailto:21ymsa@queensu.ca" class="nav-link">Contact</a>
+      </nav>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="case-hero">
+      <div class="container">
+        <a href="projects.html" class="back-link">
+          <i class="bi bi-arrow-left"></i>
+          Back to projects
+        </a>
+        <h1>University Application Dashboard</h1>
+        <p class="subtitle">A desktop tool for exploring 5 years of every application to Queen's, not just the admitted ones. Country and regional filters, feeder school rankings, year-over-year conversion analysis, and exports the team actually uses.</p>
+        
+        <div class="case-meta">
+          <div class="case-meta-item">
+            <span class="case-meta-label">Role</span>
+            <span class="case-meta-value">Sole Developer</span>
+          </div>
+          <div class="case-meta-item">
+            <span class="case-meta-label">Timeline</span>
+            <span class="case-meta-value">May 2025 to Jan 2026</span>
+          </div>
+          <div class="case-meta-item">
+            <span class="case-meta-label">Stack</span>
+            <span class="case-meta-value">Python, Pandas, Tkinter, SQLite</span>
+          </div>
+          <div class="case-meta-item">
+            <span class="case-meta-label">Status</span>
+            <span class="case-meta-value">In use by team</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Content -->
+    <section class="section">
+      <div class="container case-content">
+        
+        <div class="case-section">
+          <h2>The Problem</h2>
+          <p>Working as a recruitment rep at Queen's, I had access to years of application data, every applicant who had ever applied, regardless of whether they got in. But it was all trapped in Excel exports. Brutal to work with. Every question required manual filtering and pivot tables.</p>
+          <p>"How many international students from the UAE applied to Engineering last year?" "What schools send us the most Commerce applicants?" "Which countries have the highest accept-and-enroll conversion rate?" Simple questions that took an hour to answer in Excel. And bigger questions, like which feeder schools are actually worth visiting on tour, never got answered at all.</p>
+        </div>
+
+        <figure class="case-image">
+          <img src="assets/university_application_dashboard.png" alt="School Application Analysis Dashboard interface">
+          <figcaption>The dashboard interface, with single-country and regional analysis modes</figcaption>
+        </figure>
+
+        <div class="case-section">
+          <h2>What It Does</h2>
+          <p>I pulled the Excel exports into SQLite (way faster for queries) and built a Tkinter desktop interface on top. The whole thing runs locally because the data is sensitive and IT was never going to hand me a server.</p>
+          
+          <h3>Filters You Can Set</h3>
+          <ul>
+            <li><strong>Analysis mode:</strong> Single country or regional rollup</li>
+            <li><strong>Country selector:</strong> Filter to one specific country, or leave blank for all</li>
+            <li><strong>Student type:</strong> Canadian, non-Canadian, or both</li>
+            <li><strong>Top N schools:</strong> How deep into the ranking to go (default 25)</li>
+            <li><strong>Output name and sheet name:</strong> So the export file lands where you want it for the report you're writing</li>
+          </ul>
+
+          <h3>Analysis Modes</h3>
+          <ul>
+            <li><strong>Standard analysis:</strong> A snapshot view, with feeder school rankings, application volume, and conversion rates for the selected filter</li>
+            <li><strong>Year-over-year analysis:</strong> Same view, but trended across all 5 years so you can see what's growing, what's declining, and where the recruitment effort actually moved the needle</li>
+          </ul>
+        </div>
+
+        <div class="case-section">
+          <h2>What You Can Answer With It</h2>
+          <ul>
+            <li><strong>Demographics:</strong> Country of origin, citizenship status, which high school they attended</li>
+            <li><strong>Application data:</strong> Programs applied to, admission status (accepted, rejected, waitlisted), enrollment outcome</li>
+            <li><strong>Responses:</strong> Why they accepted or declined offers, where else they applied</li>
+            <li><strong>Conversion:</strong> What percentage of applications from a given school or country actually result in enrolled students</li>
+          </ul>
+          <p>Instead of spending an hour in Excel, you can answer these in seconds and export the result straight to a named sheet. The team started using it for reports and presentations almost immediately.</p>
+        </div>
+
+        <div class="case-section">
+          <h2>Technical Stack</h2>
+          
+          <div class="tech-grid">
+            <div class="tech-item">
+              <h4>Python and Tkinter</h4>
+              <p>Desktop app for sensitive internal data, no cloud anything</p>
+            </div>
+            <div class="tech-item">
+              <h4>Pandas and openpyxl</h4>
+              <p>Wrangling brutal Excel exports into usable data</p>
+            </div>
+            <div class="tech-item">
+              <h4>SQLite</h4>
+              <p>Local database for fast querying instead of repeatedly filtering huge dataframes in memory</p>
+            </div>
+            <div class="tech-item">
+              <h4>Matplotlib</h4>
+              <p>Embedded visualizations and bar charts inside the Tkinter window</p>
+            </div>
+            <div class="tech-item">
+              <h4>Excel Export</h4>
+              <p>Named sheets in named files so reports drop straight into the team's templates</p>
+            </div>
+            <div class="tech-item">
+              <h4>Config Driven</h4>
+              <p>JSON config so adding new schools, countries, or programs is data, not code</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="case-section">
+          <h2>By the Numbers</h2>
+          
+          <div class="results-grid">
+            <div class="result-item">
+              <span class="result-number">170K</span>
+              <span class="result-label">Applications analyzed</span>
+            </div>
+            <div class="result-item">
+              <span class="result-number">5</span>
+              <span class="result-label">Years of data</span>
+            </div>
+            <div class="result-item">
+              <span class="result-number">All</span>
+              <span class="result-label">Applicants, not just admits</span>
+            </div>
+            <div class="result-item">
+              <span class="result-number">~1 hr → sec</span>
+              <span class="result-label">Question turnaround time</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="case-section">
+          <h2>The Real Win</h2>
+          <p>The interesting thing about this tool isn't the tech, it's what changed once people had it. Questions that used to die because nobody had time to answer them ("is the East Asia tour still worth it?", "are we converting from this region or just hearing from them?") suddenly had answers. The conversation shifts when the data is one click away.</p>
+          <p>Once you can ask the question, you start asking better ones.</p>
+        </div>
+
+        <div class="case-section">
+          <h2>What I Learned</h2>
+          <ul>
+            <li><strong>Excel is brutal at scale.</strong> 170K rows across multiple files, never again. SQLite saved my sanity.</li>
+            <li><strong>Build tools that answer questions, not tools that show data.</strong> Users don't care about your database schema. They have a question and a deadline.</li>
+            <li><strong>Local desktop apps are fine.</strong> Not everything needs to be a web app. Tkinter looks dated, runs everywhere, and IT doesn't have to approve anything.</li>
+            <li><strong>Export early, export often.</strong> Half the value of a dashboard is dropping the result straight into the report someone is already writing.</li>
+          </ul>
+        </div>
+
+        <nav class="case-nav">
+          <a href="projects.html">
+            <i class="bi bi-arrow-left"></i>
+            All Projects
+          </a>
+          <a href="admission-analysis.html">
+            Next: Admission Analysis Dashboard
+            <i class="bi bi-arrow-right"></i>
+          </a>
+        </nav>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-main">
+          <h2>Let's talk.</h2>
+          <p>I'm looking for full-time opportunities in robotics, automation, or anywhere I can build things that matter.</p>
+          <a href="mailto:21ymsa@queensu.ca" class="footer-email">
+            <i class="bi bi-envelope"></i>
+            21ymsa@queensu.ca
+          </a>
+        </div>
+        <div class="footer-links">
+          <a href="https://www.linkedin.com/in/yousef-alsaqa-b1ab4822b/" target="_blank">
+            <i class="bi bi-linkedin"></i>
+            LinkedIn
+          </a>
+          <a href="https://github.com/yousefalsaqa" target="_blank">
+            <i class="bi bi-github"></i>
+            GitHub
+          </a>
+          <a href="assets/Yousef_Alsaqa_Resume.pdf" target="_blank">
+            <i class="bi bi-file-earmark-text"></i>
+            Resume
+          </a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 Yousef Alsaqa</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    const navToggle = document.getElementById('navToggle');
+    const nav = document.getElementById('nav');
+    
+    navToggle.addEventListener('click', () => {
+      nav.classList.toggle('active');
+      navToggle.classList.toggle('active');
+    });
+
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+  </script>
+</body>
+</html>

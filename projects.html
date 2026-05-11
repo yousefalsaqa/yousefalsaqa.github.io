@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Projects | Yousef Alsaqa</title>
-  <meta name="description" content="Engineering projects by Yousef Alsaqa — robotics, autonomous systems, machine learning, and automation.">
+  <meta name="description" content="Engineering projects by Yousef Alsaqa, robotics, autonomous systems, machine learning, and automation.">
   <meta name="theme-color" content="#050508">
 
   <!-- Fonts -->
@@ -44,7 +44,7 @@
     <section class="projects-hero">
       <div class="container">
         <h1>Projects<span>.</span></h1>
-        <p>Systems I've built — from medical simulators to autonomous vehicles to scripts that save me hours every week.</p>
+        <p>Systems I've built, from medical simulators to autonomous vehicles to scripts that save me hours every week.</p>
       </div>
     </section>
 
@@ -83,15 +83,15 @@
             </div>
           </div>
 
-          <!-- Admission Analysis -->
-          <div class="project-card" data-category="data">
+          <!-- Admission Analysis Dashboard -->
+          <div class="project-card" data-category="ml">
             <div class="project-card-image">
               <img src="admission_analysis_Dashboard.jpg" alt="Admission Analysis Dashboard">
             </div>
             <div class="project-card-content">
-              <span class="project-card-category">Data Analysis</span>
-              <h3>Admission Analysis Dashboards</h3>
-              <p>170K apps + 35K Commerce students. Random Forest found supp app had negative correlation. Thresholds went up.</p>
+              <span class="project-card-category">Machine Learning</span>
+              <h3>Admission Analysis Dashboard</h3>
+              <p>Random Forest predictor across 5,600 Commerce and 8,700 Engineering students against first-year GPA. Commerce findings raised admission thresholds.</p>
               <div class="project-card-tags">
                 <span>Python</span>
                 <span>Pandas</span>
@@ -99,6 +99,50 @@
                 <span>SQLite</span>
               </div>
               <a href="admission-analysis.html" class="project-card-link">
+                View case study
+                <i class="bi bi-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- University Application Dashboard -->
+          <div class="project-card" data-category="data">
+            <div class="project-card-image">
+              <img src="assets/university_application_dashboard.png" alt="University Application Dashboard">
+            </div>
+            <div class="project-card-content">
+              <span class="project-card-category">Data Analysis</span>
+              <h3>University Application Dashboard</h3>
+              <p>5 years, ~170K applications, all applicants (not just admits). Feeder schools, regional analysis, year-over-year conversion. In daily use by the team.</p>
+              <div class="project-card-tags">
+                <span>Python</span>
+                <span>Tkinter</span>
+                <span>Pandas</span>
+                <span>SQLite</span>
+              </div>
+              <a href="university-application-dashboard.html" class="project-card-link">
+                View case study
+                <i class="bi bi-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Admission Coordinator Assistant -->
+          <div class="project-card" data-category="automation">
+            <div class="project-card-image placeholder">
+              <i class="bi bi-clipboard-check"></i>
+            </div>
+            <div class="project-card-content">
+              <span class="project-card-category">Automation</span>
+              <h3>Admission Coordinator Assistant</h3>
+              <p>Tkinter and Selenium tool that takes the entire admission decision workflow off the coordinator except for calculating the average. ~1,200 applications processed.</p>
+              <div class="project-card-tags">
+                <span>Python</span>
+                <span>Tkinter</span>
+                <span>Selenium</span>
+                <span>PeopleSoft</span>
+              </div>
+              <a href="admission-coordinator-assistant.html" class="project-card-link">
                 View case study
                 <i class="bi bi-arrow-right"></i>
               </a>
@@ -113,7 +157,7 @@
             <div class="project-card-content">
               <span class="project-card-category">Automation</span>
               <h3>Document Automation</h3>
-              <p>~500 docs/day → press enter and walk away. Runs daily in my current role with error logging.</p>
+              <p>The original Selenium attacher. ~500 docs/day, press enter and walk away. The seed that became the Coordinator Assistant.</p>
               <div class="project-card-tags">
                 <span>Python</span>
                 <span>Selenium</span>
@@ -134,7 +178,7 @@
             <div class="project-card-content">
               <span class="project-card-category">Autonomous Vehicles</span>
               <h3>Queen's AutoDrive</h3>
-              <p>Two years: lane perception (NN training) then system integration (CAN bus). Car hit a table once.</p>
+              <p>Two years on the team. Lane perception (NN training) the first year, system integration (CAN bus) the second. Car hit a table once.</p>
               <div class="project-card-tags">
                 <span>Python</span>
                 <span>ROS</span>
@@ -178,7 +222,7 @@
             <div class="project-card-content">
               <span class="project-card-category">Machine Learning</span>
               <h3>EII Predictor</h3>
-              <p>99.3% accuracy predicting EII for a 4-plant chemical refinery. 2.5 weeks of manual work → minutes.</p>
+              <p>99.3% accuracy predicting EII for a 4-plant chemical refinery. 2.5 weeks of manual work down to minutes.</p>
               <div class="project-card-tags">
                 <span>Python</span>
                 <span>PyTorch</span>
@@ -220,7 +264,7 @@
             <div class="project-card-content">
               <span class="project-card-category">Robotics</span>
               <h3>Terrabot</h3>
-              <p>Where I fell in love with integration. SLAM, CO2, prox sensors, controller — all working together in ROS.</p>
+              <p>Where I fell in love with integration. SLAM, CO2, prox sensors, controller, all working together in ROS.</p>
               <div class="project-card-tags">
                 <span>ROS</span>
                 <span>Python</span>
@@ -315,7 +359,6 @@
 
   <!-- Scripts -->
   <script>
-    // Mobile nav toggle
     const navToggle = document.getElementById('navToggle');
     const nav = document.getElementById('nav');
     
@@ -324,7 +367,6 @@
       navToggle.classList.toggle('active');
     });
 
-    // Header scroll effect
     const header = document.getElementById('header');
     window.addEventListener('scroll', () => {
       if (window.scrollY > 50) {
@@ -334,7 +376,6 @@
       }
     });
 
-    // Filter functionality
     const filterBtns = document.querySelectorAll('.filter-btn');
     const projectCards = document.querySelectorAll('.project-card');
 
