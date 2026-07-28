@@ -4,13 +4,15 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document Automation | Yousef Alsaqa</title>
-  <meta name="description" content="Case study: A Selenium script that automates document attachment for university admissions.">
-  <meta name="theme-color" content="#050508">
+  <meta name="description" content="Case study: A PeopleSoft document-attachment bot that processes thousands of admission documents unattended, with a filename protocol as its entire interface.">
+  <meta name="theme-color" content="#F1EEE6">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
   <!-- Bootstrap Icons -->
   <link href="vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
@@ -24,17 +26,20 @@
   <!-- Header -->
   <header class="header" id="header">
     <div class="header-inner">
-      <a href="index.html" class="header-logo">Yousef<span>.</span></a>
-      <nav class="header-nav" id="nav">
-        <a href="index.html" class="nav-link">Home</a>
-        <a href="projects.html" class="nav-link">Projects</a>
-        <a href="experience.html" class="nav-link">Experience</a>
-        <a href="mailto:21ymsa@queensu.ca" class="nav-link">Contact</a>
+      <a href="index.html" class="header-logo">
+        <span class="header-logo-name">YOUSEF ALSAQA</span>
+        <span class="header-logo-role">MECHATRONICS / SYSTEMS</span>
+      </a>
+      <nav class="header-nav" id="nav" aria-label="Main">
+        <a href="index.html#systems" class="nav-link">Systems</a>
+        <a href="index.html#experience" class="nav-link">Experience</a>
+        <a href="index.html#field-notes" class="nav-link">Field Notes</a>
+        <a href="index.html#about" class="nav-link">About</a>
+        <a href="index.html#contact" class="nav-link">Contact</a>
       </nav>
-      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
-        <span></span>
-        <span></span>
-        <span></span>
+      <div class="header-status" id="headerStatus"><span class="header-status-text">FIELD NOTE / DOCUMENT AUTOMATION</span></div>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
       </button>
     </div>
   </header>
@@ -48,8 +53,8 @@
           Back to projects
         </a>
         <h1>Document Automation</h1>
-        <p class="subtitle">A Selenium script that turns an 8-hour day of manual document attachment into "press enter and walk away." ~500 documents processed while I do actual work.</p>
-        
+        <p class="subtitle">A PeopleSoft document-attachment bot (<code>peoplesoft_attach_bot.py</code>) that watches a folder for scanned admission documents and attaches each one to the right student record, unattended, batch after batch. Started as a personal script during the Admission Coordinator role, now the office's main way of attaching documents, 20,000 to 30,000 documents in a single admission cycle.</p>
+
         <div class="case-meta">
           <div class="case-meta-item">
             <span class="case-meta-label">Role</span>
@@ -61,11 +66,11 @@
           </div>
           <div class="case-meta-item">
             <span class="case-meta-label">Stack</span>
-            <span class="case-meta-value">Python, Selenium, ChromeDriver</span>
+            <span class="case-meta-value">Python, Selenium WebDriver, pandas</span>
           </div>
           <div class="case-meta-item">
             <span class="case-meta-label">Status</span>
-            <span class="case-meta-value">In daily use</span>
+            <span class="case-meta-value">In daily, office-wide use</span>
           </div>
         </div>
       </div>
@@ -74,135 +79,85 @@
     <!-- Content -->
     <section class="section">
       <div class="container case-content">
-        
+
         <div class="case-section">
           <h2>The Problem</h2>
-          <p>As an Admission Coordinator, part of my job is attaching documents to student records in PeopleSoft. Transcripts, test scores, recommendation letters, they come into a shared folder and need to be linked to the right student application.</p>
-          <p>The manual process:</p>
-          <ol>
-            <li>Open a document from the shared folder</li>
-            <li>Find the student ID in the filename</li>
-            <li>Search for that student in PeopleSoft</li>
-            <li>Navigate to their application</li>
-            <li>Upload the document</li>
-            <li>Repeat ~500 times a day</li>
-          </ol>
-          <p>A full 8-hour day of clicking. Open, search, click, upload, next. Mind-numbing repetition that a computer should be doing.</p>
+          <p>Scanned admission documents, transcripts, IB and GCSE final results, English test scores, and more, land in a shared folder and need to be attached to the right student's record in PeopleSoft's Campus Solutions "General Materials" component. Manually, that's open a document, find the student ID, search PeopleSoft, navigate to their record, upload, repeat, hundreds of times a day.</p>
         </div>
 
         <div class="case-section">
-          <h2>The Solution</h2>
-          <p>I wrote a Python script using Selenium that automates the entire workflow. Point it at a folder of documents, let it run, come back to find everything attached.</p>
-          
-          <h3>How It Works</h3>
-          <ol>
-            <li><strong>Parse filenames:</strong> Extract student ID and document type from standardized filenames</li>
-            <li><strong>Authenticate:</strong> Log into PeopleSoft (handles login with user input once at start)</li>
-            <li><strong>Search and navigate:</strong> Find each student's application automatically</li>
-            <li><strong>Upload:</strong> Attach the document to the correct record</li>
-            <li><strong>Log everything:</strong> Track successes, failures, and edge cases</li>
-          </ol>
-        </div>
+          <h2>The Solution: a Filename Protocol as the Interface</h2>
+          <p>The bot's entire interface is a filename convention: <code>DOCCODE-YYYYMMDD-STAFFID-STUDENTID.pdf</code>. Every document that reaches the folder gets parsed by <code>parseFileName()</code>, which strictly validates that pattern before the bot touches PeopleSoft at all. A malformed filename fails fast and cheap, before a browser session ever opens, instead of failing halfway through one.</p>
+          <p>There's no GUI. It runs from a terminal and is designed to be handed off to non-programmer admissions staff, there's a dedicated <code>SETUP GUIDE.txt</code> for that handoff.</p>
 
-        <div class="case-code">
+          <h3>A Folder-Based State Machine</h3>
+          <p>No database. Just folders and a CSV:</p>
+          <div class="case-code">
 <pre>
-# Core workflow (simplified)
-def process_document(filepath):
-    student_id, doc_type = parse_filename(filepath)
-    
-    # Search for student
-    driver.get(f"{PEOPLESOFT_URL}/search?q={student_id}")
-    wait_for_results()
-    
-    # Navigate to application
-    click_first_result()
-    navigate_to_documents_tab()
-    
-    # Upload
-    upload_file(filepath)
-    
-    # Verify and log
-    if verify_upload():
-        log_success(student_id, doc_type)
-        move_to_completed(filepath)
-    else:
-        log_failure(student_id, doc_type)
-        move_to_review(filepath)
+incoming/   &rarr;  processed/   (success)
+            &rarr;  error/       (failure)
+
+every outcome appended to ps_attachment_log.csv
 </pre>
+          </div>
+          <p>That log is the full audit trail: who attached what, when, and why anything failed, without needing a database.</p>
         </div>
 
         <div class="case-section">
-          <h2>Technical Challenges</h2>
-          
-          <h3>PeopleSoft's Dynamic DOM</h3>
-          <p>PeopleSoft loads content dynamically with unpredictable element IDs. I couldn't rely on static selectors. Solution: wait for specific text content and use relative XPath queries based on visible labels.</p>
-
-          <h3>Rate Limiting</h3>
-          <p>Too fast and PeopleSoft throttles you. Too slow and you're not saving time. I added randomized delays (2 to 5 seconds between actions) that feel "human" and avoid triggering rate limits.</p>
-
-          <h3>Error Recovery</h3>
-          <p>Networks fail. Pages timeout. Students don't exist. The script handles all of this gracefully:</p>
-          <ul>
-            <li>Automatic retry on network errors (up to 3 times)</li>
-            <li>Failed documents moved to an "errors" folder</li>
-            <li>Detailed CSV log, every failure includes why it failed, so I can fix the root cause instead of just retrying blindly</li>
-            <li>Resume from where it left off if interrupted</li>
-          </ul>
-
-          <h3>Filename Parsing</h3>
-          <p>Document filenames aren't always consistent. I built a parser that handles multiple formats:</p>
-          <ul>
-            <li><code>12345678_Transcript.pdf</code></li>
-            <li><code>Transcript_12345678.pdf</code></li>
-            <li><code>12345678 - Official Transcript (1).pdf</code></li>
-          </ul>
+          <h2>Fighting PeopleSoft's Frame Structure</h2>
+          <p>PeopleSoft renders all of its real content inside nested iframes (<code>ptifrmtgtframe</code> &rarr; <code>TargetContent</code> &rarr; <code>main</code>), and every PeopleSoft-triggered page refresh kicks the driver back out to the top frame. <code>switchToIframeIfPresent()</code> re-enters the correct frame after every single refresh before the next interaction can happen.</p>
+          <p>On top of that, each file gets up to <code>maxRetries</code> attempts. A failed attempt reports back whether the browser landed in a confirmed-good state (sitting on the search page) or an unknown one, and the next file only pays for a full page reload if recovery is actually needed, otherwise it reuses the page that's already loaded. That distinction is what made the biggest performance fix (below) possible to find and to trust.</p>
         </div>
 
         <div class="case-section">
-          <h2>Impact</h2>
-          
+          <h2>Three Bugs Worth Walking Through</h2>
+
+          <h3>The Slowdown: Root-Causing Instead of Guessing</h3>
+          <p>The bot was intermittently "insanely slow" compared to using PeopleSoft by hand. Instead of guessing at a fix, I diagnosed it by systematically eliminating variables using Chrome DevTools network timing: ruled out client-side rendering, ruled out bot-detection or WAF fingerprinting (tested by stripping Selenium's automation signature and comparing), ruled out CPU or resource contention (verified in Task Manager), one variable at a time. The actual cause: a full browser-profile reload was firing on every single file instead of once per batch, needlessly re-paying PeopleSoft's expensive portal-chrome initialization (nav bar, browser-check iScripts) for every student instead of once.</p>
+
+          <h3>The Race Condition That Reload Fix Uncovered</h3>
+          <p>PeopleSoft assigns an incrementing ID to its file-upload modal iframe (<code>ptModFrame_0</code>, <code>_1</code>, <code>_2</code>, ...) that only resets on a full page reload. Once the redundant-reload fix above stopped reloading between files, hardcoded exact-ID matching started intermittently failing, because the counter had moved past whatever ID the code expected. Fixed by matching iframes by ID prefix instead of an exact value, so it works no matter where the counter currently sits, a small but real lesson in not hardcoding assumptions about server-generated IDs.</p>
+
+          <h3>The Save-Confirmation Race</h3>
+          <p>The bot was clicking "Return to Search" before PeopleSoft's save had actually finished server-side, which triggered a spurious "unsaved changes" popup. Fixed by waiting on PeopleSoft's own asynchronous status indicator, an <code>aria-live</code> region that flips to "Saved", instead of a fixed sleep, and specifically waiting for it inside the correct iframe, since PeopleSoft's transactional pages keep their own internal document context separate from the outer portal chrome.</p>
+        </div>
+
+        <div class="case-section">
+          <h2>By the Numbers</h2>
+
           <div class="results-grid">
             <div class="result-item">
+              <span class="result-number">20&ndash;30K</span>
+              <span class="result-label">Documents in a single admission cycle</span>
+            </div>
+            <div class="result-item">
               <span class="result-number">~500</span>
-              <span class="result-label">Documents per day</span>
+              <span class="result-label">Docs/day when it was a personal AC tool</span>
             </div>
             <div class="result-item">
-              <span class="result-number">8hr → 0</span>
-              <span class="result-label">Manual time</span>
+              <span class="result-number">8hr &rarr; 0</span>
+              <span class="result-label">Manual time per batch</span>
             </div>
             <div class="result-item">
-              <span class="result-number">1 sec</span>
-              <span class="result-label">To start it running</span>
-            </div>
-            <div class="result-item">
-              <span class="result-number">Daily</span>
-              <span class="result-label">Usage frequency</span>
+              <span class="result-number">Office-wide</span>
+              <span class="result-label">Now the office's main way to attach documents</span>
             </div>
           </div>
-
-          <p>I hit enter, walk away, and the script handles the day's documents while I do work that actually requires a brain. The error folder usually has a handful that need manual attention, students who withdrew, filename typos, corrupt files. That's maybe 10 minutes of cleanup instead of 8 hours of clicking.</p>
-        </div>
-
-        <div class="case-section">
-          <h2>The Lesson: Automation Is a Conversation</h2>
-          <p>Here's what I didn't expect: automation changes your relationship with a process. Before the script, I'd click through documents without thinking. After? I started noticing patterns. Why do these files keep failing? Because the naming convention from this source is inconsistent. Why are these taking longer? Because that PeopleSoft page loads slower than others.</p>
-          <p>The script forced me to understand the process deeply, every edge case, every failure mode. And that understanding led to improvements beyond just the automation. I started pushing back on inconsistent naming conventions. I flagged slow pages to IT. The automation wasn't just about saving time; it was about exposing everything that was broken in the workflow.</p>
-          <p>That's the thing about automation: it doesn't hide problems, it amplifies them. Every exception you have to handle is a question about why that exception exists in the first place.</p>
         </div>
 
         <div class="case-section">
           <h2>What I Learned</h2>
           <ul>
-            <li><strong>Automation exposes broken processes.</strong> If your script needs 50 special cases, maybe the process needs fixing, not just automating.</li>
-            <li><strong>Logging is non-negotiable.</strong> A CSV of failures with reasons means I spend 10 minutes fixing root causes instead of hours re-running blind.</li>
-            <li><strong>Selenium isn't elegant, but it works.</strong> No API access? No problem. If a human can click it, Selenium can click it.</li>
+            <li><strong>Eliminate variables systematically, don't guess.</strong> The slowdown looked like a dozen possible causes. Ruling each one out methodically with real measurements (DevTools timing, Task Manager, stripped automation signatures) found the actual cause, a redundant reload, in a way guessing never would have.</li>
+            <li><strong>Don't hardcode assumptions about server-generated IDs.</strong> The modal-iframe race only existed because the code assumed an exact ID instead of a pattern. Fixing the reload bug exposed it immediately.</li>
+            <li><strong>Wait on the system's own state, not a timer.</strong> Fixed sleeps are guesses about timing that will eventually be wrong. Waiting on PeopleSoft's actual save-status indicator is correct regardless of how fast or slow that particular save happens to be.</li>
           </ul>
         </div>
 
         <nav class="case-nav">
           <a href="admission-analysis.html">
             <i class="bi bi-arrow-left"></i>
-            Admission Analysis
+            Universal Admission Dashboard
           </a>
           <a href="projects.html">
             All Projects
@@ -214,35 +169,21 @@ def process_document(filepath):
   </main>
 
   <!-- Footer -->
-  <footer class="footer">
+  <footer class="footer" id="contact">
     <div class="container">
       <div class="footer-content">
         <div class="footer-main">
-          <h2>Let's talk.</h2>
-          <p>I'm looking for full-time opportunities in robotics, automation, or anywhere I can build things that matter.</p>
-          <a href="mailto:21ymsa@queensu.ca" class="footer-email">
-            <i class="bi bi-envelope"></i>
-            21ymsa@queensu.ca
-          </a>
+          <h2>Have a complicated system that needs to work?</h2>
+          <p>I'm interested in robotics, automation, embedded systems, and engineering roles where software meets the physical world.</p>
+          <a href="mailto:21ymsa@queensu.ca" class="footer-email"><i class="bi bi-envelope"></i> 21ymsa@queensu.ca</a>
         </div>
         <div class="footer-links">
-          <a href="https://www.linkedin.com/in/yousef-alsaqa-b1ab4822b/" target="_blank">
-            <i class="bi bi-linkedin"></i>
-            LinkedIn
-          </a>
-          <a href="https://github.com/yousefalsaqa" target="_blank">
-            <i class="bi bi-github"></i>
-            GitHub
-          </a>
-          <a href="assets/Yousef_Alsaqa_Resume.pdf" target="_blank">
-            <i class="bi bi-file-earmark-text"></i>
-            Resume
-          </a>
+          <a href="https://www.linkedin.com/in/yousef-alsaqa-b1ab4822b/" target="_blank" rel="noopener"><i class="bi bi-linkedin"></i> LinkedIn</a>
+          <a href="https://github.com/yousefalsaqa" target="_blank" rel="noopener"><i class="bi bi-github"></i> GitHub</a>
+          <a href="assets/Yousef_Alsaqa_Resume.pdf" target="_blank"><i class="bi bi-file-earmark-text"></i> Résumé</a>
         </div>
       </div>
-      <div class="footer-bottom">
-        <p>© 2026 Yousef Alsaqa</p>
-      </div>
+      <div class="footer-bottom"><p>© 2026 Yousef Alsaqa · Kingston, Canada</p></div>
     </div>
   </footer>
 
@@ -250,21 +191,19 @@ def process_document(filepath):
   <script>
     const navToggle = document.getElementById('navToggle');
     const nav = document.getElementById('nav');
-    
     navToggle.addEventListener('click', () => {
-      nav.classList.toggle('active');
-      navToggle.classList.toggle('active');
+      const open = nav.classList.toggle('active');
+      navToggle.classList.toggle('active', open);
+      navToggle.setAttribute('aria-expanded', open);
     });
-
+    nav.querySelectorAll('.nav-link').forEach(l => l.addEventListener('click', () => {
+      nav.classList.remove('active'); navToggle.classList.remove('active');
+      navToggle.setAttribute('aria-expanded', 'false');
+    }));
     const header = document.getElementById('header');
     window.addEventListener('scroll', () => {
-      if (window.scrollY > 50) {
-        header.classList.add('scrolled');
-      } else {
-        header.classList.remove('scrolled');
-      }
-    });
+      header.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
   </script>
 </body>
 </html>
-

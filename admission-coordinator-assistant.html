@@ -4,13 +4,17 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admission Coordinator Assistant | Yousef Alsaqa</title>
-  <meta name="description" content="Case study: A Tkinter and Selenium tool that semi-automates the admission decision workflow at Queen's, from data entry to document sign-off.">
-  <meta name="theme-color" content="#050508">
+  <meta name="description" content="Workflow transformation case study: a Tkinter app driving five parallel PeopleSoft browser sessions so an evaluator reads an admission file and types one number. IB, CBSE/ISC, GCSE, and CEGEP curricula.">
+  <meta name="theme-color" content="#F1EEE6">
+
+  <!-- Favicons -->
+  <link rel="icon" href="assets/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
   <!-- Bootstrap Icons -->
   <link href="vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
@@ -18,23 +22,251 @@
   <!-- Stylesheets -->
   <link href="css/theme.css" rel="stylesheet">
   <link href="css/pages/case-study.css" rel="stylesheet">
+
+  <!-- Page-unique styling: process map + session ledger -->
+  <style>
+    /* ---------- Process map: manual chain vs automated pipeline ---------- */
+    .process-map {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border: 1px solid var(--hairline);
+      background: var(--paper);
+      margin: clamp(2rem, 5vw, 3rem) 0 0;
+    }
+
+    .pm-col {
+      padding: 1.5rem 1.5rem 1.75rem;
+      min-width: 0;
+    }
+
+    .pm-col + .pm-col {
+      border-left: 1px solid var(--hairline);
+      background: var(--paper-2);
+    }
+
+    .pm-head {
+      font-family: var(--font-mono);
+      font-size: 0.66rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.13em;
+      color: var(--graphite);
+      padding-bottom: 0.85rem;
+      margin-bottom: 1.1rem;
+      border-bottom: 1px solid var(--hairline);
+    }
+
+    /* Manual chain: a long counted list, one student at a time */
+    .pm-steps {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      counter-reset: pmstep;
+    }
+
+    .pm-steps li {
+      counter-increment: pmstep;
+      position: relative;
+      font-size: 0.85rem;
+      line-height: 1.55;
+      color: var(--carbon);
+      padding: 0 0 1rem 2.1rem;
+      margin: 0;
+    }
+
+    .pm-steps li::before {
+      content: counter(pmstep, decimal-leading-zero);
+      position: absolute;
+      left: 0;
+      top: 0.15em;
+      font-family: var(--font-mono);
+      font-size: 0.64rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      color: var(--graphite);
+    }
+
+    /* the chain line */
+    .pm-steps li::after {
+      content: '';
+      position: absolute;
+      left: 0.55rem;
+      top: 1.35em;
+      bottom: 0.25rem;
+      width: 1px;
+      background: var(--hairline);
+    }
+
+    .pm-steps li:last-child::after {
+      display: none;
+    }
+
+    .pm-repeat {
+      font-family: var(--font-mono);
+      font-size: 0.66rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--graphite);
+      margin-top: 0.5rem;
+      padding-left: 2.1rem;
+    }
+
+    /* Pipeline: stages flowing downward */
+    .pm-stage {
+      border: 1px solid var(--hairline);
+      background: var(--paper);
+      padding: 0.7rem 0.9rem;
+    }
+
+    .pm-stage-label {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--graphite);
+      margin-bottom: 0.2rem;
+    }
+
+    .pm-stage-text {
+      font-size: 0.85rem;
+      line-height: 1.5;
+      color: var(--carbon);
+    }
+
+    .pm-stage.pm-human {
+      border-left: 2px solid var(--signal);
+    }
+
+    .pm-stage.pm-human .pm-stage-label {
+      color: var(--signal);
+    }
+
+    .pm-flow-arrow {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--graphite);
+      padding: 0.3rem 0 0.3rem 0.9rem;
+      line-height: 1;
+    }
+
+    /* Fan-out block: the five sessions */
+    .pm-sessions {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 4px;
+    }
+
+    .pm-sessions li {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 0.75rem;
+      align-items: baseline;
+      border: 1px solid var(--hairline);
+      background: var(--paper);
+      padding: 0.45rem 0.9rem;
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: var(--carbon);
+    }
+
+    .pm-sessions .pm-session-role {
+      font-family: var(--font-mono);
+      font-size: 0.6rem;
+      font-weight: 400;
+      text-transform: none;
+      letter-spacing: 0.02em;
+      color: var(--graphite);
+      text-align: right;
+    }
+
+    .pm-map-caption {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      line-height: 1.6;
+      letter-spacing: 0.02em;
+      color: var(--graphite);
+      border: 1px solid var(--hairline);
+      border-top: none;
+      background: var(--paper);
+      padding: 0.75rem 1rem;
+      margin: 0 0 clamp(2rem, 5vw, 3rem);
+    }
+
+    @media (max-width: 720px) {
+      .process-map {
+        grid-template-columns: 1fr;
+      }
+
+      .pm-col + .pm-col {
+        border-left: none;
+        border-top: 1px solid var(--hairline);
+      }
+    }
+
+    /* Small mono data table for the curriculum rules */
+    .rules-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: 0.85rem;
+    }
+
+    .rules-table th {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--graphite);
+      text-align: left;
+      padding: 0.5rem 1.25rem 0.5rem 0;
+      border-bottom: 1px solid var(--carbon);
+    }
+
+    .rules-table td {
+      padding: 0.6rem 1.25rem 0.6rem 0;
+      border-bottom: 1px solid var(--hairline);
+      vertical-align: top;
+      line-height: 1.55;
+    }
+
+    .rules-table td:first-child {
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+      color: var(--carbon);
+    }
+  </style>
 </head>
 
 <body>
   <!-- Header -->
   <header class="header" id="header">
     <div class="header-inner">
-      <a href="index.html" class="header-logo">Yousef<span>.</span></a>
-      <nav class="header-nav" id="nav">
-        <a href="index.html" class="nav-link">Home</a>
-        <a href="projects.html" class="nav-link">Projects</a>
-        <a href="experience.html" class="nav-link">Experience</a>
-        <a href="mailto:21ymsa@queensu.ca" class="nav-link">Contact</a>
+      <a href="index.html" class="header-logo">
+        <span class="header-logo-name">YOUSEF ALSAQA</span>
+        <span class="header-logo-role">MECHATRONICS / SYSTEMS</span>
+      </a>
+      <nav class="header-nav" id="nav" aria-label="Main">
+        <a href="index.html#systems" class="nav-link">Systems</a>
+        <a href="index.html#experience" class="nav-link">Experience</a>
+        <a href="index.html#field-notes" class="nav-link">Field Notes</a>
+        <a href="index.html#about" class="nav-link">About</a>
+        <a href="index.html#contact" class="nav-link">Contact</a>
       </nav>
-      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
-        <span></span>
-        <span></span>
-        <span></span>
+      <div class="header-status" id="headerStatus"><span class="header-status-text">SYSTEM 03 / COORDINATOR ASSISTANT</span></div>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
       </button>
     </div>
   </header>
@@ -43,13 +275,14 @@
     <!-- Hero -->
     <section class="case-hero">
       <div class="container">
-        <a href="projects.html" class="back-link">
+        <a href="index.html#systems" class="back-link">
           <i class="bi bi-arrow-left"></i>
-          Back to projects
+          Back to systems
         </a>
+        <span class="case-system">SYSTEM 03 / WORKFLOW TRANSFORMATION</span>
         <h1>Admission Coordinator Assistant</h1>
-        <p class="subtitle">A Tkinter and Selenium tool that takes the entire admission decision workflow off the coordinator's hands except for the one part that still needs a human: reading the documents and calculating the average. Everything else gets handled automatically and the tool moves to the next student.</p>
-        
+        <p class="subtitle">A Tkinter desktop app that drives five simultaneous, independent PeopleSoft browser sessions behind one Start / Next / Skip workflow. The evaluator reads the documents and types one number. The system handles everything around that judgment.</p>
+
         <div class="case-meta">
           <div class="case-meta-item">
             <span class="case-meta-label">Role</span>
@@ -57,11 +290,11 @@
           </div>
           <div class="case-meta-item">
             <span class="case-meta-label">Timeline</span>
-            <span class="case-meta-value">Jan 2026 to Present</span>
+            <span class="case-meta-value">Jan 2026 – Present</span>
           </div>
           <div class="case-meta-item">
             <span class="case-meta-label">Stack</span>
-            <span class="case-meta-value">Python, Tkinter, Selenium</span>
+            <span class="case-meta-value">Python, Tkinter/ttk, Selenium (5 concurrent sessions)</span>
           </div>
           <div class="case-meta-item">
             <span class="case-meta-label">Status</span>
@@ -74,122 +307,170 @@
     <!-- Content -->
     <section class="section">
       <div class="container case-content">
-        
+
         <div class="case-section">
-          <h2>The Problem</h2>
-          <p>Reviewing an admission file isn't one job, it's about a dozen. The coordinator has to open a folder of documents, calculate an average from the transcripts, enter that average into PeopleSoft, sign the document off, possibly change the curriculum if the student is being moved between programs, possibly add or remove a document requirement on their record, then click through to the next student in the queue.</p>
-          <p>The actual judgment, looking at the transcripts and figuring out the average, is maybe 10% of the work. The other 90% is mechanical clicking that a computer should be doing. Multiply by hundreds of students.</p>
+          <h2>The original workflow</h2>
+          <p>Reviewing an admission file is not one job. It is about a dozen. Before this tool existed, the evaluator opened a folder of documents, read the transcript, calculated a score off the applicant's grades, then walked that result through several separate PeopleSoft components by hand: General Materials to review and sign off each document, Application Evaluation to enter an evaluation code and the score, Checklist to work through status changes, and, for certain applicants, OUAC Application and Maintain Application to update the admit basis. Then the next student in the queue, from the top.</p>
+          <p>Each of those components lives on its own page with its own student search. Same student, searched again and again, one component at a time.</p>
         </div>
 
         <div class="case-section">
-          <h2>The Solution</h2>
-          <p>I built a tool that handles everything except the part that requires actual judgment.</p>
-          
-          <h3>The New Workflow</h3>
-          <ol>
-            <li>Tool loads the next student in the queue and opens their documents</li>
-            <li>Coordinator reads the docs and calculates the average</li>
-            <li>Coordinator types the average into the tool</li>
-            <li>Tool does the rest: enters the data into PeopleSoft, signs the documents off, applies any curriculum changes, updates document requirements, and advances to the next student</li>
-          </ol>
-          <p>The coordinator's day goes from "open, search, type, click, click, sign, click, change curriculum, save, next" to "read, calculate, type number, repeat." The boring stuff is gone.</p>
+          <h2>Sources of friction</h2>
+          <p>The actual judgment, reading the transcript and figuring out the score, is a small fraction of the work. The rest is mechanical navigation, and three things make that navigation worse than it sounds.</p>
+          <p><strong>PeopleSoft has no API.</strong> Everything happens through the browser: page loads, search forms, grid pagination, modal dialogs. There is no shortcut underneath.</p>
+          <p><strong>The scoring rules genuinely differ by curriculum.</strong> These are not small variations on one formula:</p>
+          <table class="rules-table">
+            <thead>
+              <tr>
+                <th scope="col">Curriculum</th>
+                <th scope="col">Score calculation</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>IB</td>
+                <td>Subject scores are summed</td>
+              </tr>
+              <tr>
+                <td>CBSE / ISC</td>
+                <td>Subject scores are averaged</td>
+              </tr>
+              <tr>
+                <td>GCSE / A-Level</td>
+                <td>Grades pass through a 1-9 to 1-6 conversion table first</td>
+              </tr>
+            </tbody>
+          </table>
+          <p><strong>Admit basis is a lookup problem.</strong> Setting it correctly means finding the right code in a roughly 90-entry Ontario/OUAC admit-basis table, per applicant, on top of per-program subject and score requirements.</p>
         </div>
 
         <div class="case-section">
-          <h2>What It Handles</h2>
-          
-          <div class="tech-grid">
-            <div class="tech-item">
-              <h4>Document Opening</h4>
-              <p>Pulls the right documents for the next student in the queue and opens them in order so the coordinator can read straight through</p>
-            </div>
-            <div class="tech-item">
-              <h4>Data Entry</h4>
-              <p>Takes the calculated average and pushes it into the right PeopleSoft fields for the right application</p>
-            </div>
-            <div class="tech-item">
-              <h4>Document Sign-Off</h4>
-              <p>Marks documents as reviewed and signed off without manual clicking through each one</p>
-            </div>
-            <div class="tech-item">
-              <h4>Curriculum Changes</h4>
-              <p>Handles program transfers and curriculum updates as part of the same flow</p>
-            </div>
-            <div class="tech-item">
-              <h4>Document Requirements</h4>
-              <p>Adds, removes, or modifies document requirements on a student's record without leaving the tool</p>
-            </div>
-            <div class="tech-item">
-              <h4>Queue Management</h4>
-              <p>Auto-advances to the next student so there's no context switching back to PeopleSoft to find them</p>
-            </div>
-          </div>
+          <h2>Volume and repetition</h2>
+          <p>None of this would matter for ten students. It matters because the same chain repeats across hundreds of students in a cycle, and every repetition is identical except for the one moment of judgment in the middle. The original IB-only version of this tool alone carried about 1,200 applications. That is roughly 1,200 runs of the same navigation sequence that no longer happened by hand.</p>
         </div>
 
         <div class="case-section">
-          <h2>How It's Built</h2>
-          
-          <h3>Tkinter Front End</h3>
-          <p>The coordinator-facing piece is a small Tkinter window: which student is up, what documents are loaded, where to type the average, what mode the tool is in (standard review, curriculum change, doc requirement update). Tkinter is unglamorous, but it ships, runs on whatever laptop the coordinator has, and doesn't need IT to approve a deployment.</p>
+          <h2>Process map</h2>
+          <p>The transformation is easiest to see side by side. The manual version is a serial chain the evaluator walks personally. The automated version reorganizes the same steps into a pipeline: the human moment stays exactly where it was, and everything around it fans out to five browser sessions working in parallel.</p>
 
-          <h3>Selenium Back End</h3>
-          <p>Behind the scenes, Selenium drives PeopleSoft the way a coordinator would, with the same logged-in browser session. Each action (data entry, sign-off, curriculum change, requirement edit) is its own routine with its own retry and logging path.</p>
-
-          <h3>State Per Student</h3>
-          <p>Every student in the queue is a small state object: which docs are open, what's been entered, what's been signed off, what curriculum or requirement changes are pending. If anything fails partway through, the tool knows where it stopped and either retries or kicks the student into a manual-review pile so nothing falls silently through the cracks.</p>
+          <figure aria-labelledby="pmCaption" style="margin: 0;">
+            <div class="process-map">
+              <div class="pm-col">
+                <h3 class="pm-head" style="margin-top:0;">Before / manual chain, per student</h3>
+                <ol class="pm-steps">
+                  <li>Open the applicant's document folder</li>
+                  <li>Read the transcript, apply the curriculum's rules, calculate the score</li>
+                  <li>Search the student in General Materials, sign off each document</li>
+                  <li>Search again in Application Evaluation, enter code and score</li>
+                  <li>Search again in Checklist, update statuses</li>
+                  <li>If needed, open OUAC Application and Maintain Application, update admit basis</li>
+                </ol>
+                <p class="pm-repeat">Repeat for the next student &darr;</p>
+              </div>
+              <div class="pm-col">
+                <h3 class="pm-head" style="margin-top:0;">After / one workflow, five sessions</h3>
+                <div class="pm-stage">
+                  <span class="pm-stage-label">Input</span>
+                  <span class="pm-stage-text">Applicant documents, loaded per student</span>
+                </div>
+                <div class="pm-flow-arrow" aria-hidden="true">&darr;</div>
+                <div class="pm-stage pm-human">
+                  <span class="pm-stage-label">Human judgment</span>
+                  <span class="pm-stage-text">Evaluator reads, types one number</span>
+                </div>
+                <div class="pm-flow-arrow" aria-hidden="true">&darr; fan-out, one worker thread per session</div>
+                <ul class="pm-sessions">
+                  <li>General Materials <span class="pm-session-role">document sign-off</span></li>
+                  <li>Application Evaluation <span class="pm-session-role">code + score entry</span></li>
+                  <li>Checklist <span class="pm-session-role">status changes</span></li>
+                  <li>OUAC Application <span class="pm-session-role">admit basis, on demand</span></li>
+                  <li>Maintain Application <span class="pm-session-role">admit basis, on demand</span></li>
+                </ul>
+                <div class="pm-flow-arrow" aria-hidden="true">&darr; fan-in, all threads joined</div>
+                <div class="pm-stage">
+                  <span class="pm-stage-label">Output</span>
+                  <span class="pm-stage-text">Evaluated, signed-off application. Next student.</span>
+                </div>
+              </div>
+            </div>
+            <figcaption id="pmCaption" class="pm-map-caption">FIG. 01 &middot; The same steps, reorganized. The judgment stays human; the navigation becomes five parallel PeopleSoft sessions that fan out and rejoin around it.</figcaption>
+          </figure>
         </div>
 
         <div class="case-section">
-          <h2>Built On Top of the Document Automation Script</h2>
-          <p>The original document-attachment script (the Selenium tool that just attached documents to records) was the seed. Once that proved the PeopleSoft side was automatable, this tool extended the same pattern across the rest of the workflow: reading queues, entering data, signing things off, moving things between programs.</p>
-          <p>The attachment script is still in daily use. The Coordinator Assistant is what came next, the same idea applied to everything else the role spends time on.</p>
+          <h2>Automation strategy: five sessions, real threads</h2>
+          <p>The tool drives five simultaneous, independent PeopleSoft browser sessions, each with its own persistent Chrome profile. Three launch at startup, one per core component: General Materials for document review and sign-off, Application Evaluation for evaluation code and score entry, and Checklist for status changes. The remaining pair, OUAC Application and Maintain Application for admit-basis updates, is opt-in and launched on demand rather than at startup, to save resources when it is not needed.</p>
+          <p>Loading a student is fan-out, fan-in concurrency. Clicking "process student" spins up a worker thread per active browser (<code>_process_student_thread</code>), and each thread independently searches for and loads that student in its own PeopleSoft session. All threads are joined before the UI updates, so the interface never reflects a half-loaded state. That is genuine parallel automation, not just background work moved off the UI thread. Every cross-thread UI update is funneled through <code>root.after(0, ...)</code> so it lands correctly on Tk's single UI thread.</p>
+          <h3>Rules as configuration, not code paths</h3>
+          <p>A central <code>CURRICULUMS</code> config table drives which PeopleSoft fields to write to and how to calculate a score. IB summing, CBSE/ISC averaging, and the GCSE/A-Level 1-9 to 1-6 conversion table all live there, alongside the roughly 90-entry OUAC admit-basis table and per-program subject and score requirements. A hardcoded IB-only version would never have generalized; a config table did.</p>
         </div>
 
         <div class="case-section">
-          <h2>By the Numbers</h2>
-          
+          <h2>Interface design: read, type one number</h2>
+          <p>The whole interface reduces to Start / Next / Skip. The evaluator's job is to read the documents on screen and type one number, the score. Everything else, the searches, the field entry, the sign-offs, the checklist changes, happens underneath.</p>
+          <p>The one place the interface adapts is the on-screen calculator widget, which reconfigures its own button layout depending on which curriculum is active. It is a different calculator for IB than for GCSE, without being a different screen.</p>
+          <div class="placeholder-asset" role="note">[PLACEHOLDER: Screenshot of the Coordinator Assistant interface, the Start / Next / Skip controls and the curriculum-aware calculator widget. No screenshot exists yet; a capture would need applicant data redacted before publishing.]</div>
+        </div>
+
+        <div class="case-section">
+          <h2>Exception handling: the allow-list and the human pause</h2>
+          <p>PeopleSoft throws popups. Some are routine and safe to dismiss; some mean something is genuinely wrong. A <code>recover_to_search()</code> routine auto-dismisses known-safe alert dialogs from an explicit allow-list, and for anything unrecognized it does not guess. It pauses, for up to two minutes, and waits for a human to step in.</p>
+          <p>That is a deliberate fail-safe boundary between what the automation is allowed to decide on its own and what it hands back to a person. Building a boundary is more honest than pretending to handle every possible PeopleSoft dialog automatically.</p>
+        </div>
+
+        <div class="case-section">
+          <h2>Reliability</h2>
+          <p>Daily use is a different standard from a working demo, and most of what earns it is unglamorous. The recovery routine gives every session a known path back to the search screen instead of an undefined state. Joined worker threads mean the UI only ever shows a fully loaded student. And <code>gm_goto_row()</code> computes the cheapest way to reach a specific row in a document grid, stepping through Prev/Next versus jumping to First/Last and walking back, a small shortest-path calculation that cuts down on PeopleSoft round-trips, which are both the slowest and the most failure-prone part of any browser automation.</p>
+        </div>
+
+        <div class="case-section">
+          <h2>Adoption</h2>
+          <p>This started as a personal, IB-only tool built during the Admission Coordinator role, used by the person who wrote it. It earned its place by being reliable at that one curriculum, about 1,200 applications' worth. During the Business Analyst role it grew into an internal system covering multiple curricula behind a mode-picker: an evaluator picks a curriculum family and gets the right tool.</p>
+          <p>The largest addition is <code>ps_cegep_eval.py</code> (~1,450 lines), a second, comparably complex dashboard purpose-built for Quebec CEGEP evaluations, with its own course-categorization and grade-average logic. CEGEP transcripts do not map onto the IB/CBSE/GCSE model at all, so instead of forcing them into the config table, they got a sibling tool launched from the same entry point.</p>
+        </div>
+
+        <div class="case-section">
+          <h2>Operational outcome</h2>
           <div class="results-grid">
             <div class="result-item">
+              <span class="result-number">~5,800</span>
+              <span class="result-label">Lines: dashboard + CEGEP variant + shared helpers</span>
+            </div>
+            <div class="result-item">
+              <span class="result-number">5</span>
+              <span class="result-label">Parallel PeopleSoft browser sessions</span>
+            </div>
+            <div class="result-item">
               <span class="result-number">~1,200</span>
-              <span class="result-label">Applications processed</span>
-            </div>
-            <div class="result-item">
-              <span class="result-number">1</span>
-              <span class="result-label">Coordinator using it (so far)</span>
-            </div>
-            <div class="result-item">
-              <span class="result-number">90%</span>
-              <span class="result-label">Of the workflow off the coordinator</span>
+              <span class="result-label">Applications processed by the original IB-only version</span>
             </div>
             <div class="result-item">
               <span class="result-number">Daily</span>
               <span class="result-label">Usage frequency</span>
             </div>
           </div>
+          <p>What used to be a manual, multi-page-per-student PeopleSoft workflow is now one click and five browsers working in parallel, across an entire admissions cycle's applicant roster and multiple curricula. The evaluator's attention goes where it is actually needed: the transcript and the score.</p>
+          <div class="case-highlight">
+            <p>Software does not need to be glamorous to matter. The judgment stayed human. Everything mechanical around it went away.</p>
+          </div>
         </div>
 
         <div class="case-section">
-          <h2>What's Next</h2>
-          <p>The tool is currently used by me, in my own role. The natural next step is rolling it out to other coordinators and using it as a training aid for new hires, since it enforces the workflow and removes the parts where new coordinators tend to make data-entry mistakes. That's a conversation for the coming months.</p>
-        </div>
-
-        <div class="case-section">
-          <h2>What I Learned</h2>
+          <h2>Maintenance</h2>
           <ul>
-            <li><strong>Automate around the human, not the human.</strong> The coordinator's judgment is the valuable part. Build tools that hand off everything except that.</li>
-            <li><strong>Selenium is glue, not a strategy.</strong> No API access? Selenium works. But every Selenium step is a future maintenance bill, so log everything and design for graceful failure.</li>
-            <li><strong>Tools change roles.</strong> Once the mechanical work is gone, the role becomes "make decisions and keep the queue moving." That's a different (and better) job than it started as.</li>
-            <li><strong>Build it for one user first.</strong> Don't generalize until you've used it in your own role for months. Generalizing too early bakes in assumptions that don't survive contact with a second user.</li>
+            <li><strong>New curriculum, config entry.</strong> Because field mapping and score calculation live in the <code>CURRICULUMS</code> table, extending the tool usually means adding configuration, not rewriting logic.</li>
+            <li><strong>When the model does not fit, do not force it.</strong> CEGEP got its own ~1,450-line evaluator behind the shared mode-picker rather than a pile of special cases inside the main one.</li>
+            <li><strong>The allow-list grows one verified dialog at a time.</strong> A popup only becomes auto-dismissable once it is understood. Until then, it pauses for a human. That boundary is what makes the tool safe to keep extending.</li>
           </ul>
         </div>
 
         <nav class="case-nav">
-          <a href="admission-analysis.html">
+          <a href="autodrive-project.html">
             <i class="bi bi-arrow-left"></i>
-            Admission Analysis Dashboard
+            System 02 / AutoDrive
           </a>
-          <a href="document-automation.html">
-            Next: Document Automation
+          <a href="admission-analysis.html">
+            Next: Universal Admission Dashboard
             <i class="bi bi-arrow-right"></i>
           </a>
         </nav>
@@ -198,35 +479,21 @@
   </main>
 
   <!-- Footer -->
-  <footer class="footer">
+  <footer class="footer" id="contact">
     <div class="container">
       <div class="footer-content">
         <div class="footer-main">
-          <h2>Let's talk.</h2>
-          <p>I'm looking for full-time opportunities in robotics, automation, or anywhere I can build things that matter.</p>
-          <a href="mailto:21ymsa@queensu.ca" class="footer-email">
-            <i class="bi bi-envelope"></i>
-            21ymsa@queensu.ca
-          </a>
+          <h2>Have a complicated system that needs to work?</h2>
+          <p>I'm interested in robotics, automation, embedded systems, and engineering roles where software meets the physical world.</p>
+          <a href="mailto:21ymsa@queensu.ca" class="footer-email"><i class="bi bi-envelope"></i> 21ymsa@queensu.ca</a>
         </div>
         <div class="footer-links">
-          <a href="https://www.linkedin.com/in/yousef-alsaqa-b1ab4822b/" target="_blank">
-            <i class="bi bi-linkedin"></i>
-            LinkedIn
-          </a>
-          <a href="https://github.com/yousefalsaqa" target="_blank">
-            <i class="bi bi-github"></i>
-            GitHub
-          </a>
-          <a href="assets/Yousef_Alsaqa_Resume.pdf" target="_blank">
-            <i class="bi bi-file-earmark-text"></i>
-            Resume
-          </a>
+          <a href="https://www.linkedin.com/in/yousef-alsaqa-b1ab4822b/" target="_blank" rel="noopener"><i class="bi bi-linkedin"></i> LinkedIn</a>
+          <a href="https://github.com/yousefalsaqa" target="_blank" rel="noopener"><i class="bi bi-github"></i> GitHub</a>
+          <a href="assets/Yousef_Alsaqa_Resume.pdf" target="_blank"><i class="bi bi-file-earmark-text"></i> Résumé</a>
         </div>
       </div>
-      <div class="footer-bottom">
-        <p>© 2026 Yousef Alsaqa</p>
-      </div>
+      <div class="footer-bottom"><p>© 2026 Yousef Alsaqa · Kingston, Canada</p></div>
     </div>
   </footer>
 
@@ -234,20 +501,19 @@
   <script>
     const navToggle = document.getElementById('navToggle');
     const nav = document.getElementById('nav');
-    
     navToggle.addEventListener('click', () => {
-      nav.classList.toggle('active');
-      navToggle.classList.toggle('active');
+      const open = nav.classList.toggle('active');
+      navToggle.classList.toggle('active', open);
+      navToggle.setAttribute('aria-expanded', open);
     });
-
+    nav.querySelectorAll('.nav-link').forEach(l => l.addEventListener('click', () => {
+      nav.classList.remove('active'); navToggle.classList.remove('active');
+      navToggle.setAttribute('aria-expanded', 'false');
+    }));
     const header = document.getElementById('header');
     window.addEventListener('scroll', () => {
-      if (window.scrollY > 50) {
-        header.classList.add('scrolled');
-      } else {
-        header.classList.remove('scrolled');
-      }
-    });
+      header.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
   </script>
 </body>
 </html>

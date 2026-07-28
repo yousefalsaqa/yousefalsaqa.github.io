@@ -5,12 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Experience | Yousef Alsaqa</title>
   <meta name="description" content="Professional experience of Yousef Alsaqa, engineering internships, university roles, and mentoring.">
-  <meta name="theme-color" content="#050508">
+  <meta name="theme-color" content="#F1EEE6">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
   <!-- Bootstrap Icons -->
   <link href="vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
@@ -24,17 +26,20 @@
   <!-- Header -->
   <header class="header" id="header">
     <div class="header-inner">
-      <a href="index.html" class="header-logo">Yousef<span>.</span></a>
-      <nav class="header-nav" id="nav">
-        <a href="index.html" class="nav-link">Home</a>
-        <a href="projects.html" class="nav-link">Projects</a>
-        <a href="experience.html" class="nav-link active">Experience</a>
-        <a href="mailto:21ymsa@queensu.ca" class="nav-link">Contact</a>
+      <a href="index.html" class="header-logo">
+        <span class="header-logo-name">YOUSEF ALSAQA</span>
+        <span class="header-logo-role">MECHATRONICS / SYSTEMS</span>
+      </a>
+      <nav class="header-nav" id="nav" aria-label="Main">
+        <a href="index.html#systems" class="nav-link">Systems</a>
+        <a href="index.html#experience" class="nav-link">Experience</a>
+        <a href="index.html#field-notes" class="nav-link">Field Notes</a>
+        <a href="index.html#about" class="nav-link">About</a>
+        <a href="index.html#contact" class="nav-link">Contact</a>
       </nav>
-      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
-        <span></span>
-        <span></span>
-        <span></span>
+      <div class="header-status" id="headerStatus"><span class="header-status-text">FIELD LOG / EXPERIENCE</span></div>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
       </button>
     </div>
   </header>
@@ -52,14 +57,32 @@
     <section class="section">
       <div class="container">
         <div class="timeline">
+          <!-- Business Analyst -->
+          <div class="timeline-item">
+            <span class="timeline-date">Jul 2026 to Present</span>
+            <div class="timeline-content">
+              <h3>Business Analyst <span class="status-badge">Current Role</span></h3>
+              <p class="company">Queen's University, Undergraduate Admission & Recruitment</p>
+              <p>Finalized the document attacher into the office's main way of attaching documents, used office-wide now, 20,000 to 30,000 documents in a single admission cycle.</p>
+              <p>Automated a CEGEP curriculum evaluator and a high-school-average-to-student matcher, and grew the evaluation dashboard (started as an IB-only tool during the Admission Coordinator role) into a full system covering multiple curricula and other admission-related tasks.</p>
+              <p>Also turned the Commerce-only admission analysis dashboard, started during the Recruitment Representative role once the by-hand analysis got too slow, into a fully generic dashboard where a new program plugs in through a config file instead of new code.</p>
+              <div class="timeline-tags">
+                <span>Python</span>
+                <span>Selenium</span>
+                <span>Automation</span>
+                <span>PeopleSoft</span>
+              </div>
+            </div>
+          </div>
+
           <!-- Admission Coordinator -->
           <div class="timeline-item">
             <span class="timeline-date">Jan 2026 to Jun 2026</span>
             <div class="timeline-content">
-              <h3>Admission Coordinator <span class="status-badge">Current Role</span></h3>
+              <h3>Admission Coordinator</h3>
               <p class="company">Queen's University, Undergraduate Admission & Recruitment</p>
-              <p>Built and run the Admission Coordinator Assistant, a Tkinter and Selenium tool that semi-automates the entire admission decision workflow. The coordinator reads the documents and types in the calculated average; the tool handles data entry, document sign-off, curriculum changes, and document requirement updates, then advances to the next student. ~1,200 applications processed so far.</p>
-              <p>Also still running the original document automation script daily, ~500 documents per day that used to take 8 hours of manual clicking.</p>
+              <p>Built the document attacher and the Admission Coordinator Assistant, a Tkinter and Selenium tool that semi-automated the entire admission decision workflow. The coordinator reads the documents and types in the calculated average; the tool handles data entry, document sign-off, curriculum changes, and document requirement updates, then advances to the next student. ~1,200 applications processed.</p>
+              <p>Also started an evaluation dashboard, limited to IB students at first.</p>
               <div class="timeline-tags">
                 <span>Python</span>
                 <span>Tkinter</span>
@@ -75,8 +98,8 @@
             <div class="timeline-content">
               <h3>Recruitment Representative</h3>
               <p class="company">Queen's University, Undergraduate Admission & Recruitment</p>
-              <p>Built two data tools that the team still uses. The University Application Dashboard, exploring 5 years and ~170K applications across all applicants (not just admits), with feeder school rankings, regional analysis, and year-over-year conversion. And the Commerce side of the Admission Analysis Dashboard, a Random Forest predictor across 5,600 admitted Commerce students against first-year GPA. The Commerce findings (the supplementary application had a negative correlation with success) eventually contributed to higher admission thresholds.</p>
-              <p>Also wrote the original Selenium document attacher that became the seed for the Coordinator Assistant. Represented Queen's to prospective students and families while finding ways to turn repetitive work into tools.</p>
+              <p>Traveled across Ontario representing Queen's to prospective students and families almost daily.</p>
+              <p>Built an automatic location analyzer, the Automatic Recruiter Coordinator, exploring 5 years and ~170K applications across all applicants (not just admits), with fuzzy-matched feeder school rankings, regional analysis, and year-over-year conversion. Also ran the Commerce-side Random Forest analysis behind what's now the Universal Admission Dashboard, 5,600 admitted Commerce students against first-year GPA, the negative correlation between the supplementary application and success eventually contributed to higher admission thresholds, and started the dashboard framework the Engineering-side analysis (8,700 students) was later built into.</p>
               <div class="timeline-tags">
                 <span>Python</span>
                 <span>Pandas</span>
@@ -110,7 +133,7 @@
             <div class="timeline-content">
               <h3>Engineering International Student Mentor</h3>
               <p class="company">Queen's University, Faculty of Engineering</p>
-              <p>Mentored international engineering students through their first years. Ran workshops on SolidWorks, MATLAB, and programming fundamentals. Helped students navigate the transition to a new country while keeping up with a demanding curriculum.</p>
+              <p>Took incoming international engineering students under my wing individually through their first years, not scheduled workshops. Helped with SolidWorks, MATLAB, and programming fundamentals as it came up, and with navigating the transition to a new country while keeping up with a demanding curriculum.</p>
               <p>Most rewarding part: watching mentees go from struggling with basic CAD to building their own projects and mentoring others.</p>
               <div class="timeline-tags">
                 <span>Mentoring</span>
@@ -159,35 +182,21 @@
   </main>
 
   <!-- Footer -->
-  <footer class="footer">
+  <footer class="footer" id="contact">
     <div class="container">
       <div class="footer-content">
         <div class="footer-main">
-          <h2>Let's talk.</h2>
-          <p>I'm looking for full-time opportunities in robotics, automation, or anywhere I can build things that matter.</p>
-          <a href="mailto:21ymsa@queensu.ca" class="footer-email">
-            <i class="bi bi-envelope"></i>
-            21ymsa@queensu.ca
-          </a>
+          <h2>Have a complicated system that needs to work?</h2>
+          <p>I'm interested in robotics, automation, embedded systems, and engineering roles where software meets the physical world.</p>
+          <a href="mailto:21ymsa@queensu.ca" class="footer-email"><i class="bi bi-envelope"></i> 21ymsa@queensu.ca</a>
         </div>
         <div class="footer-links">
-          <a href="https://www.linkedin.com/in/yousef-alsaqa-b1ab4822b/" target="_blank">
-            <i class="bi bi-linkedin"></i>
-            LinkedIn
-          </a>
-          <a href="https://github.com/yousefalsaqa" target="_blank">
-            <i class="bi bi-github"></i>
-            GitHub
-          </a>
-          <a href="assets/Yousef_Alsaqa_Resume.pdf" target="_blank">
-            <i class="bi bi-file-earmark-text"></i>
-            Resume
-          </a>
+          <a href="https://www.linkedin.com/in/yousef-alsaqa-b1ab4822b/" target="_blank" rel="noopener"><i class="bi bi-linkedin"></i> LinkedIn</a>
+          <a href="https://github.com/yousefalsaqa" target="_blank" rel="noopener"><i class="bi bi-github"></i> GitHub</a>
+          <a href="assets/Yousef_Alsaqa_Resume.pdf" target="_blank"><i class="bi bi-file-earmark-text"></i> Résumé</a>
         </div>
       </div>
-      <div class="footer-bottom">
-        <p>© 2026 Yousef Alsaqa</p>
-      </div>
+      <div class="footer-bottom"><p>© 2026 Yousef Alsaqa · Kingston, Canada</p></div>
     </div>
   </footer>
 
@@ -195,20 +204,19 @@
   <script>
     const navToggle = document.getElementById('navToggle');
     const nav = document.getElementById('nav');
-    
     navToggle.addEventListener('click', () => {
-      nav.classList.toggle('active');
-      navToggle.classList.toggle('active');
+      const open = nav.classList.toggle('active');
+      navToggle.classList.toggle('active', open);
+      navToggle.setAttribute('aria-expanded', open);
     });
-
+    nav.querySelectorAll('.nav-link').forEach(l => l.addEventListener('click', () => {
+      nav.classList.remove('active'); navToggle.classList.remove('active');
+      navToggle.setAttribute('aria-expanded', 'false');
+    }));
     const header = document.getElementById('header');
     window.addEventListener('scroll', () => {
-      if (window.scrollY > 50) {
-        header.classList.add('scrolled');
-      } else {
-        header.classList.remove('scrolled');
-      }
-    });
+      header.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
   </script>
 </body>
 </html>

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://yousefalsaqa.netlify.app/sitemap.xml

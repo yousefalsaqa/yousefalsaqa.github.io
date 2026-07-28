@@ -1,388 +1,404 @@
-/* ============================================
-   CASE STUDY PAGE - Premium Design
-   ============================================ */
+/* ============================================================
+   CASE STUDY, SIGNAL / FIELD LOG
+   Paper investigation report: numbered sections, spec-sheet
+   rows, paper terminals, ruled figures. No cards, no glow.
+   ============================================================ */
 
-/* ---------- Case Study Hero ---------- */
+/* ---------- Hero ---------- */
 .case-hero {
-  padding-top: calc(var(--header-height) + var(--space-3xl));
-  padding-bottom: var(--space-3xl);
-  position: relative;
-  overflow: hidden;
+  padding-top: calc(var(--header-height) + clamp(2.5rem, 7vw, 5rem));
+  padding-bottom: clamp(2rem, 5vw, 3.5rem);
+  background: var(--paper);
+  border-bottom: 1px solid var(--hairline);
 }
 
-.case-hero::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: -200px;
-  width: 600px;
-  height: 600px;
-  background: radial-gradient(ellipse, rgba(0, 212, 255, 0.06) 0%, transparent 60%);
-  filter: blur(80px);
-  pointer-events: none;
+/* Mono system-number eyebrow (optional element on newer pages) */
+.case-hero .case-system,
+.case-hero .system-number,
+.case-hero .t-eyebrow {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--graphite);
+  margin-bottom: 1.25rem;
 }
 
-.case-hero .back-link {
+.back-link {
   display: inline-flex;
   align-items: center;
-  gap: var(--space-sm);
-  font-size: 0.9rem;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
   font-weight: 500;
-  color: var(--text-muted);
-  margin-bottom: var(--space-xl);
-  padding: var(--space-sm) var(--space-md);
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-full);
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  opacity: 0;
-  animation: fadeInUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--graphite);
+  margin-bottom: 2rem;
+  transition: color 0.2s var(--ease);
 }
 
-.case-hero .back-link:hover {
-  color: var(--accent-primary);
-  border-color: var(--accent-primary);
-  transform: translateX(-4px);
+.back-link:hover {
+  color: var(--carbon);
 }
 
 .case-hero h1 {
-  font-size: clamp(2rem, 5vw, 3rem);
-  font-weight: 700;
-  margin-bottom: var(--space-lg);
-  opacity: 0;
-  animation: fadeInUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
+  font-size: clamp(2.1rem, 5vw, 3.3rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.25rem;
+  max-width: 20ch;
 }
 
 .case-hero .subtitle {
-  font-size: 1.15rem;
-  color: var(--text-secondary);
-  max-width: 700px;
-  line-height: 1.8;
-  opacity: 0;
-  animation: fadeInUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+  font-family: var(--font-serif);
+  font-size: clamp(1.1rem, 2vw, 1.3rem);
+  line-height: 1.55;
+  color: var(--carbon);
+  max-width: 58ch;
 }
 
+/* Meta: ruled spec strip */
 .case-meta {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-2xl);
-  margin-top: var(--space-2xl);
-  padding-top: var(--space-xl);
-  border-top: 1px solid var(--border-subtle);
-  opacity: 0;
-  animation: fadeInUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+  gap: 1.5rem 3rem;
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--hairline);
 }
 
 .case-meta-item {
   display: flex;
   flex-direction: column;
-  gap: var(--space-xs);
+  gap: 0.35rem;
 }
 
 .case-meta-label {
-  font-size: 0.7rem;
-  font-weight: 600;
-  color: var(--accent-primary);
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 500;
+  color: var(--graphite);
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
 }
 
 .case-meta-value {
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 500;
-  color: var(--text-primary);
+  color: var(--carbon);
 }
 
-/* ---------- Case Study Content ---------- */
+.case-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 2rem;
+}
+
+/* ---------- Content column ---------- */
 .case-content {
   max-width: var(--container-narrow);
   margin: 0 auto;
 }
 
 .case-section {
-  margin-bottom: var(--space-4xl);
+  margin-bottom: clamp(3rem, 7vw, 5rem);
+}
+
+/* Numbered log entries: each h2 opens a ruled, counted section */
+.case-content {
+  counter-reset: casesec;
 }
 
 .case-section h2 {
-  font-size: 1.75rem;
-  font-weight: 700;
-  margin-bottom: var(--space-lg);
-  color: var(--text-primary);
-  display: flex;
-  align-items: center;
-  gap: var(--space-md);
+  counter-increment: casesec;
+  font-size: clamp(1.35rem, 2.5vw, 1.7rem);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--carbon);
+  border-top: 1px solid var(--hairline);
+  padding-top: 1.5rem;
+  margin-bottom: 1.25rem;
 }
 
 .case-section h2::before {
-  content: '';
-  width: 4px;
-  height: 1.5em;
-  background: var(--accent-gradient);
-  border-radius: var(--radius-full);
+  content: counter(casesec, decimal-leading-zero);
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  color: var(--graphite);
+  margin-bottom: 0.6rem;
 }
 
 .case-section h3 {
-  font-size: 1.2rem;
+  font-size: 1.15rem;
   font-weight: 600;
-  margin-top: var(--space-2xl);
-  margin-bottom: var(--space-md);
-  color: var(--text-primary);
+  margin-top: 2.25rem;
+  margin-bottom: 0.75rem;
+  color: var(--carbon);
 }
 
 .case-section p {
-  font-size: 1.05rem;
-  line-height: 1.9;
-  color: var(--text-secondary);
-  margin-bottom: var(--space-lg);
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--carbon);
+  margin-bottom: 1.25rem;
 }
 
 .case-section ul,
 .case-section ol {
-  margin-bottom: var(--space-lg);
-  padding-left: var(--space-xl);
+  margin-bottom: 1.25rem;
+  padding-left: 1.5rem;
+}
+
+.case-section ul {
+  list-style: square;
 }
 
 .case-section li {
-  font-size: 1.05rem;
-  line-height: 1.8;
-  color: var(--text-secondary);
-  margin-bottom: var(--space-md);
-  position: relative;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--carbon);
+  margin-bottom: 0.6rem;
 }
 
-.case-section ul li::marker {
-  color: var(--accent-primary);
+.case-section li::marker {
+  color: var(--graphite);
 }
 
 .case-section li strong {
-  color: var(--text-primary);
+  color: var(--carbon);
 }
 
-/* ---------- Images ---------- */
+.case-section a {
+  color: var(--carbon);
+  text-decoration: underline;
+  text-decoration-color: var(--graphite);
+  text-underline-offset: 3px;
+}
+
+.case-section a:hover {
+  text-decoration-color: var(--signal);
+}
+
+/* ---------- Figures: evidence images with mono captions ---------- */
 .case-image {
-  margin: var(--space-3xl) 0;
-  border-radius: var(--radius-lg);
+  margin: clamp(2rem, 5vw, 3rem) 0;
+  border: 1px solid var(--hairline);
+  background: var(--paper);
+  border-radius: 0;
   overflow: hidden;
-  border: 1px solid var(--border-subtle);
-  background: var(--bg-secondary);
-  transition: all var(--transition-base);
 }
 
-.case-image:hover {
-  border-color: var(--border-accent);
-  box-shadow: var(--shadow-glow);
-}
-
-.case-image img {
+.case-image img,
+.case-image video {
   width: 100%;
   height: auto;
+  display: block;
 }
 
-/* SVG diagrams get contained with padding */
+/* Diagrams (SVG) sit on the deeper paper panel with breathing room */
 .case-image img[src$=".svg"] {
-  padding: var(--space-lg);
-  background: var(--bg-tertiary);
+  padding: 1.5rem;
+  background: var(--paper-2);
 }
 
 .case-image figcaption {
-  font-size: 0.85rem;
-  color: var(--text-muted);
-  padding: var(--space-md) var(--space-lg);
-  background: var(--bg-card);
-  text-align: center;
-  border-top: 1px solid var(--border-subtle);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  line-height: 1.6;
+  letter-spacing: 0.02em;
+  color: var(--graphite);
+  padding: 0.75rem 1rem;
+  background: var(--paper);
+  text-align: left;
+  border-top: 1px solid var(--hairline);
 }
 
 .case-image-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: var(--space-lg);
-  margin: var(--space-3xl) 0;
+  gap: 1.5rem;
+  margin: clamp(2rem, 5vw, 3rem) 0;
 }
 
 .case-image-grid .case-image {
   margin: 0;
 }
 
-/* ---------- Code Blocks ---------- */
+/* ---------- Code: paper terminal with mono header strip ---------- */
 .case-code {
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg);
-  padding: var(--space-xl);
-  margin: var(--space-2xl) 0;
-  overflow-x: auto;
-  position: relative;
+  border: 1px solid var(--hairline);
+  background: var(--paper-2);
+  border-radius: 0;
+  padding: 0;
+  margin: 2rem 0;
 }
 
 .case-code::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: var(--accent-gradient);
+  content: 'CODE';
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--graphite);
+  padding: 0.55rem 1.25rem;
+  background: var(--paper);
+  border-bottom: 1px solid var(--hairline);
 }
 
 .case-code pre {
   font-family: var(--font-mono);
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   line-height: 1.7;
-  color: var(--text-secondary);
+  color: var(--carbon);
   margin: 0;
+  padding: 1.25rem;
+  overflow-x: auto;
 }
 
-/* ---------- Highlight Box ---------- */
+/* ---------- Field note: margin-ruled highlight ---------- */
 .case-highlight {
-  background: var(--accent-glow);
-  border-left: 4px solid var(--accent-primary);
-  padding: var(--space-xl);
-  margin: var(--space-2xl) 0;
-  border-radius: 0 var(--radius-md) var(--radius-md) 0;
-  position: relative;
+  background: transparent;
+  border-left: 2px solid var(--signal);
+  border-radius: 0;
+  padding: 0.25rem 0 0.25rem 1.5rem;
+  margin: 2.25rem 0;
 }
 
 .case-highlight::before {
-  content: '💡';
-  position: absolute;
-  top: var(--space-lg);
-  left: calc(-1 * var(--space-lg));
-  font-size: 1.25rem;
+  content: 'FIELD NOTE';
+  display: block;
+  position: static;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--graphite);
+  margin-bottom: 0.6rem;
 }
 
 .case-highlight p {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  line-height: 1.55;
+  color: var(--carbon);
   margin-bottom: 0;
-  color: var(--text-primary);
-  font-size: 1rem;
 }
 
-/* ---------- Tech Stack Grid ---------- */
+/* ---------- Tech stack: ruled spec-sheet rows ---------- */
 .tech-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: var(--space-md);
-  margin: var(--space-2xl) 0;
+  display: block;
+  margin: 2rem 0;
+  border-bottom: 1px solid var(--hairline);
 }
 
 .tech-item {
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-md);
-  padding: var(--space-lg);
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.tech-item:hover {
-  border-color: var(--border-accent);
-  transform: translate3d(0, -4px, 0);
-  box-shadow: var(--shadow-glow);
+  display: grid;
+  grid-template-columns: minmax(140px, 200px) 1fr;
+  gap: 1.5rem;
+  align-items: baseline;
+  background: none;
+  border: none;
+  border-top: 1px solid var(--hairline);
+  border-radius: 0;
+  padding: 0.9rem 0;
 }
 
 .tech-item h4 {
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: var(--accent-primary);
-  margin-bottom: var(--space-xs);
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--carbon);
+  margin-bottom: 0;
 }
 
 .tech-item p {
-  font-size: 0.85rem;
-  color: var(--text-muted);
+  font-size: 0.9rem;
+  color: var(--graphite);
   margin-bottom: 0;
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
-/* ---------- Results/Impact ---------- */
+/* ---------- Results: large mono figures over hairline rules ---------- */
 .results-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: var(--space-md);
-  margin: var(--space-2xl) 0;
+  gap: 2rem;
+  margin: 2.25rem 0;
 }
 
 .result-item {
-  text-align: center;
-  padding: var(--space-xl) var(--space-md);
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg);
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  position: relative;
-  overflow: hidden;
-}
-
-.result-item::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 50px;
-  height: 3px;
-  background: var(--accent-gradient);
-  border-radius: var(--radius-full);
-}
-
-.result-item:hover {
-  border-color: var(--border-accent);
-  transform: translate3d(0, -4px, 0);
-  box-shadow: var(--shadow-glow);
+  text-align: left;
+  background: none;
+  border: none;
+  border-top: 1px solid var(--hairline);
+  border-radius: 0;
+  padding: 1rem 0 0;
 }
 
 .result-number {
-  font-size: clamp(1.5rem, 3vw, 2.25rem);
-  font-weight: 700;
-  background: var(--accent-gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  font-family: var(--font-mono);
+  font-size: clamp(1.4rem, 2.6vw, 2rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--carbon);
+  background: none;
+  -webkit-text-fill-color: currentColor;
   display: block;
-  margin-bottom: var(--space-sm);
+  margin-bottom: 0.4rem;
   line-height: 1.2;
   white-space: nowrap;
 }
 
 .result-label {
-  font-size: 0.8rem;
-  color: var(--text-muted);
-  line-height: 1.4;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--graphite);
+  line-height: 1.5;
 }
 
-/* ---------- Navigation ---------- */
+/* ---------- Prev / next: mono log navigation ---------- */
 .case-nav {
   display: flex;
   justify-content: space-between;
-  padding-top: var(--space-2xl);
-  margin-top: var(--space-3xl);
-  border-top: 1px solid var(--border-subtle);
+  gap: 1rem;
+  padding-top: 2rem;
+  margin-top: clamp(2.5rem, 6vw, 4rem);
+  border-top: 1px solid var(--hairline);
 }
 
 .case-nav a {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: var(--space-sm);
-  font-size: 0.9rem;
+  gap: 0.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
   font-weight: 500;
-  color: var(--text-muted);
-  padding: var(--space-sm) var(--space-md);
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-full);
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--graphite);
+  background: none;
+  border: none;
+  border-radius: 0;
+  padding: 0.4rem 0;
+  transition: color 0.2s var(--ease);
 }
 
 .case-nav a:hover {
-  color: var(--accent-primary);
-  border-color: var(--accent-primary);
-}
-
-.case-nav a:first-child:hover {
-  transform: translate3d(-4px, 0, 0);
-}
-
-.case-nav a:last-child:hover {
-  transform: translate3d(4px, 0, 0);
+  color: var(--carbon);
 }
 
 /* ---------- Responsive ---------- */
@@ -390,39 +406,28 @@
   .case-image-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .case-meta {
-    gap: var(--space-lg);
+    gap: 1.25rem 2rem;
   }
-  
+
+  .tech-item {
+    grid-template-columns: 1fr;
+    gap: 0.35rem;
+  }
+
   .results-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: var(--space-sm);
+    gap: 1.5rem;
   }
-  
-  .result-item {
-    padding: var(--space-lg) var(--space-sm);
-  }
-  
+
   .result-number {
     font-size: 1.25rem;
   }
-  
-  .result-label {
-    font-size: 0.7rem;
-  }
-  
-  .case-section h2 {
-    font-size: 1.5rem;
-  }
-  
+
   .case-nav {
     flex-direction: column;
-    gap: var(--space-md);
-  }
-  
-  .case-nav a:hover {
-    transform: none;
+    align-items: flex-start;
   }
 }
 
@@ -430,8 +435,17 @@
   .results-grid {
     grid-template-columns: 1fr 1fr;
   }
-  
+
   .result-number {
     font-size: 1.1rem;
+    white-space: normal;
+  }
+}
+
+/* Reduced motion: neutralize transitions */
+@media (prefers-reduced-motion: reduce) {
+  .back-link,
+  .case-nav a {
+    transition: none;
   }
 }

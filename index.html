@@ -64,8 +64,8 @@
       </a>
       <nav class="header-nav" id="nav" aria-label="Main">
         <a href="index.html#systems" class="nav-link">Systems</a>
-        <a href="index.html#field-notes" class="nav-link">Field Notes</a>
         <a href="index.html#experience" class="nav-link">Experience</a>
+        <a href="index.html#field-notes" class="nav-link">Field Notes</a>
         <a href="index.html#about" class="nav-link">About</a>
         <a href="index.html#contact" class="nav-link">Contact</a>
       </nav>
@@ -229,7 +229,7 @@
           <div class="sys-body">
             <p class="sys-kicker">System 01 / Medical simulation</p>
             <h3 class="sys-title"><a href="capstone.html">CAST Medical Interface</a></h3>
-            <p class="sys-purpose">A low-cost RFID medical simulation system that changes audio scenarios based on where a digital stethoscope is placed on a manikin. Software Lead &amp; Integration, senior capstone group, Sep 2024 – May 2025.</p>
+            <p class="sys-purpose">A low-cost RFID medical simulation system that changes audio scenarios based on where a digital stethoscope is placed on a manikin. Assistant Lead, Software &amp; Integration, senior capstone group, Sep 2024 – May 2025.</p>
             <dl class="spec">
               <div class="spec-row"><dt>Input</dt><dd>RFID tag position, 12 tags at anatomical positions</dd></div>
               <div class="spec-row"><dt>Process</dt><dd>Scenario logic (28 audio scenarios), Flask interface, Raspberry Pi</dd></div>
@@ -295,7 +295,7 @@
           <div class="sys-body">
             <p class="sys-kicker">System 04 / Full-stack platform</p>
             <h3 class="sys-title"><a href="worldcupfantasy-details.html">World Cup Fantasy</a></h3>
-            <p class="sys-purpose">A full-stack fantasy football platform for the World Cup 2026 knockout stage, built solo in six months and run live for real users through the entire tournament.</p>
+            <p class="sys-purpose">A full-stack fantasy football platform for the World Cup 2026, built solo in six months and run live for real users through the entire tournament, group stage to Final.</p>
             <a class="sys-link" href="worldcupfantasy-details.html">Read system 04 →</a>
           </div>
           <dl class="spec sys-spec">
@@ -681,7 +681,7 @@
             <div>
               <h3 class="xp-role">Engineering International Student Mentor</h3>
               <p class="xp-org">Queen's University</p>
-              <p class="xp-duty">Ran workshops on SolidWorks, MATLAB, and programming fundamentals for incoming international students.</p>
+              <p class="xp-duty">Took incoming international students under my wing individually, not workshops, ongoing mentorship through their first years.</p>
             </div>
           </article>
 
@@ -787,22 +787,23 @@
           <div class="ar-row">
             <a class="ar-link" href="worldcupfantasy-details.html">
               <span class="ar-year">2026</span>
-              <span class="ar-project">La Liga Fantasy (fork)</span>
+              <span class="ar-project">WorldCupFantasy</span>
               <span class="ar-domain">Full-stack</span>
-              <span class="ar-challenge">Re-targeting the World Cup engine to a 38-gameweek season, ~80% reuse</span>
+              <span class="ar-challenge">Live-scoring engine reconciled in real time against an error-prone external feed</span>
               <span class="ar-tools">Next.js, TypeScript, PostgreSQL</span>
-              <span class="ar-status">Synced to real data</span>
+              <span class="ar-status">Ran the full tournament</span>
             </a>
-            <div class="ar-peek">
-              <span class="ar-peek-note">Field note: scoring re-verified 75 of 75 after the fork.</span>
-            </div>
-            <button class="ar-expand" aria-expanded="false" aria-label="Show details for La Liga Fantasy fork"></button>
+            <figure class="ar-peek">
+              <img src="assets/worldcupfantasy landing page.png" alt="WorldCupFantasy landing page screenshot." width="230" height="109" loading="lazy">
+              <figcaption>Evidence / landing page</figcaption>
+            </figure>
+            <button class="ar-expand" aria-expanded="false" aria-label="Show details for WorldCupFantasy"></button>
             <div class="ar-more-mobile">
               <dl>
                 <dt>Domain</dt><dd>Full-stack</dd>
-                <dt>Challenge</dt><dd>Re-targeting the World Cup engine to a 38-gameweek season, ~80% reuse</dd>
+                <dt>Challenge</dt><dd>Live-scoring engine reconciled in real time against an error-prone external feed</dd>
                 <dt>Tools</dt><dd>Next.js, TypeScript, PostgreSQL</dd>
-                <dt>Note</dt><dd>Scoring re-verified 75 of 75 after the fork</dd>
+                <dt>Note</dt><dd>Forked into a second live product, La Liga Fantasy, ~80% code reuse, scoring re-verified 75 of 75</dd>
               </dl>
             </div>
           </div>
@@ -816,10 +817,9 @@
               <span class="ar-tools">PyTorch, scikit-learn</span>
               <span class="ar-status">Delivered</span>
             </a>
-            <figure class="ar-peek">
-              <img src="assets/eii_model.jpg" alt="Diagram of the EII predictor model architecture." width="230" height="373" loading="lazy">
-              <figcaption>Evidence / model diagram</figcaption>
-            </figure>
+            <div class="ar-peek">
+              <span class="ar-peek-note">Field note: ensemble of 10 seeded neural nets + Random Forest, weighted by inverse validation error.</span>
+            </div>
             <button class="ar-expand" aria-expanded="false" aria-label="Show details for EII Predictor"></button>
             <div class="ar-more-mobile">
               <dl>

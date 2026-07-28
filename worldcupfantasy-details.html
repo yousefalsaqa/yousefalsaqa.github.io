@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WorldCupFantasy | Yousef Alsaqa</title>
+  <meta name="description" content="Case study: A live fantasy football platform for the World Cup 2026, with a scoring engine that has to be exactly right, audit-logged admin tooling, and an architecture that generalizes to a second sport.">
+  <meta name="theme-color" content="#F1EEE6">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap Icons -->
+  <link href="vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link href="css/theme.css" rel="stylesheet">
+  <link href="css/pages/case-study.css" rel="stylesheet">
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="header" id="header">
+    <div class="header-inner">
+      <a href="index.html" class="header-logo">
+        <span class="header-logo-name">YOUSEF ALSAQA</span>
+        <span class="header-logo-role">MECHATRONICS / SYSTEMS</span>
+      </a>
+      <nav class="header-nav" id="nav" aria-label="Main">
+        <a href="index.html#systems" class="nav-link">Systems</a>
+        <a href="index.html#experience" class="nav-link">Experience</a>
+        <a href="index.html#field-notes" class="nav-link">Field Notes</a>
+        <a href="index.html#about" class="nav-link">About</a>
+        <a href="index.html#contact" class="nav-link">Contact</a>
+      </nav>
+      <div class="header-status" id="headerStatus"><span class="header-status-text">SYSTEM 04 / WORLD CUP FANTASY</span></div>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="case-hero">
+      <div class="container">
+        <a href="projects.html" class="back-link">
+          <i class="bi bi-arrow-left"></i>
+          Back to projects
+        </a>
+        <h1>WorldCupFantasy</h1>
+        <p class="subtitle">A full-stack fantasy football platform for the entire World Cup 2026, built solo in 6 months, 183 commits, and run live through the whole tournament, group stage to Final, for a real group of friends and family. Kept up for demoing.</p>
+
+        <div class="case-meta">
+          <div class="case-meta-item">
+            <span class="case-meta-label">Role</span>
+            <span class="case-meta-value">Sole Developer</span>
+          </div>
+          <div class="case-meta-item">
+            <span class="case-meta-label">Timeline</span>
+            <span class="case-meta-value">Jan 2026 to Jul 2026</span>
+          </div>
+          <div class="case-meta-item">
+            <span class="case-meta-label">Stack</span>
+            <span class="case-meta-value">Next.js 14, TypeScript, PostgreSQL/Prisma</span>
+          </div>
+          <div class="case-meta-item">
+            <span class="case-meta-label">Status</span>
+            <span class="case-meta-value">Ran the full tournament, up for demo</span>
+          </div>
+        </div>
+
+        <div class="case-actions" style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1.75rem;">
+          <a href="https://world-cup-fantasy-coral.vercel.app/" target="_blank" class="btn btn-primary">
+            <i class="bi bi-box-arrow-up-right"></i>
+            <span>Live App</span>
+          </a>
+          <a href="https://github.com/yousefalsaqa/WorldCupFantasy" target="_blank" class="btn btn-secondary">
+            <i class="bi bi-github"></i>
+            <span>View Code</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Content -->
+    <section class="section">
+      <div class="container case-content">
+
+        <div class="case-section">
+          <h2>The Problem</h2>
+          <p>My friends and family wanted to play fantasy football for the World Cup 2026. That sounds like a solved problem until you try to actually run it: standard fantasy platforms are built for a season, not a tournament where a 32-team knockout field halves every round, players get permanently eliminated mid-competition, and a per-nation ownership cap becomes mathematically impossible once only two countries are left standing.</p>
+          <p>Nobody sells that. So I built it, a full draft-and-manage fantasy app shaped around the tournament format, and ran it live for the group through the entire competition.</p>
+        </div>
+
+        <figure class="case-image">
+          <img src="assets/worldcupfantasy landing page.png" alt="WorldCupFantasy landing page showing the live tournament interface" width="1912" height="907" loading="lazy">
+          <figcaption>The landing page, live during the tournament</figcaption>
+        </figure>
+
+        <div class="case-section">
+          <h2>The Solution</h2>
+          <p>Friends and family draft a 15-man squad of real World Cup players under a budget cap, set a starting XI plus a captain each round, and compete on a live-updating leaderboard as actual matches happen. Under the hood it's a Next.js 14 App Router app with 54 API routes, 25 pages, and 22 React components, backed by PostgreSQL on Neon through 16 Prisma models, with JWT auth (httpOnly cookies via <code>jose</code>) and bcrypt password hashing.</p>
+
+          <div class="tech-grid">
+            <div class="tech-item">
+              <h4>Next.js 14 + TypeScript</h4>
+              <p>App Router, React 18, ~39,000 lines of TypeScript across 144 source files</p>
+            </div>
+            <div class="tech-item">
+              <h4>PostgreSQL on Neon + Prisma</h4>
+              <p>16 models, serverless Postgres, transactional integrity for every squad mutation</p>
+            </div>
+            <div class="tech-item">
+              <h4>Vercel + cron</h4>
+              <p>Live score polling on a schedule, no server to babysit</p>
+            </div>
+            <div class="tech-item">
+              <h4>Zero test framework</h4>
+              <p>Hand-rolled TypeScript harnesses via <code>tsx</code>, no Jest or Vitest dependency</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="case-section">
+          <h2>The Hard Problem: A Scoring Engine That Has to Be Exactly Right</h2>
+          <p>The centerpiece is <code>src/lib/live-scoring.ts</code>, a full FPL-style points calculator: goals, assists, clean sheets, save and penalty-save math, card penalties, captain multipliers, and defensive-contribution thresholds modeled on real FPL's 2024-25 rule. It has to reconcile against a live, half-finished, occasionally-wrong data feed from API-Football while a match is in progress, and then be provably correct once the match ends. That's the whole game, if two managers see different points for the same player, the product is broken.</p>
+
+          <p>Points are position-dependent, not flat, and there's a tournament-specific twist: knockout matches carry a small bonus on top of the base goal value.</p>
+
+          <div class="case-code">
+<pre>
+private calculateCleanSheetPoints(position: string, cleanSheet: boolean, minutes: number): number {
+    // Must play 60+ minutes to get clean sheet points
+    if (!cleanSheet || minutes < 60) return 0;
+
+    switch (position) {
+      case 'GK':  return SCORING.CLEAN_SHEET_GK;
+      case 'DEF': return SCORING.CLEAN_SHEET_DEF;
+      case 'MID': return SCORING.CLEAN_SHEET_MID;
+      case 'FWD': return SCORING.CLEAN_SHEET_FWD;
+      default:    return 0;
+    }
+}
+</pre>
+          </div>
+
+          <h3>Verification, Not Hope</h3>
+          <p>To make that trustworthy I built three standalone test harnesses, wired into one <code>npm test</code>, no framework, just asserts and a pass/fail counter, deliberately dependency-light so it never breaks from an unrelated library update:</p>
+          <ul>
+            <li><strong>test-live-scoring.ts (932 lines)</strong> exercises every scoring rule combinatorially: appearance bands, position-specific goal and clean-sheet values, GK saves, defensive-contribution thresholds, red-card zeroing.</li>
+            <li><strong>test-stage-advance.ts (481 lines)</strong> covers the stage-advance and elimination logic.</li>
+            <li><strong>test-scoring.ts (270 lines)</strong> covers season-scoring aggregation.</li>
+          </ul>
+          <p>Verification wasn't only synthetic either. Before trusting the pipeline against real tournament data, I ran it against a real live match happening during development and checked the computed points against what actually happened on the pitch.</p>
+        </div>
+
+        <div class="case-section">
+          <h2>Data Model & the Stage Abstraction</h2>
+          <p>The interesting design decision in the 16-model schema is <code>Stage</code>: Groups → R32 → R16 → QF → SF → 3rd/Final, each carrying its own deadline, active flag, and completion state. A background "stage-advance" job locks squads at kickoff, banks points at full-time, and pushes the tournament to the next stage automatically.</p>
+          <p>Elimination is a first-class concept (<code>Nation.isEliminated</code>), which most fantasy football apps don't need but a knockout tournament fantasy app absolutely does, eliminated players get visually marked "OUT" and stop scoring, rather than just vanishing.</p>
+
+          <h3>The Cap That Loosens as the Field Shrinks</h3>
+          <p>Standard fantasy caps you at 3 players per country, fine with 32 teams, but by the Final only 2 nations exist, so a hard 3-cap makes fielding 11 starters mathematically impossible. The real function that fixes this:</p>
+
+          <div class="case-code">
+<pre>
+// The field halves every knockout round (32→16→8→4→2). With the standard
+// 3-per-nation cap and only 2 nations in the Final, you could own at most 6
+// finalists but need 11 starters — an XI becomes impossible to field. So the
+// cap loosens as the field shrinks:
+//   • Default (groups → R16): 3 per nation.
+//   • Quarter Finals (8 nations): 4 per nation.
+//   • SF (4 nations): 5 per nation.
+//   • Final round: no cap (Infinity) — a full XI from one finalist is
+//     fillable, the "go all-in on the final" design intent, kept on purpose.
+export function maxPerNationForStage(stageId: string | null | undefined): number {
+  switch (stageId) {
+    case 'QF': return 4;
+    case 'SF': return 5;
+    case 'F':  return Infinity;
+    default:   return SQUAD.maxPerNation; // 3
+  }
+}
+</pre>
+          </div>
+          <p>Deliberately enabling an "all-in on the finalist" strategy exactly when the format demands it.</p>
+        </div>
+
+        <div class="case-section">
+          <h2>Live Scoring Pipeline</h2>
+          <p>A Vercel cron triggers a poller that, on each tick: pulls live fixtures from API-Football, feeds real-time stats through the scoring calculator, and writes per-player, per-match performance rows with an <code>isLive</code> flag. Points are only banked (finalized) once a match is actually full-time, with a self-healing re-score sweep, because API-Football sometimes marks a match FT before publishing final stats, which would otherwise freeze a match's points at an incomplete snapshot forever.</p>
+          <p>Three "safety sweep" jobs run alongside the main poller, unbanked-match healing, pending re-scores, and elimination sweeps, each independently idempotent so a cron retry or overlap never double-applies anything.</p>
+        </div>
+
+        <div class="case-section">
+          <h2>Admin/Ops: Where Trust Actually Gets Built</h2>
+          <p>This is the part I'd highlight most in an interview, honestly. Every mutating admin action, manual point overrides, retroactive squad corrections, chip refunds, bug-driven data fixes, goes through an immutable <code>AuditLog</code> table with a <code>revertedAt</code> pointer, so nothing is ever silently edited; corrections are new rows that reference what they undo.</p>
+
+          <div class="case-code">
+<pre>
+model AuditLog {
+  id        String   @id @default(cuid())
+  userId    String?
+  action    String
+  details   String
+  ipAddress String?
+  createdAt DateTime @default(now())
+
+  // When this entry was reverted. Null = still in effect. UIs hide
+  // reverted entries from default views so they don't clutter the
+  // Adjustments list with +X/-X pairs.
+  revertedAt        DateTime?
+  // ID of the audit entry that reverted this one. Lets admins trace
+  // cause/effect.
+  revertedByAuditId String?
+
+  @@index([userId])
+  @@index([action])
+  @@index([createdAt])
+}
+</pre>
+          </div>
+
+          <p>Querying production right now shows real volume behind that table, this isn't a demo dataset, it's a season of real usage:</p>
+
+          <div class="results-grid">
+            <div class="result-item">
+              <span class="result-number">26</span>
+              <span class="result-label">Distinct audit action types</span>
+            </div>
+            <div class="result-item">
+              <span class="result-number">195</span>
+              <span class="result-label">Real transfers made</span>
+            </div>
+            <div class="result-item">
+              <span class="result-number">75</span>
+              <span class="result-label">Chip activations</span>
+            </div>
+            <div class="result-item">
+              <span class="result-number">31</span>
+              <span class="result-label">Elimination-sweep events</span>
+            </div>
+            <div class="result-item">
+              <span class="result-number">6</span>
+              <span class="result-label">Live match re-scores</span>
+            </div>
+            <div class="result-item">
+              <span class="result-number">29</span>
+              <span class="result-label">User registrations</span>
+            </div>
+          </div>
+
+          <h3>The Retroactive-Correction Pattern</h3>
+          <p>The one I'm proudest of. When a real bug or a legitimate "I meant to make this transfer 20 minutes ago" request comes in mid-tournament, I don't want to spend a free transfer or apply a hit for something that's genuinely the app's fault or an owner-authorized backdate. So I built a repeatable pattern: a direct squad-row swap (same slot, same starting/captain state) with bank and value adjusted by the exact price delta so bank + value stays conserved to the penny, wrapped in a transaction with the audit row, guarded by sanity checks, position match, "not already owned", "bank can't go negative", that throw before touching the database if anything's off.</p>
+
+          <div class="case-code">
+<pre>
+if (outPlayer.position !== inPlayer.position) {
+  console.log('POSITION MISMATCH — aborting'); return;
+}
+const alreadyOwns = await prisma.squadPlayer.findFirst({
+  where: { teamId: team.id, playerId: inPlayer.id },
+});
+if (alreadyOwns) { console.log('already owned — aborting'); return; }
+
+const netDelta = round(inPlayer.currentPrice - squadRow.purchasePrice);
+
+await prisma.squadPlayer.update({
+  where: { id: squadRow.id },
+  data: { playerId: inPlayer.id, purchasePrice: inPlayer.currentPrice },
+});
+await prisma.team.update({
+  where: { id: team.id },
+  data: {
+    bankBalance: round(team.bankBalance - netDelta),
+    teamValue: round(team.teamValue + netDelta),
+  },
+});
+await prisma.auditLog.create({ data: { action: 'ADMIN_RETROACTIVE_SQUAD_CORRECTION', details: '...' } });
+</pre>
+          </div>
+
+          <div class="case-highlight">
+            <p>💡 I used this exact pattern live, mid-conversation, correcting multiple teams' squads during the Final and then fully reversing two of them without leaving residue. The audit trail shows both directions cleanly, which is the entire point of building it this way instead of hand-editing rows.</p>
+          </div>
+
+          <p>The 221 one-off scripts I've accumulated over the season, check-, audit-, fix- scripts for specific incidents, checking a specific player's live minutes lagging the API, auditing group-stage banking sums, verifying penalty-save scoring after a rule change, are the unglamorous truth of running this live. They default to dry-run when they mutate data, because a fantasy app's database is basically money and reputation with your friends.</p>
+        </div>
+
+        <div class="case-section">
+          <h2>Frontend Engineering Worth Calling Out</h2>
+          <ul>
+            <li><strong>kit.tsx:</strong> a from-scratch SVG jersey renderer, real per-nation stripe/hoop/sash patterns, gradient shading for a pseudo-3D look, captain/vice armband badges, a live-points pill, all parameterized so roughly 200 nations render correctly from just two kit colors and a country code. A <code>PlayerFace</code> component overlays real headshots on the same kit-colored frame and gracefully falls back to the pure-SVG shirt if the photo 404s.</li>
+            <li><strong>The /table mobile interaction:</strong> a finger-tracked drag-to-reveal column expansion, collapsed "# Club P Pts" opens W/D/L/GD by dragging, half-open is a valid resting state, driven entirely by a CSS custom property written directly in the touch handler (no React re-render per pixel of drag, transitions suppressed during drag via a class toggle). It went through four rejected approaches first: a real <code>&lt;table&gt;</code> with sticky columns (CSS <code>max-width</code> doesn't clamp table cells), native horizontal scroll (felt "patchy" with no snap state), and a discrete toggle-on-threshold, each rejected for a specific, memorable failure mode before landing on the drag-driven version.</li>
+            <li><strong>Auth-gated route groups</strong> with JWT session refresh, a splash-screen remover, and an iOS PWA install prompt for the "add to home screen" flow friends actually use on their phones.</li>
+          </ul>
+        </div>
+
+        <div class="case-section">
+          <h2>War Stories: Real Bugs, Real Fixes</h2>
+          <ul>
+            <li><strong>Float-drift in banked points.</strong> Repeated bank/value arithmetic across many transfers slowly desynced fractional pennies from the true squad value. Fixed with consistent rounding at each mutation point rather than only at display time.</li>
+            <li><strong>Non-additive mercy-transfer bug.</strong> The QF→SF stage transition computed free-transfer "mercy" (extra transfers for teams that lost players to elimination) using a formula that replaced rather than added to existing free transfers, silently costing teams transfers they'd already banked. Caught, fixed, and, critically, retroactively re-applied to every affected team via an audit-logged sweep script across roughly 25 teams, rather than just fixing it forward and leaving already-wronged teams shorted.</li>
+            <li><strong>Ghost-state bug in the lineup builder</strong> (found and fixed in the sister La Liga codebase, same root architecture): after a transfer, a child component kept its stale starting player-ID set because it wasn't remounted, so a transferred-out player's ID lingered as a "ghost", inflating the starting-XI count to 12 and disabling Save with a completely unrelated error message because the disabled-reason logic fell through every specific branch to a generic fallback. Root-caused by tracing the exact state transition, not just patching the symptom.</li>
+            <li><strong>Budget double-counting in transfer validation.</strong> It compared the current market value of the entire squad against just the bank plus one player's sale price, two numbers that were never comparable, producing wildly wrong "exceeds budget" errors on completely normal transfers. Dead code path nobody had hit until the La Liga fork surfaced it.</li>
+          </ul>
+        </div>
+
+        <div class="case-section">
+          <h2>Proof the Architecture Generalizes: The La Liga Fork</h2>
+          <p>Rather than describe the architecture in the abstract, I fork-forwarded the entire app into a second, real product: a season-long, 38-gameweek La Liga fantasy app reusing about 80% of the World Cup codebase almost unchanged, same scoring engine (re-verified 75/75 against the new rule set), same gameweek/lock/live-update pipeline, same auth and league system.</p>
+          <p>The port required renaming the tournament-specific concepts, Nation → Club, Stage → Gameweek, and dropping the elimination/bracket logic, but proved the core engine, banking model, and admin-correction pattern weren't tournament-specific hacks, they're a reusable fantasy-sports platform. That fork syncs against real 2026-27 La Liga data via API-Football Pro (20 clubs, 552 real players, 380 real fixtures across 38 real gameweeks with real kickoff-derived deadlines), and its scoring engine was checked against a genuinely live match (LA Galaxy 0-3 LAFC) during development the same way the original was.</p>
+        </div>
+
+        <div class="case-section">
+          <h2>By the Numbers</h2>
+          <div class="results-grid">
+            <div class="result-item">
+              <span class="result-number">183</span>
+              <span class="result-label">Commits, solo, over 6 months</span>
+            </div>
+            <div class="result-item">
+              <span class="result-number">~39,000</span>
+              <span class="result-label">Lines of TypeScript across 144 files</span>
+            </div>
+            <div class="result-item">
+              <span class="result-number">16</span>
+              <span class="result-label">Prisma models</span>
+            </div>
+            <div class="result-item">
+              <span class="result-number">221</span>
+              <span class="result-label">One-off admin/ops scripts run live</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="case-section">
+          <h2>What I Learned</h2>
+          <ul>
+            <li><strong>An audit trail is worth more than being right the first time.</strong> Bugs happen, especially against a live external data feed. What matters is being able to prove exactly what broke, when, and how it was made right, instead of hand-waving "yeah I fixed it."</li>
+            <li><strong>Fix forward and fix backward.</strong> The mercy-transfer bug taught me that patching the bug going forward isn't enough if it already wronged real users, the retroactive sweep across every affected team was the actual fix.</li>
+            <li><strong>A second real product is the best architecture review.</strong> Forking to La Liga surfaced dead code paths and design assumptions no amount of self-review would have caught, because a second consumer of the same code doesn't share my blind spots.</li>
+          </ul>
+        </div>
+
+        <nav class="case-nav">
+          <a href="projects.html">
+            <i class="bi bi-arrow-left"></i>
+            All Projects
+          </a>
+          <a href="capstone.html">
+            Next: CAST Medical Interface
+            <i class="bi bi-arrow-right"></i>
+          </a>
+        </nav>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer" id="contact">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-main">
+          <h2>Have a complicated system that needs to work?</h2>
+          <p>I'm interested in robotics, automation, embedded systems, and engineering roles where software meets the physical world.</p>
+          <a href="mailto:21ymsa@queensu.ca" class="footer-email"><i class="bi bi-envelope"></i> 21ymsa@queensu.ca</a>
+        </div>
+        <div class="footer-links">
+          <a href="https://www.linkedin.com/in/yousef-alsaqa-b1ab4822b/" target="_blank" rel="noopener"><i class="bi bi-linkedin"></i> LinkedIn</a>
+          <a href="https://github.com/yousefalsaqa" target="_blank" rel="noopener"><i class="bi bi-github"></i> GitHub</a>
+          <a href="assets/Yousef_Alsaqa_Resume.pdf" target="_blank"><i class="bi bi-file-earmark-text"></i> Résumé</a>
+        </div>
+      </div>
+      <div class="footer-bottom"><p>© 2026 Yousef Alsaqa · Kingston, Canada</p></div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    const navToggle = document.getElementById('navToggle');
+    const nav = document.getElementById('nav');
+    navToggle.addEventListener('click', () => {
+      const open = nav.classList.toggle('active');
+      navToggle.classList.toggle('active', open);
+      navToggle.setAttribute('aria-expanded', open);
+    });
+    nav.querySelectorAll('.nav-link').forEach(l => l.addEventListener('click', () => {
+      nav.classList.remove('active'); navToggle.classList.remove('active');
+      navToggle.setAttribute('aria-expanded', 'false');
+    }));
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+  </script>
+</body>
+</html>

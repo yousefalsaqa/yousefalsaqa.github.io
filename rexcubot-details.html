@@ -5,12 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Rexcubot Competition Robot | Yousef Alsaqa</title>
   <meta name="description" content="Case study: Competition robot with parallel linkage scoop and precision gripper for Tronassic Park challenge.">
-  <meta name="theme-color" content="#050508">
+  <meta name="theme-color" content="#F1EEE6">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
   <!-- Bootstrap Icons -->
   <link href="vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
@@ -24,17 +26,20 @@
   <!-- Header -->
   <header class="header" id="header">
     <div class="header-inner">
-      <a href="index.html" class="header-logo">Yousef<span>.</span></a>
-      <nav class="header-nav" id="nav">
-        <a href="index.html" class="nav-link">Home</a>
-        <a href="projects.html" class="nav-link">Projects</a>
-        <a href="experience.html" class="nav-link">Experience</a>
-        <a href="mailto:21ymsa@queensu.ca" class="nav-link">Contact</a>
+      <a href="index.html" class="header-logo">
+        <span class="header-logo-name">YOUSEF ALSAQA</span>
+        <span class="header-logo-role">MECHATRONICS / SYSTEMS</span>
+      </a>
+      <nav class="header-nav" id="nav" aria-label="Main">
+        <a href="index.html#systems" class="nav-link">Systems</a>
+        <a href="index.html#experience" class="nav-link">Experience</a>
+        <a href="index.html#field-notes" class="nav-link">Field Notes</a>
+        <a href="index.html#about" class="nav-link">About</a>
+        <a href="index.html#contact" class="nav-link">Contact</a>
       </nav>
-      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
-        <span></span>
-        <span></span>
-        <span></span>
+      <div class="header-status" id="headerStatus"><span class="header-status-text">FIELD NOTE / REXCUBOT</span></div>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
       </button>
     </div>
   </header>
@@ -87,7 +92,7 @@
         </div>
 
         <figure class="case-image">
-          <img src="assets/303_Rexcubot_Main.jpg" alt="Rexcubot fully assembled">
+          <img src="assets/303bot.jpg" alt="Rexcubot fully assembled">
           <figcaption>Rexcubot in final competition configuration</figcaption>
         </figure>
 
@@ -98,7 +103,7 @@
           <p>The front scoop uses a 4-bar parallel linkage. Why parallel? It keeps the scoop floor level throughout its range of motion, eggs don't roll out when lifting.</p>
           
           <figure class="case-image">
-            <img src="assets/303_Scoop.jpg" alt="Scoop mechanism detail">
+            <img src="assets/scoop303bot.png" alt="Scoop mechanism detail">
             <figcaption>The parallel linkage maintains scoop angle throughout the range of motion</figcaption>
           </figure>
 
@@ -114,7 +119,7 @@
           <p>Ken required a different approach. The gripper uses a rack-and-pinion mechanism for linear opening/closing motion with precise position control.</p>
           
           <figure class="case-image">
-            <img src="assets/303_Gripper.jpg" alt="Gripper mechanism detail">
+            <img src="assets/303gripper.jpg" alt="Gripper mechanism detail">
             <figcaption>Rack-and-pinion gripper with compliant fingertips</figcaption>
           </figure>
 
@@ -185,7 +190,7 @@ float get_line_error() {
         </div>
 
         <figure class="case-image">
-          <img src="assets/electric_schematic_303.png" alt="Electrical schematic">
+          <img src="assets/electric schematic 303mren.png" alt="Electrical schematic">
           <figcaption>Complete electrical schematic showing power distribution and signal routing</figcaption>
         </figure>
 
@@ -256,7 +261,7 @@ void loop() {
         </div>
 
         <figure class="case-image">
-          <img src="assets/303bot_poster.jpg" alt="Competition poster">
+          <img src="assets/mren303bot.png" alt="Competition poster">
           <figcaption>Project poster presented at competition</figcaption>
         </figure>
 
@@ -302,35 +307,21 @@ void loop() {
   </main>
 
   <!-- Footer -->
-  <footer class="footer">
+  <footer class="footer" id="contact">
     <div class="container">
       <div class="footer-content">
         <div class="footer-main">
-          <h2>Let's talk.</h2>
-          <p>I'm looking for full-time opportunities in robotics, automation, or anywhere I can build things that matter.</p>
-          <a href="mailto:21ymsa@queensu.ca" class="footer-email">
-            <i class="bi bi-envelope"></i>
-            21ymsa@queensu.ca
-          </a>
+          <h2>Have a complicated system that needs to work?</h2>
+          <p>I'm interested in robotics, automation, embedded systems, and engineering roles where software meets the physical world.</p>
+          <a href="mailto:21ymsa@queensu.ca" class="footer-email"><i class="bi bi-envelope"></i> 21ymsa@queensu.ca</a>
         </div>
         <div class="footer-links">
-          <a href="https://www.linkedin.com/in/yousef-alsaqa-b1ab4822b/" target="_blank">
-            <i class="bi bi-linkedin"></i>
-            LinkedIn
-          </a>
-          <a href="https://github.com/yousefalsaqa" target="_blank">
-            <i class="bi bi-github"></i>
-            GitHub
-          </a>
-          <a href="assets/Yousef_Alsaqa_Resume.pdf" target="_blank">
-            <i class="bi bi-file-earmark-text"></i>
-            Resume
-          </a>
+          <a href="https://www.linkedin.com/in/yousef-alsaqa-b1ab4822b/" target="_blank" rel="noopener"><i class="bi bi-linkedin"></i> LinkedIn</a>
+          <a href="https://github.com/yousefalsaqa" target="_blank" rel="noopener"><i class="bi bi-github"></i> GitHub</a>
+          <a href="assets/Yousef_Alsaqa_Resume.pdf" target="_blank"><i class="bi bi-file-earmark-text"></i> Résumé</a>
         </div>
       </div>
-      <div class="footer-bottom">
-        <p>© 2026 Yousef Alsaqa</p>
-      </div>
+      <div class="footer-bottom"><p>© 2026 Yousef Alsaqa · Kingston, Canada</p></div>
     </div>
   </footer>
 
@@ -338,20 +329,19 @@ void loop() {
   <script>
     const navToggle = document.getElementById('navToggle');
     const nav = document.getElementById('nav');
-    
     navToggle.addEventListener('click', () => {
-      nav.classList.toggle('active');
-      navToggle.classList.toggle('active');
+      const open = nav.classList.toggle('active');
+      navToggle.classList.toggle('active', open);
+      navToggle.setAttribute('aria-expanded', open);
     });
-
+    nav.querySelectorAll('.nav-link').forEach(l => l.addEventListener('click', () => {
+      nav.classList.remove('active'); navToggle.classList.remove('active');
+      navToggle.setAttribute('aria-expanded', 'false');
+    }));
     const header = document.getElementById('header');
     window.addEventListener('scroll', () => {
-      if (window.scrollY > 50) {
-        header.classList.add('scrolled');
-      } else {
-        header.classList.remove('scrolled');
-      }
-    });
+      header.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
   </script>
 </body>
 </html>

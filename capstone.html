@@ -4,13 +4,16 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CAST Medical Interface | Yousef Alsaqa</title>
-  <meta name="description" content="Case study: A patient simulator with custom RFID stethoscope for nursing education at Queen's University.">
-  <meta name="theme-color" content="#050508">
+  <meta name="description" content="Teardown of CAST, an RFID auscultation simulator built for Queen's University School of Nursing: 12 tagged listening points, 28 audio scenarios, about $250 in hardware.">
+  <meta name="theme-color" content="#F1EEE6">
+
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
   <!-- Bootstrap Icons -->
   <link href="vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
@@ -18,23 +21,307 @@
   <!-- Stylesheets -->
   <link href="css/theme.css" rel="stylesheet">
   <link href="css/pages/case-study.css" rel="stylesheet">
+
+  <!-- Page-unique styles: CAST teardown -->
+  <style>
+    /* ---- Hero signal chain strip ---- */
+    .signal-chain {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 0.9rem 1.1rem;
+      margin-top: 2rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--hairline);
+    }
+
+    .signal-chain-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    .signal-chain-label {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--graphite);
+    }
+
+    .signal-chain-value {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--carbon);
+    }
+
+    .signal-chain-arrow {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--signal);
+      align-self: flex-end;
+      padding-bottom: 0.1rem;
+    }
+
+    /* ---- Annotated figure: numbered markers + leader lines ---- */
+    .fig-annotated-frame {
+      position: relative;
+    }
+
+    .fig-marker {
+      position: absolute;
+      left: var(--x);
+      top: var(--y);
+      transform: translate(-50%, -50%);
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--paper);
+      border: 1.5px solid var(--signal);
+      border-radius: 50%;
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: var(--carbon);
+      z-index: 2;
+    }
+
+    .fig-marker::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: var(--len, 44px);
+      height: 1.5px;
+      background: var(--signal);
+      transform-origin: 0 50%;
+      transform: rotate(var(--angle, 45deg));
+      z-index: -1;
+    }
+
+    .case-section ol.fig-key {
+      list-style: none;
+      margin: 0;
+      padding: 0.9rem 1rem;
+      border-top: 1px solid var(--hairline);
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.5rem 2rem;
+    }
+
+    .case-section .fig-key li {
+      display: flex;
+      gap: 0.6rem;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      line-height: 1.6;
+      color: var(--graphite);
+      margin: 0;
+    }
+
+    .fig-key-num {
+      color: var(--signal);
+      font-weight: 700;
+      flex: none;
+    }
+
+    /* ---- Exploded system view: ruled layer rows ---- */
+    .exploded-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      font-family: var(--font-mono);
+      font-size: 0.66rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--graphite);
+      padding-bottom: 0.7rem;
+      border-bottom: 1px solid var(--carbon);
+      margin-top: 2rem;
+    }
+
+    .case-section ol.exploded {
+      list-style: none;
+      margin: 0 0 2rem;
+      padding: 0;
+    }
+
+    .case-section .exploded-row {
+      display: grid;
+      grid-template-columns: 92px 1fr minmax(200px, 250px);
+      gap: 1.5rem;
+      align-items: baseline;
+      padding: 1.15rem 0;
+      border-bottom: 1px solid var(--hairline);
+      margin: 0;
+    }
+
+    .exploded-num {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      color: var(--graphite);
+    }
+
+    .exploded-row h3 {
+      margin: 0 0 0.35rem;
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .exploded-row p {
+      font-size: 0.9rem;
+      line-height: 1.65;
+      color: var(--graphite);
+      margin: 0;
+    }
+
+    .exploded-note {
+      font-family: var(--font-mono);
+      font-size: 0.66rem;
+      line-height: 1.7;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--graphite);
+      border-left: 1px solid var(--hairline);
+      padding-left: 1rem;
+    }
+
+    .exploded-note strong {
+      color: var(--carbon);
+      font-weight: 500;
+    }
+
+    /* ---- Signal path: paper terminal, non-code header ---- */
+    .signal-path {
+      border: 1px solid var(--hairline);
+      background: var(--paper-2);
+      margin: 2rem 0;
+    }
+
+    .signal-path::before {
+      content: 'SIGNAL PATH / ONE AUSCULTATION EVENT';
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--graphite);
+      padding: 0.55rem 1.25rem;
+      background: var(--paper);
+      border-bottom: 1px solid var(--hairline);
+    }
+
+    .signal-path pre {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      line-height: 1.9;
+      color: var(--carbon);
+      margin: 0;
+      padding: 1.25rem;
+      overflow-x: auto;
+    }
+
+    /* ---- Spec tables (tag layout, cost sheet) ---- */
+    .spec-table-wrap {
+      overflow-x: auto;
+      margin: 1.5rem 0 2rem;
+    }
+
+    .spec-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .spec-table caption {
+      text-align: left;
+      font-family: var(--font-mono);
+      font-size: 0.66rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--graphite);
+      padding-bottom: 0.6rem;
+    }
+
+    .spec-table th {
+      font-family: var(--font-mono);
+      font-size: 0.64rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--graphite);
+      text-align: left;
+      padding: 0.55rem 1.25rem 0.55rem 0;
+      border-bottom: 1px solid var(--carbon);
+    }
+
+    .spec-table td {
+      font-size: 0.92rem;
+      line-height: 1.6;
+      color: var(--carbon);
+      padding: 0.7rem 1.25rem 0.7rem 0;
+      border-bottom: 1px solid var(--hairline);
+      vertical-align: top;
+    }
+
+    .spec-table td.mono-cell {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      white-space: nowrap;
+    }
+
+    .spec-table tr.total-row td {
+      font-weight: 600;
+    }
+
+    .spec-table tr.total-row td.mono-cell {
+      color: var(--signal);
+      font-weight: 700;
+    }
+
+    /* ---- Responsive ---- */
+    @media (max-width: 700px) {
+      .case-section .exploded-row {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+      }
+
+      .exploded-note {
+        border-left: none;
+        padding-left: 0;
+      }
+
+      .case-section ol.fig-key {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 
 <body>
-  <!-- Header -->
   <header class="header" id="header">
     <div class="header-inner">
-      <a href="index.html" class="header-logo">Yousef<span>.</span></a>
-      <nav class="header-nav" id="nav">
-        <a href="index.html" class="nav-link">Home</a>
-        <a href="projects.html" class="nav-link">Projects</a>
-        <a href="experience.html" class="nav-link">Experience</a>
-        <a href="mailto:21ymsa@queensu.ca" class="nav-link">Contact</a>
+      <a href="index.html" class="header-logo">
+        <span class="header-logo-name">YOUSEF ALSAQA</span>
+        <span class="header-logo-role">MECHATRONICS / SYSTEMS</span>
+      </a>
+      <nav class="header-nav" id="nav" aria-label="Main">
+        <a href="index.html#systems" class="nav-link">Systems</a>
+        <a href="index.html#experience" class="nav-link">Experience</a>
+        <a href="index.html#field-notes" class="nav-link">Field Notes</a>
+        <a href="index.html#about" class="nav-link">About</a>
+        <a href="index.html#contact" class="nav-link">Contact</a>
       </nav>
-      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
-        <span></span>
-        <span></span>
-        <span></span>
+      <div class="header-status" id="headerStatus"><span class="header-status-text">SYSTEM 01 / CAST</span></div>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
       </button>
     </div>
   </header>
@@ -43,21 +330,22 @@
     <!-- Hero -->
     <section class="case-hero">
       <div class="container">
-        <a href="projects.html" class="back-link">
-          <i class="bi bi-arrow-left"></i>
-          Back to projects
+        <a href="index.html#systems" class="back-link">
+          <i class="bi bi-arrow-left" aria-hidden="true"></i>
+          Systems index
         </a>
+        <span class="case-system">SYSTEM 01 / TEARDOWN</span>
         <h1>CAST Medical Interface</h1>
         <p class="subtitle">A patient simulator that lets nursing students practice auscultation on a manikin, with real heart and lung sounds played through a custom RFID stethoscope. Built for Queen's University School of Nursing.</p>
-        
+
         <div class="case-meta">
           <div class="case-meta-item">
             <span class="case-meta-label">Role</span>
-            <span class="case-meta-value">Software Lead & Integration</span>
+            <span class="case-meta-value">Assistant Lead, Software &amp; Integration</span>
           </div>
           <div class="case-meta-item">
             <span class="case-meta-label">Timeline</span>
-            <span class="case-meta-value">Sep 2024 to May 2025</span>
+            <span class="case-meta-value">Sep 2024 – May 2025</span>
           </div>
           <div class="case-meta-item">
             <span class="case-meta-label">Team</span>
@@ -68,94 +356,298 @@
             <span class="case-meta-value">In use at Queen's</span>
           </div>
         </div>
+
+        <div class="signal-chain" aria-label="System signal chain">
+          <div class="signal-chain-item">
+            <span class="signal-chain-label">Input</span>
+            <span class="signal-chain-value">RFID tag position, 12 tags</span>
+          </div>
+          <span class="signal-chain-arrow" aria-hidden="true">&rarr;</span>
+          <div class="signal-chain-item">
+            <span class="signal-chain-label">Process</span>
+            <span class="signal-chain-value">Scenario logic, 28 audio scenarios</span>
+          </div>
+          <span class="signal-chain-arrow" aria-hidden="true">&rarr;</span>
+          <div class="signal-chain-item">
+            <span class="signal-chain-label">Output</span>
+            <span class="signal-chain-value">Localized heart / lung audio</span>
+          </div>
+          <span class="signal-chain-arrow" aria-hidden="true">&rarr;</span>
+          <div class="signal-chain-item">
+            <span class="signal-chain-label">Constraint</span>
+            <span class="signal-chain-value">~$250 total hardware</span>
+          </div>
+        </div>
       </div>
     </section>
 
     <!-- Content -->
     <section class="section">
       <div class="container case-content">
-        
+
+        <!-- 01 Product overview -->
         <div class="case-section">
-          <h2>The Problem</h2>
-          <p>Nursing students need to learn auscultation, using a stethoscope to listen to heart and lung sounds. But practicing on real patients is limited and risky. Existing simulators are either too expensive ($50K+) or too simple (just audio files on a laptop).</p>
-          <p>Queen's School of Nursing needed something in between: realistic enough to teach proper technique, affordable enough to deploy in labs, and robust enough for daily student use.</p>
+          <h2>Product overview</h2>
+          <p>Nursing students need to learn auscultation, using a stethoscope to listen to heart and lung sounds. Practicing on real patients is limited and risky. Existing simulators are either too expensive (commercial patient simulators with auscultation start around $50K) or too simple, just audio files on a laptop.</p>
+          <p>Queen's School of Nursing needed something in between: realistic enough to teach proper technique, affordable enough to deploy in labs, and reliable enough for daily student use. We built CAST, Clinical Auscultation Simulation Training. The full system had two modules: auscultation (listening with a stethoscope) and palpation (physical examination by touch). I owned everything software and handled all hardware-software integration for the auscultation side.</p>
+          <div class="case-highlight">
+            <p>The challenge was not making one component work. It was making the entire experience feel invisible to the learner.</p>
+          </div>
         </div>
 
-        <figure class="case-image">
-          <img src="capstone full picture.jpg" alt="CAST system overview showing the manikin, stethoscope, and interface">
-          <figcaption>The complete CAST system with manikin, custom stethoscope, and feedback interface</figcaption>
-        </figure>
-
+        <!-- 02 Physical interaction -->
         <div class="case-section">
-          <h2>The Solution</h2>
-          <p>We built CAST, Clinical Auscultation Simulation Training. The full system had two modules: auscultation (listening with a stethoscope) and palpation (physical examination by touch). I owned everything software and handled all hardware-software integration for the auscultation side.</p>
-          
-          <h3>1. Custom RFID Stethoscope</h3>
-          <p>I built a stethoscope housing containing an MFRC522 RFID reader connected to a Raspberry Pi. Earphones plug into the Pi for audio output, it looks and feels like using a real stethoscope, but the sounds come from the manikin's "condition" rather than actual vibrations.</p>
-          
+          <h2>Physical interaction</h2>
+          <p>The student picks up the stethoscope and places it on the manikin's chest or back, exactly as they would with a patient. Inside the chest piece, an MFRC522 RFID reader identifies which anatomical position it is touching, and the matching heart or lung sound plays through earphones plugged into the Raspberry Pi. It looks and feels like using a real stethoscope, but the sounds come from the manikin's active audio scenario rather than actual vibrations.</p>
+          <p>The interaction only works if it is fast. Audio switches in under 260ms when the stethoscope moves between positions, so listening feels continuous rather than like triggering sound clips.</p>
+
           <figure class="case-image">
-            <img src="stethoscope-iii.png" alt="Custom RFID stethoscope design">
-            <figcaption>The custom stethoscope with integrated RFID reader connected to Raspberry Pi</figcaption>
-          </figure>
-
-          <h3>2. RFID-Tagged Manikin</h3>
-          <p>We took an old CPR manikin from Queen's Clinical Simulation Center and embedded 12 RFID tags at anatomically correct positions:</p>
-          <ul>
-            <li><strong>Heart valves (H1-H6):</strong> Aortic, pulmonic, tricuspid, mitral, and additional cardiac positions</li>
-            <li><strong>Lung positions (L1-L6):</strong> Anterior and posterior listening points for both lungs</li>
-          </ul>
-          <p>When the stethoscope touches any of these spots, the RFID reader identifies the location and plays the appropriate sound for the current "scenario."</p>
-
-          <h3>3. Instructor Control Interface</h3>
-          <p>A Flask-based web app lets instructors first select auscultation or palpation mode. For auscultation, they choose the organ (heart or lungs) and then select from 28 different sounds, everything from normal heartbeat to various murmurs and respiratory conditions. The interface shows real-time feedback: exactly where the student is listening and what sound is playing.</p>
-
-          <h3>4. Student Interface</h3>
-          <p>Students see a simpler view, whether the mode is live, and feedback on their examination. There's also a <strong>quiz mode</strong> where either the program randomly selects a scenario or students can choose specific sounds to practice on their own.</p>
-        </div>
-
-        <div class="case-image-grid">
-          <figure class="case-image">
-            <img src="feedbackinterface-final.jpg" alt="Instructor feedback interface">
-            <figcaption>Instructor control panel</figcaption>
-          </figure>
-          <figure class="case-image">
-            <img src="fi-studentfinal.jpg" alt="Student interface">
-            <figcaption>Student view during examination</figcaption>
+            <div class="fig-annotated-frame">
+              <img src="stethoscope-iii.png" width="2082" height="2776" alt="Workbench photo of the auscultation hardware: wired earphones on the left, a black 3D-printed Raspberry Pi enclosure in the center, and the MFRC522 RFID reader mounted in a smaller printed chest-piece housing on the right, joined by a grey cable harness.">
+              <span class="fig-marker" style="--x:21%; --y:44%; --angle:235deg;"><span aria-hidden="true">1</span></span>
+              <span class="fig-marker" style="--x:51%; --y:55%; --angle:300deg;"><span aria-hidden="true">2</span></span>
+              <span class="fig-marker" style="--x:76%; --y:61%; --angle:55deg;"><span aria-hidden="true">3</span></span>
+              <span class="fig-marker" style="--x:66%; --y:16%; --angle:160deg;"><span aria-hidden="true">4</span></span>
+            </div>
+            <ol class="fig-key">
+              <li><span class="fig-key-num">1</span> Earphones, audio out from the Pi. The student hears the scenario here.</li>
+              <li><span class="fig-key-num">2</span> Printed enclosure housing the Raspberry Pi 4, the system's controller.</li>
+              <li><span class="fig-key-num">3</span> MFRC522 reader in the printed chest-piece housing. This is the part that touches the manikin.</li>
+              <li><span class="fig-key-num">4</span> Cable harness carrying the SPI connection between reader and Pi.</li>
+            </ol>
+            <figcaption>FIG. 01 / AUSCULTATION HARDWARE, BENCH STATE. MFRC522 READER + RASPBERRY PI 4 + EARPHONES. NUMBERED KEY ABOVE.</figcaption>
           </figure>
         </div>
 
+        <!-- 03 Exploded system view -->
         <div class="case-section">
-          <h2>Technical Deep Dive</h2>
-          
+          <h2>Exploded system view</h2>
+          <p>Reading the system top down, from the surface the student touches to the audio they hear:</p>
+
+          <div class="exploded-head" aria-hidden="true">
+            <span>LAYER STACK</span>
+            <span>SIGNAL DIRECTION: SURFACE &rarr; AUDIO OUT</span>
+          </div>
+          <ol class="exploded">
+            <li class="exploded-row">
+              <span class="exploded-num">LAYER 01</span>
+              <div>
+                <h3>Manikin surface</h3>
+                <p>An old CPR manikin donated from Queen's Clinical Simulation Center. The student interacts with anatomy, not electronics.</p>
+              </div>
+              <span class="exploded-note">BASE: DONATED CPR MANIKIN<br>MODULAR SKIN + BASE UNIT</span>
+            </li>
+            <li class="exploded-row">
+              <span class="exploded-num">LAYER 02</span>
+              <div>
+                <h3>RFID tags</h3>
+                <p>Twelve passive tags embedded at anatomically correct auscultation points. Each tag carries a unique ID.</p>
+              </div>
+              <span class="exploded-note">12 TAGS<br>H1-H6 CARDIAC &middot; L1-L6 PULMONARY</span>
+            </li>
+            <li class="exploded-row">
+              <span class="exploded-num">LAYER 03</span>
+              <div>
+                <h3>Reader + Pi</h3>
+                <p>The MFRC522 in the stethoscope chest piece reads whichever tag it touches and reports it to the Raspberry Pi 4 over SPI.</p>
+              </div>
+              <span class="exploded-note">MFRC522 &rarr; SPI &rarr; RASPBERRY PI 4</span>
+            </li>
+            <li class="exploded-row">
+              <span class="exploded-num">LAYER 04</span>
+              <div>
+                <h3>Scenario logic</h3>
+                <p>A lookup table maps tag ID to anatomical position, then position to the correct sound file for whichever scenario the instructor has set.</p>
+              </div>
+              <span class="exploded-note">TAG ID &rarr; POSITION &rarr; SOUND FILE<br>28 AUDIO SCENARIOS</span>
+            </li>
+            <li class="exploded-row">
+              <span class="exploded-num">LAYER 05</span>
+              <div>
+                <h3>Audio + interface</h3>
+                <p>Pygame's mixer plays the sound through the earphones while Flask and Socket.IO push live state to the instructor and student dashboards.</p>
+              </div>
+              <span class="exploded-note">SWITCH &lt; 260 MS<br>FLASK + SOCKET.IO LIVE FEED</span>
+            </li>
+          </ol>
+        </div>
+
+        <!-- 04 Prototype evolution -->
+        <div class="case-section">
+          <h2>Prototype evolution</h2>
+          <p>The design brief called for a manikin that could host more than one kind of training. So the platform is modular: a skin layer lifts off, a training module drops into the base unit, and the detachable head houses the Raspberry Pi, which exchanges data with the web interface. One module carries an array of force sensors for CPR and patient check-up practice, the palpation side of the project. The other carries the RFID tags for auscultation, the side documented here.</p>
+
+          <figure class="case-image">
+            <img src="capstone full picture.jpg" width="1313" height="1189" loading="lazy" alt="Architecture diagram of the CAST manikin. A skin layer lifts off, a swappable module is placed inside the base unit, and a detachable head houses the Raspberry Pi, which exchanges data with the functional interface on a monitor. Module options shown: an array of force sensors for CPR and patient check-ups, and RFID tags for auscultation.">
+            <figcaption>FIG. 02 / MODULAR ARCHITECTURE. SKIN &rarr; MODULE &rarr; BASE UNIT. DETACHABLE HEAD CARRIES THE PI; DATA LINK TO THE FUNCTIONAL INTERFACE.</figcaption>
+          </figure>
+
+          <p>The base itself was not bought. It was an old CPR manikin donated by Queen's Clinical Simulation Center, which is also why the cost sheet in section 09 counts its replacement value rather than a purchase. The stethoscope went through its own iterations: a housing for the chest piece that holds the MFRC522 flush against the reading surface, with the cable harness strain-relieved back to the Pi enclosure.</p>
+
+          <div class="placeholder-asset" role="note">[PLACEHOLDER: build-process photos. Manikin during tag installation and earlier stethoscope housing iterations. No photos of these stages exist in the repo.]</div>
+        </div>
+
+        <!-- 05 Hardware architecture -->
+        <div class="case-section">
+          <h2>Hardware architecture</h2>
+          <p>The electronics are deliberately minimal. One single-board computer, one reader, twelve passive tags, and a pair of earphones. Everything else is software.</p>
+
           <div class="tech-grid">
             <div class="tech-item">
               <h4>Raspberry Pi 4</h4>
-              <p>Central controller running the Flask server and audio system</p>
+              <p>Central controller running the Flask server and the audio system</p>
             </div>
             <div class="tech-item">
               <h4>MFRC522 RFID</h4>
-              <p>Reader module in stethoscope, communicating via SPI</p>
+              <p>Reader module in the stethoscope chest piece, communicating via SPI</p>
             </div>
             <div class="tech-item">
-              <h4>Flask + Socket.IO</h4>
-              <p>Real-time web interface for instructor control</p>
+              <h4>Passive RFID tags</h4>
+              <p>12 tags embedded in the manikin, one per auscultation point, no wiring or power at the tag</p>
             </div>
             <div class="tech-item">
-              <h4>Pygame</h4>
-              <p>Audio playback with low-latency switching</p>
+              <h4>Wired earphones</h4>
+              <p>Plug directly into the Pi, so the student hears audio localized to wherever the stethoscope sits</p>
             </div>
           </div>
 
-          <h3>The Audio Challenge</h3>
-          <p>Heart and lung sounds need to loop seamlessly and switch instantly when the stethoscope moves. I used Pygame's mixer with pre-loaded audio channels, hitting switching times under 260ms.</p>
-
-          <h3>RFID Tag Layout</h3>
-          <p>12 auscultation points total, 6 cardiac (H1-H6) and 6 pulmonary (L1-L6). Each RFID tag has a unique ID that maps to an anatomical position. The software maintains a lookup table connecting tag IDs to positions, and positions to the appropriate sound file based on the active scenario.</p>
+          <p>Keeping the tags passive matters: the manikin body contains no powered electronics on the auscultation side, so there is nothing inside it to charge, service, or break during daily student handling.</p>
         </div>
 
+        <!-- 06 Software logic -->
         <div class="case-section">
-          <h2>Impact</h2>
-          
+          <h2>Software logic</h2>
+          <p>Heart and lung sounds need to loop cleanly and switch the instant the stethoscope moves. I used Pygame's mixer with pre-loaded audio channels, which is how the system hits switching times under 260ms. The Flask server, with Socket.IO for real-time updates, keeps both dashboards in sync with what the hardware is doing.</p>
+
+          <div class="signal-path">
+            <pre>STETHOSCOPE CONTACT
+  &rarr; MFRC522 READ ....... tag UID over SPI
+  &rarr; POSITION LOOKUP .... UID mapped to H1-H6 / L1-L6
+  &rarr; SCENARIO MAP ....... position + active scenario &rarr; sound file
+  &rarr; CHANNEL SWITCH ..... pygame mixer, pre-loaded, &lt; 260 ms
+  &rarr; AUDIO OUT .......... earphones via the Pi
+  &rarr; SOCKET.IO EVENT .... instructor + student dashboards update</pre>
+          </div>
+
+          <p>The software maintains a lookup table connecting tag IDs to positions, and positions to the appropriate sound file based on the active scenario. Changing the scenario never touches the hardware; it only changes which files the positions resolve to.</p>
+        </div>
+
+        <!-- 07 Audio-scenario system -->
+        <div class="case-section">
+          <h2>Audio-scenario system</h2>
+          <p>Twelve auscultation points, six cardiac and six pulmonary, cover the standard listening positions. On top of that sit 28 audio scenarios, everything from normal heartbeat and normal breath sounds to various murmurs and respiratory conditions, all real clinical audio recordings.</p>
+
+          <div class="spec-table-wrap">
+            <table class="spec-table">
+              <caption>TAG LAYOUT / 12 AUSCULTATION POINTS</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Group</th>
+                  <th scope="col">Tags</th>
+                  <th scope="col">Listening points</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Cardiac</td>
+                  <td class="mono-cell">H1-H6</td>
+                  <td>Aortic, pulmonic, tricuspid, mitral, and additional cardiac positions</td>
+                </tr>
+                <tr>
+                  <td>Pulmonary</td>
+                  <td class="mono-cell">L1-L6</td>
+                  <td>Anterior and posterior listening points for both lungs</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p>Any of the 28 scenarios can be active at once, and every tagged position resolves to the correct sound for that scenario. A murmur scenario does not just change one spot; it changes what the whole chest sounds like, position by position.</p>
+
+          <div class="placeholder-asset" role="note">[PLACEHOLDER: photo or diagram of the manikin with the 12 tagged auscultation points marked H1-H6 and L1-L6. No tag-map image exists in the repo.]</div>
+        </div>
+
+        <!-- 08 The interface -->
+        <div class="case-section">
+          <h2>The interface: where it all comes together</h2>
+          <p>Everything upstream of this point only matters if it is trustworthy to look at. The RFID read, the position lookup, the 260ms audio switch, none of it means anything if the instructor cannot see what the hardware is doing right now, and if the student cannot tell whether the module is even live. Flask and Socket.IO are the layer that turns hardware state, instructor input, and audio playback into one shared, real-time picture for two different people looking at two different screens. This is the part that glues the rest of the system together.</p>
+
+          <h3>Instructor dashboard: control</h3>
+          <p>The instructor's job is to set up a scenario, then trust that it is running. The dashboard reflects that: a single toggle brings the auscultation module online, two dropdowns choose which of the 28 scenarios plays at the cardiac and pulmonary positions, and a live status block reports exactly what the hardware is doing, sound playing or not, current tag location, current sound file, active mode, all pushed over Socket.IO the instant the state changes on the Pi, not on a page refresh.</p>
+
+          <figure class="case-image">
+            <div class="fig-annotated-frame">
+              <img src="feedbackinterface-final.jpg" width="1443" height="873" loading="lazy" alt="Instructor dashboard screenshot: module control panel with the auscultation module offline, a Set Online button, Heart Mode and Lung Mode dropdowns set to normal baselines, and a current status readout for sound playing, current location, current sound, and active mode.">
+              <span class="fig-marker" style="--x:37%; --y:32%; --angle:200deg;"><span aria-hidden="true">1</span></span>
+              <span class="fig-marker" style="--x:16%; --y:51%; --angle:20deg;"><span aria-hidden="true">2</span></span>
+              <span class="fig-marker" style="--x:16%; --y:65%; --angle:340deg;"><span aria-hidden="true">3</span></span>
+              <span class="fig-marker" style="--x:14%; --y:83%; --angle:20deg;"><span aria-hidden="true">4</span></span>
+            </div>
+            <ol class="fig-key">
+              <li><span class="fig-key-num">1</span> Set Online. Puts the auscultation module live; before this, the hardware is powered but inactive.</li>
+              <li><span class="fig-key-num">2</span> Heart Mode. Chooses the scenario playing at the six cardiac positions.</li>
+              <li><span class="fig-key-num">3</span> Lung Mode. Same choice for the six pulmonary positions.</li>
+              <li><span class="fig-key-num">4</span> Live status. Sound Playing, Current Location, Current Sound, Active Mode, all Socket.IO-pushed.</li>
+            </ol>
+            <figcaption>FIG. 03 / INSTRUCTOR DASHBOARD. THE CONTROL SURFACE FOR SCENARIO STATE AND LIVE HARDWARE FEEDBACK.</figcaption>
+          </figure>
+
+          <h3>Student dashboard: confidence</h3>
+          <p>Students do not need control, they need to trust the module is working. Their view is deliberately narrower: a Live Simulation tab confirming the module is active ("Auscultation Module is Active, Ready for Examination," timestamped), a Quiz Mode where the program picks a scenario at random or the student chooses one to practice against, a Feedback tab, and a Session History log. Same underlying state as the instructor's dashboard, different questions answered.</p>
+
+          <figure class="case-image">
+            <img src="fi-studentfinal.jpg" width="1215" height="558" loading="lazy" alt="Student dashboard screenshot with tabs for Live Simulation, Quiz Mode, Feedback, and Session History, and a banner reading Auscultation Module is Active, Ready for Examination.">
+            <figcaption>FIG. 04 / STUDENT DASHBOARD. LIVE SIMULATION, QUIZ MODE, FEEDBACK, SESSION HISTORY. A NARROWER VIEW OF THE SAME STATE.</figcaption>
+          </figure>
+
+          <p>Two dashboards reading the same Socket.IO state was a deliberate split, not two half-built features. An instructor who needs to change a scenario mid-session and a student who just needs to know the module is live are asking different questions of the same system, so they get different answers instead of one screen trying to serve both.</p>
+        </div>
+
+        <!-- 09 Constraints -->
+        <div class="case-section">
+          <h2>Constraints: the ~$250 line</h2>
+          <p>The whole project lived under one number. Commercial patient simulators with auscultation capabilities start around $50K. CAST had to land near $250, roughly 200&times; cheaper, without feeling like a toy.</p>
+
+          <div class="spec-table-wrap">
+            <table class="spec-table">
+              <caption>COST SHEET / TOTAL BUILD</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Item</th>
+                  <th scope="col">Note</th>
+                  <th scope="col">Cost</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>CPR manikin</td>
+                  <td>Donated by Queen's Clinical Simulation Center; counted at replacement value</td>
+                  <td class="mono-cell">~$180</td>
+                </tr>
+                <tr>
+                  <td>Raspberry Pi + MFRC522</td>
+                  <td>The cheapest Raspberry Pi plus the RFID reader</td>
+                  <td class="mono-cell">~$70</td>
+                </tr>
+                <tr class="total-row">
+                  <td>Total</td>
+                  <td>vs. ~$50K+ commercial entry point</td>
+                  <td class="mono-cell">~$250</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p>The constraint also shaped conversations, not just parts lists. One instructor asked if we could make skin that heals itself after needle injections: the student pokes it, and it closes back up. I had to explain that while self-healing materials exist, they are expensive, slow, and not something we could integrate into a $250 system. Managing expectations without crushing enthusiasm is its own skill.</p>
+          <p>Working with non-engineers meant constantly translating between what they want and what is physically possible. "I want self-healing skin" usually means "I need something durable for repeated use." Digging for the underlying need was as much a part of the job as the code.</p>
+        </div>
+
+        <!-- 10 Testing -->
+        <div class="case-section">
+          <h2>Testing</h2>
+          <p>The number that mattered most was switching latency. With pre-loaded channels, audio switches between positions in under 260ms, fast enough that moving the stethoscope feels like listening to one patient rather than queuing clips.</p>
+          <p>Sessions with the nursing instructors confirmed it. They liked the speed and the smooth transitions between sounds, and they particularly appreciated having real clinical audio recordings rather than synthesized approximations.</p>
+
           <div class="results-grid">
             <div class="result-item">
               <span class="result-number">28</span>
@@ -166,103 +658,84 @@
               <span class="result-label">Auscultation points</span>
             </div>
             <div class="result-item">
-              <span class="result-number">~$250</span>
-              <span class="result-label">Total build cost</span>
+              <span class="result-number">&lt;260ms</span>
+              <span class="result-label">Audio switching</span>
             </div>
             <div class="result-item">
-              <span class="result-number">200×</span>
+              <span class="result-number">200&times;</span>
               <span class="result-label">Cheaper than commercial</span>
             </div>
           </div>
-
-          <p><strong>How we got there:</strong> The $250 breaks down to ~$180 for the manikin (donated from the simulation center, but that's replacement value) and ~$70 for the cheapest Raspberry Pi plus the MFRC522 reader. Commercial patient simulators with auscultation capabilities start around $50K.</p>
-
-          <p><strong>User feedback:</strong> The nursing instructors loved the speed and smooth transitions between sounds. They particularly appreciated having real clinical audio recordings. One note: they suggested calling them "audio scenarios" instead of "conditions", because things like normal heartbeat or normal breath sounds aren't conditions, just reference baselines. Fair point.</p>
         </div>
 
+        <!-- 11 Deployment -->
         <div class="case-section">
-          <h2>The Struggle: Speaking Different Languages</h2>
-          <p>The hardest part of this project wasn't the code, it was communication. Working with non-engineers means constantly translating between "what they want" and "what's physically possible."</p>
-          <p>One instructor asked if we could make skin that heals itself after needle injections. Like, the student pokes it, and it closes back up. I had to explain that while self-healing materials exist, they're expensive, slow, and not something we could integrate into a $250 system. Managing expectations without crushing enthusiasm is its own skill.</p>
-          
-          <h2>The Win: Documentation</h2>
-          <p>I'm proud of the code, but I'm more proud of the documentation. This system will be maintained by people who weren't on the team, possibly years from now. I wrote it assuming the reader knows nothing, architecture diagrams, wiring schematics, troubleshooting guides, the works. If the next person can pick it up without calling me, I did my job right.</p>
+          <h2>Deployment</h2>
+          <p>CAST is in use at Queen's School of Nursing. That changed what "done" meant. This system will be maintained by people who were not on the team, possibly years from now, so I wrote the documentation assuming the reader knows nothing: architecture diagrams, wiring schematics, troubleshooting guides, the works.</p>
+          <div class="case-highlight">
+            <p>I'm proud of the code, but I'm more proud of the documentation. If the next person can pick it up without calling me, I did my job right.</p>
+          </div>
         </div>
 
+        <!-- 12 What changed after real use -->
         <div class="case-section">
-          <h2>What I Learned</h2>
+          <h2>What changed after real use</h2>
+          <p>The instructors made one correction that stuck. We had been calling the sounds "conditions." They pointed out that a normal heartbeat or normal breath sounds are not conditions, they are reference baselines. Fair point. They are "audio scenarios" now, in the interface and in this write-up.</p>
           <ul>
-            <li><strong>Users know what they need, not what they want.</strong> "I want self-healing skin" means "I need something durable for repeated use." Dig for the underlying need.</li>
+            <li><strong>Users know what they need, not what they want.</strong> The self-healing-skin request was really a durability requirement. Dig for the underlying need.</li>
             <li><strong>Document like you're leaving tomorrow.</strong> Because eventually, you are. Good documentation is a gift to future maintainers.</li>
             <li><strong>Integration is the project.</strong> Getting the RFID, audio, web server, and UI to work together smoothly took longer than building any single piece.</li>
           </ul>
         </div>
 
-        <nav class="case-nav">
-          <a href="projects.html">
-            <i class="bi bi-arrow-left"></i>
-            All Projects
+        <nav class="case-nav" aria-label="Case study navigation">
+          <a href="index.html#systems">
+            <i class="bi bi-arrow-left" aria-hidden="true"></i>
+            Systems index
           </a>
-          <a href="admission-analysis.html">
-            Next: Admission Analysis
-            <i class="bi bi-arrow-right"></i>
+          <a href="autodrive-project.html">
+            Next: System 02 / AutoDrive
+            <i class="bi bi-arrow-right" aria-hidden="true"></i>
           </a>
         </nav>
       </div>
     </section>
   </main>
 
-  <!-- Footer -->
-  <footer class="footer">
+  <footer class="footer" id="contact">
     <div class="container">
       <div class="footer-content">
         <div class="footer-main">
-          <h2>Let's talk.</h2>
-          <p>I'm looking for full-time opportunities in robotics, automation, or anywhere I can build things that matter.</p>
-          <a href="mailto:21ymsa@queensu.ca" class="footer-email">
-            <i class="bi bi-envelope"></i>
-            21ymsa@queensu.ca
-          </a>
+          <h2>Have a complicated system that needs to work?</h2>
+          <p>I'm interested in robotics, automation, embedded systems, and engineering roles where software meets the physical world.</p>
+          <a href="mailto:21ymsa@queensu.ca" class="footer-email"><i class="bi bi-envelope"></i> 21ymsa@queensu.ca</a>
         </div>
         <div class="footer-links">
-          <a href="https://www.linkedin.com/in/yousef-alsaqa-b1ab4822b/" target="_blank">
-            <i class="bi bi-linkedin"></i>
-            LinkedIn
-          </a>
-          <a href="https://github.com/yousefalsaqa" target="_blank">
-            <i class="bi bi-github"></i>
-            GitHub
-          </a>
-          <a href="assets/Yousef_Alsaqa_Resume.pdf" target="_blank">
-            <i class="bi bi-file-earmark-text"></i>
-            Resume
-          </a>
+          <a href="https://www.linkedin.com/in/yousef-alsaqa-b1ab4822b/" target="_blank" rel="noopener"><i class="bi bi-linkedin"></i> LinkedIn</a>
+          <a href="https://github.com/yousefalsaqa" target="_blank" rel="noopener"><i class="bi bi-github"></i> GitHub</a>
+          <a href="assets/Yousef_Alsaqa_Resume.pdf" target="_blank"><i class="bi bi-file-earmark-text"></i> Résumé</a>
         </div>
       </div>
-      <div class="footer-bottom">
-        <p>© 2026 Yousef Alsaqa</p>
-      </div>
+      <div class="footer-bottom"><p>© 2026 Yousef Alsaqa · Kingston, Canada</p></div>
     </div>
   </footer>
 
-  <!-- Scripts -->
   <script>
     const navToggle = document.getElementById('navToggle');
     const nav = document.getElementById('nav');
-    
     navToggle.addEventListener('click', () => {
-      nav.classList.toggle('active');
-      navToggle.classList.toggle('active');
+      const open = nav.classList.toggle('active');
+      navToggle.classList.toggle('active', open);
+      navToggle.setAttribute('aria-expanded', open);
     });
-
+    nav.querySelectorAll('.nav-link').forEach(l => l.addEventListener('click', () => {
+      nav.classList.remove('active'); navToggle.classList.remove('active');
+      navToggle.setAttribute('aria-expanded', 'false');
+    }));
     const header = document.getElementById('header');
     window.addEventListener('scroll', () => {
-      if (window.scrollY > 50) {
-        header.classList.add('scrolled');
-      } else {
-        header.classList.remove('scrolled');
-      }
-    });
+      header.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
   </script>
 </body>
 </html>

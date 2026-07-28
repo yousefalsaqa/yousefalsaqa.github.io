@@ -5,12 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Projects | Yousef Alsaqa</title>
   <meta name="description" content="Engineering projects by Yousef Alsaqa, robotics, autonomous systems, machine learning, and automation.">
-  <meta name="theme-color" content="#050508">
+  <meta name="theme-color" content="#F1EEE6">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
   <!-- Bootstrap Icons -->
   <link href="vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
@@ -24,17 +26,20 @@
   <!-- Header -->
   <header class="header" id="header">
     <div class="header-inner">
-      <a href="index.html" class="header-logo">Yousef<span>.</span></a>
-      <nav class="header-nav" id="nav">
-        <a href="index.html" class="nav-link">Home</a>
-        <a href="projects.html" class="nav-link active">Projects</a>
-        <a href="experience.html" class="nav-link">Experience</a>
-        <a href="mailto:21ymsa@queensu.ca" class="nav-link">Contact</a>
+      <a href="index.html" class="header-logo">
+        <span class="header-logo-name">YOUSEF ALSAQA</span>
+        <span class="header-logo-role">MECHATRONICS / SYSTEMS</span>
+      </a>
+      <nav class="header-nav" id="nav" aria-label="Main">
+        <a href="index.html#systems" class="nav-link">Systems</a>
+        <a href="index.html#experience" class="nav-link">Experience</a>
+        <a href="index.html#field-notes" class="nav-link">Field Notes</a>
+        <a href="index.html#about" class="nav-link">About</a>
+        <a href="index.html#contact" class="nav-link">Contact</a>
       </nav>
-      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
-        <span></span>
-        <span></span>
-        <span></span>
+      <div class="header-status" id="headerStatus"><span class="header-status-text">INDEX / ALL SYSTEMS</span></div>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
       </button>
     </div>
   </header>
@@ -53,6 +58,7 @@
       <div class="container">
         <div class="projects-filters">
           <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="web">Web</button>
           <button class="filter-btn" data-filter="robotics">Robotics</button>
           <button class="filter-btn" data-filter="ml">ML/AI</button>
           <button class="filter-btn" data-filter="embedded">Embedded</button>
@@ -61,6 +67,28 @@
         </div>
 
         <div class="projects-grid">
+          <!-- WorldCupFantasy -->
+          <div class="project-card" data-category="web">
+            <div class="project-card-image">
+              <img src="assets/worldcupfantasy landing page.png" alt="WorldCupFantasy landing page">
+            </div>
+            <div class="project-card-content">
+              <span class="project-card-category">Full-Stack Web App</span>
+              <h3>WorldCupFantasy</h3>
+              <p>Live fantasy football for the entire World Cup 2026. 183 commits, real users, a scoring engine that has to be exactly right, and an audit trail proving it.</p>
+              <div class="project-card-tags">
+                <span>Next.js</span>
+                <span>TypeScript</span>
+                <span>PostgreSQL</span>
+                <span>Prisma</span>
+              </div>
+              <a href="worldcupfantasy-details.html" class="project-card-link">
+                View case study
+                <i class="bi bi-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+
           <!-- CAST Medical Interface -->
           <div class="project-card" data-category="embedded">
             <div class="project-card-image">
@@ -83,15 +111,15 @@
             </div>
           </div>
 
-          <!-- Admission Analysis Dashboard -->
+          <!-- Universal Admission Dashboard -->
           <div class="project-card" data-category="ml">
             <div class="project-card-image">
-              <img src="admission_analysis_Dashboard.jpg" alt="Admission Analysis Dashboard">
+              <img src="admission_analysis_Dashboard.jpg" alt="Universal Admission Dashboard">
             </div>
             <div class="project-card-content">
               <span class="project-card-category">Machine Learning</span>
-              <h3>Admission Analysis Dashboard</h3>
-              <p>Random Forest predictor across 5,600 Commerce and 8,700 Engineering students against first-year GPA. Commerce findings raised admission thresholds.</p>
+              <h3>Universal Admission Dashboard</h3>
+              <p>Random Forest predictor across 5,600 Commerce and 8,700 Engineering students against first-year GPA, genericized into a config-driven system with its own student lookup and policy what-if simulator. Commerce findings raised admission thresholds.</p>
               <div class="project-card-tags">
                 <span>Python</span>
                 <span>Pandas</span>
@@ -105,15 +133,15 @@
             </div>
           </div>
 
-          <!-- University Application Dashboard -->
+          <!-- Automatic Recruiter Coordinator -->
           <div class="project-card" data-category="data">
             <div class="project-card-image">
-              <img src="assets/university_application_dashboard.png" alt="University Application Dashboard">
+              <img src="assets/university_application_dashboard.png" alt="Automatic Recruiter Coordinator">
             </div>
             <div class="project-card-content">
               <span class="project-card-category">Data Analysis</span>
-              <h3>University Application Dashboard</h3>
-              <p>5 years, ~170K applications, all applicants (not just admits). Feeder schools, regional analysis, year-over-year conversion. In daily use by the team.</p>
+              <h3>Automatic Recruiter Coordinator</h3>
+              <p>5 years, ~170K applications, all applicants (not just admits). Fuzzy-matched feeder schools, regional analysis, year-over-year conversion. In daily use by the team.</p>
               <div class="project-card-tags">
                 <span>Python</span>
                 <span>Tkinter</span>
@@ -135,7 +163,7 @@
             <div class="project-card-content">
               <span class="project-card-category">Automation</span>
               <h3>Admission Coordinator Assistant</h3>
-              <p>Tkinter and Selenium tool that takes the entire admission decision workflow off the coordinator except for calculating the average. ~1,200 applications processed.</p>
+              <p>Tkinter dashboard driving 5 parallel PeopleSoft browser sessions to evaluate applications across IB, CBSE, GCSE, and CEGEP curricula. Grew from an IB-only tool into a ~5,800-line system.</p>
               <div class="project-card-tags">
                 <span>Python</span>
                 <span>Tkinter</span>
@@ -157,7 +185,7 @@
             <div class="project-card-content">
               <span class="project-card-category">Automation</span>
               <h3>Document Automation</h3>
-              <p>The original Selenium attacher. ~500 docs/day, press enter and walk away. The seed that became the Coordinator Assistant.</p>
+              <p>A PeopleSoft attachment bot, unattended, filename-driven. Now the office's main way of attaching documents, 20,000 to 30,000 in one admission cycle.</p>
               <div class="project-card-tags">
                 <span>Python</span>
                 <span>Selenium</span>
@@ -325,35 +353,21 @@
   </main>
 
   <!-- Footer -->
-  <footer class="footer">
+  <footer class="footer" id="contact">
     <div class="container">
       <div class="footer-content">
         <div class="footer-main">
-          <h2>Let's talk.</h2>
-          <p>I'm looking for full-time opportunities in robotics, automation, or anywhere I can build things that matter.</p>
-          <a href="mailto:21ymsa@queensu.ca" class="footer-email">
-            <i class="bi bi-envelope"></i>
-            21ymsa@queensu.ca
-          </a>
+          <h2>Have a complicated system that needs to work?</h2>
+          <p>I'm interested in robotics, automation, embedded systems, and engineering roles where software meets the physical world.</p>
+          <a href="mailto:21ymsa@queensu.ca" class="footer-email"><i class="bi bi-envelope"></i> 21ymsa@queensu.ca</a>
         </div>
         <div class="footer-links">
-          <a href="https://www.linkedin.com/in/yousef-alsaqa-b1ab4822b/" target="_blank">
-            <i class="bi bi-linkedin"></i>
-            LinkedIn
-          </a>
-          <a href="https://github.com/yousefalsaqa" target="_blank">
-            <i class="bi bi-github"></i>
-            GitHub
-          </a>
-          <a href="assets/Yousef_Alsaqa_Resume.pdf" target="_blank">
-            <i class="bi bi-file-earmark-text"></i>
-            Resume
-          </a>
+          <a href="https://www.linkedin.com/in/yousef-alsaqa-b1ab4822b/" target="_blank" rel="noopener"><i class="bi bi-linkedin"></i> LinkedIn</a>
+          <a href="https://github.com/yousefalsaqa" target="_blank" rel="noopener"><i class="bi bi-github"></i> GitHub</a>
+          <a href="assets/Yousef_Alsaqa_Resume.pdf" target="_blank"><i class="bi bi-file-earmark-text"></i> Résumé</a>
         </div>
       </div>
-      <div class="footer-bottom">
-        <p>© 2026 Yousef Alsaqa</p>
-      </div>
+      <div class="footer-bottom"><p>© 2026 Yousef Alsaqa · Kingston, Canada</p></div>
     </div>
   </footer>
 
@@ -361,20 +375,19 @@
   <script>
     const navToggle = document.getElementById('navToggle');
     const nav = document.getElementById('nav');
-    
     navToggle.addEventListener('click', () => {
-      nav.classList.toggle('active');
-      navToggle.classList.toggle('active');
+      const open = nav.classList.toggle('active');
+      navToggle.classList.toggle('active', open);
+      navToggle.setAttribute('aria-expanded', open);
     });
-
+    nav.querySelectorAll('.nav-link').forEach(l => l.addEventListener('click', () => {
+      nav.classList.remove('active'); navToggle.classList.remove('active');
+      navToggle.setAttribute('aria-expanded', 'false');
+    }));
     const header = document.getElementById('header');
     window.addEventListener('scroll', () => {
-      if (window.scrollY > 50) {
-        header.classList.add('scrolled');
-      } else {
-        header.classList.remove('scrolled');
-      }
-    });
+      header.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
 
     const filterBtns = document.querySelectorAll('.filter-btn');
     const projectCards = document.querySelectorAll('.project-card');

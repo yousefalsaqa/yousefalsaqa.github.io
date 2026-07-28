@@ -4,13 +4,17 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Queen's AutoDrive | Yousef Alsaqa</title>
-  <meta name="description" content="Two years with Queen's AutoDrive: Lane perception and system integration for the SAE AutoDrive Challenge.">
-  <meta name="theme-color" content="#050508">
+  <meta name="description" content="Technical investigation of two years on Queen's AutoDrive: lane perception on embedded hardware, CAN bus integration at 10Hz, and the incident log from a Level 4 autonomous vehicle program.">
+  <meta name="theme-color" content="#F1EEE6">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
   <!-- Bootstrap Icons -->
   <link href="vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
@@ -18,23 +22,270 @@
   <!-- Stylesheets -->
   <link href="css/theme.css" rel="stylesheet">
   <link href="css/pages/case-study.css" rel="stylesheet">
+
+  <!-- Page-unique styles -->
+  <style>
+    /* ---- Information flow: mono signal pipeline ---- */
+    .case-section ol.signal-flow {
+      list-style: none;
+      padding: 0;
+      margin: 2rem 0 1.5rem;
+      border-top: 1px solid var(--hairline);
+    }
+
+    .case-section .signal-flow li {
+      display: grid;
+      grid-template-columns: 80px 190px 1fr;
+      gap: 1.25rem;
+      align-items: baseline;
+      margin: 0;
+      padding: 1.1rem 0;
+      border-bottom: 1px solid var(--hairline);
+    }
+
+    .flow-stage {
+      font-family: var(--font-mono);
+      font-size: 0.64rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--graphite);
+    }
+
+    .flow-name {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--carbon);
+    }
+
+    .flow-name::after {
+      content: ' \2193';
+      color: var(--hairline);
+    }
+
+    .signal-flow li:last-child .flow-name::after {
+      content: '';
+    }
+
+    .flow-desc {
+      font-size: 0.92rem;
+      line-height: 1.65;
+      color: var(--graphite);
+      margin: 0 !important;
+    }
+
+    .flow-own {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--graphite);
+      margin-left: 0.75rem;
+      white-space: nowrap;
+    }
+
+    .flow-own::before {
+      content: '';
+      width: 7px;
+      height: 7px;
+      background: var(--signal);
+      flex: none;
+    }
+
+    /* ---- Year responsibilities: two ruled columns ---- */
+    .year-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem 3rem;
+      margin: 2rem 0;
+    }
+
+    .year-col {
+      border-top: 2px solid var(--carbon);
+      padding-top: 1.1rem;
+    }
+
+    .year-label {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--graphite);
+      margin-bottom: 0.4rem;
+    }
+
+    .year-col h3 {
+      margin-top: 0 !important;
+    }
+
+    /* ---- Carbon band: incident log + failure analysis ---- */
+    .incident-band {
+      background: var(--carbon);
+      color: var(--paper);
+      --graphite: #B7B4AB;
+      --hairline: rgba(241, 238, 230, 0.2);
+      --paper-2: #1C1B18;
+      padding: clamp(3.5rem, 8vw, 6rem) 0;
+    }
+
+    .incident-band ::selection {
+      background: var(--signal);
+      color: var(--carbon);
+    }
+
+    .incident-inner {
+      max-width: var(--container-narrow);
+      margin: 0 auto;
+    }
+
+    .band-section {
+      margin-bottom: clamp(3rem, 7vw, 4.5rem);
+    }
+
+    .band-section:last-child {
+      margin-bottom: 0;
+    }
+
+    .band-eyebrow {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--graphite);
+      border-top: 1px solid var(--hairline);
+      padding-top: 1.5rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .band-section h2 {
+      font-size: clamp(1.35rem, 2.5vw, 1.7rem);
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: var(--paper);
+      margin-bottom: 1.25rem;
+    }
+
+    .band-section > p {
+      font-size: 1rem;
+      line-height: 1.75;
+      color: rgba(241, 238, 230, 0.88);
+      margin-bottom: 1.25rem;
+      max-width: 62ch;
+    }
+
+    .incident-entry {
+      border: 1px solid var(--hairline);
+      background: var(--paper-2);
+      margin: 2rem 0;
+    }
+
+    .incident-head {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 0.4rem 1.5rem;
+      padding: 0.6rem 1.25rem;
+      border-bottom: 1px solid var(--hairline);
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--graphite);
+    }
+
+    .incident-entry dl {
+      margin: 0;
+      padding: 1.35rem 1.25rem;
+      display: grid;
+      grid-template-columns: 110px 1fr;
+      gap: 1rem 1.5rem;
+    }
+
+    .incident-entry dt {
+      font-family: var(--font-mono);
+      font-size: 0.66rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--signal);
+      padding-top: 0.2em;
+    }
+
+    .incident-entry dd {
+      margin: 0;
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      line-height: 1.75;
+      color: rgba(241, 238, 230, 0.92);
+    }
+
+    /* ---- Resume section numbering after the carbon band ---- */
+    .count-resume {
+      counter-reset: casesec 8;
+    }
+
+    /* ---- Evidence video ---- */
+    .evidence-video video {
+      background: #11110F;
+      aspect-ratio: 16 / 9;
+    }
+
+    @media (max-width: 700px) {
+      .case-section .signal-flow li {
+        grid-template-columns: 1fr;
+        gap: 0.3rem;
+      }
+
+      .year-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .incident-entry dl {
+        grid-template-columns: 1fr;
+        gap: 0.25rem 0;
+      }
+
+      .incident-entry dd {
+        margin-bottom: 0.9rem;
+      }
+
+      .incident-entry dd:last-child {
+        margin-bottom: 0;
+      }
+    }
+  </style>
 </head>
 
 <body>
   <!-- Header -->
   <header class="header" id="header">
     <div class="header-inner">
-      <a href="index.html" class="header-logo">Yousef<span>.</span></a>
-      <nav class="header-nav" id="nav">
-        <a href="index.html" class="nav-link">Home</a>
-        <a href="projects.html" class="nav-link">Projects</a>
-        <a href="experience.html" class="nav-link">Experience</a>
-        <a href="mailto:21ymsa@queensu.ca" class="nav-link">Contact</a>
+      <a href="index.html" class="header-logo">
+        <span class="header-logo-name">YOUSEF ALSAQA</span>
+        <span class="header-logo-role">MECHATRONICS / SYSTEMS</span>
+      </a>
+      <nav class="header-nav" id="nav" aria-label="Main">
+        <a href="index.html#systems" class="nav-link">Systems</a>
+        <a href="index.html#experience" class="nav-link">Experience</a>
+        <a href="index.html#field-notes" class="nav-link">Field Notes</a>
+        <a href="index.html#about" class="nav-link">About</a>
+        <a href="index.html#contact" class="nav-link">Contact</a>
       </nav>
-      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
-        <span></span>
-        <span></span>
-        <span></span>
+      <div class="header-status" id="headerStatus"><span class="header-status-text">SYSTEM 02 / AUTODRIVE</span></div>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
       </button>
     </div>
   </header>
@@ -43,25 +294,26 @@
     <!-- Hero -->
     <section class="case-hero">
       <div class="container">
-        <a href="projects.html" class="back-link">
-          <i class="bi bi-arrow-left"></i>
-          Back to projects
+        <a href="index.html#systems" class="back-link">
+          <i class="bi bi-arrow-left" aria-hidden="true"></i>
+          Back to systems
         </a>
+        <span class="case-system">SYSTEM 02 / AUTODRIVE &middot; TECHNICAL INVESTIGATION</span>
         <h1>Queen's AutoDrive</h1>
         <p class="subtitle">Two years building a Level 4 autonomous vehicle for the SAE AutoDrive Challenge, from training neural networks to debugging why the car decided to ram a table.</p>
-        
+
         <div class="case-meta">
           <div class="case-meta-item">
             <span class="case-meta-label">Roles</span>
-            <span class="case-meta-value">Lane Perception → System Integration</span>
+            <span class="case-meta-value">Lane Perception &rarr; System Integration</span>
           </div>
           <div class="case-meta-item">
             <span class="case-meta-label">Year 1</span>
-            <span class="case-meta-value">Sep 2021 to May 2022</span>
+            <span class="case-meta-value">Sep 2021 &ndash; May 2022</span>
           </div>
           <div class="case-meta-item">
             <span class="case-meta-label">Year 2</span>
-            <span class="case-meta-value">Sep 2023 to May 2024</span>
+            <span class="case-meta-value">Sep 2023 &ndash; May 2024</span>
           </div>
           <div class="case-meta-item">
             <span class="case-meta-label">Team</span>
@@ -71,34 +323,132 @@
       </div>
     </section>
 
-    <!-- Content -->
+    <!-- Investigation, part 1: sections 01-06 -->
     <section class="section">
       <div class="container case-content">
-        
+
         <div class="case-section">
-          <h2>The Challenge</h2>
+          <h2>Mission</h2>
           <p>Queen's AutoDrive competes in the SAE AutoDrive Challenge, a multi-year competition to develop a Level 4 autonomous vehicle. Level 4 means the car drives itself in defined conditions, no human backup required.</p>
-          <p>I joined the team for two separate years, working on different parts of the system each time. First year was all about teaching the car to see the road. Second year was about making all the pieces talk to each other without exploding.</p>
+          <p>I joined the team for two separate years and worked on a different part of the system each time. Year one was teaching the car to see the road. Year two was making all the pieces talk to each other without anything going wrong. One workbench did not survive year two. This page is the investigation.</p>
         </div>
 
         <div class="case-section">
-          <h2>Year 1: Lane Perception (2021 to 2022)</h2>
-          <p>My first year was on the perception team, specifically lane detection. The car needs to know where the road is at all times, sounds simple until you realize lane markings are faded, construction zones have conflicting lines, and Kingston winters mean half the year the lines are buried under snow.</p>
-          
-          <h3>Neural Network Training</h3>
-          <p>We used a UFLD (Ultra-Fast Lane Detection) architecture that treats lane finding as a row classification problem instead of pixel segmentation. My job was training and fine-tuning the model on our custom dataset, hours of driving footage from around Kingston, annotated frame by frame.</p>
-          
-          <p>Training involved a lot of trial and error. Learning rate too high? Model diverges. Too low? Takes forever. Augmentation not aggressive enough? Model only works in sunny weather. Too aggressive? It thinks everything is a lane. I spent weeks tuning hyperparameters and staring at loss curves.</p>
+          <h2>System architecture</h2>
+          <p>An autonomous vehicle is essentially a rolling network. Cameras, LiDAR, radar, GPS, and IMU all generate data that has to reach the compute stack, and commands flow back out to steering, throttle, and brakes. Most of that traffic moves over the CAN bus.</p>
+          <div class="tech-grid">
+            <div class="tech-item">
+              <h4>Perception model</h4>
+              <p>UFLD (Ultra-Fast Lane Detection), lane finding treated as row classification instead of pixel segmentation</p>
+            </div>
+            <div class="tech-item">
+              <h4>Backbone</h4>
+              <p>ResNet-18, chosen for speed on embedded hardware</p>
+            </div>
+            <div class="tech-item">
+              <h4>Compute</h4>
+              <p>Jetson Xavier NX running the perception stack</p>
+            </div>
+            <div class="tech-item">
+              <h4>Optimization</h4>
+              <p>TensorRT with FP16 quantization and layer fusion</p>
+            </div>
+            <div class="tech-item">
+              <h4>Middleware</h4>
+              <p>ROS2 sensor fusion, path planning, and control nodes</p>
+            </div>
+            <div class="tech-item">
+              <h4>Vehicle bus</h4>
+              <p>CAN, with the compute and control nodes synchronized at 10Hz</p>
+            </div>
+          </div>
         </div>
 
         <div class="case-section">
-          <h3>How UFLD Works</h3>
-          <p>Instead of classifying every pixel (slow), UFLD divides each row of the image into grid cells and predicts which cell contains the lane. This reduces the problem from millions of pixel classifications to thousands of row classifications, way faster on embedded hardware.</p>
-          
+          <h2>Information flow</h2>
+          <p>Everything the car does is one chain, run over and over. A frame comes in at one end, and a physical action comes out the other.</p>
+          <ol class="signal-flow">
+            <li>
+              <span class="flow-stage">Stage 01</span>
+              <span class="flow-name">Perception<span class="flow-own">My scope, Year 1</span></span>
+              <p class="flow-desc">Camera feed in. UFLD finds the lanes at roughly 30 frames per second on the Jetson.</p>
+            </li>
+            <li>
+              <span class="flow-stage">Stage 02</span>
+              <span class="flow-name">Localization</span>
+              <p class="flow-desc">GPS and IMU data place the vehicle in the world. Owned by other sub-teams.</p>
+            </li>
+            <li>
+              <span class="flow-stage">Stage 03</span>
+              <span class="flow-name">Decision</span>
+              <p class="flow-desc">Path planning and control nodes decide what the car should do next.</p>
+            </li>
+            <li>
+              <span class="flow-stage">Stage 04</span>
+              <span class="flow-name">CAN command<span class="flow-own">My scope, Year 2</span></span>
+              <p class="flow-desc">The decision leaves the computer as CAN messages addressed to the vehicle's ECUs.</p>
+            </li>
+            <li>
+              <span class="flow-stage">Stage 05</span>
+              <span class="flow-name">Vehicle response</span>
+              <p class="flow-desc">Steering, throttle, and brakes act on whatever arrived.</p>
+            </li>
+          </ol>
+          <p>My two years sat at the ends of this chain: teaching stage one to see, then making sure stage four said what stage three meant. Stage five does not ask questions. A malformed message at stage four becomes motion at stage five. Section 07 documents what that looks like.</p>
+
+          <figure class="case-image">
+            <img src="assets/initiallanedetection.jpg" alt="Camera frame from a road with lane markings detected and overlaid by the model" width="1280" height="720" loading="lazy">
+            <figcaption>FIG. 01 &middot; STAGE 01 OUTPUT &middot; Initial lane detection output during Year 1 model development.</figcaption>
+          </figure>
+        </div>
+
+        <div class="case-section">
+          <h2>Vehicle communication</h2>
+          <p>The compute stack and the vehicle meet on the CAN bus, with the ROS2 sensor fusion, path planning, and control nodes synchronized over it at 10Hz. Understanding the message protocols became my specialty in year two. The work broke down into four jobs:</p>
+          <div class="tech-grid">
+            <div class="tech-item">
+              <h4>Message decoding</h4>
+              <p>Reverse-engineering proprietary CAN IDs and data formats from the vehicle's ECUs</p>
+            </div>
+            <div class="tech-item">
+              <h4>Protocol design</h4>
+              <p>Defining custom message formats for our added sensors and actuators</p>
+            </div>
+            <div class="tech-item">
+              <h4>Bus monitoring</h4>
+              <p>Diagnostic tools to trace message flow and catch errors</p>
+            </div>
+            <div class="tech-item">
+              <h4>Safety interlocks</h4>
+              <p>Watchdog systems that kill autonomy if communication fails</p>
+            </div>
+          </div>
+          <p>When something breaks in an autonomous vehicle, it could be anywhere: sensor, network, compute, actuator. When messages stop flowing, you need to know which node died and why. The tooling, CAN sniffers, log analyzers, and real-time dashboards, existed to answer that question quickly.</p>
+        </div>
+
+        <div class="case-section">
+          <h2>Integration responsibilities</h2>
+          <div class="year-grid">
+            <div class="year-col">
+              <span class="year-label">Year 1 &middot; Sep 2021 &ndash; May 2022</span>
+              <h3>Lane perception</h3>
+              <p>The car needs to know where the road is at all times. That sounds simple until lane markings fade, construction zones draw conflicting lines, and a Kingston winter buries everything for half the year.</p>
+              <p>My job was training and fine-tuning the UFLD model on our custom dataset: hours of driving footage from around Kingston, annotated frame by frame. Learning rate too high, the model diverges. Too low, training takes forever. Augmentation too gentle, it only works in sunny weather. Too aggressive, it thinks everything is a lane. Weeks of hyperparameter tuning and loss curves.</p>
+            </div>
+            <div class="year-col">
+              <span class="year-label">Year 2 &middot; Sep 2023 &ndash; May 2024</span>
+              <h3>System integration</h3>
+              <p>After a year of CAN bus work on Formula SAE, I came back to AutoDrive on the integration team. Different challenge, same car: making all the subsystems communicate reliably.</p>
+              <p>That meant the four jobs in section 04, plus the diagnostic work of isolating faults across a system where the failure could be in any layer. Getting one subsystem to work is development. Getting all of them to work together is integration, and it is a different discipline.</p>
+            </div>
+          </div>
+
+          <h3>Why UFLD</h3>
+          <p>Instead of classifying every pixel, which is slow, UFLD divides each image row into grid cells and predicts which cell contains the lane. That reduces the problem from millions of pixel classifications to thousands of row classifications, which is what makes real-time inference possible on embedded hardware.</p>
           <div class="case-code">
 <pre>
-# Traditional segmentation: O(H × W × C) per frame
-# UFLD: O(H × G × L) per frame
+# Traditional segmentation: O(H x W x C) per frame
+# UFLD: O(H x G x L) per frame
 # Where G = grid cells (~200), L = lanes (typically 4)
 
 def process_lanes(image):
@@ -109,62 +459,103 @@ def process_lanes(image):
 </pre>
           </div>
 
-          <p>The backbone is a lightweight ResNet-18, chosen for speed. On our Jetson Xavier NX, we hit around 30fps with ~85% detection accuracy on the test set, not competition-winning numbers, but solid for a student team still building out the rest of the pipeline.</p>
+          <div class="case-image-grid">
+            <figure class="case-image">
+              <img src="assets/LaneDetectionDemo.gif" alt="Animated clip of the lane detection overlay tracking lane lines while driving" width="426" height="240" loading="lazy">
+              <figcaption>FIG. 02 &middot; Lane detection demo clip.</figcaption>
+            </figure>
+            <figure class="case-image">
+              <img src="assets/Lanefollowing.gif" alt="Animated clip from a lane following test run" width="600" height="338" loading="lazy">
+              <figcaption>FIG. 03 &middot; Lane following test.</figcaption>
+            </figure>
+          </div>
         </div>
 
-        <figure class="case-image">
-          <video autoplay loop muted playsinline style="width: 100%; border-radius: 8px;">
-            <source src="assets/KingstonLaneDetection.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
-          <figcaption>Lane detection running in real-time on Kingston roads</figcaption>
-        </figure>
-
         <div class="case-section">
-          <h2>Year 2: System Integration (2023 to 2024)</h2>
-          <p>After my Formula SAE experience with CAN bus, I came back to AutoDrive on the system integration team. Different challenge, same car: making all the subsystems communicate reliably.</p>
-          
-          <h3>CAN Bus Deep Dive</h3>
-          <p>An autonomous vehicle is essentially a rolling network. Cameras, LiDAR, radar, GPS, IMU, all generating data that needs to reach the compute stack. Then commands flow back out to steering, throttle, brakes. Most of this happens over CAN bus, and understanding the message protocols became my specialty.</p>
-          
-          <div class="tech-grid">
-            <div class="tech-item">
-              <h4>Message Decoding</h4>
-              <p>Reverse-engineering proprietary CAN IDs and data formats from vehicle ECUs</p>
+          <h2>Test environment</h2>
+          <p>Two environments, two purposes.</p>
+          <p><strong>The garage.</strong> Controlled testing of protocol and software changes on the real vehicle. Safety protocols required a person in the driver's seat, ready to hit the emergency stop, for every test that could move the car.</p>
+          <p><strong>Kingston roads.</strong> Data collection for the perception work. The driving footage that became our training and test sets was recorded around Kingston and annotated frame by frame, which means the ~85% accuracy figure was measured against real local conditions, not a benchmark dataset.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Carbon band: incident log + failure analysis -->
+    <section class="incident-band" aria-label="Incident log and failure analysis">
+      <div class="container">
+        <div class="incident-inner">
+
+          <div class="band-section">
+            <span class="band-eyebrow">07</span>
+            <h2>Incident log</h2>
+            <p>Two entries from the integration years. Both are reconstructed from what we traced afterward, not from how they felt at the time.</p>
+
+            <div class="incident-entry">
+              <div class="incident-head">
+                <span>Entry 001</span>
+                <span>Location: garage</span>
+                <span>Context: protocol change test</span>
+              </div>
+              <dl>
+                <dt>Incident</dt>
+                <dd>Testing new protocol changes. We believed the accelerator was disconnected, so a bad test command should have been harmless, bytes moving with nothing behind them to actually move the car. Team lead in the driver's seat anyway, per safety protocol, ready on the emergency stop. A test command was sent. The accelerator was not disconnected. The car lurched forward, accelerated, and plowed straight into a workbench.</dd>
+                <dt>Cause</dt>
+                <dd>A malformed CAN message the ECU read as "go," sent down a line we had assumed, incorrectly, was safed.</dd>
+                <dt>Response</dt>
+                <dd>Nobody was hurt. The car was fine, mostly. The next week went to tracing exactly what happened, message by message, and to figuring out why the disconnect we thought we had was not actually there.</dd>
+                <dt>Result</dt>
+                <dd>1 table destroyed. A humbling week. An assumption about hardware state is not a fact until you have verified it, and even in a controlled environment, things can go very wrong very fast.</dd>
+              </dl>
             </div>
-            <div class="tech-item">
-              <h4>Protocol Design</h4>
-              <p>Defining custom message formats for our added sensors and actuators</p>
-            </div>
-            <div class="tech-item">
-              <h4>Bus Monitoring</h4>
-              <p>Building diagnostic tools to trace message flow and catch errors</p>
-            </div>
-            <div class="tech-item">
-              <h4>Safety Interlocks</h4>
-              <p>Implementing watchdog systems to kill autonomy if communication fails</p>
+
+            <div class="incident-entry">
+              <div class="incident-head">
+                <span>Entry 002</span>
+                <span>Location: vehicle-wide</span>
+                <span>Context: intermittent fault</span>
+              </div>
+              <dl>
+                <dt>Incident</dt>
+                <dd>For months, the car randomly lost communication with half its sensors. Intermittent, unreproducible on demand, infuriating.</dd>
+                <dt>Cause</dt>
+                <dd>A blown fuse in the power distribution unit. One fuse.</dd>
+                <dt>Response</dt>
+                <dd>Checked wiring. Swapped boards. Reviewed code. Ran signal integrity analysis. Walked past the fuse box a hundred times, because "it's probably software."</dd>
+                <dt>Result</dt>
+                <dd>Fuse replaced, fault gone. Months of diagnosis, minutes of repair.</dd>
+              </dl>
             </div>
           </div>
 
-          <h3>The Diagnostic Challenge</h3>
-          <p>When something breaks in an autonomous vehicle, it could be anywhere, sensor, network, compute, actuator. My job was building the tooling to isolate problems quickly. CAN sniffers, log analyzers, real-time dashboards. When messages stop flowing, you need to know which node died and why.</p>
+          <div class="band-section">
+            <span class="band-eyebrow">08</span>
+            <h2>Failure analysis</h2>
+            <p>Neither failure lived inside a component. Entry 001 was not a bug in any single module: the message was wrong, but the ECU could not know that. It read the bytes it was given and the car moved. The failure existed in the space between the compute stack and the vehicle, exactly where nobody's unit tests were looking.</p>
+            <p>Entry 002 was the opposite trap. Every symptom pointed at software: intermittent, spread across multiple sensors, resistant to every software-level investigation we ran. The actual cause was electrical and would have taken minutes to find, if anyone had suspected it.</p>
+            <p>The common thread is cost distribution. In both cases the repair was cheap and the diagnosis was expensive: a week of message tracing in one, months of elimination in the other. The engineering problem was never fixing the fault. It was locating it.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Investigation, part 2: sections 09-11 -->
+    <section class="section">
+      <div class="container case-content count-resume">
+
+        <div class="case-section">
+          <h2>Changes made</h2>
+          <p>The integration year's output was tooling and habits. Some of it predates the failures above, and some of it exists because of them.</p>
+          <ul>
+            <li><strong>Watchdog safety interlocks.</strong> If communication fails, autonomy dies. The system defaults to doing nothing rather than doing something unspecified.</li>
+            <li><strong>Diagnostic tooling on the bus.</strong> CAN sniffers, log analyzers, and real-time dashboards, so that "which node died and why" is a question with a fast answer instead of a months-long one.</li>
+            <li><strong>Debugging order.</strong> Simple physical checks first. Power and fuses before software theories, no matter how software-shaped the symptom looks.</li>
+          </ul>
         </div>
 
         <div class="case-section">
-          <h2>The Stories That Stick</h2>
-          
-          <h3>The Table Incident</h3>
-          <p>We were in the garage testing some new protocol changes. The team lead was in the driver's seat, safety protocols required someone ready to hit the emergency stop. We sent a test command. The car lurched forward, accelerated, and plowed straight into a workbench.</p>
-          <p>Nobody was hurt (thankfully), and the car was fine (mostly). But we spent the next week tracing exactly what happened: a malformed CAN message that the vehicle ECU interpreted as "go." It was humbling. Autonomous vehicles aren't toys, and even in a controlled environment, things can go very wrong very fast.</p>
-
-          <h3>The Great Fuse Hunt</h3>
-          <p>For months, we chased a bug where the car would randomly lose communication with half its sensors. We checked wiring, swapped boards, reviewed code, ran signal integrity analysis. Nothing. The problem was intermittent and infuriating.</p>
-          <p>Turns out it was a blown fuse in the power distribution unit. One fuse. We'd walked past it a hundred times without checking because "it's probably software." Lesson learned: always check the simple things first, even when the problem looks complex.</p>
-        </div>
-
-        <div class="case-section">
-          <h2>Results</h2>
-          
+          <h2>Final system behavior</h2>
           <div class="results-grid">
             <div class="result-item">
               <span class="result-number">~30fps</span>
@@ -183,64 +574,58 @@ def process_lanes(image):
               <span class="result-label">Table destroyed</span>
             </div>
           </div>
+          <p><strong>How we got those numbers.</strong> The ~30fps comes from the Jetson Xavier NX running the UFLD model with TensorRT optimization, FP16 quantization and layer fusion. The ~85% accuracy is from our test set of annotated Kingston driving footage. Real-world performance varies with conditions, but that is what we could reliably measure. Not competition-winning numbers, but solid for a student team still building out the rest of the pipeline.</p>
 
-          <p><strong>How we got those numbers:</strong> The ~30fps comes from our Jetson Xavier NX running the UFLD model with TensorRT optimization (FP16 quantization, layer fusion). The ~85% accuracy is from our test set, annotated driving footage from around Kingston. Real-world performance varies with conditions, but that's what we could reliably measure.</p>
+          <figure class="case-image evidence-video">
+            <video controls preload="none" muted playsinline width="1280" height="720">
+              <source src="assets/KingstonLaneDetection.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+            <figcaption>EVIDENCE &middot; Lane detection running in real time on Kingston roads.</figcaption>
+          </figure>
         </div>
 
         <div class="case-section">
-          <h2>What I Learned</h2>
+          <h2>Engineering lessons</h2>
           <ul>
             <li><strong>Check the fuse.</strong> Seriously. Before you spend three months debugging software, check the hardware. The simplest explanation is often right.</li>
-            <li><strong>Safety isn't optional.</strong> The table incident could have been worse. Autonomous vehicles require paranoid-level safety thinking at every stage.</li>
+            <li><strong>Safety is not optional.</strong> The table incident could have been worse. Autonomous vehicles require paranoid-level safety thinking at every stage.</li>
             <li><strong>Training data is everything.</strong> For the perception work, heavy augmentation and real-world data collection made more difference than architecture changes.</li>
             <li><strong>Integration is harder than development.</strong> Getting one system to work is straightforward. Getting ten systems to work together reliably is where the real engineering happens.</li>
           </ul>
         </div>
 
-        <nav class="case-nav">
-          <a href="steering-project.html">
-            <i class="bi bi-arrow-left"></i>
-            Formula SAE Steering
+        <nav class="case-nav" aria-label="Adjacent systems">
+          <a href="capstone.html">
+            <i class="bi bi-arrow-left" aria-hidden="true"></i>
+            SYSTEM 01 / CAST
           </a>
-          <a href="eii-project-details.html">
-            Next: Energy Intensity Predictor
-            <i class="bi bi-arrow-right"></i>
+          <a href="admission-coordinator-assistant.html">
+            SYSTEM 03 / Admission Coordinator
+            <i class="bi bi-arrow-right" aria-hidden="true"></i>
           </a>
         </nav>
+
       </div>
     </section>
   </main>
 
   <!-- Footer -->
-  <footer class="footer">
+  <footer class="footer" id="contact">
     <div class="container">
       <div class="footer-content">
         <div class="footer-main">
-          <h2>Let's talk.</h2>
-          <p>I'm looking for full-time opportunities in robotics, automation, or anywhere I can build things that matter.</p>
-          <a href="mailto:21ymsa@queensu.ca" class="footer-email">
-            <i class="bi bi-envelope"></i>
-            21ymsa@queensu.ca
-          </a>
+          <h2>Have a complicated system that needs to work?</h2>
+          <p>I'm interested in robotics, automation, embedded systems, and engineering roles where software meets the physical world.</p>
+          <a href="mailto:21ymsa@queensu.ca" class="footer-email"><i class="bi bi-envelope"></i> 21ymsa@queensu.ca</a>
         </div>
         <div class="footer-links">
-          <a href="https://www.linkedin.com/in/yousef-alsaqa-b1ab4822b/" target="_blank">
-            <i class="bi bi-linkedin"></i>
-            LinkedIn
-          </a>
-          <a href="https://github.com/yousefalsaqa" target="_blank">
-            <i class="bi bi-github"></i>
-            GitHub
-          </a>
-          <a href="assets/Yousef_Alsaqa_Resume.pdf" target="_blank">
-            <i class="bi bi-file-earmark-text"></i>
-            Resume
-          </a>
+          <a href="https://www.linkedin.com/in/yousef-alsaqa-b1ab4822b/" target="_blank" rel="noopener"><i class="bi bi-linkedin"></i> LinkedIn</a>
+          <a href="https://github.com/yousefalsaqa" target="_blank" rel="noopener"><i class="bi bi-github"></i> GitHub</a>
+          <a href="assets/Yousef_Alsaqa_Resume.pdf" target="_blank"><i class="bi bi-file-earmark-text"></i> Résumé</a>
         </div>
       </div>
-      <div class="footer-bottom">
-        <p>© 2026 Yousef Alsaqa</p>
-      </div>
+      <div class="footer-bottom"><p>© 2026 Yousef Alsaqa · Kingston, Canada</p></div>
     </div>
   </footer>
 
@@ -248,20 +633,19 @@ def process_lanes(image):
   <script>
     const navToggle = document.getElementById('navToggle');
     const nav = document.getElementById('nav');
-    
     navToggle.addEventListener('click', () => {
-      nav.classList.toggle('active');
-      navToggle.classList.toggle('active');
+      const open = nav.classList.toggle('active');
+      navToggle.classList.toggle('active', open);
+      navToggle.setAttribute('aria-expanded', open);
     });
-
+    nav.querySelectorAll('.nav-link').forEach(l => l.addEventListener('click', () => {
+      nav.classList.remove('active'); navToggle.classList.remove('active');
+      navToggle.setAttribute('aria-expanded', 'false');
+    }));
     const header = document.getElementById('header');
     window.addEventListener('scroll', () => {
-      if (window.scrollY > 50) {
-        header.classList.add('scrolled');
-      } else {
-        header.classList.remove('scrolled');
-      }
-    });
+      header.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
   </script>
 </body>
 </html>
