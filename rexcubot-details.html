@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
+  <script>(function(){try{if(localStorage.getItem("theme")==="dark"){document.documentElement.setAttribute("data-theme","dark");}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Rexcubot Competition Robot | Yousef Alsaqa</title>
   <meta name="description" content="Case study: Competition robot with parallel linkage scoop and precision gripper for Tronassic Park challenge.">
@@ -39,6 +40,7 @@
         <a href="index.html#contact" class="nav-link">Contact</a>
       </nav>
       <div class="header-status" id="headerStatus"><span class="header-status-text">FIELD NOTE / REXCUBOT</span></div>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-pressed="false" aria-label="Switch to dark mode"><span class="theme-toggle-dot" aria-hidden="true"></span><span class="theme-toggle-text">LIGHT</span></button>
       <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
@@ -343,6 +345,27 @@ void loop() {
     window.addEventListener('scroll', () => {
       header.classList.toggle('scrolled', window.scrollY > 40);
     }, { passive: true });
+
+    // ---- Theme toggle (manual only, never from system preference) ----
+    const themeToggle = document.getElementById('themeToggle');
+    const themeText = themeToggle.querySelector('.theme-toggle-text');
+    function setThemeUI(isDark) {
+      themeText.textContent = isDark ? 'DARK' : 'LIGHT';
+      themeToggle.setAttribute('aria-pressed', String(isDark));
+      themeToggle.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+    }
+    setThemeUI(document.documentElement.getAttribute('data-theme') === 'dark');
+    themeToggle.addEventListener('click', () => {
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      if (isDark) {
+        document.documentElement.removeAttribute('data-theme');
+        localStorage.setItem('theme', 'light');
+      } else {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+      }
+      setThemeUI(!isDark);
+    });
   </script>
 </body>
 </html>

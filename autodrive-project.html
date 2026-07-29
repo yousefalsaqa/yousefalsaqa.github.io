@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
+  <script>(function(){try{if(localStorage.getItem("theme")==="dark"){document.documentElement.setAttribute("data-theme","dark");}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Queen's AutoDrive | Yousef Alsaqa</title>
   <meta name="description" content="Technical investigation of two years on Queen's AutoDrive: lane perception on embedded hardware, CAN bus integration at 10Hz, and the incident log from a Level 4 autonomous vehicle program.">
@@ -130,17 +131,20 @@
 
     /* ---- Carbon band: incident log + failure analysis ---- */
     .incident-band {
-      background: var(--carbon);
-      color: var(--paper);
+      background: var(--ink-fixed);
+      color: var(--paper-fixed);
+      --carbon: var(--ink-fixed);
+      --paper: var(--paper-fixed);
       --graphite: #B7B4AB;
       --hairline: rgba(241, 238, 230, 0.2);
       --paper-2: #1C1B18;
+      --signal: #FF4F1F;
       padding: clamp(3.5rem, 8vw, 6rem) 0;
     }
 
     .incident-band ::selection {
       background: var(--signal);
-      color: var(--carbon);
+      color: var(--ink-fixed);
     }
 
     .incident-inner {
@@ -285,6 +289,7 @@
         <a href="index.html#contact" class="nav-link">Contact</a>
       </nav>
       <div class="header-status" id="headerStatus"><span class="header-status-text">SYSTEM 02 / AUTODRIVE</span></div>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-pressed="false" aria-label="Switch to dark mode"><span class="theme-toggle-dot" aria-hidden="true"></span><span class="theme-toggle-text">LIGHT</span></button>
       <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
@@ -647,6 +652,27 @@ def process_lanes(image):
     window.addEventListener('scroll', () => {
       header.classList.toggle('scrolled', window.scrollY > 40);
     }, { passive: true });
+
+    // ---- Theme toggle (manual only, never from system preference) ----
+    const themeToggle = document.getElementById('themeToggle');
+    const themeText = themeToggle.querySelector('.theme-toggle-text');
+    function setThemeUI(isDark) {
+      themeText.textContent = isDark ? 'DARK' : 'LIGHT';
+      themeToggle.setAttribute('aria-pressed', String(isDark));
+      themeToggle.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+    }
+    setThemeUI(document.documentElement.getAttribute('data-theme') === 'dark');
+    themeToggle.addEventListener('click', () => {
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      if (isDark) {
+        document.documentElement.removeAttribute('data-theme');
+        localStorage.setItem('theme', 'light');
+      } else {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+      }
+      setThemeUI(!isDark);
+    });
   </script>
 </body>
 </html>
