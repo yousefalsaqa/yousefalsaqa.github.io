@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yousef Alsaqa — Résumé</title>
+  <meta name="description" content="Résumé of Yousef Alsaqa, mechatronics and robotics engineer.">
+  <meta name="robots" content="noindex">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="preload" href="assets/fonts/Archivo.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/GeistMono.woff2" as="font" type="font/woff2" crossorigin>
+
+  <style>
+    /* ==========================================================
+       One source of truth: this page IS the résumé. Ctrl+P makes
+       the PDF. Same faces and accents as the site, but always on
+       paper — a résumé's canonical form is the printed one.
+       ========================================================== */
+    @font-face {
+      font-family: 'Archivo';
+      src: url('assets/fonts/Archivo.woff2') format('woff2-variations');
+      font-weight: 100 900;
+      font-stretch: 62% 125%;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Geist Mono';
+      src: url('assets/fonts/GeistMono.woff2') format('woff2-variations');
+      font-weight: 100 900;
+      font-display: swap;
+    }
+
+    :root {
+      --ink: #14161A;
+      --muted: #565D66;
+      --hairline: #C9CED6;
+      --accent: #15618F;
+      --hot: #A34400;
+      --mono: 'Geist Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; }
+
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      background: #3A3E45;
+      font-family: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
+      color: var(--ink);
+      line-height: 1.3;
+      font-size: 8.8pt;
+    }
+
+    .sheet {
+      width: 8.5in;
+      min-height: 11in;
+      margin: 24px auto;
+      padding: 0.42in 0.55in;
+      background: #FFFFFF;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.45);
+    }
+
+    /* ---------- head ---------- */
+    .head { display: flex; justify-content: space-between; align-items: flex-start; gap: 16pt; }
+    h1 {
+      font-size: 19pt;
+      font-variation-settings: 'wdth' 90, 'wght' 700;
+      letter-spacing: -0.015em;
+      line-height: 1;
+    }
+    .tagline { margin-top: 2pt; font-size: 9.2pt; color: var(--muted); }
+    .contact {
+      text-align: right;
+      font-family: var(--mono);
+      font-size: 7.4pt;
+      line-height: 1.65;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+    .contact a { color: var(--accent); text-decoration: none; }
+
+    /* ---------- sections ---------- */
+    section { margin-top: 5pt; }
+    h2 {
+      font-family: var(--mono);
+      font-size: 7.6pt;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border-bottom: 1px solid var(--hairline);
+      padding-bottom: 1.5pt;
+      margin-bottom: 3.5pt;
+    }
+
+    .entry { margin-bottom: 3.6pt; break-inside: avoid; }
+    .entry:last-child { margin-bottom: 0; }
+    .entry-head { display: flex; justify-content: space-between; align-items: baseline; gap: 10pt; }
+    h3 { font-size: 9.5pt; font-variation-settings: 'wdth' 94, 'wght' 640; }
+    h3 .org { font-variation-settings: 'wdth' 94, 'wght' 420; color: var(--muted); }
+    .dates {
+      font-family: var(--mono);
+      font-size: 7.2pt;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+    ul { padding-left: 11pt; margin-top: 1pt; }
+    li { margin-bottom: 1pt; }
+    li::marker { color: var(--hairline); }
+    .k { color: var(--hot); font-variation-settings: 'wght' 600; }
+
+    /* ---------- skills ---------- */
+    .skills { display: grid; gap: 1pt; }
+    .skill-row { display: grid; grid-template-columns: 92pt 1fr; gap: 8pt; }
+    .skill-row dt {
+      font-family: var(--mono);
+      font-size: 7.2pt;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding-top: 1pt;
+    }
+    .skill-row dd { font-size: 8.6pt; }
+
+    /* ---------- print ---------- */
+    .print-hint {
+      max-width: 8.5in;
+      margin: 0 auto 24px;
+      text-align: center;
+      font-family: var(--mono);
+      font-size: 11px;
+      color: #9AA1AB;
+    }
+    @media print {
+      body { background: #FFF; font-size: 8.8pt; }
+      .sheet { width: auto; min-height: 0; margin: 0; padding: 0; box-shadow: none; }
+      .print-hint { display: none; }
+      a { color: var(--accent) !important; }
+      @page { size: letter; margin: 0.42in 0.55in; }
+    }
+  </style>
+</head>
+<body>
+  <div class="sheet">
+    <header class="head">
+      <div>
+        <h1>Yousef Alsaqa</h1>
+        <p class="tagline">Mechatronics &amp; Robotics Engineer — production software and hardware systems</p>
+      </div>
+      <div class="contact">
+        Kingston, ON · 613-987-5970 · EN &amp; AR<br>
+        <a href="mailto:21ymsa@queensu.ca">21ymsa@queensu.ca</a><br>
+        <a href="https://yousefalsaqa.netlify.app">yousefalsaqa.netlify.app</a> · <a href="https://github.com/yousefalsaqa">github.com/yousefalsaqa</a><br>
+        <a href="https://www.linkedin.com/in/yousef-alsaqa-b1ab4822b/">linkedin.com/in/yousef-alsaqa</a>
+      </div>
+    </header>
+
+    <section>
+      <h2>Education</h2>
+      <div class="entry">
+        <div class="entry-head">
+          <h3>B.A.Sc., Mechatronics &amp; Robotics Engineering <span class="org">· Queen's University, Kingston, ON</span></h3>
+          <span class="dates">Sep 2021 – Jun 2025</span>
+        </div>
+        <ul>
+          <li>Fourth-Year Dean's List (2025) · Principal's Scholarship for Academic Excellence ($4,000)</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2>Work Experience</h2>
+
+      <div class="entry">
+        <div class="entry-head">
+          <h3>Business Analyst <span class="org">· Queen's University, Undergraduate Admission &amp; Recruitment</span></h3>
+          <span class="dates">Jul 2026 – Present</span>
+        </div>
+        <ul>
+          <li>Finalized the document attacher into the office standard, root-causing a page-reload bug that was doubling its runtime. Used office-wide: <span class="k">20,000–30,000 documents</span> per cycle.</li>
+          <li>Grew the evaluation dashboard into a <span class="k">~5,800-line</span> system driving <span class="k">5 parallel</span> PeopleSoft sessions across multiple curricula; automated a CEGEP evaluator and an average-to-student matcher.</li>
+          <li>Turned the Commerce-only admission analysis dashboard into a fully generic, config-driven system where a new program is a config file rather than new code.</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="entry-head">
+          <h3>Admission Coordinator <span class="org">· Queen's University, Undergraduate Admission &amp; Recruitment</span></h3>
+          <span class="dates">Jan 2026 – Jun 2026</span>
+        </div>
+        <ul>
+          <li>Built a Tkinter/Selenium tool that semi-automated the admission-decision workflow — read the documents, type one number, the tool does the rest. <span class="k">~1,200 applications</span>.</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="entry-head">
+          <h3>Recruitment Representative <span class="org">· Queen's University, Undergraduate Admission &amp; Recruitment</span></h3>
+          <span class="dates">May 2025 – Jan 2026</span>
+        </div>
+        <ul>
+          <li>Built a fuzzy-matched location analyzer covering <span class="k">5 years, ~170K applications</span>: feeder-school rankings, regional analysis, year-over-year conversion.</li>
+          <li>Random Forest analysis of 5,600 admitted Commerce students vs first-year GPA; its supplementary-application finding contributed to raising admission thresholds.</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="entry-head">
+          <h3>Freelance Web Developer <span class="org">· Kingston, ON</span></h3>
+          <span class="dates">Jul 2026 – Present</span>
+        </div>
+        <ul>
+          <li>Shipped production sites for two Kingston businesses: Next.js + Supabase, owner-editable menus and dashboards, deployed on Vercel.</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="entry-head">
+          <h3>Mechanical Engineering Intern <span class="org">· Dorsch Holding GmbH, Abu Dhabi, UAE</span></h3>
+          <span class="dates">Jun 2023 – Aug 2023</span>
+        </div>
+        <ul>
+          <li>Redesigned a water drainage system from pumped to gravity-fed on the Bu Hasa oil-field expansion after fluid simulations exposed inefficiencies; reworked pipe layouts to cut pressure losses.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2>Projects</h2>
+
+      <div class="entry">
+        <div class="entry-head">
+          <h3>World Cup Fantasy <span class="org">· full-stack platform, live through the entire World Cup 2026</span></h3>
+          <span class="dates">Jan 2026 – Jul 2026</span>
+        </div>
+        <ul>
+          <li>Solo-built Next.js/TypeScript/PostgreSQL platform serving real users through the tournament; live-scoring engine reconciled against an error-prone external feed, verified with <span class="k">1,600+ lines</span> of test harnesses and a live match first.</li>
+          <li>Every admin action writes to an immutable, revertible audit log; architecture forked into a second live product (La Liga fantasy) at ~80% reuse.</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="entry-head">
+          <h3>Vela <span class="org">· voice assistant with desktop control, in daily use</span></h3>
+          <span class="dates">Aug 2026 – Present</span>
+        </div>
+        <ul>
+          <li>TypeScript agent on the Claude Agent SDK: wake-word voice, app/media/window control, watch-and-notify triggers. Memory is human-editable markdown in an Obsidian vault — one note per fact, hand corrections read back on recall.</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="entry-head">
+          <h3>CAST Medical Interface <span class="org">· RFID patient simulator, deployed at Queen's School of Nursing</span></h3>
+          <span class="dates">Sep 2024 – May 2025</span>
+        </div>
+        <ul>
+          <li>Assistant lead, software &amp; hardware integration (senior capstone): 12 RFID-tagged anatomical positions, 28 audio scenarios, Flask on a Raspberry Pi — <span class="k">~$250</span> of hardware replacing six-figure commercial simulators.</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="entry-head">
+          <h3>Queen's AutoDrive <span class="org">· Level 4 autonomous vehicle, SAE AutoDrive Challenge</span></h3>
+          <span class="dates">Sep 2021 – May 2024</span>
+        </div>
+        <ul>
+          <li>CNN lane-perception optimized for embedded inference (TensorRT, Jetson Xavier NX); then system integration, synchronizing ROS2 fusion, planning and control over CAN at <span class="k">10 Hz</span>.</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="entry-head">
+          <h3>Resonance <span class="org">· Unreal Engine 5.8 action game, C++ gameplay</span></h3>
+          <span class="dates">Jul 2026 – Present</span>
+        </div>
+        <ul>
+          <li>Combat on driven-oscillator physics: probe a part, match its dampener frequency, then overload or stabilize it. Chaos destruction; every verb logs telemetry and feel is debugged from the numbers.</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="entry-head">
+          <h3>Formula SAE Steering System <span class="org">· Electrical Lead, custom driver telemetry</span></h3>
+          <span class="dates">Sep 2022 – May 2023</span>
+        </div>
+        <ul>
+          <li>Designed a custom PCB and TFT display delivering real-time telemetry over CAN at <span class="k">500 kbps</span>; root-caused termination-resistor issues behind intermittent bus dropout at speed.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2>Technical Skills</h2>
+      <dl class="skills">
+        <div class="skill-row"><dt>Software &amp; Web</dt><dd>TypeScript, Next.js/React, Node.js, Python, C/C++, SQL/PostgreSQL, SQLite, Prisma, Supabase, Git</dd></div>
+        <div class="skill-row"><dt>Robotics &amp; Embedded</dt><dd>ROS/ROS2, OpenCV, SLAM, CAN bus, Arduino, Raspberry Pi, SolidWorks, MATLAB/Simulink, Unreal Engine 5</dd></div>
+        <div class="skill-row"><dt>Data &amp; ML</dt><dd>Pandas, scikit-learn, PyTorch, Random Forest, TensorRT, rapidfuzz</dd></div>
+        <div class="skill-row"><dt>Automation</dt><dd>Selenium, Playwright, Tkinter, YAML/JSON config, PeopleSoft, Vercel, Claude Agent SDK</dd></div>
+      </dl>
+    </section>
+  </div>
+
+  <p class="print-hint">Ctrl+P → Save as PDF → letter, default margins off (the page sets its own).</p>
+</body>
+</html>
