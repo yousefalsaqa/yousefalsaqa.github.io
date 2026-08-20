@@ -19,6 +19,12 @@ const gsap = window.gsap;
 /* Each exchange names the tools it fires and, where relevant, the note it
    writes. Kept short: this is a demonstration of the tool layer, not a
    transcript of a whole evening. */
+const WAKE = {
+  say: 'Vela, you there?',
+  tools: [],
+  reply: 'Here.',
+};
+
 const EXCHANGES = [
   {
     say: 'what am I working on',
@@ -31,19 +37,19 @@ const EXCHANGES = [
     reply: 'Opening Resonance.log. Last write was 14 minutes ago.',
   },
   {
-    say: 'remember that I graduated in 2025',
-    tools: ['remember'],
-    reply: 'Written.',
-    note: {
-      name: 'yousef-graduated-basc-mechatronics-2025',
-      kind: 'user',
-      body: 'BASc Mechatronics & Robotics Engineering, Queen\'s, 2025.',
-    },
-  },
-  {
     say: 'what do you know about the game',
     tools: ['recall'],
-    reply: 'Unreal 5.8, combat is frequency matching against machine parts. You told me the dampener sets the target frequency.',
+    reply: 'Unreal 5.8, combat is frequency matching against machine parts. You told me the dampener sets the target frequency, and that stabilize is the skilled verb.',
+  },
+  {
+    say: 'remember that stabilize feels unfair below 60% lock',
+    tools: ['remember'],
+    reply: 'Written. I filed it under the game.',
+    note: {
+      name: 'stabilize-feels-unfair-below-60-lock',
+      kind: 'project',
+      body: 'Playtest note: matching punishes too early. Try opening the verbs at 45%.',
+    },
   },
   {
     say: 'watch the build and tell me when it finishes',
@@ -51,19 +57,19 @@ const EXCHANGES = [
     reply: 'Watching. I will say something when it changes.',
   },
   {
-    say: 'open the hub',
+    say: 'put something on',
     tools: ['launch_app'],
-    reply: 'Hub is up. Every tool call will sketch itself there as it fires.',
-  },
-  {
-    say: 'skip this track',
-    tools: ['media_control'],
-    reply: 'Skipped.',
+    reply: 'Netflix is up on the second monitor.',
   },
   {
     say: 'what have I got open',
     tools: ['list_windows'],
     reply: 'Unreal Editor, two Chrome windows, Blender, and a terminal in the portfolio repo.',
+  },
+  {
+    say: 'open the hub',
+    tools: ['launch_app'],
+    reply: 'Hub is up. Every tool call will sketch itself there as it fires.',
   },
 ];
 
@@ -153,15 +159,19 @@ export function mount(container, system) {
 
     line('vln--you', `<span class="vln-who">you</span><span class="vln-text">${ex.say}</span>`);
 
+    const hasTools = ex.tools.length > 0;
     after(reduced() ? 0 : 380, () => {
       // Tool chips appear before the reply, because that is the order it
       // happens in — she calls the tool, then answers from what it returned.
-      const chips = ex.tools
-        .map((t) => `<code class="vln-tool">${t}</code>`).join('');
-      line('vln--tools', `<span class="vln-who"></span><span class="vln-text">${chips}</span>`);
-      statusEl.textContent = `running ${ex.tools[ex.tools.length - 1]}`;
+      // The wake exchange fires no tool; she just answers.
+      if (hasTools) {
+        const chips = ex.tools
+          .map((t) => `<code class="vln-tool">${t}</code>`).join('');
+        line('vln--tools', `<span class="vln-who"></span><span class="vln-text">${chips}</span>`);
+        statusEl.textContent = `running ${ex.tools[ex.tools.length - 1]}`;
+      }
 
-      after(reduced() ? 0 : 520, () => {
+      after(reduced() ? 0 : (hasTools ? 520 : 140), () => {
         line('vln--her', `<span class="vln-who">vela</span><span class="vln-text">${ex.reply}</span>`);
         if (ex.note) after(reduced() ? 0 : 260, () => addNote(ex.note, true));
         statusEl.textContent = 'listening for "vela"';
@@ -180,8 +190,8 @@ export function mount(container, system) {
     promptHost.appendChild(b);
   });
 
-  // Open with one exchange already run, so the panel is not empty on arrival.
-  after(reduced() ? 0 : 500, () => run(EXCHANGES[0]));
+  // Open on the wake ritual — how every real session with her starts.
+  after(reduced() ? 0 : 500, () => run(WAKE));
 
   if (gsap && !reduced()) {
     gsap.from(promptHost.children, {

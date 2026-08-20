@@ -694,10 +694,47 @@
   .ledger-board { border-left: 0; border-top: 1px solid var(--hairline); }
   .rsn { grid-template-columns: 1fr; grid-template-rows: minmax(0, 52%) 1fr; }
   .rsn-machine { border-right: 0; border-bottom: 1px solid var(--hairline); }
-  .sessions-grid { grid-template-columns: repeat(2, 1fr); overflow-y: auto; }
+  /* One lane per row with natural heights. The two-column version packed
+     lanes into rows shorter than their content and the text stacked onto
+     itself. Steps go two-across inside each lane to keep it short. */
+  .sessions-grid {
+    grid-template-columns: 1fr;
+    grid-auto-rows: max-content;
+    overflow-y: auto;
+  }
+  .lane {
+    grid-template-rows: auto auto auto;
+    border-right: 0;
+    border-bottom: 1px solid var(--hairline);
+  }
+  .lane-steps { grid-template-columns: 1fr 1fr; gap: 0.3rem 0.9rem; }
   .vla { grid-template-columns: 1fr; grid-template-rows: 1fr minmax(0, 38%); }
   .vla-main { border-right: 0; border-bottom: 1px solid var(--hairline); }
-  .lane { border-bottom: 1px solid var(--hairline); }
+}
+
+/* ---------- Sliders on touch ----------
+   The 3px blade thumb is a mouse target. Under a finger the track gets a
+   little more presence and the thumb becomes a round 22px grab, with the
+   input tall enough that the touch does not have to be surgical. */
+@media (pointer: coarse) {
+  .rsn-slider, .ledger-scrub { height: 34px; }
+  .rsn-slider::-webkit-slider-runnable-track,
+  .ledger-scrub::-webkit-slider-runnable-track { height: 3px; border-radius: 2px; }
+  .rsn-slider::-moz-range-track,
+  .ledger-scrub::-moz-range-track { height: 3px; border-radius: 2px; }
+  .rsn-slider::-webkit-slider-thumb,
+  .ledger-scrub::-webkit-slider-thumb {
+    width: 22px; height: 22px;
+    margin-top: -9.5px;
+    border-radius: 50%;
+    border: 2px solid var(--ground);
+  }
+  .rsn-slider::-moz-range-thumb,
+  .ledger-scrub::-moz-range-thumb {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    border: 2px solid var(--ground);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -197,8 +197,7 @@ export function mount(container, system) {
     });
   }
 
-  // Run once on mount so it is alive when you arrive.
-  setTimeout(start, reduced() ? 0 : 450);
+  // Waits for the evaluator. The number field is the invitation.
 
   return {
     destroy() {
