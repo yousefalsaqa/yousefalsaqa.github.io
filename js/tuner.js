@@ -37,6 +37,8 @@ export class Tuner {
     this.live = null;          // { destroy } of the mounted instrument
     this.busy = false;
     this.rail = root.querySelector('[data-rail]');
+    this.miniName = root.querySelector('[data-mini-name]');
+    this.miniDots = root.querySelector('[data-mini-dots]');
     this.panel = root.querySelector('[data-panel]');
     this.stage = root.querySelector('[data-stage]');
     this._onKey = this._key.bind(this);
@@ -116,6 +118,20 @@ export class Tuner {
     this.rail.appendChild(this.needle);
 
     this.stations = Array.from(this.rail.querySelectorAll('.station'));
+
+    // The phone strip: one dot per system, tappable.
+    if (this.miniDots) {
+      this.miniDots.innerHTML = '';
+      SYSTEMS.forEach((sys, i) => {
+        const d = document.createElement('button');
+        d.type = 'button';
+        d.className = 'rail-dot';
+        d.setAttribute('aria-label', `Open ${sys.name}`);
+        d.addEventListener('click', () => this.select(i));
+        this.miniDots.appendChild(d);
+      });
+      this.dots = Array.from(this.miniDots.children);
+    }
   }
 
   _bindDrag() {
@@ -170,6 +186,8 @@ export class Tuner {
 
     // Rail state
     this.stations?.forEach((s, n) => s.classList.toggle('is-live', n === i));
+    this.dots?.forEach((d, n) => d.classList.toggle('is-live', n === i));
+    if (this.miniName) this.miniName.textContent = `${sys.no} · ${sys.name}`;
     if (this.needle) {
       const pos = (i / (SYSTEMS.length - 1)) * 100;
       if (immediate || reduced() || !gsap) {

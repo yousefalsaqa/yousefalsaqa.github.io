@@ -762,11 +762,19 @@
    ========================================================================== */
 
 @media (max-width: 900px) {
-  .bm-body { grid-template-columns: 1fr; grid-template-rows: minmax(0, 34%) 1fr; }
-  .bodymap-figure { border-right: 0; border-bottom: 1px solid var(--hairline); }
-  .bm-bar { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; }
+  .bm-body { grid-template-columns: 1fr; grid-template-rows: minmax(0, 30%) 1fr; }
+  .bodymap-figure { border-right: 0; border-bottom: 1px solid var(--hairline); padding: var(--sp-3); }
+  /* The probe photo is desktop garnish; on a phone it is just clutter. */
+  .bm-hw { display: none; }
+  .bodymap-hint { display: none; }
+  .bm-bar { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; padding: var(--sp-2) var(--sp-3); }
   .bm-bar::-webkit-scrollbar { display: none; }
   .bm-modes { flex-wrap: nowrap; }
+  /* The trace must never lose its room to the log: cap the log to its two
+     newest lines and keep every scope row inside its own box. */
+  .scope-canvas { min-height: 96px; }
+  .scope-log { min-height: 0; max-height: 3rem; overflow: hidden; }
+  .scope-log-row:nth-child(n+3) { display: none; }
   .trace-body { grid-template-columns: 1fr; grid-template-rows: minmax(0, 32%) 1fr; }
   .trace-cam { border-right: 0; border-bottom: 1px solid var(--hairline); }
   .ledger-split { grid-template-columns: 1fr; grid-template-rows: 1fr auto; }

@@ -240,6 +240,11 @@
   width: 100%;
 }
 
+/* Phone strip: what Apple would put there. The current system's name and six
+   page dots, under 48px tall, with swipe as the primary way to move. Hidden
+   on fine-pointer widths where the full rail exists. */
+.rail-mini { display: none; }
+
 .rail {
   position: relative;
   height: 62px;
@@ -503,7 +508,46 @@ kbd {
     backdrop-filter: blur(10px);
     border-top: 0;
     border-bottom: 1px solid var(--hairline);
-    padding-block: var(--sp-3) var(--sp-1);
+    padding: 0 var(--gutter);
+  }
+  /* The tick rail and its hint are desktop furniture. */
+  .rail, .rail-hint { display: none; }
+  .rail-mini {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--sp-4);
+    height: 46px;
+  }
+  .rail-mini-name {
+    color: var(--type);
+    font-size: 0.66rem;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .rail-mini-dots { display: flex; gap: 0.3rem; flex: none; }
+  .rail-dot {
+    width: 26px;
+    height: 26px;
+    padding: 0;
+    display: grid;
+    place-items: center;
+  }
+  .rail-dot::before {
+    content: '';
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--muted);
+    opacity: 0.55;
+    transition: background 0.3s, opacity 0.3s, transform 0.3s;
+  }
+  .rail-dot.is-live::before {
+    background: var(--stabilize);
+    opacity: 1;
+    transform: scale(1.25);
   }
   .console-grid {
     display: flex;
@@ -528,7 +572,7 @@ kbd {
   .stage-live { display: none; }
   .stage-frame {
     order: 1;
-    height: calc(100svh - var(--header-h) - 118px);
+    height: calc(100svh - var(--header-h) - 60px);
     min-height: 24rem;
   }
   .console-left { order: 2; display: block; }

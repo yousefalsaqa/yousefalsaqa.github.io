@@ -126,8 +126,13 @@
         </div>
       </div>
 
-      <!-- The rail: sweep the driver -->
+      <!-- The rail: sweep the driver. On phones it collapses to the mini
+           strip: current system plus page dots, swipe-first. -->
       <div class="console-rail">
+        <div class="rail-mini">
+          <span class="rail-mini-name mono" data-mini-name>01 &middot; CAST</span>
+          <div class="rail-mini-dots" data-mini-dots role="group" aria-label="Systems"></div>
+        </div>
         <div class="rail" data-rail role="group" aria-label="Tune between systems"></div>
         <p class="rail-hint">
           <span class="rail-hint-fine">Every instrument is live. Click a station, drag the rail, or use</span>
