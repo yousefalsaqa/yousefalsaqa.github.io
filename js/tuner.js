@@ -12,7 +12,7 @@
        mount(container, system) -> { destroy(): void }
    ========================================================================== */
 
-import { SYSTEMS, formatFreq } from './systems.js';
+import { SYSTEMS } from './systems.js';
 import { dampedEase, DAMPING, reduced } from './secondorder.js';
 
 const gsap = window.gsap;
@@ -20,9 +20,9 @@ const gsap = window.gsap;
 /* Instruments are keyed by the `instrument` field in systems.js. */
 const LOADERS = {
   bodymap:  () => import('./instruments/bodymap.js'),
+  console:  () => import('./instruments/console.js'),
   sweep:    () => import('./instruments/sweep.js'),
   trace:    () => import('./instruments/trace.js'),
-  vault:    () => import('./instruments/vault.js'),
   ledger:   () => import('./instruments/ledger.js'),
   sessions: () => import('./instruments/sessions.js'),
 };
@@ -39,8 +39,6 @@ export class Tuner {
     this.rail = root.querySelector('[data-rail]');
     this.panel = root.querySelector('[data-panel]');
     this.stage = root.querySelector('[data-stage]');
-    this.readout = root.querySelector('[data-freq]');
-    this.modeOut = root.querySelector('[data-mode]');
     this._onKey = this._key.bind(this);
   }
 
@@ -62,20 +60,15 @@ export class Tuner {
     if (!this.rail) return;
     this.rail.innerHTML = '';
 
-    const lo = SYSTEMS[0].freq;
-    const hi = SYSTEMS[SYSTEMS.length - 1].freq;
-
     SYSTEMS.forEach((sys, i) => {
-      // Position each station by its actual frequency, so the spacing on the
-      // rail reflects the mode spectrum rather than being evenly divided.
-      const pos = ((sys.freq - lo) / (hi - lo)) * 100;
+      const pos = (i / (SYSTEMS.length - 1)) * 100;
 
       const station = document.createElement('button');
       station.type = 'button';
       station.className = 'station';
       station.style.left = `${pos}%`;
       station.dataset.index = String(i);
-      station.setAttribute('aria-label', `Tune to ${sys.name}, ${formatFreq(sys.freq)}`);
+      station.setAttribute('aria-label', `Open ${sys.name}`);
       station.innerHTML =
         `<span class="station-tick" aria-hidden="true"></span>` +
         `<span class="station-no">${sys.no}</span>` +
@@ -100,16 +93,8 @@ export class Tuner {
     const pick = (clientX) => {
       const r = this.rail.getBoundingClientRect();
       const t = Math.min(Math.max((clientX - r.left) / r.width, 0), 1);
-      const lo = SYSTEMS[0].freq;
-      const hi = SYSTEMS[SYSTEMS.length - 1].freq;
-      const f = lo + t * (hi - lo);
-      // Snap to whichever station is nearest in frequency.
-      let best = 0, bestD = Infinity;
-      SYSTEMS.forEach((s, i) => {
-        const d = Math.abs(s.freq - f);
-        if (d < bestD) { bestD = d; best = i; }
-      });
-      this.select(best);
+      // Snap to the nearest station.
+      this.select(Math.round(t * (SYSTEMS.length - 1)));
     };
 
     this.rail.addEventListener('pointerdown', (e) => {
@@ -152,9 +137,7 @@ export class Tuner {
     // Rail state
     this.stations?.forEach((s, n) => s.classList.toggle('is-live', n === i));
     if (this.needle) {
-      const lo = SYSTEMS[0].freq;
-      const hi = SYSTEMS[SYSTEMS.length - 1].freq;
-      const pos = ((sys.freq - lo) / (hi - lo)) * 100;
+      const pos = (i / (SYSTEMS.length - 1)) * 100;
       if (immediate || reduced() || !gsap) {
         this.needle.style.left = `${pos}%`;
       } else {
@@ -166,8 +149,6 @@ export class Tuner {
         });
       }
     }
-    if (this.readout) this.readout.textContent = formatFreq(sys.freq);
-    if (this.modeOut) this.modeOut.textContent = `mode (${sys.mode[0]},${sys.mode[1]})`;
 
     // Swap the panel: the outgoing system is driven apart, the incoming one
     // settles. Overload out, stabilize in.

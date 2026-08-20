@@ -135,7 +135,14 @@
   min-height: 0;
 }
 .rsn-machine img { width: 100%; height: 100%; object-fit: fill; display: block; }
-.rsn-overlay { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.rsn-overlay {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  z-index: 2;
+  /* The overlay itself must not swallow the artwork, but the markers on it
+     have to be clickable, so the hit targets opt back in. */
+  pointer-events: none;
+}
+.rsn-overlay .rp { pointer-events: auto; }
 .rsn-machine figcaption {
   padding: 0.45rem 0.7rem;
   border-top: 1px solid var(--hairline);
@@ -163,47 +170,69 @@
 
 .rsn-panel {
   display: grid;
-  grid-template-rows: auto auto auto 1fr auto;
+  grid-template-rows: auto auto auto auto auto 1fr;
   gap: var(--sp-3);
   padding: var(--sp-4);
   min-height: 0;
+  align-content: start;
 }
-.rsn-readout { display: flex; align-items: baseline; gap: 0.5rem; }
-.rsn-driver {
-  font-family: var(--font-mono);
-  font-size: var(--step-2);
-  color: var(--overload);
-  line-height: 1;
-}
-.rsn-driver-label {
-  font-family: var(--font-mono);
-  font-size: 0.56rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-.rsn-curve { width: 100%; height: 70px; display: block; }
 
-.rsn-parts { display: grid; align-content: start; gap: 0.4rem; min-height: 0; overflow-y: auto; }
-.rp-row {
-  display: grid;
-  grid-template-columns: 1fr 54px 3.2rem;
-  gap: 0.6rem;
-  align-items: center;
+.rsn-steps { display: grid; gap: 0.3rem; }
+.rsn-steps li {
+  display: flex; align-items: baseline; gap: 0.5rem;
   font-family: var(--font-mono);
   font-size: 0.6rem;
   color: var(--muted);
+  transition: color 0.3s;
 }
-.rp-name { color: var(--type); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.rp-meter { display: block; height: 3px; background: var(--hairline); }
-.rp-meter i { display: block; height: 100%; width: 0; background: var(--stabilize); transition: background 0.25s; }
-.rp-row.is-hot .rp-meter i { background: var(--overload); }
-.rp-row.is-hot .rp-name { color: var(--overload); }
-.rp-row.is-failed { opacity: 0.45; }
-.rp-row.is-failed .rp-val { color: var(--overload); }
-.rp-val { text-align: right; }
+.rsn-steps b {
+  display: grid; place-items: center;
+  width: 14px; height: 14px;
+  border: 1px solid var(--hairline);
+  font-size: 0.5rem;
+  font-weight: 400;
+  flex: none;
+  transition: border-color 0.3s, background 0.3s, color 0.3s;
+}
+.rsn-steps li.is-on { color: var(--type); }
+.rsn-steps li.is-on b { border-color: var(--stabilize); background: var(--stabilize); color: var(--ground); }
 
-.rsn-hint { margin: 0; font-family: var(--font-mono); font-size: 0.58rem; color: var(--muted); line-height: 1.5; }
+.rsn-target {
+  display: flex; justify-content: space-between; align-items: baseline; gap: var(--sp-3);
+  padding-block: 0.5rem;
+  border-block: 1px solid var(--hairline);
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+}
+.rsn-part-name { color: var(--type); }
+.rsn-lock { color: var(--muted); font-size: 0.6rem; }
+.rsn-lock.is-lock { color: var(--stabilize); }
+
+.rsn-curve { width: 100%; height: 76px; display: block; }
+
+.rsn-verbs { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-3); }
+.rsn-verb {
+  padding: 0.55rem 0.6rem;
+  border: 1px solid var(--hairline);
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  transition: border-color 0.25s, color 0.25s, background 0.25s;
+}
+.rsn-verb:disabled { opacity: 0.35; cursor: default; }
+.rsn-verb--over:not(:disabled):hover { border-color: var(--overload); color: var(--overload); }
+.rsn-verb--stab:not(:disabled):hover { border-color: var(--stabilize); color: var(--stabilize); }
+
+.rsn-hint { margin: 0; font-family: var(--font-mono); font-size: 0.58rem; color: var(--muted); line-height: 1.55; }
+
+.rp-hit { fill: transparent; cursor: pointer; }
+.rp { cursor: pointer; }
+.rp:focus { outline: none; }
+.rp.is-probed .rp-ring { stroke: var(--stabilize); opacity: 1; stroke-width: 0.7; }
+.rp.is-probed .rp-dot  { fill: var(--stabilize); }
+.rp.is-stable .rp-ring { stroke: var(--stabilize); opacity: 0.45; }
+.rp.is-stable .rp-dot  { fill: var(--stabilize); opacity: 0.5; }
 
 /* Range inputs are styled once here for every instrument that uses one. */
 .rsn-slider, .ledger-scrub {
@@ -271,89 +300,92 @@
 .tchan-canvas { width: 100%; height: 100%; min-height: 0; display: block; }
 
 /* ============================================================================
-   04 · VELA — memory vault
+   03 · VELA — the console
    ========================================================================== */
 
-.vault { display: grid; grid-template-rows: auto 1fr auto; height: 100%; min-height: 0; }
-.vault-head {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.vla { display: grid; grid-template-columns: 1fr minmax(0, 34%); height: 100%; min-height: 0; }
+.vla-main { display: grid; grid-template-rows: auto 1fr auto; min-height: 0; border-right: 1px solid var(--hairline); }
+
+.vla-bar {
+  display: flex; align-items: center; gap: 0.6rem;
   padding: var(--sp-3) var(--sp-4);
   border-bottom: 1px solid var(--hairline);
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
   color: var(--muted);
 }
-.vault-recall { display: flex; align-items: center; gap: 0.4rem; }
-.vault-recall-icon { color: var(--stabilize); }
-.vault-input {
-  background: none;
-  border: 0;
-  border-bottom: 1px solid var(--hairline);
-  color: var(--type);
-  font-family: var(--font-mono);
-  font-size: 0.66rem;
-  padding: 0.2rem 0;
-  width: 12rem;
+.vla-wake { display: flex; align-items: flex-end; gap: 2px; height: 12px; }
+.vla-wake i {
+  display: block; width: 2px; background: var(--stabilize);
+  animation: wake 1.4s ease-in-out infinite;
 }
-.vault-input:focus { outline: none; border-bottom-color: var(--stabilize); }
+.vla-wake i:nth-child(1) { height: 4px;  animation-delay: 0s; }
+.vla-wake i:nth-child(2) { height: 9px;  animation-delay: 0.12s; }
+.vla-wake i:nth-child(3) { height: 12px; animation-delay: 0.24s; }
+.vla-wake i:nth-child(4) { height: 7px;  animation-delay: 0.36s; }
+.vla-wake i:nth-child(5) { height: 3px;  animation-delay: 0.48s; }
+@keyframes wake { 0%, 100% { transform: scaleY(0.35); } 50% { transform: scaleY(1); } }
 
-.vault-field { position: relative; min-height: 0; }
-.vault-links { position: absolute; inset: 0; width: 100%; height: 100%; }
-.vlink {
-  stroke: var(--hairline);
-  stroke-width: 1;
-  transition: stroke 0.3s, opacity 0.3s;
+.vla-log { min-height: 0; overflow-y: auto; padding: var(--sp-4); display: grid; align-content: start; gap: 0.55rem; }
+.vla-log::-webkit-scrollbar { width: 3px; }
+.vla-log::-webkit-scrollbar-thumb { background: var(--hairline); }
+
+.vln { display: grid; grid-template-columns: 3.2rem 1fr; gap: 0.6rem; align-items: baseline; }
+.vln-who {
+  font-family: var(--font-mono); font-size: 0.55rem;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted);
 }
-.vlink.is-lit { stroke: var(--stabilize); }
-.vlink.is-hidden { opacity: 0; }
-
-.vault-notes { position: absolute; inset: 0; }
-.vnote {
-  position: absolute;
-  transform: translate(-50%, -50%);
-  display: grid;
-  gap: 0.15rem;
-  justify-items: start;
-  padding: 0.4rem 0.6rem;
+.vln-text { font-size: var(--step--1); line-height: 1.55; }
+.vln--you .vln-text { color: var(--type); }
+.vln--her .vln-who { color: var(--stabilize); }
+.vln--her .vln-text { color: var(--muted); }
+.vln--tools .vln-text { display: flex; flex-wrap: wrap; gap: 0.3rem; }
+.vln-tool {
+  font-family: var(--font-mono); font-size: 0.55rem;
+  padding: 0.1rem 0.4rem;
   border: 1px solid var(--hairline);
-  background: var(--ground);
-  text-align: left;
-  max-width: 15rem;
-  transition: border-color 0.3s, opacity 0.3s, background 0.3s;
+  color: var(--stabilize);
 }
-.vnote-kind {
-  font-family: var(--font-mono);
-  font-size: 0.5rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-.vnote-name {
-  font-family: var(--font-mono);
-  font-size: 0.58rem;
-  color: var(--type);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 14rem;
-}
-.vnote--project .vnote-kind { color: var(--stabilize); }
-.vnote--pending { border-style: dashed; }
-.vnote--pending .vnote-kind { color: var(--overload); }
-.vnote--feedback .vnote-kind { color: var(--overload); }
-.vnote.is-lit { border-color: var(--stabilize); background: var(--surface-2); }
-.vnote.is-dim { opacity: 0.32; }
-.vnote.is-hidden { opacity: 0.08; pointer-events: none; }
 
-.vault-read {
-  display: grid;
-  gap: 0.2rem;
+.vla-prompts {
+  display: flex; flex-wrap: wrap; gap: 0.35rem;
   padding: var(--sp-3) var(--sp-4);
   border-top: 1px solid var(--hairline);
-  min-height: 3.6rem;
 }
-.vault-read-name { color: var(--stabilize); }
-.vault-read-body { color: var(--muted); font-family: var(--font-display); font-size: var(--step--1); letter-spacing: 0; }
+.vla-prompt {
+  font-family: var(--font-mono); font-size: 0.56rem;
+  padding: 0.28rem 0.55rem;
+  border: 1px solid var(--hairline);
+  color: var(--muted);
+  transition: border-color 0.22s, color 0.22s;
+}
+.vla-prompt:hover { border-color: var(--stabilize); color: var(--stabilize); }
+
+.vla-vault { display: grid; grid-template-rows: auto 1fr auto; min-height: 0; }
+.vla-vault-head, .vla-vault-foot {
+  display: flex; justify-content: space-between; gap: 0.5rem;
+  padding: var(--sp-3);
+  font-family: var(--font-mono); font-size: 0.56rem; color: var(--muted);
+}
+.vla-vault-head { border-bottom: 1px solid var(--hairline); }
+.vla-vault-foot { border-top: 1px solid var(--hairline); line-height: 1.4; }
+.vla-vault-count { color: var(--stabilize); }
+
+.vla-notes { min-height: 0; overflow-y: auto; padding: var(--sp-3); display: grid; align-content: start; gap: 0.45rem; }
+.vla-notes::-webkit-scrollbar { width: 3px; }
+.vla-notes::-webkit-scrollbar-thumb { background: var(--hairline); }
+.vnote {
+  display: grid; gap: 0.15rem;
+  padding: 0.4rem 0.5rem;
+  border-left: 2px solid var(--hairline);
+  background: var(--surface-2);
+}
+.vnote-name { font-family: var(--font-mono); font-size: 0.54rem; color: var(--type); word-break: break-all; }
+.vnote-body { font-size: 0.66rem; line-height: 1.45; color: var(--muted); }
+.vnote--project { border-left-color: var(--stabilize); }
+.vnote--feedback { border-left-color: var(--overload); }
+.vnote--pending { border-left-style: dashed; border-left-color: var(--overload); }
+.vnote.is-fresh { border-left-color: var(--stabilize); }
 
 /* ============================================================================
    05 · WORLD CUP FANTASY — ledger
@@ -537,6 +569,8 @@
   .rsn { grid-template-columns: 1fr; grid-template-rows: minmax(0, 52%) 1fr; }
   .rsn-machine { border-right: 0; border-bottom: 1px solid var(--hairline); }
   .sessions-grid { grid-template-columns: repeat(2, 1fr); overflow-y: auto; }
+  .vla { grid-template-columns: 1fr; grid-template-rows: 1fr minmax(0, 38%); }
+  .vla-main { border-right: 0; border-bottom: 1px solid var(--hairline); }
   .lane { border-bottom: 1px solid var(--hairline); }
 }
 
