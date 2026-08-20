@@ -230,7 +230,13 @@
   gap: 0.2rem;
   min-height: 3.4rem;
   align-content: start;
+  /* Opaque and stacked above the canvas: Safari has been seen compositing
+     these grid rows over the trace, and on a solid panel that is invisible. */
+  background: var(--surface);
+  position: relative;
+  z-index: 2;
 }
+.scope-canvas { position: relative; z-index: 0; }
 .scope-log-row {
   font-family: var(--font-mono);
   font-size: 0.54rem;
@@ -248,8 +254,8 @@
   padding: var(--sp-3) var(--sp-4);
   color: var(--muted);
 }
-.scope-head { border-bottom: 1px solid var(--hairline); }
-.scope-foot { border-top: 1px solid var(--hairline); }
+.scope-head { border-bottom: 1px solid var(--hairline); background: var(--surface); position: relative; z-index: 2; }
+.scope-foot { border-top: 1px solid var(--hairline); background: var(--surface); position: relative; z-index: 2; }
 .scope-head-main { display: grid; gap: 0.15rem; min-width: 0; }
 .scope-site { color: var(--type); font-size: 0.72rem; }
 .scope-loc {
@@ -448,6 +454,7 @@
   z-index: 2;
 }
 
+.trace-stale-flag[hidden] { display: none; }
 .trace-stale-flag {
   position: absolute;
   top: var(--sp-3); left: var(--sp-3);
@@ -457,11 +464,12 @@
   font-family: var(--font-mono);
   font-size: 0.6rem;
   letter-spacing: 0.1em;
-  opacity: 0;
-  transition: opacity 0.3s;
   pointer-events: none;
+  animation: staleblink 1.1s steps(2) infinite;
 }
-.trace.is-stale /* Video and ghost share one grid cell, so the chevrons can never spill onto
+@keyframes staleblink { 50% { opacity: 0.25; } }
+
+/* Video and ghost share one grid cell, so the chevrons can never spill onto
    the caption row below. */
 .trace-cam video { grid-row: 1; grid-column: 1; }
 .trace-ghost {
@@ -473,9 +481,6 @@
   pointer-events: none;
   z-index: 2;
 }
-
-.trace-stale-flag { opacity: 1; animation: staleblink 1.1s steps(2) infinite; }
-@keyframes staleblink { 50% { opacity: 0.25; } }
 .trace-cam figcaption {
   padding: 0.45rem 0.7rem;
   border-top: 1px solid var(--hairline);

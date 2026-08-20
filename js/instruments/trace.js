@@ -86,6 +86,7 @@ export function mount(container, system) {
   let t = 0;
   let staleErr = 0;       // metres the lane estimate lags the road
   let lastAge = 16;
+  let wasBad = false;
   let drift = 0;          // 0..1, how far the nodes have fallen out of step
   let drifting = false;
   let raf = 0;
@@ -138,12 +139,19 @@ export function mount(container, system) {
     });
 
     clockEl.textContent = `t = ${t.toFixed(1)} s`;
-    const bad = age > AGE_LIMIT;
+    // Hysteresis so the banner cannot chatter at the threshold, and the
+    // flag's visibility is owned by the hidden attribute rather than a CSS
+    // opacity dance - on real phones the transition/animation combination
+    // was leaving the flag fully visible at 25 ms.
+    if (age > AGE_LIMIT) wasBad = true;
+    else if (age < AGE_LIMIT * 0.8) wasBad = false;
+    const bad = wasBad;
     stateEl.textContent = bad
       ? `stale perception · acting on ${Math.round(age)} ms old road`
       : 'nominal';
     stateEl.classList.toggle('is-bad', bad);
-    staleFlag.textContent = `PERCEPTION STALE · ${Math.round(age)} ms`;
+    staleFlag.hidden = !bad;
+    if (bad) staleFlag.textContent = `PERCEPTION STALE · ${Math.round(age)} ms`;
     // The footage itself goes stale: flagged and washed out, because the
     // frame you are watching is no longer the frame the planner is using.
     container.querySelector('.trace')?.classList.toggle('is-stale', bad);
