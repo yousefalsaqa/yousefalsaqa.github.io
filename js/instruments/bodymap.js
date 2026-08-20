@@ -170,7 +170,7 @@ export function mount(container, system) {
 
       <div class="bm-body">
         <div class="bodymap-figure">
-          <svg viewBox="0 0 220 120" class="manikin" role="group"
+          <svg viewBox="12 22 206 76" class="manikin" role="group"
                aria-label="Twelve RFID auscultation positions on the manikin">
             <path class="mk-body" d="M16 26 H118 C132 26 140 34 146 46 H166 V74 H146
                                      C140 86 132 94 118 94 H16 Z"/>

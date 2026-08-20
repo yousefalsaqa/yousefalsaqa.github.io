@@ -762,7 +762,7 @@
    ========================================================================== */
 
 @media (max-width: 900px) {
-  .bm-body { grid-template-columns: 1fr; grid-template-rows: minmax(0, 30%) 1fr; }
+  .bm-body { grid-template-columns: 1fr; grid-template-rows: minmax(0, 32%) 1fr; }
   .bodymap-figure { border-right: 0; border-bottom: 1px solid var(--hairline); padding: var(--sp-3); }
   /* The probe photo is desktop garnish; on a phone it is just clutter. */
   .bm-hw { display: none; }
