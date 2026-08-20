@@ -1,10 +1,10 @@
 /* ============================================================================
-   TUNER — the plate is the index
+   TUNER — the system rail
    ----------------------------------------------------------------------------
-   Six systems, six Chladni modes. Sweeping the drive frequency locks the plate
-   into a mode and loads that system's instrument. There is no scroll hijack:
-   the rail is a discrete control you click, drag or arrow through, so the page
-   still scrolls the way a page scrolls.
+   Six systems on one rail. Clicking, dragging or arrowing to a station loads
+   that system's document and its live instrument. There is no scroll hijack:
+   the rail is a discrete control, so the page still scrolls the way a page
+   scrolls.
 
    Each system's instrument is loaded on demand from js/instruments/. They all
    expose the same shape:
@@ -30,11 +30,9 @@ const LOADERS = {
 export class Tuner {
   /**
    * @param {HTMLElement} root Section containing the rail and panel slots.
-   * @param {import('./cymatics.js').CymaticPlate|null} plate
    */
-  constructor(root, plate) {
+  constructor(root) {
     this.root = root;
-    this.plate = plate;
     this.index = -1;
     this.live = null;          // { destroy } of the mounted instrument
     this.busy = false;
@@ -42,6 +40,7 @@ export class Tuner {
     this.panel = root.querySelector('[data-panel]');
     this.stage = root.querySelector('[data-stage]');
     this.readout = root.querySelector('[data-freq]');
+    this.modeOut = root.querySelector('[data-mode]');
     this._onKey = this._key.bind(this);
   }
 
@@ -168,9 +167,7 @@ export class Tuner {
       }
     }
     if (this.readout) this.readout.textContent = formatFreq(sys.freq);
-
-    // Drive the plate into this system's mode.
-    if (this.plate) this.plate.setMode(sys.mode[0], sys.mode[1], immediate);
+    if (this.modeOut) this.modeOut.textContent = `mode (${sys.mode[0]},${sys.mode[1]})`;
 
     // Swap the panel: the outgoing system is driven apart, the incoming one
     // settles. Overload out, stabilize in.
@@ -240,9 +237,9 @@ export class Tuner {
   }
 }
 
-export function mountTuner(root, plate) {
+export function mountTuner(root) {
   if (!root) return null;
-  const t = new Tuner(root, plate);
+  const t = new Tuner(root);
   t.init();
   return t;
 }

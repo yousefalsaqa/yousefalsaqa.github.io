@@ -15,22 +15,30 @@ import { dampedEase, DAMPING, reduced } from '../secondorder.js';
 
 const gsap = window.gsap;
 
-/* Twelve auscultation positions. x/y are percentages of the torso box. */
-const POSITIONS = [
-  { id: 1,  x: 38, y: 24, kind: 'heart', site: 'Aortic',        note: 'R 2nd intercostal',  finding: 'Normal S1 S2' },
-  { id: 2,  x: 62, y: 24, kind: 'heart', site: 'Pulmonic',      note: 'L 2nd intercostal',  finding: 'Split S2 on inspiration' },
-  { id: 3,  x: 56, y: 38, kind: 'heart', site: 'Tricuspid',     note: 'L 4th, sternal border', finding: 'Normal S1 S2' },
-  { id: 4,  x: 64, y: 46, kind: 'heart', site: 'Mitral / apex', note: 'L 5th, midclavicular', finding: 'Systolic murmur' },
+/* Twelve auscultation positions, in the manikin's own viewBox coordinates
+   (0 0 220 120). The manikin is supine with the head to the right, matching
+   the base-unit drawing from the capstone: higher x is toward the head, and
+   the patient's right side is the upper half of the figure.
 
-  { id: 5,  x: 30, y: 18, kind: 'lung',  site: 'R upper lobe',  note: 'Anterior',           finding: 'Clear vesicular' },
-  { id: 6,  x: 70, y: 18, kind: 'lung',  site: 'L upper lobe',  note: 'Anterior',           finding: 'Clear vesicular' },
-  { id: 7,  x: 27, y: 34, kind: 'lung',  site: 'R middle lobe', note: 'Anterior',           finding: 'Coarse crackles' },
-  { id: 8,  x: 73, y: 34, kind: 'lung',  site: 'L lingula',     note: 'Anterior',           finding: 'Clear vesicular' },
-  { id: 9,  x: 25, y: 52, kind: 'lung',  site: 'R lower lobe',  note: 'Anterior base',      finding: 'Fine crackles' },
-  { id: 10, x: 75, y: 52, kind: 'lung',  site: 'L lower lobe',  note: 'Anterior base',      finding: 'Expiratory wheeze' },
-  { id: 11, x: 20, y: 42, kind: 'lung',  site: 'R lateral',     note: 'Mid-axillary',       finding: 'Diminished' },
-  { id: 12, x: 80, y: 42, kind: 'lung',  site: 'L lateral',     note: 'Mid-axillary',       finding: 'Clear vesicular' },
+   These live inside the SVG rather than as an HTML overlay, so they cannot
+   drift out of register when the figure is scaled or letterboxed. */
+const POSITIONS = [
+  { id: 1,  x: 118, y: 50, kind: 'heart', site: 'Aortic',        note: 'R 2nd intercostal',     finding: 'Normal S1 S2' },
+  { id: 2,  x: 118, y: 70, kind: 'heart', site: 'Pulmonic',      note: 'L 2nd intercostal',     finding: 'Split S2 on inspiration' },
+  { id: 3,  x: 100, y: 66, kind: 'heart', site: 'Tricuspid',     note: 'L 4th, sternal border', finding: 'Normal S1 S2' },
+  { id: 4,  x: 88,  y: 78, kind: 'heart', site: 'Mitral / apex', note: 'L 5th, midclavicular',  finding: 'Systolic murmur' },
+
+  { id: 5,  x: 126, y: 38, kind: 'lung',  site: 'R upper lobe',  note: 'Anterior',       finding: 'Clear vesicular' },
+  { id: 6,  x: 126, y: 82, kind: 'lung',  site: 'L upper lobe',  note: 'Anterior',       finding: 'Clear vesicular' },
+  { id: 7,  x: 102, y: 34, kind: 'lung',  site: 'R middle lobe', note: 'Anterior',       finding: 'Coarse crackles' },
+  { id: 8,  x: 102, y: 86, kind: 'lung',  site: 'L lingula',     note: 'Anterior',       finding: 'Clear vesicular' },
+  { id: 9,  x: 70,  y: 42, kind: 'lung',  site: 'R lower lobe',  note: 'Anterior base',  finding: 'Fine crackles' },
+  { id: 10, x: 70,  y: 78, kind: 'lung',  site: 'L lower lobe',  note: 'Anterior base',  finding: 'Expiratory wheeze' },
+  { id: 11, x: 46,  y: 36, kind: 'lung',  site: 'R lateral',     note: 'Mid-axillary',   finding: 'Diminished' },
+  { id: 12, x: 46,  y: 84, kind: 'lung',  site: 'L lateral',     note: 'Mid-axillary',   finding: 'Clear vesicular' },
 ];
+
+const SVG_NS = 'http://www.w3.org/2000/svg';
 
 /* ---------------------------------------------------------------------------
    Waveform synthesis
@@ -99,15 +107,17 @@ export function mount(container, system) {
   container.innerHTML = `
     <div class="bodymap">
       <div class="bodymap-figure">
-        <svg viewBox="0 0 200 260" class="torso" aria-hidden="true">
-          <path class="torso-outline" d="
-            M100 10 c-13 0-22 8-24 20 l-2 12 c-16 4-30 12-34 22 l-8 46 c-1 8 3 12 9 13
-            l8 1 -5 96 c-1 9 4 14 13 14 h86 c9 0 14-5 13-14 l-5-96 8-1 c6-1 10-5 9-13
-            l-8-46 c-4-10-18-18-34-22 l-2-12 c-2-12-11-20-24-20 z"/>
-          <path class="torso-sternum" d="M100 52 V150"/>
-          <path class="torso-ribs" d="M64 74 q36 14 72 0 M60 96 q40 16 80 0 M62 118 q38 14 76 0"/>
+        <svg viewBox="0 0 220 120" class="manikin" role="group"
+             aria-label="Twelve RFID auscultation positions on the manikin">
+          <!-- Base unit: supine, head to the right, per the capstone drawing -->
+          <path class="mk-body" d="M16 26 H118 C132 26 140 34 146 46 H166 V74 H146
+                                   C140 86 132 94 118 94 H16 Z"/>
+          <circle class="mk-body" cx="190" cy="60" r="26"/>
+          <!-- Auscultation module footprint: the region the tags sit under -->
+          <rect class="mk-module" x="40" y="30" width="98" height="60" rx="2"/>
+          <path class="mk-midline" d="M40 60 H138"/>
+          <g class="mk-points"></g>
         </svg>
-        <div class="bodymap-points" role="group" aria-label="Twelve RFID auscultation positions"></div>
         <p class="bodymap-hint">Probe a position</p>
       </div>
 
@@ -125,7 +135,7 @@ export function mount(container, system) {
     </div>
   `;
 
-  const pointsHost = container.querySelector('.bodymap-points');
+  const pointsHost = container.querySelector('.mk-points');
   const canvas = container.querySelector('.scope-canvas');
   const siteEl = container.querySelector('.scope-site');
   const tagEl = container.querySelector('.scope-tag');
@@ -138,22 +148,29 @@ export function mount(container, system) {
   let t0 = 0;
   let alive = true;
 
-  /* ---- points ---- */
+  /* ---- points ----
+     Built as SVG nodes in the manikin's own coordinate space, so a tag always
+     lands exactly where it sits on the module regardless of how the figure is
+     scaled. The hit target is a transparent circle larger than the visible
+     dot, because a 3px dot is not a pointer target. */
   POSITIONS.forEach((p) => {
-    const b = document.createElement('button');
-    b.type = 'button';
-    b.className = `bp bp--${p.kind}`;
-    b.style.left = `${p.x}%`;
-    b.style.top = `${p.y}%`;
-    b.dataset.id = String(p.id);
-    b.setAttribute('aria-label', `${p.site}, ${p.note}. ${p.finding}.`);
-    b.innerHTML = `<span class="bp-dot"></span><span class="bp-id">${p.id}</span>`;
+    const g = document.createElementNS(SVG_NS, 'g');
+    g.setAttribute('class', `bp bp--${p.kind}`);
+    g.setAttribute('tabindex', '0');
+    g.setAttribute('role', 'button');
+    g.setAttribute('aria-label', `${p.site}, ${p.note}. ${p.finding}.`);
+    g.innerHTML = `
+      <circle class="bp-halo" cx="${p.x}" cy="${p.y}" r="7"/>
+      <circle class="bp-dot"  cx="${p.x}" cy="${p.y}" r="3.1"/>
+      <circle class="bp-hit"  cx="${p.x}" cy="${p.y}" r="9"/>
+      <text class="bp-id" x="${p.x + 8}" y="${p.y - 5}">${p.id}</text>
+    `;
 
-    const pick = () => setActive(p, b);
-    b.addEventListener('pointerenter', pick);
-    b.addEventListener('focus', pick);
-    b.addEventListener('click', pick);
-    pointsHost.appendChild(b);
+    const pick = () => setActive(p, g);
+    g.addEventListener('pointerenter', pick);
+    g.addEventListener('focus', pick);
+    g.addEventListener('click', pick);
+    pointsHost.appendChild(g);
   });
 
   const buttons = Array.from(pointsHost.children);
@@ -233,12 +250,13 @@ export function mount(container, system) {
   raf = requestAnimationFrame(draw);
 
   if (gsap && !reduced()) {
+    // Opacity only. Scaling an SVG <g> from zero needs a transform box the
+    // group does not have, and lands the dots off their coordinates.
     gsap.from(buttons, {
-      scale: 0,
       opacity: 0,
-      duration: 0.8,
+      duration: 0.7,
       stagger: { each: 0.035, from: 'random' },
-      ease: dampedEase(DAMPING.reactive, 1.0),
+      ease: dampedEase(DAMPING.data, 1.0),
     });
   }
 

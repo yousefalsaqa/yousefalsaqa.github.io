@@ -22,66 +22,65 @@
 
 .bodymap {
   display: grid;
-  grid-template-columns: minmax(180px, 34%) 1fr;
+  grid-template-rows: minmax(0, 46%) 1fr;
   height: 100%;
 }
 
 .bodymap-figure {
   position: relative;
-  border-right: 1px solid var(--hairline);
-  padding: var(--sp-5) var(--sp-4);
+  border-bottom: 1px solid var(--hairline);
+  padding: var(--sp-5) var(--sp-4) var(--sp-7);
   display: grid;
   place-items: center;
+  min-height: 0;
 }
-.torso { width: 100%; max-height: 100%; }
-.torso-outline { fill: var(--surface-2); stroke: var(--hairline); stroke-width: 1; }
-.torso-sternum, .torso-ribs { fill: none; stroke: var(--hairline); stroke-width: 0.6; opacity: 0.7; }
+.manikin { width: 100%; height: auto; max-height: 100%; overflow: visible; }
 
-.bodymap-points { position: absolute; inset: var(--sp-5) var(--sp-4); }
-
-.bp {
-  position: absolute;
-  transform: translate(-50%, -50%);
-  width: 26px; height: 26px;
-  display: grid;
-  place-items: center;
-  padding: 0;
+.mk-body { fill: var(--surface-2); stroke: var(--hairline); stroke-width: 1.1; }
+.mk-module {
+  fill: none;
+  stroke: var(--hairline);
+  stroke-width: 0.8;
+  stroke-dasharray: 3 3;
+  opacity: 0.9;
 }
+.mk-midline { stroke: var(--hairline); stroke-width: 0.6; opacity: 0.6; }
+
+/* Points live in the manikin's coordinate space; r is in user units. */
+.bp { cursor: pointer; }
+.bp:focus { outline: none; }
+.bp-hit { fill: transparent; }
 .bp-dot {
-  position: absolute;
-  width: 9px; height: 9px;
-  border-radius: 50%;
-  border: 1px solid var(--muted);
-  background: var(--ground);
-  transition: background 0.3s, border-color 0.3s, transform 0.4s cubic-bezier(0.16,1,0.3,1);
+  fill: var(--ground);
+  stroke: var(--muted);
+  stroke-width: 1;
+  transition: fill 0.3s, stroke 0.3s, r 0.35s cubic-bezier(0.16,1,0.3,1);
+}
+.bp-halo {
+  fill: none;
+  stroke: var(--stabilize);
+  stroke-width: 0.9;
+  opacity: 0;
+  transition: opacity 0.3s;
 }
 .bp-id {
-  position: absolute;
   font-family: var(--font-mono);
-  font-size: 0.5rem;
-  color: transparent;
-  transform: translate(13px, -11px);
-  transition: color 0.3s;
+  font-size: 6px;
+  fill: transparent;
+  transition: fill 0.3s;
 }
-.bp:hover .bp-dot, .bp.is-live .bp-dot { transform: scale(1.7); }
-.bp.is-live .bp-dot { background: var(--stabilize); border-color: var(--stabilize); }
-.bp--heart.is-live .bp-dot { background: var(--overload); border-color: var(--overload); }
-.bp:hover .bp-id, .bp.is-live .bp-id { color: var(--muted); }
-/* Live point gets a halo pulse, so the probed position is unmistakable. */
-.bp.is-live::after {
-  content: '';
-  position: absolute;
-  width: 26px; height: 26px;
-  border-radius: 50%;
-  border: 1px solid currentColor;
-  color: var(--stabilize);
-  opacity: 0.4;
-  animation: probe 1.8s ease-out infinite;
-}
-.bp--heart.is-live::after { color: var(--overload); }
+
+.bp:hover .bp-dot { r: 4.4; }
+.bp.is-live .bp-dot { r: 4.4; fill: var(--stabilize); stroke: var(--stabilize); }
+.bp--heart.is-live .bp-dot { fill: var(--overload); stroke: var(--overload); }
+.bp:hover .bp-id, .bp.is-live .bp-id, .bp:focus .bp-id { fill: var(--muted); }
+.bp.is-live .bp-halo { opacity: 0.55; animation: probe 1.9s ease-out infinite; }
+.bp--heart.is-live .bp-halo { stroke: var(--overload); }
+.bp:focus-visible .bp-halo { opacity: 1; }
+
 @keyframes probe {
-  0%   { transform: scale(0.4); opacity: 0.7; }
-  100% { transform: scale(1.5); opacity: 0; }
+  0%   { r: 5;  opacity: 0.7; }
+  100% { r: 13; opacity: 0; }
 }
 
 .bodymap-hint {
@@ -110,80 +109,118 @@
 .scope-canvas { width: 100%; height: 100%; min-height: 0; display: block; }
 
 /* ============================================================================
-   02 · RESONANCE — sweep
+   02 · RESONANCE — driver sweep on the concept sheet
    ========================================================================== */
 
-.sweep { display: grid; grid-template-rows: 1fr auto; height: 100%; min-height: 0; }
+.rsn { display: grid; grid-template-columns: minmax(0, 42%) 1fr; height: 100%; min-height: 0; }
 
-.sweep-stage {
+.rsn-machine {
   position: relative;
+  margin: 0;
+  border-right: 1px solid var(--hairline);
   display: grid;
-  grid-template-columns: 1fr minmax(150px, 30%);
+  grid-template-rows: minmax(0, 1fr) auto;
+  min-height: 0;
+  overflow: hidden;
+  background: var(--surface-2);
+  padding: var(--sp-3) var(--sp-3) 0;
+}
+/* Aspect-locked so image and overlay occupy exactly the same rectangle. */
+.rsn-frame {
+  position: relative;
+  aspect-ratio: 900 / 1631;
+  max-height: 100%;
+  max-width: 100%;
+  margin: auto;
   min-height: 0;
 }
-.sweep-machine { width: 100%; height: 100%; padding: var(--sp-4); }
-.machine-frame path { stroke: var(--hairline); stroke-width: 1; fill: none; }
-
-.mpart-body {
-  fill: var(--surface-2);
-  stroke: var(--muted);
-  stroke-width: 0.7;
-  transition: stroke 0.3s, fill 0.3s;
-}
-.mpart.is-ringing .mpart-body { stroke: var(--overload); fill: color-mix(in srgb, var(--overload) 12%, var(--surface-2)); }
-.mpart.is-failed .mpart-body { stroke: var(--muted); opacity: 0.4; }
-.mpart-crack { stroke: var(--overload); stroke-width: 0.9; }
-
-.sweep-parts-status {
-  border-left: 1px solid var(--hairline);
-  padding: var(--sp-4) var(--sp-3);
-  display: grid;
-  align-content: start;
-  gap: var(--sp-3);
-}
-.pstat { display: grid; gap: 0.3rem; color: var(--muted); }
-.pstat-name { color: var(--type); }
-.pstat-bar { display: block; height: 3px; background: var(--hairline); }
-.pstat-bar i { display: block; height: 100%; background: var(--stabilize); transition: width 0.1s linear, background 0.3s; }
-.pstat.is-hot .pstat-bar i { background: var(--overload); }
-.pstat.is-failed .pstat-name, .pstat.is-failed .pstat-val { color: var(--overload); }
-.pstat-val { justify-self: end; }
-
-.sweep-controls { border-top: 1px solid var(--hairline); padding: var(--sp-4); display: grid; gap: var(--sp-3); }
-.sweep-curve { width: 100%; height: 64px; display: block; }
-.sweep-drive { display: grid; gap: 0.35rem; }
-.sweep-drive-label, .sweep-hint {
+.rsn-machine img { width: 100%; height: 100%; object-fit: fill; display: block; }
+.rsn-overlay { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.rsn-machine figcaption {
+  padding: 0.45rem 0.7rem;
+  border-top: 1px solid var(--hairline);
   font-family: var(--font-mono);
-  font-size: 0.6rem;
+  font-size: 0.56rem;
   letter-spacing: 0.06em;
   color: var(--muted);
-  margin: 0;
 }
 
-/* Range inputs are styled once, here, for every instrument that uses one. */
-.sweep-slider, .ledger-scrub {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 100%;
-  height: 22px;
-  background: transparent;
+.rp-ring {
+  fill: none;
+  stroke: var(--muted);
+  stroke-width: 0.35;
+  opacity: 0.5;
+  transition: stroke 0.25s, opacity 0.25s;
+  vector-effect: non-scaling-stroke;
 }
-.sweep-slider::-webkit-slider-runnable-track,
-.ledger-scrub::-webkit-slider-runnable-track {
-  height: 1px; background: var(--hairline);
+.rp-dot { fill: var(--muted); opacity: 0.6; transition: fill 0.25s; }
+.rp.is-near .rp-ring { stroke: var(--stabilize); opacity: 0.9; }
+.rp.is-near .rp-dot  { fill: var(--stabilize); }
+.rp.is-hot .rp-ring  { stroke: var(--overload); opacity: 1; stroke-width: 0.7; }
+.rp.is-hot .rp-dot   { fill: var(--overload); }
+.rp.is-failed .rp-ring { stroke: var(--overload); opacity: 0.28; stroke-dasharray: 1 1.4; }
+.rp.is-failed .rp-dot  { fill: var(--overload); opacity: 0.35; }
+
+.rsn-panel {
+  display: grid;
+  grid-template-rows: auto auto auto 1fr auto;
+  gap: var(--sp-3);
+  padding: var(--sp-4);
+  min-height: 0;
 }
-.sweep-slider::-moz-range-track,
+.rsn-readout { display: flex; align-items: baseline; gap: 0.5rem; }
+.rsn-driver {
+  font-family: var(--font-mono);
+  font-size: var(--step-2);
+  color: var(--overload);
+  line-height: 1;
+}
+.rsn-driver-label {
+  font-family: var(--font-mono);
+  font-size: 0.56rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.rsn-curve { width: 100%; height: 70px; display: block; }
+
+.rsn-parts { display: grid; align-content: start; gap: 0.4rem; min-height: 0; overflow-y: auto; }
+.rp-row {
+  display: grid;
+  grid-template-columns: 1fr 54px 3.2rem;
+  gap: 0.6rem;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: var(--muted);
+}
+.rp-name { color: var(--type); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.rp-meter { display: block; height: 3px; background: var(--hairline); }
+.rp-meter i { display: block; height: 100%; width: 0; background: var(--stabilize); transition: background 0.25s; }
+.rp-row.is-hot .rp-meter i { background: var(--overload); }
+.rp-row.is-hot .rp-name { color: var(--overload); }
+.rp-row.is-failed { opacity: 0.45; }
+.rp-row.is-failed .rp-val { color: var(--overload); }
+.rp-val { text-align: right; }
+
+.rsn-hint { margin: 0; font-family: var(--font-mono); font-size: 0.58rem; color: var(--muted); line-height: 1.5; }
+
+/* Range inputs are styled once here for every instrument that uses one. */
+.rsn-slider, .ledger-scrub {
+  -webkit-appearance: none; appearance: none;
+  width: 100%; height: 22px; background: transparent;
+}
+.rsn-slider::-webkit-slider-runnable-track,
+.ledger-scrub::-webkit-slider-runnable-track { height: 1px; background: var(--hairline); }
+.rsn-slider::-moz-range-track,
 .ledger-scrub::-moz-range-track { height: 1px; background: var(--hairline); }
-.sweep-slider::-webkit-slider-thumb,
+.rsn-slider::-webkit-slider-thumb,
 .ledger-scrub::-webkit-slider-thumb {
   -webkit-appearance: none;
-  width: 3px; height: 20px;
-  margin-top: -10px;
-  background: var(--overload);
-  border: 0;
-  cursor: ew-resize;
+  width: 3px; height: 20px; margin-top: -10px;
+  background: var(--overload); border: 0; cursor: ew-resize;
 }
-.sweep-slider::-moz-range-thumb,
+.rsn-slider::-moz-range-thumb,
 .ledger-scrub::-moz-range-thumb {
   width: 3px; height: 20px; border: 0; border-radius: 0;
   background: var(--overload); cursor: ew-resize;
@@ -496,10 +533,9 @@
    ========================================================================== */
 
 @media (max-width: 900px) {
-  .bodymap { grid-template-columns: 1fr; grid-template-rows: auto 1fr; }
-  .bodymap-figure { border-right: 0; border-bottom: 1px solid var(--hairline); min-height: 46vh; }
-  .sweep-stage { grid-template-columns: 1fr; grid-template-rows: 1fr auto; }
-  .sweep-parts-status { border-left: 0; border-top: 1px solid var(--hairline); }
+  .bodymap { grid-template-rows: minmax(0, 40%) 1fr; }
+  .rsn { grid-template-columns: 1fr; grid-template-rows: minmax(0, 52%) 1fr; }
+  .rsn-machine { border-right: 0; border-bottom: 1px solid var(--hairline); }
   .sessions-grid { grid-template-columns: repeat(2, 1fr); overflow-y: auto; }
   .lane { border-bottom: 1px solid var(--hairline); }
 }

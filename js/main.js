@@ -5,10 +5,7 @@
    pairs so a page transition can tear down and re-arm cleanly.
    ========================================================================== */
 
-import { mountPlate } from './cymatics.js';
-import {
-  initMotion, teardownMotion, initScroll, couplePlate,
-} from './motion.js';
+import { initMotion, teardownMotion, initScroll } from './motion.js';
 import { mountTuner } from './tuner.js';
 import { mountCursor } from './cursor.js';
 import { onReducedChange } from './secondorder.js';
@@ -17,7 +14,6 @@ import { onReducedChange } from './secondorder.js';
    dies before this line leaves the page fully readable. */
 document.documentElement.classList.add('js-enabled');
 
-let plate = null;
 let tuner = null;
 let cursor = null;
 
@@ -46,15 +42,12 @@ function initTheme() {
     const isLight = document.documentElement.getAttribute('data-theme') === 'light';
     if (isLight) {
       document.documentElement.removeAttribute('data-theme');
-      try { localStorage.setItem('theme', 'dark'); } catch { /* private mode */ }
+      try { localStorage.setItem('so-theme', 'dark'); } catch { /* private mode */ }
     } else {
       document.documentElement.setAttribute('data-theme', 'light');
-      try { localStorage.setItem('theme', 'light'); } catch { /* private mode */ }
+      try { localStorage.setItem('so-theme', 'light'); } catch { /* private mode */ }
     }
     paint(!isLight);
-    // The plate samples its colours from CSS custom properties, so it has to
-    // be told the tokens moved.
-    if (plate) plate.readTokens();
   });
 }
 
@@ -115,27 +108,16 @@ function initReadout(scope) {
    ------------------------------------------------------------------------- */
 
 export function setupPage(scope = document) {
-  const canvas = scope.querySelector('[data-cymatics]');
-  if (canvas) {
-    plate = mountPlate(canvas);
-    // mountPlate returns null when WebGL2 is unavailable; the static poster
-    // underneath stays visible in that case.
-    if (plate) canvas.closest('[data-plate-host]')?.setAttribute('data-webgl', 'on');
-  }
-
   initMotion(scope);
   initReadout(scope);
-  couplePlate(plate);
 
-  // The tuner takes over the plate's mode, so it must mount after the plate.
   const tunerRoot = scope.querySelector('[data-tuner]');
-  if (tunerRoot) tuner = mountTuner(tunerRoot, plate);
+  if (tunerRoot) tuner = mountTuner(tunerRoot);
 }
 
 export function resetPage() {
   teardownMotion();
   if (tuner) { tuner.destroy(); tuner = null; }
-  if (plate) { plate.destroy(); plate = null; }
 }
 
 /* ---------------------------------------------------------------------------

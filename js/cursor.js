@@ -38,16 +38,13 @@ export function mountCursor() {
 
   let tx = window.innerWidth / 2;
   let ty = window.innerHeight / 2;
-  let x = tx, y = ty;
-  let vx = 0, vy = 0;
   let raf = 0;
 
-  /* Critically-damped follower. Same family as everything else here, but
-     zeta = 1 so the cursor never overshoots the pointer — a reticle that
-     wobbles past where you are pointing is unusable. */
-  const K = 260;              // stiffness
-  const C = 2 * Math.sqrt(K); // critical damping
-
+  /* The reticle tracks the pointer exactly. An earlier version ran it as a
+     damped follower, which was the same mistake every lagging custom cursor
+     makes: once the native cursor is hidden, any lag between the hand and the
+     mark reads as the page being slow. The physics belongs in the page, not
+     between the user and their own pointer. */
   const onMove = (e) => {
     tx = e.clientX;
     ty = e.clientY;
@@ -84,18 +81,10 @@ export function mountCursor() {
   document.addEventListener('pointerleave', onLeave);
   document.addEventListener('pointerenter', onEnter);
 
-  let last = 0;
-  function frame(now) {
-    const dt = last ? Math.min((now - last) / 1000, 0.032) : 0.016;
-    last = now;
-
-    // Spring-damper toward the pointer, integrated semi-implicitly.
-    const ax = K * (tx - x) - C * vx;
-    const ay = K * (ty - y) - C * vy;
-    vx += ax * dt; vy += ay * dt;
-    x += vx * dt;  y += vy * dt;
-
-    el.style.transform = `translate3d(${x.toFixed(1)}px, ${y.toFixed(1)}px, 0)`;
+  /* One write per frame rather than one per pointermove event, so a high-rate
+     mouse cannot outpace the compositor. */
+  function frame() {
+    el.style.transform = `translate3d(${tx}px, ${ty}px, 0)`;
     raf = requestAnimationFrame(frame);
   }
   raf = requestAnimationFrame(frame);

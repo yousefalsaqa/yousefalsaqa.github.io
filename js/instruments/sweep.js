@@ -1,117 +1,133 @@
 /* ============================================================================
-   INSTRUMENT — Resonance frequency sweep
+   INSTRUMENT — Resonance, driver sweep against a real machine
    ----------------------------------------------------------------------------
-   The game's core verb, playable in a browser. Three parts of a machine, each
-   with its own natural frequency and damping. Sweep the driver; when you land
-   near a part's resonance its amplitude climbs by the real magnification
-   factor for a driven damped oscillator,
+   The parts are the Phase 1 part list off the monster turnaround sheet in
+   Art/Reference: sensor head module, core housing, shoulder actuator, upper
+   brace, forearm guard, hip joint, knee joint, ankle assembly. Every readable
+   part on that sheet is a data-asset entry with its own modes and safe
+   amplitude, and this is that list with numbers on it.
+
+   Amplitude follows the magnification factor for a driven damped oscillator,
 
        M(r) = 1 / sqrt( (1 - r^2)^2 + (2*zeta*r)^2 ),     r = w / wn
 
-   which peaks at 1/(2*zeta). Hold it there and that part accumulates fatigue
-   until it fails. Detune and it recovers. That is Overload and Stabilize.
+   peaking at 1/(2*zeta). Hold a part near its peak and it accumulates fatigue
+   until it fails. Move off and it recovers. Overload and Stabilize.
+
+   Colour follows the canon in Art/Reference/README.md: Overload is orange,
+   Stabilize is blue.
    ========================================================================== */
 
 import { dampedEase, DAMPING, reduced } from '../secondorder.js';
 
 const gsap = window.gsap;
+const SVG_NS = 'http://www.w3.org/2000/svg';
 
-/* Machine parts. wn is in the same arbitrary units as the driver. */
+/* x/y are percentages of the front-view sheet. wn is normalised driver units;
+   light armour panels ring high and sharp, structural mass rings low and is
+   better damped. */
 const PARTS = [
-  { id: 'strut',   label: 'Support strut',  wn: 0.24, zeta: 0.045, x: 22, y: 30, w: 14, h: 46 },
-  { id: 'housing', label: 'Core housing',   wn: 0.52, zeta: 0.075, x: 42, y: 22, w: 30, h: 56 },
-  { id: 'fin',     label: 'Dissipator fin', wn: 0.79, zeta: 0.035, x: 78, y: 34, w: 11, h: 38 },
+  { id: 'head',     label: 'Sensor head module', x: 47.7, y: 8.7,  wn: 0.86, zeta: 0.030 },
+  { id: 'shoulderL',label: 'Shoulder actuator L',x: 25.4, y: 16.9, wn: 0.42, zeta: 0.070 },
+  { id: 'shoulderR',label: 'Shoulder actuator R',x: 73.1, y: 16.9, wn: 0.45, zeta: 0.070 },
+  { id: 'core',     label: 'Core housing',       x: 48.3, y: 26.5, wn: 0.30, zeta: 0.090 },
+  { id: 'brace',    label: 'Upper brace',        x: 20.4, y: 33.3, wn: 0.62, zeta: 0.040 },
+  { id: 'forearm',  label: 'Forearm guard',      x: 83.6, y: 42.9, wn: 0.71, zeta: 0.055 },
+  { id: 'hip',      label: 'Hip joint',          x: 41.5, y: 44.3, wn: 0.24, zeta: 0.085 },
+  { id: 'knee',     label: 'Knee joint',         x: 32.2, y: 62.0, wn: 0.52, zeta: 0.045 },
+  { id: 'ankle',    label: 'Ankle assembly',     x: 35.3, y: 84.6, wn: 0.36, zeta: 0.060 },
 ];
 
-/** Magnification factor at driver frequency w for a part. */
-function magnification(part, w) {
-  const r = w / part.wn;
+const magnification = (p, w) => {
+  const r = w / p.wn;
   const a = 1 - r * r;
-  const b = 2 * part.zeta * r;
+  const b = 2 * p.zeta * r;
   return 1 / Math.sqrt(a * a + b * b);
-}
-
-/** Peak magnification, used to normalise the display to 0..1. */
-function peak(part) {
-  return 1 / (2 * part.zeta * Math.sqrt(1 - part.zeta * part.zeta));
-}
+};
+const peak = (p) => 1 / (2 * p.zeta * Math.sqrt(1 - p.zeta * p.zeta));
 
 export function mount(container, system) {
   container.innerHTML = `
-    <div class="sweep">
-      <div class="sweep-stage">
-        <svg class="sweep-machine" viewBox="0 0 100 100" aria-hidden="true">
-          <g class="machine-frame">
-            <path d="M10 82 H90" />
-            <path d="M18 82 V70 M82 82 V70" />
-          </g>
-          <g class="machine-parts"></g>
-        </svg>
-        <div class="sweep-parts-status" role="status" aria-live="polite"></div>
-      </div>
+    <div class="rsn">
+      <figure class="rsn-machine">
+        <!-- The frame is locked to the image's aspect ratio so the overlay and
+             the artwork share one coordinate space. Letting the image
+             contain-fit inside a differently-shaped box puts every marker off
+             the part it is supposed to be on. -->
+        <div class="rsn-frame">
+          <img src="assets/resonance/machine-front.webp"
+               alt="Concept turnaround of the Phase 1 machine, a bipedal Cadence work unit, with its parts labelled."
+               width="900" height="1631" decoding="async">
+          <svg class="rsn-overlay" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"></svg>
+        </div>
+        <figcaption>Phase 1 machine · concept sheet, Art/Reference</figcaption>
+      </figure>
 
-      <div class="sweep-controls">
-        <canvas class="sweep-curve"></canvas>
-        <label class="sweep-drive">
-          <span class="sweep-drive-label">Driver frequency</span>
-          <input class="sweep-slider" type="range" min="0" max="1000" value="90"
-                 aria-label="Driver frequency. Sweep to find each part's resonance.">
-        </label>
-        <p class="sweep-hint">Sweep until a part starts to ring. Hold it there.</p>
+      <div class="rsn-panel">
+        <div class="rsn-readout">
+          <span class="rsn-driver" data-driver>0.09</span>
+          <span class="rsn-driver-label">driver</span>
+        </div>
+
+        <canvas class="rsn-curve"></canvas>
+
+        <input class="rsn-slider" type="range" min="0" max="1000" value="90"
+               aria-label="Driver frequency. Sweep to find each part's resonance.">
+
+        <ul class="rsn-parts"></ul>
+
+        <p class="rsn-hint" role="status" aria-live="polite">Sweep until a part rings. Hold it there.</p>
       </div>
     </div>
   `;
 
-  const partsG = container.querySelector('.machine-parts');
-  const statusHost = container.querySelector('.sweep-parts-status');
-  const slider = container.querySelector('.sweep-slider');
-  const curve = container.querySelector('.sweep-curve');
+  const overlay = container.querySelector('.rsn-overlay');
+  const partsList = container.querySelector('.rsn-parts');
+  const slider = container.querySelector('.rsn-slider');
+  const curve = container.querySelector('.rsn-curve');
   const cctx = curve.getContext('2d');
-  const hint = container.querySelector('.sweep-hint');
+  const hint = container.querySelector('.rsn-hint');
+  const driverOut = container.querySelector('[data-driver]');
 
-  /* Per-part live state. */
   const state = PARTS.map((p) => ({ part: p, fatigue: 0, failed: false, amp: 0 }));
 
-  /* ---- build the parts ---- */
+  /* ---- overlay markers, in the sheet's own coordinate space ---- */
   state.forEach((s) => {
-    const p = s.part;
-    const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-    g.setAttribute('class', 'mpart');
-    g.dataset.id = p.id;
+    const g = document.createElementNS(SVG_NS, 'g');
+    g.setAttribute('class', 'rp');
+    g.dataset.id = s.part.id;
     g.innerHTML = `
-      <rect class="mpart-body" x="${p.x - p.w / 2}" y="${p.y}" width="${p.w}" height="${p.h}" rx="1"/>
-      <path class="mpart-crack" d="" fill="none"/>
+      <circle class="rp-ring" cx="${s.part.x}" cy="${s.part.y}" r="2.4"/>
+      <circle class="rp-dot"  cx="${s.part.x}" cy="${s.part.y}" r="0.7"/>
     `;
-    partsG.appendChild(g);
-    s.g = g;
-    s.body = g.querySelector('.mpart-body');
-    s.crack = g.querySelector('.mpart-crack');
+    overlay.appendChild(g);
+    s.marker = g;
+    s.ring = g.querySelector('.rp-ring');
 
-    const row = document.createElement('div');
-    row.className = 'pstat';
-    row.dataset.id = p.id;
-    row.innerHTML = `
-      <span class="pstat-name">${p.label}</span>
-      <span class="pstat-bar"><i style="width:0%"></i></span>
-      <span class="pstat-val">OK</span>
+    const li = document.createElement('li');
+    li.className = 'rp-row';
+    li.innerHTML = `
+      <span class="rp-name">${s.part.label}</span>
+      <span class="rp-meter"><i style="width:0%"></i></span>
+      <span class="rp-val">—</span>
     `;
-    statusHost.appendChild(row);
-    s.row = row;
-    s.bar = row.querySelector('.pstat-bar i');
-    s.val = row.querySelector('.pstat-val');
+    partsList.appendChild(li);
+    s.row = li;
+    s.meter = li.querySelector('.rp-meter i');
+    s.val = li.querySelector('.rp-val');
   });
 
   let w = 0.09;
   let raf = 0;
   let alive = true;
   let last = 0;
-  let announced = false;
+  let allDone = false;
 
   slider.addEventListener('input', () => {
     w = Number(slider.value) / 1000;
+    driverOut.textContent = w.toFixed(3);
   });
 
-  /* ---- response curve ---- */
   function sizeCurve() {
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
     curve.width = Math.round(curve.clientWidth * dpr);
@@ -119,86 +135,59 @@ export function mount(container, system) {
   }
 
   function drawCurve() {
-    const cw = curve.width;
-    const ch = curve.height;
+    const cw = curve.width, ch = curve.height;
+    if (!cw || !ch) return;
     const css = getComputedStyle(document.documentElement);
-    const stable = css.getPropertyValue('--stabilize').trim() || '#4DD9E8';
-    const over = css.getPropertyValue('--overload').trim() || '#FF3B5C';
+    const stable = css.getPropertyValue('--stabilize').trim() || '#4DA6E8';
+    const over = css.getPropertyValue('--overload').trim() || '#FF7A1F';
     const grid = css.getPropertyValue('--hairline').trim() || '#262A31';
     const muted = css.getPropertyValue('--muted').trim() || '#7C818A';
 
     cctx.clearRect(0, 0, cw, ch);
-
     cctx.strokeStyle = grid;
     cctx.lineWidth = 1;
     cctx.beginPath();
     for (let i = 1; i < 6; i++) { const x = (cw / 6) * i; cctx.moveTo(x, 0); cctx.lineTo(x, ch); }
     cctx.stroke();
 
-    // One response curve per surviving part, normalised to its own peak.
     state.forEach((s) => {
-      cctx.strokeStyle = s.failed ? muted : stable;
-      cctx.globalAlpha = s.failed ? 0.3 : 0.85;
-      cctx.lineWidth = Math.max(1.2, cw / 1000);
+      cctx.strokeStyle = s.failed ? muted : (s.amp > 0.55 ? over : stable);
+      cctx.globalAlpha = s.failed ? 0.22 : (s.amp > 0.55 ? 0.95 : 0.5);
+      cctx.lineWidth = Math.max(1.1, cw / 1100);
       cctx.beginPath();
       const pk = peak(s.part);
-      for (let i = 0; i <= 300; i++) {
-        const f = (i / 300);
+      for (let i = 0; i <= 240; i++) {
+        const f = i / 240;
         const m = Math.min(magnification(s.part, Math.max(f, 0.001)) / pk, 1);
         const x = f * cw;
-        const y = ch - m * ch * 0.88 - ch * 0.06;
+        const y = ch - m * ch * 0.86 - ch * 0.07;
         if (i === 0) cctx.moveTo(x, y); else cctx.lineTo(x, y);
       }
       cctx.stroke();
     });
     cctx.globalAlpha = 1;
 
-    // Driver position
     const dx = w * cw;
     cctx.strokeStyle = over;
     cctx.lineWidth = Math.max(1.4, cw / 900);
     cctx.beginPath();
-    cctx.moveTo(dx, 0);
-    cctx.lineTo(dx, ch);
+    cctx.moveTo(dx, 0); cctx.lineTo(dx, ch);
     cctx.stroke();
   }
 
-  /* ---- fracture ---- */
-  function fracture(s) {
+  function fail(s) {
     s.failed = true;
-    s.g.classList.add('is-failed');
-    const p = s.part;
-    // A jagged crack across the body, seeded off the part geometry.
-    const x0 = p.x - p.w / 2;
-    const y = p.y + p.h * 0.42;
-    let d = `M${x0} ${y}`;
-    const steps = 6;
-    for (let i = 1; i <= steps; i++) {
-      const px = x0 + (p.w * i) / steps;
-      const py = y + (i % 2 ? -1 : 1) * (1.2 + (i % 3));
-      d += ` L${px.toFixed(2)} ${py.toFixed(2)}`;
-    }
-    s.crack.setAttribute('d', d);
-
-    s.val.textContent = 'SHEARED';
+    s.marker.classList.add('is-failed');
     s.row.classList.add('is-failed');
+    s.val.textContent = 'SHEARED';
+    hint.textContent = `${s.part.label} sheared. Focus-fire on one part beats spreading the drive.`;
 
-    if (gsap && !reduced()) {
-      gsap.fromTo(s.g,
-        { x: 0 },
-        { x: 0, duration: 0.9, ease: dampedEase(0.18, 3.0),
-          onStart: () => gsap.set(s.body, { transformOrigin: '50% 50%' }) }
-      );
-      gsap.to(s.body, { opacity: 0.35, duration: 0.5 });
-    }
-
-    if (!announced && state.every((x) => x.failed)) {
-      announced = true;
-      hint.textContent = 'All three parts sheared. That is the whole fight.';
+    if (!allDone && state.every((x) => x.failed)) {
+      allDone = true;
+      hint.textContent = 'Every part sheared. The machine comes apart by structure, not by HP.';
     }
   }
 
-  /* ---- frame ---- */
   function frame(now) {
     if (!alive) return;
     const dt = last ? Math.min((now - last) / 1000, 0.05) : 0.016;
@@ -209,24 +198,19 @@ export function mount(container, system) {
       const m = magnification(s.part, Math.max(w, 0.001)) / peak(s.part);
       s.amp = m;
 
-      // Fatigue accumulates only well into the resonance peak, and recovers
-      // when the driver moves off it.
-      if (m > 0.55) s.fatigue = Math.min(s.fatigue + (m - 0.55) * dt * 1.5, 1);
-      else s.fatigue = Math.max(s.fatigue - dt * 0.28, 0);
+      if (m > 0.55) s.fatigue = Math.min(s.fatigue + (m - 0.55) * dt * 1.35, 1);
+      else s.fatigue = Math.max(s.fatigue - dt * 0.3, 0);
 
-      s.bar.style.width = `${(s.fatigue * 100).toFixed(1)}%`;
+      s.meter.style.width = `${(s.fatigue * 100).toFixed(1)}%`;
       s.row.classList.toggle('is-hot', m > 0.55);
-      if (!s.failed) {
-        s.val.textContent = s.fatigue > 0.02 ? `${Math.round(s.fatigue * 100)}%` : 'OK';
-      }
+      s.marker.classList.toggle('is-hot', m > 0.55);
+      s.marker.classList.toggle('is-near', m > 0.22 && m <= 0.55);
+      s.val.textContent = s.fatigue > 0.02 ? `${Math.round(s.fatigue * 100)}%` : '—';
 
-      // Visible ringing, amplitude proportional to the magnification factor.
-      const phase = now / 1000 * (12 + s.part.wn * 40);
-      const disp = reduced() ? 0 : Math.sin(phase) * m * 3.4;
-      s.g.setAttribute('transform', `translate(${disp.toFixed(2)} 0)`);
-      s.g.classList.toggle('is-ringing', m > 0.35);
+      // Ring radius tracks amplitude directly: the marker is an amplitude gauge.
+      if (s.ring) s.ring.setAttribute('r', (2.4 + m * 3.2).toFixed(2));
 
-      if (s.fatigue >= 1) fracture(s);
+      if (s.fatigue >= 1) fail(s);
     });
 
     drawCurve();
@@ -234,9 +218,17 @@ export function mount(container, system) {
   }
 
   sizeCurve();
-  const onResize = () => { sizeCurve(); };
+  const onResize = () => sizeCurve();
   window.addEventListener('resize', onResize, { passive: true });
+  driverOut.textContent = w.toFixed(3);
   raf = requestAnimationFrame(frame);
+
+  if (gsap && !reduced()) {
+    gsap.from(state.map((s) => s.row), {
+      opacity: 0, x: 14, duration: 0.6, stagger: 0.04,
+      ease: dampedEase(DAMPING.data, 1.0),
+    });
+  }
 
   return {
     destroy() {

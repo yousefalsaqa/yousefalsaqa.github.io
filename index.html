@@ -2,7 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <script>(function(){try{if(localStorage.getItem("theme")==="light"){document.documentElement.setAttribute("data-theme","light");}}catch(e){}})();</script>
+  <!-- Applied before first paint so the theme never flashes. The key is
+       deliberately not "theme": the previous site stored light/dark against
+       that name with the opposite default, and those stale values were
+       flipping this design into light mode on first visit. -->
+  <script>(function(){try{if(localStorage.getItem("so-theme")==="light"){document.documentElement.setAttribute("data-theme","light");}}catch(e){}})();</script>
   <meta name="google-site-verification" content="laC9N_i_ffKfKtNP3v-vc6yUR4gqK98N_lNMZkZz4Fs" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Yousef Alsaqa | Mechatronics &amp; Systems Engineer</title>
@@ -91,23 +95,8 @@
     <section class="console" id="console" data-tuner data-status="SYSTEMS">
       <div class="console-grid">
 
-        <!-- Left: the plate, the identity, the system document -->
+        <!-- Left: the system document -->
         <div class="console-left">
-          <div class="plate" data-plate-host>
-            <canvas class="plate-canvas" data-cymatics aria-hidden="true"
-                    data-probe="standing wave"></canvas>
-            <svg class="plate-poster" viewBox="0 0 100 100" aria-hidden="true" preserveAspectRatio="xMidYMid slice">
-              <rect width="100" height="100" fill="var(--ground)"/>
-              <g stroke="var(--sand)" stroke-opacity="0.4" fill="none" stroke-width="0.6">
-                <path d="M0 33 H100 M0 67 H100 M33 0 V100 M67 0 V100"/>
-                <path d="M0 0 Q50 50 100 0 M0 100 Q50 50 100 100"/>
-              </g>
-            </svg>
-            <div class="plate-mode">
-              <span class="plate-freq" data-freq>412 Hz</span>
-            </div>
-          </div>
-
           <div class="console-doc" data-panel>
             <!-- Tuner writes the active system here -->
             <noscript>

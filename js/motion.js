@@ -2,8 +2,7 @@
    MOTION — scroll wiring
    ----------------------------------------------------------------------------
    Turns the second-order engine into actual page behaviour: reveals that ring
-   into place, headline variable-font axes that compress under scroll load, and
-   the cymatic plate's excitation level.
+   into place, scaled by how hard the page is being scrolled.
 
    GSAP, ScrollTrigger, SplitText and Lenis are loaded as globals by <script>
    tags ahead of this module, so they are read off window rather than imported.
@@ -201,19 +200,6 @@ export function initAxisDrive() {
         },
       });
     },
-  });
-}
-
-/* ---------------------------------------------------------------------------
-   Plate coupling
-   ------------------------------------------------------------------------- */
-
-export function couplePlate(plate) {
-  if (!plate) return;
-  ScrollTrigger.create({
-    start: 0,
-    end: () => ScrollTrigger.maxScroll(window),
-    onUpdate: (self) => plate.setExcitation(excitation(self.getVelocity())),
   });
 }
 

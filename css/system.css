@@ -43,11 +43,11 @@
   --muted:      #7C818A;
   --sand:       #C8CCD4;   /* the cymatic plate's accumulated sand */
 
-  /* The two verbs. Every accent on the site is one of these, or a mix.
-     stabilize = settled, resolved, at rest.
-     overload  = driven past what the part can survive. */
-  --stabilize:  #4DD9E8;
-  --overload:   #FF3B5C;
+  /* The two verbs, in the colours Resonance already uses for them
+     (Art/Reference/README.md): Stabilize reads blue, Overload reads orange.
+     Everything accented on this site is one of these or a mix. */
+  --stabilize:  #4DA6E8;
+  --overload:   #FF7A1F;
 
   /* Type stacks */
   --font-display: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
@@ -80,20 +80,23 @@
   --max-w: 1440px;
 }
 
-/* Light: the printed trace. Sand becomes ink on paper, the plate inverts. */
+/* Light: the printed trace. Sand becomes ink on paper, the plate inverts.
+   The ground is deliberately a shade of grey rather than white, so panels
+   (which are white) read as panels. A white ground with near-white surfaces
+   flattens the whole instrument into one sheet. */
 :root[data-theme='light'] {
-  --ground:     #F4F5F7;
-  --surface:    #FFFFFF;
-  --surface-2:  #EDEFF2;
-  --hairline:   #D6DAE0;
+  --ground:     #DFE3E8;
+  --surface:    #F7F8FA;
+  --surface-2:  #FFFFFF;
+  --hairline:   #B9C0CA;
 
-  --type:       #0C0E12;
-  --muted:      #5A6068;
-  --sand:       #2A2E36;
+  --type:       #0B0D11;
+  --muted:      #4E555F;
+  --sand:       #1C2027;
 
   /* Darkened so both clear 4.5:1 against the paper ground. */
-  --stabilize:  #0B7F8F;
-  --overload:   #C81837;
+  --stabilize:  #15618F;
+  --overload:   #A34400;
 }
 
 /* ---------- Reset ---------- */
