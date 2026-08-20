@@ -48,6 +48,50 @@
 .bm-tab + .bm-tab { border-left: 0; }
 .bm-tab.is-on { background: var(--stabilize); border-color: var(--stabilize); color: var(--ground); }
 
+.bm-pick {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-width: 0;
+}
+.bm-pick > span {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.bm-pick select {
+  appearance: none;
+  -webkit-appearance: none;
+  background: var(--surface-2);
+  border: 1px solid var(--hairline);
+  color: var(--type);
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.04em;
+  padding: 0.35rem 1.4rem 0.35rem 0.6rem;
+  min-height: 32px;
+  max-width: 11rem;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='5'%3E%3Cpath d='M0 0l4 5 4-5z' fill='%237C818A'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.5rem center;
+}
+.bm-pick select:focus-visible { outline: 2px solid var(--stabilize); outline-offset: 1px; }
+
+.bm-commit {
+  padding: 0.35rem 0.9rem;
+  min-height: 32px;
+  border: 1px solid var(--stabilize);
+  color: var(--stabilize);
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.bm-commit:disabled { opacity: 0.4; }
+.bm-commit[hidden] { display: none; }
+
 .bm-modes { display: flex; flex-wrap: wrap; gap: 0.35rem; min-width: 0; }
 .bm-mode {
   padding: 0.3rem 0.6rem;
@@ -142,17 +186,9 @@
   opacity: 0;
   transition: opacity 0.3s;
 }
-.bp-id {
-  font-family: var(--font-mono);
-  font-size: 6px;
-  fill: transparent;
-  transition: fill 0.3s;
-}
-
 .bp:hover .bp-dot { r: 4.4; }
 .bp.is-live .bp-dot { r: 4.4; fill: var(--stabilize); stroke: var(--stabilize); }
 .bp--heart.is-live .bp-dot { fill: var(--overload); stroke: var(--overload); }
-.bp:hover .bp-id, .bp.is-live .bp-id, .bp:focus .bp-id { fill: var(--muted); }
 .bp.is-live .bp-halo { opacity: 0.55; animation: probe 1.9s ease-out infinite; }
 .bp--heart.is-live .bp-halo { stroke: var(--overload); }
 .bp:focus-visible .bp-halo { opacity: 1; }
@@ -230,7 +266,15 @@
 }
 .scope-head { border-bottom: 1px solid var(--hairline); }
 .scope-foot { border-top: 1px solid var(--hairline); }
+.scope-head-main { display: grid; gap: 0.15rem; min-width: 0; }
 .scope-site { color: var(--type); font-size: 0.72rem; }
+.scope-loc {
+  font-family: var(--font-mono);
+  font-size: 0.56rem;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  text-transform: none;
+}
 .scope-finding { color: var(--stabilize); }
 .scope-canvas { width: 100%; height: 100%; min-height: 0; display: block; }
 
@@ -769,7 +813,11 @@
   .bodymap-hint { display: none; }
   .bm-bar { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; padding: var(--sp-2) var(--sp-3); }
   .bm-bar::-webkit-scrollbar { display: none; }
-  .bm-modes { flex-wrap: nowrap; }
+  .bm-pick > span { display: none; }
+  .bm-pick { flex: 1; }
+  .bm-pick select { max-width: none; width: 100%; }
+  .bm-commit { flex: none; }
+  .bm-bar { gap: var(--sp-2); }
   /* The trace must never lose its room to the log: cap the log to its two
      newest lines and keep every scope row inside its own box. */
   .scope-canvas { min-height: 96px; }
