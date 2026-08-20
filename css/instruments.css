@@ -209,7 +209,17 @@
   margin: 0;
 }
 
-.bodymap-scope { display: grid; grid-template-rows: auto auto 1fr auto auto; min-height: 0; }
+/* Flex, not grid: Safari resolves this nested grid's 1fr row against the
+   canvas's intrinsic 150px and lets the later rows overlap it - which is
+   exactly the text-on-the-waveform bug on real iPhones. Flex sizes it the
+   same way in every engine: fixed rows take their height, the canvas gets
+   whatever is left. */
+.bodymap-scope {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+.bodymap-scope > * { flex: none; }
 
 /* The real interface announces the active module in a banner before anything
    else, so this does too. */
@@ -237,6 +247,11 @@
   z-index: 2;
 }
 .scope-canvas { position: relative; z-index: 0; }
+.scope-canvas {
+  flex: 1 1 0;
+  height: auto;
+  min-height: 96px;
+}
 .scope-log-row {
   font-family: var(--font-mono);
   font-size: 0.54rem;
@@ -266,7 +281,7 @@
   text-transform: none;
 }
 .scope-finding { color: var(--stabilize); }
-.scope-canvas { width: 100%; height: 100%; min-height: 0; display: block; }
+.scope-canvas { width: 100%; display: block; }
 
 /* ============================================================================
    02 · RESONANCE — driver sweep on the concept sheet
