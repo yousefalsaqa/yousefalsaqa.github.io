@@ -479,9 +479,12 @@ export function mount(container, system) {
     const grid = css.getPropertyValue('--hairline').trim() || '#262A31';
 
     ctx.clearRect(0, 0, w, h);
+    // The graticule is context, and in light mode hairline-on-white grid
+    // boxes dominate the trace, so it fades almost out there.
+    const lightTheme = document.documentElement.getAttribute('data-theme') === 'light';
     ctx.strokeStyle = grid;
     ctx.lineWidth = 1;
-    ctx.globalAlpha = 0.65;
+    ctx.globalAlpha = lightTheme ? 0.16 : 0.45;
     ctx.beginPath();
     for (let i = 1; i < 8; i++) { const x = (w / 8) * i; ctx.moveTo(x, 0); ctx.lineTo(x, h); }
     for (let i = 1; i < 4; i++) { const y = (h / 4) * i; ctx.moveTo(0, y); ctx.lineTo(w, y); }
@@ -538,6 +541,10 @@ export function mount(container, system) {
       duration: 0.7,
       stagger: { each: 0.035, from: 'random' },
       ease: dampedEase(DAMPING.data, 1.0),
+      // The module boots in its off state, so this animation runs while the
+      // points are dimmed - without clearing the inline opacity it bakes the
+      // dim in permanently and power-on never brightens them.
+      clearProps: 'opacity',
     });
   }
 

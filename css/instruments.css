@@ -195,6 +195,10 @@
   opacity: 0.9;
 }
 .mk-midline { stroke: var(--hairline); stroke-width: 0.6; opacity: 0.6; }
+/* On paper the dashed module frame shouts; the points say where the module
+   is well enough there. */
+[data-theme='light'] .mk-module { display: none; }
+[data-theme='light'] .mk-midline { opacity: 0.3; }
 
 /* Points live in the manikin's coordinate space; r is in user units. */
 .bp { cursor: pointer; }
