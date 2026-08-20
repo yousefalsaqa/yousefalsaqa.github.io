@@ -2,21 +2,19 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <script>(function(){try{if(localStorage.getItem("theme")==="dark"){document.documentElement.setAttribute("data-theme","dark");}}catch(e){}})();</script>
+  <script>(function(){try{if(localStorage.getItem("so-theme")==="light"){document.documentElement.setAttribute("data-theme","light");}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Universal Admission Dashboard | Yousef Alsaqa</title>
   <meta name="description" content="Analysis writeup: ten years of admission records, a Random Forest predictor ranking, a policy what-if simulator, and an anonymized student lookup, with an honest account of what the results do and do not show.">
-  <meta name="theme-color" content="#F1EEE6">
+  <meta name="theme-color" content="#08090B">
 
   <!-- Favicons -->
   <link rel="icon" type="image/png" href="assets/favicon.png">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=JetBrains+Mono:wght@400;500;700&display=swap" media="print" onload="this.media=&#39;all&#39;">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=JetBrains+Mono:wght@400;500;700&display=swap"></noscript>
+  <!-- Fonts: self-hosted, a blocked CDN must never blank the page -->
+  <link rel="preload" href="assets/fonts/Archivo.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/GeistMono.woff2" as="font" type="font/woff2" crossorigin>
 
   <!-- Bootstrap Icons -->
   <link href="vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
@@ -128,14 +126,14 @@
         <span class="header-logo-role">MECHATRONICS / SYSTEMS</span>
       </a>
       <nav class="header-nav" id="nav" aria-label="Main">
-        <a href="index.html#systems" class="nav-link">Systems</a>
+        <a href="index.html#console" class="nav-link">Systems</a>
         <a href="index.html#experience" class="nav-link">Experience</a>
-        <a href="index.html#field-notes" class="nav-link">Field Notes</a>
+        <a href="index.html#principles" class="nav-link">Method</a>
         <a href="index.html#about" class="nav-link">About</a>
         <a href="index.html#contact" class="nav-link">Contact</a>
       </nav>
       <div class="header-status" id="headerStatus"><span class="header-status-text">SYSTEM 04 / ADMISSION ANALYSIS</span></div>
-      <button class="theme-toggle" id="themeToggle" type="button" aria-pressed="false" aria-label="Switch to dark mode"><span class="theme-toggle-dot" aria-hidden="true"></span><span class="theme-toggle-text">LIGHT</span></button>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-pressed="false" aria-label="Switch to light mode"><span class="theme-toggle-dot" aria-hidden="true"></span><span class="theme-toggle-text">DARK</span></button>
       <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
@@ -188,7 +186,7 @@
         <div class="case-section">
           <h2>Dataset</h2>
           <p>Two datasets, one per program, each covering roughly 10 years of admitted students. Commerce: about 5,600 students. Engineering: about 8,700 students, spread across six common-first-year disciplines. Each record pairs admission inputs, overall high school average, individual subject grades, supplementary application score, admission curriculum (Ontario, IB, and so on), with the outcome variable, first-year GPA. The raw material arrived as difficult Excel exports, cleaned with pandas and openpyxl and loaded into SQLite for querying.</p>
-          <p>Privacy was handled before analysis, not after. <code>anonymize_commerce_data.py</code> hashes real student numbers into anonymous IDs with SHA-256, and the only file linking the two is <code>misc/student_id_mapping.json</code>. Analysts can explore grades and GPA freely without a real ID ever appearing on screen, while that one mapping file is the sensitive key that gets locked down separately. The anonymized lookup table, built from per-term sheets in <code>anonymized_commerce_data.xlsx</code>, holds about 5,087 students.</p>
+          <p>Privacy came first. <code>anonymize_commerce_data.py</code> hashes real student numbers into anonymous IDs with SHA-256, and the only file linking the two is <code>misc/student_id_mapping.json</code>. Analysts can explore grades and GPA freely without a real ID ever appearing on screen, while that one mapping file is the sensitive key that gets locked down separately. The anonymized lookup table, built from per-term sheets in <code>anonymized_commerce_data.xlsx</code>, holds about 5,087 students.</p>
           <p>One property of this dataset shapes everything downstream: it contains only students who were admitted and enrolled. That matters later, in Limitations.</p>
 
           <div class="results-grid">
@@ -213,7 +211,7 @@
 
         <div class="case-section">
           <h2>The question</h2>
-          <p>Which admission inputs predict first-year academic performance, and how strongly? Stated carefully, that is a question about prediction, not about cause. Two follow-up questions came with it: if a threshold had been set differently, how would the historical population have split, and would a proposed threshold fall harder on students from one admission curriculum than another?</p>
+          <p>Which admission inputs predict first-year academic performance, and how strongly? Stated carefully, the question is predictive. Whether an input <em>causes</em> better performance is a different question, and this data cannot answer it. Two follow-up questions came with it: if a threshold had been set differently, how would the historical population have split, and would a proposed threshold fall harder on students from one admission curriculum than another?</p>
         </div>
 
         <div class="case-section">
@@ -222,7 +220,7 @@
 
           <h3>The instrument</h3>
           <p>The analysis started as a Commerce-only script during the Recruitment Representative role, because the by-hand version, correlating each input against GPA and re-checking it across years, took long enough that building a tool won out over repeating the manual process every time someone asked a new question. During the Business Analyst role I turned it into one program-aware system: <code>universal_dashboard.py</code>, a single <code>UniversalDashboard</code> class launched by <code>run_dashboard.py</code>, with a program-selector dropdown and four tabs, Main Dashboard, Course Analysis, Policy Threshold, and Student Lookup.</p>
-          <p>Choosing a program swaps which analysis engine runs underneath. Commerce stays on its original hardcoded legacy class, because it was built before the system was designed to be generic at all. Every other program reads its own <code>programs/&lt;name&gt;/config.yaml</code>, column mappings, predictors, thresholds, through a generic <code>GenericAdmissionAnalysis</code> class. That is the universal part: adding a new program is mostly a config file, not new code.</p>
+          <p>Choosing a program swaps which analysis engine runs underneath. Commerce stays on its original hardcoded legacy class, because it was built before the system was designed to be generic at all. Every other program reads its own <code>programs/&lt;name&gt;/config.yaml</code>, column mappings, predictors, thresholds, through a generic <code>GenericAdmissionAnalysis</code> class. That is the universal part: adding a new program usually means writing a config file.</p>
 
           <div class="disclosure" role="note">
             <span class="disclosure-label">Disclosure / Unwired features</span>
@@ -230,7 +228,7 @@
           </div>
 
           <h3>Policy Threshold simulator</h3>
-          <p><code>policy_threshold_dashboard.py</code> is a rule-based what-if tool, not an optimizer. It does not calculate the best cutoff. You type in thresholds, for example Math &ge; 88 and English &ge; 82, and it partitions the historical student population by that AND-rule and shows, live: how many students would pass or fail, the GPA gap between the two groups with a t-test for whether that gap is statistically distinguishable from noise, and a rejection-rate breakdown by admission curriculum, Ontario versus IB and so on, flagging whether a proposed policy would disproportionately hit one group. That fairness breakdown is the part that is easy to miss when eyeballing spreadsheets, and it turns a gut call into an exportable, checkable justification.</p>
+          <p><code>policy_threshold_dashboard.py</code> is a rule-based what-if tool. It does not find the best cutoff for you. You type in thresholds, for example Math &ge; 88 and English &ge; 82, and it partitions the historical student population by that AND-rule and shows, live: how many students would pass or fail, the GPA gap between the two groups with a t-test for whether that gap is statistically distinguishable from noise, and a rejection-rate breakdown by admission curriculum, Ontario versus IB and so on, flagging whether a proposed policy would disproportionately hit one group. That fairness breakdown is the part that is easy to miss when eyeballing spreadsheets, and it turns a gut call into an exportable, checkable justification.</p>
 
           <h3>Student Lookup</h3>
           <p><code>student_lookup.py</code> loads every sheet of the anonymized workbook, one sheet per admission term, into a single in-memory table and supports search by anonymous ID, real ID, or criteria: GPA range, program, admit term, school type, grade, subject, course. It replaces manually scrolling through per-term Excel tabs to pull one student's file for a committee discussion.</p>
@@ -258,7 +256,7 @@
             </div>
             <div class="tech-item">
               <h4>YAML config</h4>
-              <p>Per-program column mappings, predictors, and thresholds, so a new program is a config file, not new code</p>
+              <p>Per-program column mappings, predictors, and thresholds, so a new program plugs in as a config file</p>
             </div>
           </div>
         </div>
@@ -332,7 +330,7 @@
             </div>
             <div class="ledger-row">
               <span class="ledger-term">Predictive importance</span>
-              <p class="ledger-def">How much a variable helps a specific model reduce error, relative to the other variables it was given. The Random Forest ranking is this. It is a useful ordering, not a strength-of-effect measurement.</p>
+              <p class="ledger-def">How much a variable helps a specific model reduce error, relative to the other variables it was given. The Random Forest ranking is this. It orders the variables; it says nothing about the size of any effect.</p>
             </div>
             <div class="ledger-row">
               <span class="ledger-term">Causation</span>
@@ -360,7 +358,7 @@
             <p>I'm not going to claim I walked into a room, said "change your thresholds," and they did it. That's not how universities work. The analysis was part of the conversation, the change aligned with what the numbers suggested, and that is as far as the evidence goes.</p>
           </div>
 
-          <p>The organizational outcome I can attribute to this work is the tooling itself. What began as a one-program script is now a system the office keeps using: the policy simulator replaces re-filtering spreadsheets every time someone proposes a cutoff, the lookup replaces scrolling per-term Excel tabs before committee meetings, and a new program plugs in through a config file rather than new code. The <a href="university-application-dashboard.html">Automatic Recruiter Coordinator</a>, the office's feeder-school and regional analysis tool, remains a deliberate exception: a standalone companion with its own CLI and GUI, not wired into this umbrella dashboard.</p>
+          <p>The organizational outcome I can attribute to this work is the tooling itself. What began as a one-program script is now a system the office keeps using: the policy simulator replaces re-filtering spreadsheets every time someone proposes a cutoff, the lookup replaces scrolling per-term Excel tabs before committee meetings, and a new program plugs in through a config file rather than new code. The <a href="university-application-dashboard.html">Automatic Recruiter Coordinator</a>, the office's feeder-school and regional analysis tool, remains a deliberate exception: a standalone companion with its own CLI and GUI, kept out of this umbrella dashboard on purpose.</p>
           <p>The Engineering analysis is the open thread. The model runs, the findings are under review, and whether they enter a policy conversation is, correctly, not my call to make.</p>
         </div>
 
@@ -416,22 +414,22 @@
     // ---- Theme toggle (manual only, never from system preference) ----
     const themeToggle = document.getElementById('themeToggle');
     const themeText = themeToggle.querySelector('.theme-toggle-text');
-    function setThemeUI(isDark) {
-      themeText.textContent = isDark ? 'DARK' : 'LIGHT';
-      themeToggle.setAttribute('aria-pressed', String(isDark));
-      themeToggle.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+    function setThemeUI(isLight) {
+      themeText.textContent = isLight ? 'LIGHT' : 'DARK';
+      themeToggle.setAttribute('aria-pressed', String(isLight));
+      themeToggle.setAttribute('aria-label', isLight ? 'Switch to dark mode' : 'Switch to light mode');
     }
-    setThemeUI(document.documentElement.getAttribute('data-theme') === 'dark');
+    setThemeUI(document.documentElement.getAttribute('data-theme') === 'light');
     themeToggle.addEventListener('click', () => {
-      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-      if (isDark) {
+      const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+      if (isLight) {
         document.documentElement.removeAttribute('data-theme');
-        localStorage.setItem('theme', 'light');
+        localStorage.setItem('so-theme', 'dark');
       } else {
-        document.documentElement.setAttribute('data-theme', 'dark');
-        localStorage.setItem('theme', 'dark');
+        document.documentElement.setAttribute('data-theme', 'light');
+        localStorage.setItem('so-theme', 'light');
       }
-      setThemeUI(!isDark);
+      setThemeUI(!isLight);
     });
   </script>
 </body>

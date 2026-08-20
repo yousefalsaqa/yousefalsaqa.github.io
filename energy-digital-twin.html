@@ -2,19 +2,17 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <script>(function(){try{if(localStorage.getItem("theme")==="dark"){document.documentElement.setAttribute("data-theme","dark");}}catch(e){}})();</script>
+  <script>(function(){try{if(localStorage.getItem("so-theme")==="light"){document.documentElement.setAttribute("data-theme","light");}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Energy Digital Twin | Yousef Alsaqa</title>
   <meta name="description" content="Case study: Building simulation platform integrating EnergyPlus with real-time ML predictions for industrial energy optimization.">
-  <meta name="theme-color" content="#F1EEE6">
+  <meta name="theme-color" content="#08090B">
   <link rel="icon" type="image/png" href="assets/favicon.png">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=JetBrains+Mono:wght@400;500;700&display=swap" media="print" onload="this.media=&#39;all&#39;">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=JetBrains+Mono:wght@400;500;700&display=swap"></noscript>
+  <!-- Fonts: self-hosted, a blocked CDN must never blank the page -->
+  <link rel="preload" href="assets/fonts/Archivo.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/GeistMono.woff2" as="font" type="font/woff2" crossorigin>
 
   <!-- Bootstrap Icons -->
   <link href="vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
@@ -33,14 +31,14 @@
         <span class="header-logo-role">MECHATRONICS / SYSTEMS</span>
       </a>
       <nav class="header-nav" id="nav" aria-label="Main">
-        <a href="index.html#systems" class="nav-link">Systems</a>
+        <a href="index.html#console" class="nav-link">Systems</a>
         <a href="index.html#experience" class="nav-link">Experience</a>
-        <a href="index.html#field-notes" class="nav-link">Field Notes</a>
+        <a href="index.html#principles" class="nav-link">Method</a>
         <a href="index.html#about" class="nav-link">About</a>
         <a href="index.html#contact" class="nav-link">Contact</a>
       </nav>
       <div class="header-status" id="headerStatus"><span class="header-status-text">FIELD NOTE / ENERGY DIGITAL TWIN</span></div>
-      <button class="theme-toggle" id="themeToggle" type="button" aria-pressed="false" aria-label="Switch to dark mode"><span class="theme-toggle-dot" aria-hidden="true"></span><span class="theme-toggle-text">LIGHT</span></button>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-pressed="false" aria-label="Switch to light mode"><span class="theme-toggle-dot" aria-hidden="true"></span><span class="theme-toggle-text">DARK</span></button>
       <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
@@ -362,22 +360,22 @@ streamlit run dashboard.py --server.port 8501
     // ---- Theme toggle (manual only, never from system preference) ----
     const themeToggle = document.getElementById('themeToggle');
     const themeText = themeToggle.querySelector('.theme-toggle-text');
-    function setThemeUI(isDark) {
-      themeText.textContent = isDark ? 'DARK' : 'LIGHT';
-      themeToggle.setAttribute('aria-pressed', String(isDark));
-      themeToggle.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+    function setThemeUI(isLight) {
+      themeText.textContent = isLight ? 'LIGHT' : 'DARK';
+      themeToggle.setAttribute('aria-pressed', String(isLight));
+      themeToggle.setAttribute('aria-label', isLight ? 'Switch to dark mode' : 'Switch to light mode');
     }
-    setThemeUI(document.documentElement.getAttribute('data-theme') === 'dark');
+    setThemeUI(document.documentElement.getAttribute('data-theme') === 'light');
     themeToggle.addEventListener('click', () => {
-      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-      if (isDark) {
+      const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+      if (isLight) {
         document.documentElement.removeAttribute('data-theme');
-        localStorage.setItem('theme', 'light');
+        localStorage.setItem('so-theme', 'dark');
       } else {
-        document.documentElement.setAttribute('data-theme', 'dark');
-        localStorage.setItem('theme', 'dark');
+        document.documentElement.setAttribute('data-theme', 'light');
+        localStorage.setItem('so-theme', 'light');
       }
-      setThemeUI(!isDark);
+      setThemeUI(!isLight);
     });
   </script>
 </body>
