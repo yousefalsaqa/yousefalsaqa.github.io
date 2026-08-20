@@ -220,11 +220,6 @@ export function mount(container, system) {
             <g class="mk-points"></g>
           </svg>
           <p class="bodymap-hint">Probe a position</p>
-          <figure class="bm-hw">
-            <img src="assets/cast-probe.webp" width="560" height="760" loading="lazy" decoding="async"
-                 alt="The actual probe: an RC522 RFID reader in a 3D-printed handheld housing.">
-            <figcaption>The probe. RC522 in a printed housing.</figcaption>
-          </figure>
         </div>
 
         <div class="bodymap-scope">

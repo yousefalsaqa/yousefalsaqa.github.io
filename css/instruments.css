@@ -209,22 +209,6 @@
   margin: 0;
 }
 
-.bm-hw {
-  position: absolute;
-  right: var(--sp-3); bottom: var(--sp-3);
-  width: clamp(56px, 9vw, 92px);
-  margin: 0;
-  display: grid;
-  gap: 0.25rem;
-}
-.bm-hw img { width: 100%; border: 1px solid var(--hairline); }
-.bm-hw figcaption {
-  font-family: var(--font-mono);
-  font-size: 0.5rem;
-  line-height: 1.35;
-  color: var(--muted);
-}
-
 .bodymap-scope { display: grid; grid-template-rows: auto auto 1fr auto auto; min-height: 0; }
 
 /* The real interface announces the active module in a banner before anything
@@ -834,8 +818,6 @@
 @media (max-width: 900px) {
   .bm-body { grid-template-columns: 1fr; grid-template-rows: minmax(0, 32%) 1fr; }
   .bodymap-figure { border-right: 0; border-bottom: 1px solid var(--hairline); padding: var(--sp-3); }
-  /* The probe photo is desktop garnish; on a phone it is just clutter. */
-  .bm-hw { display: none; }
   .bodymap-hint { display: none; }
   .bm-bar { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; padding: var(--sp-2) var(--sp-3); }
   .bm-bar::-webkit-scrollbar { display: none; }
