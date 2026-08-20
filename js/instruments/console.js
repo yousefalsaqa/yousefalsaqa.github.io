@@ -23,7 +23,7 @@ const EXCHANGES = [
   {
     say: 'what am I working on',
     tools: ['list_projects'],
-    reply: 'Three. Resonance, this portfolio, and the WSIB lookup. Resonance was the last one you touched.',
+    reply: 'Three. Resonance, this portfolio, and the NASA telemetry project. Resonance was the last one you touched.',
   },
   {
     say: 'open the resonance log',
@@ -49,6 +49,11 @@ const EXCHANGES = [
     say: 'watch the build and tell me when it finishes',
     tools: ['watch'],
     reply: 'Watching. I will say something when it changes.',
+  },
+  {
+    say: 'open the hub',
+    tools: ['launch_app'],
+    reply: 'Hub is up. Every tool call will sketch itself there as it fires.',
   },
   {
     say: 'skip this track',
