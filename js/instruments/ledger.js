@@ -31,6 +31,17 @@ const FEED = [
   { min: 88, kind: 'goal',    player: 'Haugen',     pts: 6,  text: 'Goal · Haugen' },
 ];
 
+/* Squads. The point of showing them: when the feed reassigns the 12' goal at
+   55', whoever owns Rodríguez drops and whoever owns Haugen climbs — points
+   that were already on screen move. That is the whole reason the audit log
+   exists. */
+const TEAMS = [
+  { name: 'Limestone XI',  players: ['Rodríguez', 'Bertrand'], base: 31 },
+  { name: 'Kingston Rd',   players: ['Okafor'],                base: 38 },
+  { name: 'North of 7',    players: ['Haugen', 'Lindqvist'],   base: 33 },
+  { name: 'Casablanca FC', players: ['Bertrand', 'Lindqvist'], base: 36 },
+];
+
 export function mount(container, system) {
   container.innerHTML = `
     <div class="ledger">
@@ -48,7 +59,13 @@ export function mount(container, system) {
       <input class="ledger-scrub" type="range" min="0" max="90" value="0"
              aria-label="Scrub the match clock to replay the feed">
 
-      <div class="ledger-log" role="log" aria-live="polite"></div>
+      <div class="ledger-split">
+        <div class="ledger-log" role="log" aria-live="polite"></div>
+        <aside class="ledger-board">
+          <div class="ledger-board-head">standings</div>
+          <ol class="ledger-teams"></ol>
+        </aside>
+      </div>
 
       <p class="ledger-hint">Scrub to 55'. The feed takes a goal back.</p>
     </div>
@@ -68,10 +85,44 @@ export function mount(container, system) {
   let alive = true;
   let last = 0;
 
+  const teamsEl = container.querySelector('.ledger-teams');
+  let lastOrder = '';
+
   function total() {
     return FEED
       .slice(0, shown)
       .reduce((sum, e, i) => sum + (reverted.has(i) ? 0 : e.pts), 0);
+  }
+
+  /** A team's points: base plus every applied event for a player it owns. */
+  function teamPoints(team) {
+    return FEED.slice(0, shown).reduce((sum, e, i) => {
+      if (reverted.has(i) || !team.players.includes(e.player)) return sum;
+      return sum + e.pts;
+    }, team.base);
+  }
+
+  function paintBoard() {
+    const rows = TEAMS
+      .map((t) => ({ t, pts: teamPoints(t) }))
+      .sort((a, b) => b.pts - a.pts);
+    const order = rows.map((r) => r.t.name).join('|');
+    const moved = order !== lastOrder && lastOrder !== '';
+    lastOrder = order;
+
+    teamsEl.innerHTML = rows.map((r, i) => `
+      <li class="ledger-team">
+        <span class="lt-rank">${i + 1}</span>
+        <span class="lt-name">${r.t.name}</span>
+        <span class="lt-pts">${r.pts}</span>
+      </li>`).join('');
+
+    if (moved && gsap && !reduced()) {
+      gsap.from(teamsEl.children, {
+        opacity: 0.2, x: -8, duration: 0.6, stagger: 0.05,
+        ease: dampedEase(DAMPING.card, 1.2),
+      });
+    }
   }
 
   function paintTotal() {
@@ -83,6 +134,7 @@ export function mount(container, system) {
         { y: 0, opacity: 1, duration: 0.7, ease: dampedEase(DAMPING.data, 1.3) }
       );
     }
+    paintBoard();
   }
 
   function addEntry(e, i) {

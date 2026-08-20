@@ -24,14 +24,15 @@ const STEPS = [
   'Advance',
 ];
 
-/* Each worker runs at its own pace — PeopleSoft is not uniformly slow, it is
-   unpredictably slow, and the fan-out exists precisely because of that. */
+/* Each worker runs at its own pace, and stalls — PeopleSoft is not uniformly
+   slow, it is unpredictably slow, and the fan-out exists precisely because of
+   that. `calc` is the curriculum's actual scoring rule from the config table. */
 const WORKERS = [
-  { id: 1, rate: 1.00, curriculum: 'IB' },
-  { id: 2, rate: 0.72, curriculum: 'GCSE / A-Level' },
-  { id: 3, rate: 1.28, curriculum: 'CBSE' },
-  { id: 4, rate: 0.88, curriculum: 'Ontario' },
-  { id: 5, rate: 1.12, curriculum: 'CEGEP' },
+  { id: 1, rate: 1.00, curriculum: 'IB',            calc: 'sum of 6 → /45' },
+  { id: 2, rate: 0.72, curriculum: 'GCSE / A-Level', calc: '1–9 → 1–6 table' },
+  { id: 3, rate: 1.28, curriculum: 'CBSE / ISC',     calc: 'average of best' },
+  { id: 4, rate: 0.88, curriculum: 'Ontario',        calc: 'top 6 average' },
+  { id: 5, rate: 1.12, curriculum: 'CEGEP',          calc: 'course-map check' },
 ];
 
 export function mount(container, system) {
@@ -73,6 +74,7 @@ export function mount(container, system) {
       <div class="lane-head">
         <span class="lane-id">S${wk.id}</span>
         <span class="lane-curriculum">${wk.curriculum}</span>
+        <span class="lane-calc">${wk.calc}</span>
       </div>
       <ol class="lane-steps">
         ${STEPS.map((s) => `<li><span class="lane-dot"></span><span class="lane-step">${s}</span></li>`).join('')}
@@ -94,9 +96,18 @@ export function mount(container, system) {
     lanes.forEach((l) => {
       l.progress = 0;
       l.done = false;
+      // One or two random stalls per lane, because that is what PeopleSoft
+      // actually does: nothing for a second and a half, then fine again.
+      l.stalls = new Map();
+      const n = 1 + Math.floor(Math.random() * 2);
+      while (l.stalls.size < n) {
+        l.stalls.set(1 + Math.floor(Math.random() * (STEPS.length - 2)),
+                     0.6 + Math.random() * 1.3);
+      }
+      l.stallLeft = 0;
       l.items.forEach((i) => i.classList.remove('is-done', 'is-active'));
       l.state.textContent = 'idle';
-      l.el.classList.remove('is-done');
+      l.el.classList.remove('is-done', 'is-stalled');
     });
   }
 
@@ -126,7 +137,25 @@ export function mount(container, system) {
       lanes.forEach((l) => {
         if (l.done) return;
         allDone = false;
-        l.progress += dt * l.cfg.rate * 1.15;
+
+        // Stalled: hold position, show it, count it down.
+        if (l.stallLeft > 0) {
+          l.stallLeft -= dt;
+          if (l.stallLeft <= 0) {
+            l.el.classList.remove('is-stalled');
+            l.state.textContent = `score ${scoreInput.value}`;
+          }
+        } else {
+          const before = Math.floor(l.progress);
+          l.progress += dt * l.cfg.rate * 1.15;
+          const nowStep = Math.floor(l.progress);
+          if (nowStep !== before && l.stalls.has(nowStep)) {
+            l.stallLeft = l.stalls.get(nowStep);
+            l.stalls.delete(nowStep);
+            l.el.classList.add('is-stalled');
+            l.state.textContent = 'waiting on PeopleSoft…';
+          }
+        }
 
         const idx = Math.min(Math.floor(l.progress), STEPS.length);
         l.items.forEach((item, i) => {

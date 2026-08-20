@@ -119,14 +119,23 @@ export function mount(container, system) {
           <g class="mk-points"></g>
         </svg>
         <p class="bodymap-hint">Probe a position</p>
+        <figure class="bm-hw">
+          <img src="assets/cast-probe.webp" width="560" height="760" loading="lazy" decoding="async"
+               alt="The actual probe: an RC522 RFID reader in a 3D-printed handheld housing.">
+          <figcaption>The probe. RC522 in a printed housing.</figcaption>
+        </figure>
       </div>
 
       <div class="bodymap-scope">
+        <!-- Status line in the shape the real Flask interface uses: a module
+             banner, then timestamped events as tags are read. -->
+        <div class="scope-banner">Auscultation module active &middot; ready for examination</div>
         <div class="scope-head">
           <span class="scope-site">—</span>
           <span class="scope-tag">TAG —</span>
         </div>
         <canvas class="scope-canvas"></canvas>
+        <div class="scope-log" role="log" aria-live="polite"></div>
         <div class="scope-foot">
           <span class="scope-note">12 tags · 28 scenarios</span>
           <span class="scope-finding">Select a position</span>
@@ -175,6 +184,8 @@ export function mount(container, system) {
 
   const buttons = Array.from(pointsHost.children);
 
+  const logEl = container.querySelector('.scope-log');
+
   function setActive(p, btn) {
     if (active === p) return;
     active = p;
@@ -184,6 +195,14 @@ export function mount(container, system) {
     tagEl.textContent = `TAG ${String(p.id).padStart(2, '0')}`;
     findingEl.textContent = p.finding;
     noteEl.textContent = p.note;
+
+    // The real interface logs each read with a wall-clock time. Same here.
+    const t = new Date().toLocaleTimeString('en-CA', { hour12: false });
+    const row = document.createElement('div');
+    row.className = 'scope-log-row';
+    row.innerHTML = `<span>${t}</span> Tag ${String(p.id).padStart(2, '0')} read &middot; ${p.site} &middot; ${p.finding}`;
+    logEl.prepend(row);
+    while (logEl.children.length > 4) logEl.lastElementChild.remove();
 
     if (gsap && !reduced()) {
       // The readout is a physical gauge: it rings when it moves.

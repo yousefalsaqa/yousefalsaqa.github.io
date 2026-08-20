@@ -22,19 +22,22 @@
 
 .bodymap {
   display: grid;
-  grid-template-rows: minmax(0, 46%) 1fr;
+  grid-template-columns: minmax(0, 46%) 1fr;
   height: 100%;
 }
 
 .bodymap-figure {
   position: relative;
-  border-bottom: 1px solid var(--hairline);
-  padding: var(--sp-5) var(--sp-4) var(--sp-7);
+  border-right: 1px solid var(--hairline);
+  padding: var(--sp-4);
   display: grid;
   place-items: center;
   min-height: 0;
 }
-.manikin { width: 100%; height: auto; max-height: 100%; overflow: visible; }
+/* Both axes constrained: an SVG with a viewBox scales to fit the smaller one
+   while keeping its aspect. height:auto let it size from the panel width and
+   overflow its grid row straight over the scope. */
+.manikin { width: 100%; height: 100%; }
 
 .mk-body { fill: var(--surface-2); stroke: var(--hairline); stroke-width: 1.1; }
 .mk-module {
@@ -94,7 +97,54 @@
   margin: 0;
 }
 
-.bodymap-scope { display: grid; grid-template-rows: auto 1fr auto; min-height: 0; }
+.bm-hw {
+  position: absolute;
+  right: var(--sp-3); bottom: var(--sp-3);
+  width: clamp(56px, 9vw, 92px);
+  margin: 0;
+  display: grid;
+  gap: 0.25rem;
+}
+.bm-hw img { width: 100%; border: 1px solid var(--hairline); }
+.bm-hw figcaption {
+  font-family: var(--font-mono);
+  font-size: 0.5rem;
+  line-height: 1.35;
+  color: var(--muted);
+}
+
+.bodymap-scope { display: grid; grid-template-rows: auto auto 1fr auto auto; min-height: 0; }
+
+/* The real interface announces the active module in a banner before anything
+   else, so this does too. */
+.scope-banner {
+  padding: 0.4rem var(--sp-4);
+  background: color-mix(in srgb, var(--stabilize) 14%, transparent);
+  border-bottom: 1px solid var(--hairline);
+  font-family: var(--font-mono);
+  font-size: 0.56rem;
+  letter-spacing: 0.06em;
+  color: var(--stabilize);
+}
+
+.scope-log {
+  border-top: 1px solid var(--hairline);
+  padding: 0.4rem var(--sp-4);
+  display: grid;
+  gap: 0.2rem;
+  min-height: 3.4rem;
+  align-content: start;
+}
+.scope-log-row {
+  font-family: var(--font-mono);
+  font-size: 0.54rem;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.scope-log-row span { color: var(--stabilize); margin-right: 0.4rem; }
+.scope-log-row:first-child { color: var(--type); }
 .scope-head, .scope-foot {
   display: flex;
   justify-content: space-between;
@@ -260,6 +310,28 @@
    ========================================================================== */
 
 .trace { display: grid; grid-template-rows: auto 1fr auto; height: 100%; min-height: 0; }
+.trace-body {
+  display: grid;
+  grid-template-columns: minmax(0, 38%) 1fr;
+  min-height: 0;
+}
+.trace-cam {
+  margin: 0;
+  border-right: 1px solid var(--hairline);
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  min-height: 0;
+  background: var(--surface-2);
+}
+.trace-cam video { width: 100%; height: 100%; object-fit: cover; min-height: 0; }
+.trace-cam figcaption {
+  padding: 0.45rem 0.7rem;
+  border-top: 1px solid var(--hairline);
+  font-family: var(--font-mono);
+  font-size: 0.56rem;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
 .trace-head, .trace-foot {
   display: flex;
   justify-content: space-between;
@@ -392,6 +464,30 @@
    ========================================================================== */
 
 .ledger { display: grid; grid-template-rows: auto auto 1fr auto; height: 100%; min-height: 0; }
+.ledger-split { display: grid; grid-template-columns: 1fr minmax(0, 34%); min-height: 0; }
+.ledger-board { border-left: 1px solid var(--hairline); display: grid; grid-template-rows: auto 1fr; min-height: 0; }
+.ledger-board-head {
+  padding: var(--sp-3) var(--sp-3) 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.56rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border-bottom: 1px solid var(--hairline);
+}
+.ledger-teams { padding: var(--sp-3); display: grid; align-content: start; gap: 0.4rem; overflow-y: auto; min-height: 0; }
+.ledger-team {
+  display: grid;
+  grid-template-columns: 1.2rem 1fr auto;
+  gap: 0.5rem;
+  align-items: baseline;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+}
+.lt-rank { color: var(--muted); }
+.lt-name { color: var(--type); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.lt-pts { color: var(--stabilize); }
+.ledger-team:first-child .lt-rank { color: var(--overload); }
 .ledger-head {
   display: flex;
   justify-content: space-between;
@@ -519,6 +615,9 @@
 .lane-head { display: grid; gap: 0.1rem; }
 .lane-id { color: var(--stabilize); }
 .lane-curriculum { color: var(--muted); font-size: 0.56rem; }
+.lane-calc { color: var(--muted); font-size: 0.5rem; opacity: 0.8; }
+.lane.is-stalled { background: color-mix(in srgb, var(--overload) 5%, transparent); }
+.lane.is-stalled .lane-state { color: var(--overload); }
 
 .lane-steps { display: grid; align-content: start; gap: 0.34rem; }
 .lane-steps li { display: flex; align-items: center; gap: 0.4rem; }
@@ -565,7 +664,12 @@
    ========================================================================== */
 
 @media (max-width: 900px) {
-  .bodymap { grid-template-rows: minmax(0, 40%) 1fr; }
+  .bodymap { grid-template-columns: 1fr; grid-template-rows: minmax(0, 38%) 1fr; }
+  .bodymap-figure { border-right: 0; border-bottom: 1px solid var(--hairline); }
+  .trace-body { grid-template-columns: 1fr; grid-template-rows: minmax(0, 42%) 1fr; }
+  .trace-cam { border-right: 0; border-bottom: 1px solid var(--hairline); }
+  .ledger-split { grid-template-columns: 1fr; grid-template-rows: 1fr auto; }
+  .ledger-board { border-left: 0; border-top: 1px solid var(--hairline); }
   .rsn { grid-template-columns: 1fr; grid-template-rows: minmax(0, 52%) 1fr; }
   .rsn-machine { border-right: 0; border-bottom: 1px solid var(--hairline); }
   .sessions-grid { grid-template-columns: repeat(2, 1fr); overflow-y: auto; }

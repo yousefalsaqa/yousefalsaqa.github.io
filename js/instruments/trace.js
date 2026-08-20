@@ -30,7 +30,15 @@ export function mount(container, system) {
         <span class="trace-title">CAN bus · 10 Hz</span>
         <button type="button" class="trace-drift">Induce node drift</button>
       </div>
-      <div class="trace-channels"></div>
+      <div class="trace-body">
+        <figure class="trace-cam">
+          <video src="assets/LaneDetectionDemo.mp4" autoplay muted loop playsinline
+                 preload="metadata" width="426" height="240"
+                 aria-label="Onboard footage with the lane detection overlay tracking lane lines."></video>
+          <figcaption>Perception · onboard, the lane model's own output</figcaption>
+        </figure>
+        <div class="trace-channels"></div>
+      </div>
       <div class="trace-foot">
         <span class="trace-clock">t = 0.0 s</span>
         <span class="trace-state">nominal</span>
