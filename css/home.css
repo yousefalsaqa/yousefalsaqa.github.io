@@ -184,7 +184,36 @@
   max-width: 52ch;
   margin: 0;
 }
+.stage-frame { position: relative; min-height: 0; }
+
+/* The instruments run and respond, and nothing on a first visit says so.
+   This does. It sits above the stage so the tuner's swaps never wipe it. */
+.stage-live {
+  position: absolute;
+  top: -1.5rem;
+  right: 0;
+  pointer-events: none;
+  z-index: 5;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.18rem 0.55rem;
+  background: var(--ground);
+  border: 1px solid var(--stabilize);
+  color: var(--stabilize);
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.12em;
+}
+.stage-live i {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--stabilize);
+  animation: pulse 2.4s ease-in-out infinite;
+}
+
 .console-stage {
+  height: 100%;
   min-height: 0;
   border: 1px solid var(--hairline);
   background: var(--surface);
@@ -488,7 +517,10 @@ kbd {
   .console-intro { display: none; }
   /* The instrument owns the screen: header + sticky rail + this = one
      viewport, so nothing inside it gets cut off below the fold. */
-  .console-stage {
+  /* The sticky rail's hint already says every instrument is live, and the
+     rail clips anything floated above the stage, so the badge is desktop's. */
+  .stage-live { display: none; }
+  .stage-frame {
     order: 1;
     height: calc(100svh - var(--header-h) - 118px);
     min-height: 24rem;
