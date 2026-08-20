@@ -179,7 +179,7 @@
         <ul>
           <li>Finalized the document attacher into the office standard, root-causing a page-reload bug that was doubling its runtime. Used office-wide: <span class="k">20,000–30,000 documents</span> per cycle.</li>
           <li>Grew the evaluation dashboard into a system driving <span class="k">5 parallel</span> PeopleSoft sessions across multiple curricula; automated a CEGEP evaluator and an average-to-student matcher.</li>
-          <li>Turned the Commerce-only admission analysis dashboard into a fully generic, config-driven system where a new program is a config file rather than new code.</li>
+          <li>Turned the Commerce-only admission analysis dashboard into a generic, config-driven system where a new program is a config file rather than new code; the Engineering analysis then plugged in as exactly that: ten years of data, high school average and the five required 4U courses against Year 1 GPA and each APSC course, split by school designation and admission basis.</li>
         </ul>
       </div>
 
@@ -200,7 +200,7 @@
         </div>
         <ul>
           <li>Built a fuzzy-matched location analyzer covering <span class="k">5 years, ~170K applications</span>: feeder-school rankings, regional analysis, year-over-year conversion.</li>
-          <li>Random Forest analysis of 5,600 admitted Commerce students vs first-year GPA; its supplementary-application finding contributed to raising admission thresholds.</li>
+          <li>Random Forest analysis over <span class="k">10+ years</span> of Commerce admissions data, testing which admission inputs, high school average, subject grades, supplementary application, actually predict first-year GPA. The thresholds have since gone up.</li>
         </ul>
       </div>
 
@@ -235,7 +235,7 @@
         </div>
         <ul>
           <li>Solo-built Next.js/TypeScript/PostgreSQL platform serving real users through the tournament; live-scoring engine reconciled against an error-prone external feed, verified with hand-rolled test harnesses and a live match first.</li>
-          <li>Every admin action writes to an immutable, revertible audit log; architecture forked into a second live product (La Liga fantasy) at ~80% reuse.</li>
+          <li>Admin actions write to an immutable, revertible audit log; forked into a live La Liga product at ~80% reuse.</li>
         </ul>
       </div>
 
