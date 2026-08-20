@@ -101,6 +101,21 @@
 
 /* ---------- Left: the system document ---------- */
 
+.doc-toggle {
+  display: none;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-3);
+  padding: var(--sp-3) var(--sp-4);
+  border: 1px solid var(--hairline);
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  letter-spacing: 0.06em;
+  color: var(--type);
+}
+.doc-toggle-arrow { color: var(--stabilize); transition: transform 0.4s; }
+
 .console-left { display: grid; min-height: 0; }
 
 /* The system document, written by the tuner */
@@ -464,13 +479,31 @@ kbd {
   .console-grid {
     display: flex;
     flex-direction: column;
-    gap: var(--sp-5);
+    gap: var(--sp-4);
+    padding-block: var(--sp-3) var(--sp-5);
   }
   .console-right { display: contents; }
-  .console-intro { font-size: var(--step-0); order: 1; }
-  .console-stage { order: 2; height: 74svh; min-height: 30rem; }
-  .console-left { order: 3; display: block; }
-  .console-doc { overflow: visible; padding-right: 0; }
+  /* The intro repeats what the doc already says; on a phone it only costs
+     screen. The instrument IS the introduction. */
+  .console-intro { display: none; }
+  /* The instrument owns the screen: header + sticky rail + this = one
+     viewport, so nothing inside it gets cut off below the fold. */
+  .console-stage {
+    order: 1;
+    height: calc(100svh - var(--header-h) - 118px);
+    min-height: 24rem;
+  }
+  .console-left { order: 2; display: block; }
+  /* The document folds away behind its toggle until asked for. */
+  .doc-toggle { display: flex; }
+  .console-doc {
+    overflow: hidden;
+    padding-right: 0;
+    max-height: 0;
+    transition: max-height 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .console-left.open .console-doc { max-height: 400rem; }
+  .console-left.open .doc-toggle .doc-toggle-arrow { transform: rotate(180deg); }
   .about-grid { grid-template-columns: 1fr; }
   .about-portrait { max-width: 22rem; }
 }

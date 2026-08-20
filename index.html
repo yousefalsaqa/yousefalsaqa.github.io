@@ -28,9 +28,9 @@
   <link rel="preload" href="assets/fonts/Archivo.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/GeistMono.woff2" as="font" type="font/woff2" crossorigin>
 
-  <link href="css/system.css" rel="stylesheet">
-  <link href="css/home.css" rel="stylesheet">
-  <link href="css/instruments.css" rel="stylesheet">
+  <link href="css/system.css?v=4" rel="stylesheet">
+  <link href="css/home.css?v=4" rel="stylesheet">
+  <link href="css/instruments.css?v=4" rel="stylesheet">
 
   <script type="application/ld+json">
   {
@@ -96,8 +96,13 @@
       <div class="console-grid">
 
         <!-- Left: the system document -->
-        <div class="console-left">
-          <div class="console-doc" data-panel>
+        <div class="console-left" id="consoleLeft">
+          <button class="doc-toggle" id="docToggle" type="button" aria-expanded="false"
+                  aria-controls="consoleDoc">
+            <span class="doc-toggle-label">About this system</span>
+            <span class="doc-toggle-arrow" aria-hidden="true">&darr;</span>
+          </button>
+          <div class="console-doc" id="consoleDoc" data-panel>
             <!-- Tuner writes the active system here -->
             <noscript>
               <p>Six systems: CAST Medical Interface, Resonance, Queen's AutoDrive,

@@ -35,6 +35,7 @@ export function mount(container, system) {
           <video src="assets/LaneDetectionDemo.mp4" autoplay muted loop playsinline
                  preload="metadata" width="426" height="240"
                  aria-label="Onboard footage with the lane detection overlay tracking lane lines."></video>
+          <span class="trace-stale-flag" aria-hidden="true">PERCEPTION STALE</span>
           <figcaption>Perception · onboard, the lane model's own output</figcaption>
         </figure>
         <div class="trace-channels"></div>
@@ -97,12 +98,13 @@ export function mount(container, system) {
 
     // A gentle lane weave, plus growing error as perception goes stale.
     const weave = Math.sin(t * 0.7) * 0.5 + Math.sin(t * 1.9) * 0.16;
-    const stale = drift * Math.sin(t * 2.6) * 0.9;
+    const stale = drift * Math.sin(t * 2.6) * 1.3;
     const lane = weave + stale;
 
-    // Control chases the lane offset; with drift it chases an old value.
-    const steer = -(lane * 16) + drift * Math.sin(t * 3.4) * 11;
-    const speed = 9.4 + Math.sin(t * 0.42) * 1.6 - drift * 2.2;
+    // Control chases the lane offset; with drift it chases an old value, so
+    // the steering hunts hard while the lane barely moved.
+    const steer = -(lane * 16) + drift * Math.sin(t * 3.4) * 18;
+    const speed = 9.4 + Math.sin(t * 0.42) * 1.6 - drift * 3.4;
     const sync = 4 + drift * 96 + Math.abs(Math.sin(t * 5.1)) * (2 + drift * 14);
 
     const vals = { lane, steer, speed, sync };
@@ -117,6 +119,9 @@ export function mount(container, system) {
     const bad = sync > 40;
     stateEl.textContent = bad ? 'stale perception' : 'nominal';
     stateEl.classList.toggle('is-bad', bad);
+    // The footage itself goes stale: flagged and washed out, because the
+    // frame you are watching is no longer the frame the planner is using.
+    container.querySelector('.trace')?.classList.toggle('is-stale', bad);
   }
 
   function size(ch) {

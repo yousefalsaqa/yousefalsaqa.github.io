@@ -55,6 +55,19 @@ function initTheme() {
    Navigation
    ------------------------------------------------------------------------- */
 
+/* Mobile: the system document folds behind a toggle so the instrument can
+   own the screen. The label carries the active system's name, which the
+   tuner keeps fresh. */
+function initDocToggle() {
+  const btn = document.getElementById('docToggle');
+  const left = document.getElementById('consoleLeft');
+  if (!btn || !left) return;
+  btn.addEventListener('click', () => {
+    const open = left.classList.toggle('open');
+    btn.setAttribute('aria-expanded', String(open));
+  });
+}
+
 function initNav() {
   const toggle = document.getElementById('navToggle');
   const nav = document.getElementById('nav');
@@ -141,6 +154,7 @@ function failsafe() {
 function boot() {
   initTheme();
   initNav();
+  initDocToggle();
   initScroll();
   cursor = mountCursor();
   setupPage(document);
