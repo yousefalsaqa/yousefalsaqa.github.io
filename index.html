@@ -2,18 +2,19 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <script>(function(){try{if(localStorage.getItem("theme")==="dark"){document.documentElement.setAttribute("data-theme","dark");}}catch(e){}})();</script>
+  <script>(function(){try{if(localStorage.getItem("theme")==="light"){document.documentElement.setAttribute("data-theme","light");}}catch(e){}})();</script>
   <meta name="google-site-verification" content="laC9N_i_ffKfKtNP3v-vc6yUR4gqK98N_lNMZkZz4Fs" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Yousef Alsaqa | Mechatronics & Systems Engineer</title>
-  <meta name="description" content="Yousef Alsaqa is a mechatronics engineer in Kingston, Canada working across robotics, embedded systems, and automation. Selected systems: the CAST medical simulator, Queen's AutoDrive, admissions workflow automation, and a live fantasy football platform.">
+  <title>Yousef Alsaqa | Mechatronics &amp; Systems Engineer</title>
+  <meta name="description" content="Yousef Alsaqa builds systems that have to hold under load: a deployed medical simulator, a Level 4 autonomous vehicle stack, an Unreal Engine physics game, an agent that runs a desktop, and a fantasy platform that scored a live World Cup.">
   <meta name="author" content="Yousef Alsaqa">
   <meta name="robots" content="index, follow">
-  <meta name="theme-color" content="#F1EEE6">
+  <meta name="theme-color" content="#08090B">
+  <link rel="canonical" href="https://yousefalsaqa.netlify.app/">
 
   <!-- Open Graph -->
-  <meta property="og:title" content="Yousef Alsaqa | Mechatronics & Systems Engineer">
-  <meta property="og:description" content="I make complicated systems work together. Robotics, embedded systems, and automation, built around real engineering work.">
+  <meta property="og:title" content="Yousef Alsaqa | Mechatronics &amp; Systems Engineer">
+  <meta property="og:description" content="Every system has a frequency where it comes apart. Robotics, embedded systems, real-time platforms, and the engineering behind them.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://yousefalsaqa.netlify.app/">
   <meta property="og:image" content="https://yousefalsaqa.netlify.app/assets/gradpic.jpeg">
@@ -22,18 +23,12 @@
   <link href="assets/favicon.png" rel="icon">
   <link href="assets/apple-touch-icon.png" rel="apple-touch-icon">
 
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=JetBrains+Mono:wght@400;500;700&display=swap" media="print" onload="this.media=&#39;all&#39;">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=JetBrains+Mono:wght@400;500;700&display=swap"></noscript>
+  <!-- Fonts are self-hosted (see css/system.css); no CDN can hang first paint. -->
+  <link rel="preload" href="assets/fonts/Archivo.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/GeistMono.woff2" as="font" type="font/woff2" crossorigin>
 
-  <!-- Bootstrap Icons (footer) -->
-  <link href="vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-
-  <!-- Stylesheets -->
-  <link href="css/theme.css" rel="stylesheet">
-  <link href="css/pages/home.css" rel="stylesheet">
+  <link href="css/system.css" rel="stylesheet">
+  <link href="css/home.css" rel="stylesheet">
 
   <script type="application/ld+json">
   {
@@ -51,572 +46,332 @@
       "https://www.linkedin.com/in/yousef-alsaqa-b1ab4822b/",
       "https://github.com/yousefalsaqa"
     ],
-    "knowsAbout": ["Robotics", "Embedded Systems", "Automation", "Machine Learning", "Systems Integration"],
-    "description": "Mechatronics engineer working across robotics, embedded systems, and automation. BASc Mechatronics & Robotics Engineering, Queen's University."
+    "knowsAbout": ["Robotics", "Embedded Systems", "Automation", "Machine Learning", "Systems Integration", "Game Development"],
+    "description": "Mechatronics engineer working across robotics, embedded systems, real-time platforms and automation. BASc Mechatronics & Robotics Engineering, Queen's University."
   }
   </script>
 </head>
 
-<body>
+<body data-barba="wrapper">
+  <a class="skip" href="#main">Skip to content</a>
+
   <header class="header" id="header">
     <div class="header-inner">
-      <a href="index.html" class="header-logo">
-        <span class="header-logo-name">YOUSEF ALSAQA</span>
-        <span class="header-logo-role">MECHATRONICS / SYSTEMS</span>
+      <a href="index.html" class="brand">
+        <span class="brand-name">YOUSEF ALSAQA</span>
+        <span class="brand-role">MECHATRONICS / SYSTEMS</span>
       </a>
-      <nav class="header-nav" id="nav" aria-label="Main">
-        <a href="index.html#systems" class="nav-link">Systems</a>
-        <a href="index.html#experience" class="nav-link">Experience</a>
-        <a href="index.html#field-notes" class="nav-link">Field Notes</a>
-        <a href="index.html#about" class="nav-link">About</a>
-        <a href="index.html#contact" class="nav-link">Contact</a>
+
+      <nav class="nav" id="nav" aria-label="Main">
+        <a href="#systems">Systems</a>
+        <a href="#principles">Method</a>
+        <a href="#experience">Experience</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
       </nav>
-      <div class="header-status" id="headerStatus"><span class="header-status-text">FIELD LOG</span></div>
-      <button class="theme-toggle" id="themeToggle" type="button" aria-pressed="false" aria-label="Switch to dark mode"><span class="theme-toggle-dot" aria-hidden="true"></span><span class="theme-toggle-text">LIGHT</span></button>
+
+      <div class="readout" id="headerStatus" aria-live="polite">
+        <span class="readout-dot" aria-hidden="true"></span>
+        <span class="readout-text mono">STANDBY</span>
+      </div>
+
+      <button class="theme-toggle" id="themeToggle" type="button" aria-pressed="false" aria-label="Switch to light mode">
+        <span class="theme-toggle-text mono">DARK</span>
+      </button>
+
       <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
     </div>
   </header>
 
-  <main>
+  <main id="main" data-barba="container" data-barba-namespace="home">
+
     <!-- ================================================
-         1. HERO
+         HERO — the plate
          ================================================ -->
-    <section class="hero" data-status="FIELD LOG" aria-label="Introduction">
-      <div class="container hero-grid">
-        <div class="hero-intro">
-          <p class="hero-eyebrow">Field log / Kingston, Ontario</p>
-          <h1 class="hero-statement">I make complicated systems <em>work together.</em></h1>
-          <p class="hero-support">I'm Yousef Alsaqa, a mechatronics engineer working across robotics, embedded systems, and automation. I build practical systems that connect hardware, software, data, and people.</p>
-          <div class="hero-actions">
-            <a href="#systems" class="btn btn-primary">Explore selected systems</a>
-            <a href="assets/Yousef_Alsaqa_Resume.pdf" target="_blank" rel="noopener" class="btn btn-secondary">View résumé</a>
-          </div>
-        </div>
+    <section class="hero" data-status="RESONANCE" aria-label="Introduction">
+      <div class="plate" data-plate-host>
+        <canvas class="plate-canvas" data-cymatics aria-hidden="true"></canvas>
 
-        <div class="hero-map" id="heroMap">
-          <!-- Accessible equivalent of the interactive map -->
-          <ol class="sr-only">
-            <li>CAST: RFID tag position, to embedded controller (Raspberry Pi), to scenario logic, to localized medical audio.</li>
-            <li>AutoDrive: camera feed, to perception stack (CNN lane detection), to decision system, to CAN command, to vehicle response.</li>
-            <li>Admission Coordinator Assistant: application documents, to human judgment (one typed number), to web automation across five parallel PeopleSoft sessions, to processed application.</li>
-            <li>Admission analysis: ten years of CSV records, to Random Forest model, to predictor ranking, to threshold discussion.</li>
-            <li>World Cup Fantasy: live match feed from API-Football, to scoring engine, to banked points, to live leaderboard.</li>
-          </ol>
+        <!-- Shown until WebGL2 confirms it can take over. A real Chladni
+             figure for mode (3,4), drawn as a static poster. -->
+        <svg class="plate-poster" viewBox="0 0 100 100" aria-hidden="true" preserveAspectRatio="xMidYMid slice">
+          <defs>
+            <radialGradient id="pg" cx="50%" cy="50%" r="70%">
+              <stop offset="0%" stop-color="var(--sand)" stop-opacity="0.30"/>
+              <stop offset="100%" stop-color="var(--sand)" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+          <rect width="100" height="100" fill="var(--ground)"/>
+          <g stroke="var(--sand)" stroke-opacity="0.42" fill="none" stroke-width="0.5">
+            <path d="M0 25 H100 M0 50 H100 M0 75 H100 M25 0 V100 M50 0 V100 M75 0 V100"/>
+            <path d="M0 0 Q50 50 100 0 M0 100 Q50 50 100 100"/>
+          </g>
+          <rect width="100" height="100" fill="url(#pg)"/>
+        </svg>
+      </div>
 
-          <svg id="systemMap" viewBox="0 0 540 590" aria-hidden="false" role="group" aria-label="Systems map: five real signal paths across the projects on this page. Focus a project node to trace its path.">
-            <!-- Signal paths -->
-            <g class="map-path" id="path-cast">
-              <path class="map-hit" d="M70 70 H235 V120 H305 V70 H470"></path>
-              <path class="map-line" d="M70 70 H235 V120 H305 V70 H470"></path>
-              <path class="map-draw" d="M70 70 H235 V120 H305 V70 H470" pathLength="1"></path>
-            </g>
-            <g class="map-path" id="path-autodrive">
-              <path class="map-hit" d="M70 170 H235 V120 H305 V170 H470"></path>
-              <path class="map-line" d="M70 170 H235 V120 H305 V170 H470"></path>
-              <path class="map-draw" d="M70 170 H235 V120 H305 V170 H470" pathLength="1"></path>
-            </g>
-            <g class="map-path" id="path-aca">
-              <path class="map-hit" d="M70 320 H470"></path>
-              <path class="map-line" d="M70 320 H470"></path>
-              <path class="map-draw" d="M70 320 H470" pathLength="1"></path>
-            </g>
-            <g class="map-path" id="path-analysis">
-              <path class="map-hit" d="M70 320 V470 H470"></path>
-              <path class="map-line" d="M70 320 V470 H470"></path>
-              <path class="map-draw" d="M70 320 V470 H470" pathLength="1"></path>
-            </g>
-            <g class="map-path" id="path-wcf">
-              <path class="map-hit" d="M70 540 H470 V474"></path>
-              <path class="map-line" d="M70 540 H470 V474"></path>
-              <path class="map-draw" d="M70 540 H470 V474" pathLength="1"></path>
-            </g>
+      <div class="hero-body shell">
+        <p class="hero-eyebrow mono" data-reveal="data">Kingston, Ontario</p>
 
-            <!-- Timing ticks -->
-            <line class="map-tick" x1="350" y1="64" x2="350" y2="76"></line>
-            <text class="map-ticklabel" x="350" y="58" text-anchor="middle">&lt;260MS</text>
-            <line class="map-tick" x1="350" y1="164" x2="350" y2="176"></line>
-            <text class="map-ticklabel" x="350" y="158" text-anchor="middle">10HZ</text>
-            <line class="map-tick" x1="350" y1="314" x2="350" y2="326"></line>
-            <text class="map-ticklabel" x="350" y="308" text-anchor="middle">5 SESSIONS</text>
-            <line class="map-tick" x1="64" y1="400" x2="76" y2="400"></line>
-            <text class="map-ticklabel" x="84" y="404" text-anchor="start">10 YRS CSV</text>
-            <line class="map-tick" x1="350" y1="534" x2="350" y2="546"></line>
-            <text class="map-ticklabel" x="350" y="528" text-anchor="middle">RESCORE SWEEP</text>
+        <h1 class="hero-statement" data-split>
+          Every system has a frequency where it comes apart. I find it before the user does.
+        </h1>
 
-            <!-- Origin annotation for the live feed -->
-            <text class="map-ticklabel" x="62" y="516" text-anchor="start">LIVE MATCH FEED</text>
-            <text class="map-ticklabel" x="62" y="528" text-anchor="start">(API-FOOTBALL)</text>
+        <p class="hero-support" data-reveal="display" data-reveal-y="24">
+          I'm Yousef Alsaqa, a mechatronics engineer. I work where hardware, software and
+          people have to agree with each other &mdash; robotics, embedded control, real-time
+          platforms, and the automation nobody wants to own.
+        </p>
 
-            <!-- Technical nodes -->
-            <rect class="map-node" id="n-rfid" x="-4.5" y="-4.5" width="9" height="9" transform="translate(70,70)"></rect>
-            <text class="map-label" x="62" y="54" text-anchor="start">RFID INPUT</text>
-            <rect class="map-node" id="n-cv" x="-4.5" y="-4.5" width="9" height="9" transform="translate(70,170)"></rect>
-            <text class="map-label" x="62" y="154" text-anchor="start">COMPUTER VISION</text>
-            <rect class="map-node" id="n-app" x="-4.5" y="-4.5" width="9" height="9" transform="translate(70,320)"></rect>
-            <text class="map-label" x="62" y="304" text-anchor="start">APPLICATION DATA</text>
-            <rect class="map-node" id="n-ec" x="-4.5" y="-4.5" width="9" height="9" transform="translate(270,120)"></rect>
-            <text class="map-label" x="312" y="112" text-anchor="start">EMBEDDED CONTROLLER</text>
-            <rect class="map-node" id="n-human" x="-4.5" y="-4.5" width="9" height="9" transform="translate(250,320)"></rect>
-            <text class="map-label" x="250" y="304" text-anchor="middle">HUMAN OPERATOR</text>
-            <rect class="map-node" id="n-audio" x="-4.5" y="-4.5" width="9" height="9" transform="translate(470,70)"></rect>
-            <text class="map-label" x="478" y="54" text-anchor="end">AUDIO OUT</text>
-            <rect class="map-node" id="n-can" x="-4.5" y="-4.5" width="9" height="9" transform="translate(470,170)"></rect>
-            <text class="map-label" x="478" y="154" text-anchor="end">CAN BUS</text>
-            <rect class="map-node" id="n-web" x="-4.5" y="-4.5" width="9" height="9" transform="translate(470,320)"></rect>
-            <text class="map-label" x="478" y="304" text-anchor="end">WEB AUTOMATION</text>
-            <rect class="map-node" id="n-dash" x="-4.5" y="-4.5" width="9" height="9" transform="translate(470,470)"></rect>
-            <text class="map-label" x="478" y="456" text-anchor="end">DASHBOARD OUT</text>
-
-            <!-- Project nodes (interactive) -->
-            <g class="map-project" id="p-cast" data-path="cast" tabindex="0" role="img" aria-label="CAST: RFID tag position to embedded controller to scenario logic to localized medical audio.">
-              <circle cx="150" cy="70" r="6"></circle>
-              <text x="150" y="92">CAST</text>
-            </g>
-            <g class="map-project" id="p-autodrive" data-path="autodrive" tabindex="0" role="img" aria-label="AutoDrive: camera feed to perception stack to decision system to CAN command to vehicle response.">
-              <circle cx="150" cy="170" r="6"></circle>
-              <text x="150" y="192">AUTODRIVE</text>
-            </g>
-            <g class="map-project" id="p-aca" data-path="aca" tabindex="0" role="img" aria-label="Admission Coordinator Assistant: application documents to human judgment to web automation to processed application.">
-              <circle cx="150" cy="320" r="6"></circle>
-              <text x="150" y="342">COORDINATOR ASSISTANT</text>
-            </g>
-            <g class="map-project" id="p-analysis" data-path="analysis" tabindex="0" role="img" aria-label="Admission analysis: ten years of CSV records to Random Forest model to predictor ranking to threshold discussion.">
-              <circle cx="250" cy="470" r="6"></circle>
-              <text x="250" y="492">ADMISSION ANALYSIS</text>
-            </g>
-            <g class="map-project" id="p-wcf" data-path="wcf" tabindex="0" role="img" aria-label="World Cup Fantasy: live match feed to scoring engine to banked points to live leaderboard.">
-              <circle cx="250" cy="540" r="6"></circle>
-              <text x="250" y="562">WORLD CUP FANTASY</text>
-            </g>
-          </svg>
-          <p class="hero-map-caption">Fig. 01 · Five real signal paths, one per system on this page. Hover or tab through a node to trace it.</p>
+        <div class="hero-actions" data-reveal="card" data-reveal-group>
+          <a href="#systems" class="btn btn-primary">Selected systems</a>
+          <a href="assets/Yousef_Alsaqa_Resume.pdf" target="_blank" rel="noopener" class="btn">Résumé</a>
         </div>
       </div>
 
-      <div class="container">
-        <div class="hero-status">
-          <div class="hero-status-item">
-            <span class="hero-status-label">Location</span>
-            <span class="hero-status-value">Kingston, Canada</span>
-          </div>
-          <div class="hero-status-item">
-            <span class="hero-status-label">Discipline</span>
-            <span class="hero-status-value">Mechatronics / Robotics / Automation</span>
-          </div>
-          <div class="hero-status-item">
-            <span class="hero-status-label">Current signal</span>
-            <span class="hero-status-value"><span class="live-dot" aria-hidden="true"></span>Open to engineering opportunities</span>
-          </div>
+      <div class="hero-status shell" data-reveal="data" data-reveal-group>
+        <div class="status-cell">
+          <span class="status-key mono">Discipline</span>
+          <span class="status-val">Mechatronics · Robotics · Automation</span>
+        </div>
+        <div class="status-cell">
+          <span class="status-key mono">Education</span>
+          <span class="status-val">BASc, Queen's University, 2025</span>
+        </div>
+        <div class="status-cell">
+          <span class="status-key mono">Availability</span>
+          <span class="status-val"><span class="live-dot" aria-hidden="true"></span>Open to engineering roles</span>
         </div>
       </div>
     </section>
 
     <!-- ================================================
-         2. SELECTED SYSTEMS INDEX
+         SELECTED SYSTEMS
          ================================================ -->
     <section class="section" id="systems" data-status="SELECTED SYSTEMS">
-      <div class="container">
-        <div class="sysindex-head">
-          <div>
-            <p class="section-label">Index</p>
-            <h2 class="section-title">Selected systems</h2>
-          </div>
-          <p class="section-subtitle">Built across hardware, software, data, and the unpredictable space between them.</p>
-        </div>
+      <div class="shell">
+        <header class="section-head">
+          <p class="section-label mono" data-reveal="data">Index</p>
+          <h2 class="section-title" data-reveal="display">Selected systems</h2>
+          <p class="section-sub" data-reveal="display" data-reveal-y="22">
+            Six things that had to work in front of someone. Two are running right now.
+          </p>
+        </header>
 
-        <!-- SYSTEM 01 / CAST -->
-        <article class="sys-entry sys-entry--01">
-          <p class="sys-no" aria-hidden="true">01</p>
+        <!-- 01 CAST -->
+        <article class="sys" data-reveal="card" data-reveal-y="40">
+          <p class="sys-no mono" aria-hidden="true">01</p>
           <div class="sys-body">
-            <p class="sys-kicker">System 01 / Medical simulation</p>
+            <p class="sys-kicker mono">Medical simulation · Deployed</p>
             <h3 class="sys-title"><a href="capstone.html">CAST Medical Interface</a></h3>
-            <p class="sys-purpose">A low-cost RFID medical simulation system that changes audio scenarios based on where a digital stethoscope is placed on a manikin. Assistant Lead, Software &amp; Integration, senior capstone group, Sep 2024 – May 2025.</p>
+            <p class="sys-purpose">
+              A digital stethoscope knows where it is on the manikin, and plays what a nurse
+              would actually hear there. Assistant lead for software and integration on the
+              senior capstone, Sep 2024 &ndash; May 2025.
+            </p>
             <dl class="spec">
-              <div class="spec-row"><dt>Input</dt><dd>RFID tag position, 12 tags at anatomical positions</dd></div>
-              <div class="spec-row"><dt>Process</dt><dd>Scenario logic (28 audio scenarios), Flask interface, Raspberry Pi</dd></div>
-              <div class="spec-row"><dt>Output</dt><dd>Localized heart and lung audio</dd></div>
-              <div class="spec-row"><dt>Constraint</dt><dd><span class="sig">~$250</span> total hardware cost</dd></div>
-              <div class="spec-row"><dt>Status</dt><dd>In use at Queen's School of Nursing</dd></div>
+              <div><dt>Input</dt><dd>RFID position, 12 anatomical tags</dd></div>
+              <div><dt>Process</dt><dd>Scenario logic across 28 audio cases, Flask on a Raspberry Pi</dd></div>
+              <div><dt>Output</dt><dd>Localized heart and lung audio</dd></div>
+              <div><dt>Constraint</dt><dd><span class="sig">~$250</span> of hardware, total</dd></div>
+              <div><dt>Status</dt><dd>In use at Queen's School of Nursing</dd></div>
             </dl>
-            <a class="sys-link" href="capstone.html">Read system 01 →</a>
+            <a class="sys-link" href="capstone.html">Read system 01 <span aria-hidden="true">→</span></a>
           </div>
           <figure class="sys-media">
-            <img src="capstone full picture.jpg" alt="CAST system diagram: interchangeable skin and module layers placed over a base unit manikin, an RFID auscultation module, a detachable head housing the Raspberry Pi, and the functional web interface." width="1313" height="1189" loading="lazy">
-            <figcaption>System diagram / modular manikin + RFID auscultation module</figcaption>
+            <img src="capstone full picture.jpg" alt="CAST system diagram: interchangeable skin and module layers over a base manikin, an RFID auscultation module, a detachable head housing the Raspberry Pi, and the web interface." width="1313" height="1189" loading="lazy" decoding="async">
+            <figcaption class="mono">Modular manikin + RFID auscultation module</figcaption>
           </figure>
         </article>
 
-        <!-- SYSTEM 02 / AUTODRIVE -->
-        <article class="sys-entry sys-entry--02">
-          <p class="sys-no" aria-hidden="true">02</p>
-          <figure class="sys-media">
-            <img src="assets/initiallanedetection.jpg" alt="Early lane detection output overlaid on a road camera frame from the AutoDrive test vehicle." width="1280" height="720" loading="lazy">
-            <figcaption>Early lane detection output / test footage frame</figcaption>
-          </figure>
+        <!-- 02 RESONANCE -->
+        <article class="sys sys--flip" data-reveal="card" data-reveal-y="40">
+          <p class="sys-no mono" aria-hidden="true">02</p>
           <div class="sys-body">
-            <p class="sys-kicker">System 02 / Autonomous vehicle</p>
-            <h3 class="sys-title"><a href="autodrive-project.html">Queen's AutoDrive</a></h3>
-            <p class="sys-purpose">Two years on Queen's AutoDrive for the SAE AutoDrive Challenge, a Level 4 autonomous vehicle. Year one, lane perception: training and optimizing a CNN for low-latency embedded inference with TensorRT. Year two, system integration: ROS2 sensor fusion, path planning, and control nodes synchronized over CAN bus.</p>
+            <p class="sys-kicker mono">Game systems · In development</p>
+            <h3 class="sys-title"><a href="resonance.html">Resonance</a></h3>
+            <p class="sys-purpose">
+              You cannot cut or out-damage these machines. Every part has a natural frequency,
+              and you either drive it past what it can survive or ride its motion until it
+              settles. An Unreal Engine 5.8 action game built on real structural behaviour.
+            </p>
             <dl class="spec">
-              <div class="spec-row"><dt>Input</dt><dd>Camera feed from the vehicle</dd></div>
-              <div class="spec-row"><dt>Process</dt><dd>CNN lane detection (TensorRT, Jetson Xavier NX), ROS2 fusion + planning</dd></div>
-              <div class="spec-row"><dt>Output</dt><dd>CAN commands, nodes synchronized at <span class="sig">10 Hz</span></dd></div>
-              <div class="spec-row"><dt>Constraint</dt><dd>Real-time inference on embedded hardware</dd></div>
-              <div class="spec-row"><dt>Status</dt><dd>Two competition years, 2021–22 and 2023–24</dd></div>
+              <div><dt>Input</dt><dd>Sustained frequency matching, not button timing</dd></div>
+              <div><dt>Process</dt><dd>Per-part resonance profiles, C++ gameplay layer, Chaos destruction</dd></div>
+              <div><dt>Output</dt><dd>A specific part cracks, buckles or shears off</dd></div>
+              <div><dt>Constraint</dt><dd>Every verb writes telemetry &mdash; feel gets diagnosed from logs</dd></div>
+              <div><dt>Status</dt><dd>Phase 1, <span class="sig">47 commits</span>, iterating in playtest</dd></div>
             </dl>
-            <a class="sys-link" href="autodrive-project.html">Read system 02 →</a>
-          </div>
-        </article>
-
-        <!-- SYSTEM 03 / ADMISSION COORDINATOR ASSISTANT -->
-        <article class="sys-entry sys-entry--03">
-          <p class="sys-no" aria-hidden="true">03</p>
-          <div class="sys-body">
-            <p class="sys-kicker">System 03 / Workflow automation</p>
-            <h3 class="sys-title"><a href="admission-coordinator-assistant.html">Admission Coordinator Assistant</a></h3>
-            <p class="sys-purpose">A Tkinter desktop app driving five simultaneous, independent PeopleSoft browser sessions behind one Start, Next, Skip workflow, so an evaluator processes an applicant end to end while typing exactly one number.</p>
-            <dl class="spec">
-              <div class="spec-row"><dt>Input</dt><dd>Applicant documents, plus one human-typed score</dd></div>
-              <div class="spec-row"><dt>Process</dt><dd>Fan-out worker threads, config-driven curriculum rules (IB, CBSE/ISC, GCSE/A-Level)</dd></div>
-              <div class="spec-row"><dt>Output</dt><dd>Evaluated, signed-off application</dd></div>
-              <div class="spec-row"><dt>Constraint</dt><dd>PeopleSoft has no API. Everything runs through browser automation</dd></div>
-              <div class="spec-row"><dt>Status</dt><dd>In daily use, <span class="sig">~1,200</span> applications on the original IB-only version</dd></div>
-            </dl>
-            <a class="sys-link" href="admission-coordinator-assistant.html">Read system 03 →</a>
+            <a class="sys-link" href="resonance.html">Read system 02 <span aria-hidden="true">→</span></a>
           </div>
           <div class="sys-media">
-            <div class="placeholder-asset" role="note">[PLACEHOLDER: Admission Coordinator Assistant interface screenshot, the Start / Next / Skip control panel]</div>
-            <p class="figure-cap">Interface capture pending / internal tool</p>
+            <div class="asset-pending" role="note">Capture pending &mdash; the sentinel is mid-rebuild and not worth showing yet.</div>
           </div>
         </article>
 
-        <!-- SYSTEM 04 / WORLD CUP FANTASY -->
-        <article class="sys-entry sys-entry--04">
-          <p class="sys-no" aria-hidden="true">04</p>
+        <!-- 03 AUTODRIVE -->
+        <article class="sys" data-reveal="card" data-reveal-y="40">
+          <p class="sys-no mono" aria-hidden="true">03</p>
           <div class="sys-body">
-            <p class="sys-kicker">System 04 / Full-stack platform</p>
-            <h3 class="sys-title"><a href="worldcupfantasy-details.html">World Cup Fantasy</a></h3>
-            <p class="sys-purpose">A full-stack fantasy football platform for the World Cup 2026, built solo in six months and run live for real users through the entire tournament, group stage to Final.</p>
-            <a class="sys-link" href="worldcupfantasy-details.html">Read system 04 →</a>
+            <p class="sys-kicker mono">Autonomous vehicle · SAE Challenge</p>
+            <h3 class="sys-title"><a href="autodrive-project.html">Queen's AutoDrive</a></h3>
+            <p class="sys-purpose">
+              Two years on a Level 4 vehicle. Year one was lane perception: getting a CNN fast
+              enough to be useful on embedded hardware. Year two was integration, which is
+              where the actual difficulty lives.
+            </p>
+            <dl class="spec">
+              <div><dt>Input</dt><dd>Vehicle camera feed</dd></div>
+              <div><dt>Process</dt><dd>CNN lane detection on Jetson Xavier NX via TensorRT, ROS2 fusion and planning</dd></div>
+              <div><dt>Output</dt><dd>CAN commands, nodes synchronized at <span class="sig">10 Hz</span></dd></div>
+              <div><dt>Constraint</dt><dd>Real-time inference inside an embedded power budget</dd></div>
+              <div><dt>Status</dt><dd>Two competition years, 2021&ndash;22 and 2023&ndash;24</dd></div>
+            </dl>
+            <a class="sys-link" href="autodrive-project.html">Read system 03 <span aria-hidden="true">→</span></a>
           </div>
-          <dl class="spec sys-spec">
-            <div class="spec-row"><dt>Input</dt><dd>Live match feed, API-Football</dd></div>
-            <div class="spec-row"><dt>Process</dt><dd>Scoring engine, ~39,000 lines of TypeScript, 54 API routes, Prisma + PostgreSQL</dd></div>
-            <div class="spec-row"><dt>Output</dt><dd>Banked points, live leaderboard</dd></div>
-            <div class="spec-row"><dt>Constraint</dt><dd>Built solo, <span class="sig">183 commits</span> in 6 months, scoring live during real matches</dd></div>
-            <div class="spec-row"><dt>Status</dt><dd>Ran in production for real users, forked into a La Liga app (~80% reuse)</dd></div>
-          </dl>
           <figure class="sys-media">
-            <img src="assets/worldcupfantasy landing page.png" alt="Landing page of the World Cup Fantasy web application." width="1912" height="907" loading="lazy">
-            <figcaption>World Cup Fantasy / production landing page</figcaption>
+            <video src="assets/LaneDetectionDemo.mp4" width="426" height="240" autoplay muted loop playsinline preload="metadata" aria-label="Lane detection overlay tracking lane lines during an onboard test drive."></video>
+            <figcaption class="mono">Lane detection overlay, onboard test footage</figcaption>
           </figure>
         </article>
-      </div>
-    </section>
 
-    <!-- ================================================
-         3. CAST TEARDOWN
-         ================================================ -->
-    <section class="section" id="system-01" data-status="SYSTEM 01 / CAST">
-      <div class="container">
-        <div class="section-header">
-          <p class="section-label">System 01 / Teardown</p>
-          <h2 class="section-title">Inside the CAST simulator</h2>
-          <p class="section-subtitle">A donated CPR manikin, a custom RFID stethoscope, and a Raspberry Pi. In use at Queen's School of Nursing.</p>
-        </div>
-
-        <div class="teardown-grid">
-          <figure class="td-figure">
-            <img src="stethoscope-iii.png" alt="The CAST stethoscope prototype on a workbench: a 3D printed enclosure housing the Raspberry Pi, a tethered stethoscope head carrying an RFID-RC522 reader board, and wired earbuds for audio output." width="2082" height="2776" loading="lazy">
-            <span class="td-marker td-marker--flip" id="m-1" style="left:73.5%; top:60%;" aria-hidden="true">1</span>
-            <span class="td-marker td-marker--flip" id="m-2" style="left:74.5%; top:69%;" aria-hidden="true">2</span>
-            <span class="td-marker" id="m-3" style="left:22%; top:44%;" aria-hidden="true">3</span>
-            <span class="td-marker" id="m-4" style="left:51%; top:55%;" aria-hidden="true">4</span>
-            <span class="td-marker td-marker--flip" id="m-5" style="left:66%; top:10%;" aria-hidden="true">5</span>
-            <span class="td-marker" id="m-6" style="left:40%; top:84%;" aria-hidden="true">6</span>
-            <figcaption class="figure-cap">Working prototype / stethoscope head, Pi enclosure, audio out</figcaption>
-          </figure>
-
-          <ol class="td-notes">
-            <li class="td-note" data-marker="1" tabindex="0">
-              <div>
-                <span class="td-note-label">RFID reader</span>
-                <p>An MFRC522 board in the stethoscope head reads the tag it is resting on, over SPI to the Pi.</p>
-              </div>
-            </li>
-            <li class="td-note" data-marker="2" tabindex="0">
-              <div>
-                <span class="td-note-label">Tag location</span>
-                <p>12 passive tags sit at anatomical positions inside the manikin: 6 cardiac (H1 to H6), 6 pulmonary (L1 to L6).</p>
-              </div>
-            </li>
-            <li class="td-note" data-marker="3" tabindex="0">
-              <div>
-                <span class="td-note-label">Audio trigger</span>
-                <p>The matching heart or lung sound reaches the earpieces in under 260 ms, fast enough to feel immediate.</p>
-              </div>
-            </li>
-            <li class="td-note" data-marker="4" tabindex="0">
-              <div>
-                <span class="td-note-label">Scenario state</span>
-                <p>A Raspberry Pi 4 in the enclosure holds the active scenario, one of 28 clinical audio scenarios.</p>
-              </div>
-            </li>
-            <li class="td-note" data-marker="5" tabindex="0">
-              <div>
-                <span class="td-note-label">Instructor control</span>
-                <p>A Flask and Socket.IO web interface lets the instructor switch scenarios mid-session, without touching the manikin.</p>
-              </div>
-            </li>
-            <li class="td-note" data-marker="6" tabindex="0">
-              <div>
-                <span class="td-note-label">Hardware cost</span>
-                <p>About $250 in total hardware. Commercial simulators start around $50K.</p>
-              </div>
-            </li>
-          </ol>
-        </div>
-
-        <div class="td-layers">
-          <div class="td-layer">
-            <span class="td-layer-no">01</span>
-            <span class="td-layer-name">Physical interaction</span>
-            <p>A nursing student places the stethoscope on one of 12 auscultation points on the manikin.</p>
-          </div>
-          <div class="td-layer">
-            <span class="td-layer-no">02</span>
-            <span class="td-layer-name">RFID detection</span>
-            <p>The reader identifies which tag sits under the chest surface.</p>
-          </div>
-          <div class="td-layer">
-            <span class="td-layer-no">03</span>
-            <span class="td-layer-name">Scenario processing</span>
-            <p>The Pi maps tag position and active scenario to the correct clinical sound.</p>
-          </div>
-          <div class="td-layer">
-            <span class="td-layer-no">04</span>
-            <span class="td-layer-name">Audio response</span>
-            <p>Playback switches in under 260 ms.</p>
-          </div>
-          <div class="td-layer">
-            <span class="td-layer-no">05</span>
-            <span class="td-layer-name">Instructor workflow</span>
-            <p>The instructor drives the session from the web interface while the student examines the manikin.</p>
-          </div>
-        </div>
-
-        <blockquote class="pull-line">The challenge was not making one component work. It was making the entire experience feel invisible to the learner.</blockquote>
-
-        <div class="td-evidence">
-          <figure>
-            <img src="fi-studentfinal.jpg" alt="Screenshot of the CAST student dashboard showing the auscultation module active and ready for examination." width="1215" height="558" loading="lazy">
-            <figcaption class="figure-cap">CAST web interface / student dashboard during a live simulation</figcaption>
-          </figure>
-          <div>
-            <p class="margin-note">The photo above is the working prototype exactly as it sat on the shop bench: enclosure, stethoscope head, standard earbuds. The manikin it plugs into was donated by Queen's Clinical Simulation Center.</p>
-            <a class="sys-link" href="capstone.html">Read system 01 →</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ================================================
-         4. AUTODRIVE UNDER PRESSURE (carbon)
-         ================================================ -->
-    <section class="section section-carbon" id="system-02" data-status="SYSTEM 02 / AUTODRIVE">
-      <div class="container">
-        <div class="section-header">
-          <p class="section-label">System 02 / Under pressure</p>
-          <h2 class="section-title">Where autonomy actually fails</h2>
-          <p class="section-subtitle">Every stage of the AutoDrive stack worked on the bench. The failures lived in the arrows between them.</p>
-        </div>
-
-        <div class="pl-flow">
-          <div class="pl-stage">
-            <div class="pl-stage-box" data-n="A">Perception</div>
-            <p class="pl-note">sensor uncertainty. ~85% accuracy on the test set is not 100%.</p>
-          </div>
-          <div class="pl-stage">
-            <div class="pl-stage-box" data-n="B">Localization</div>
-            <p class="pl-note">timing. Every estimate is already stale by the time it is used.</p>
-          </div>
-          <div class="pl-stage">
-            <div class="pl-stage-box" data-n="C">Decision</div>
-            <p class="pl-note">integration failures. Correct nodes, wrong assumptions between them.</p>
-          </div>
-          <div class="pl-stage">
-            <div class="pl-stage-box" data-n="D">CAN communication</div>
-            <p class="pl-note">message formatting. One malformed frame reads as a command.</p>
-          </div>
-          <div class="pl-stage">
-            <div class="pl-stage-box" data-n="E">Vehicle response</div>
-          </div>
-        </div>
-
-        <div class="incident-grid">
-          <div class="incident">
-            <div class="incident-head">
-              <span>Incident log / <span class="sig">entry 001</span></span>
-              <span>Garage test, protocol changes</span>
-            </div>
-            <dl>
-            <div class="incident-row">
-              <dt>Incident</dt>
-              <dd>Test command sent with the team lead in the driver's seat and an emergency stop armed. The car lurched forward, accelerated, and plowed straight into a workbench.</dd>
-            </div>
-            <div class="incident-row">
-              <dt>Cause</dt>
-              <dd>A malformed CAN message that the vehicle ECU interpreted as <span class="sig">"go."</span></dd>
-            </div>
-            <div class="incident-row">
-              <dt>Response</dt>
-              <dd>Nobody was hurt. The car was fine, mostly. The following week went to tracing exactly what happened.</dd>
-            </div>
-            <div class="incident-row">
-              <dt>Result</dt>
-              <dd><span class="sig">1 table destroyed.</span> Safety isn't optional.</dd>
-            </div>
+        <!-- 04 VELA -->
+        <article class="sys sys--flip" data-reveal="card" data-reveal-y="40">
+          <p class="sys-no mono" aria-hidden="true">04</p>
+          <div class="sys-body">
+            <p class="sys-kicker mono">Agent architecture · Running daily</p>
+            <h3 class="sys-title"><a href="vela.html">Vela</a></h3>
+            <p class="sys-purpose">
+              An assistant with hands. It remembers across sessions, drives a Windows desktop,
+              and keeps what it believes about me in an Obsidian vault I can open and correct
+              &mdash; one markdown note per fact, because a database row is a fine place to
+              store a fact and a miserable place to read one.
+            </p>
+            <dl class="spec">
+              <div><dt>Input</dt><dd>Voice and text, with ambient listening</dd></div>
+              <div><dt>Process</dt><dd>Claude Agent SDK, <span class="sig">19</span> TypeScript modules, custom tool layer</dd></div>
+              <div><dt>Output</dt><dd>Desktop actions, spoken replies, durable memory</dd></div>
+              <div><dt>Constraint</dt><dd>Memory has to stay human-readable and hand-editable</dd></div>
+              <div><dt>Status</dt><dd>In daily use on this machine</dd></div>
             </dl>
+            <a class="sys-link" href="vela.html">Read system 04 <span aria-hidden="true">→</span></a>
           </div>
+          <div class="sys-media">
+            <div class="asset-pending" role="note">Capture pending &mdash; the interface is a terminal and a voice, which screenshots badly.</div>
+          </div>
+        </article>
 
-          <div class="ad-evidence">
-            <figure>
-              <video src="assets/LaneDetectionDemo.mp4" width="426" height="240" autoplay muted loop playsinline preload="metadata" aria-label="Short clip of the lane detection model tracking lane lines on a road during a test drive."></video>
-              <figcaption class="figure-cap">Evidence / lane detection, onboard test footage</figcaption>
-            </figure>
-            <a class="sys-link" href="autodrive-project.html" style="margin-top:1.25rem; display:inline-block;">Read system 02 →</a>
+        <!-- 05 WORLD CUP FANTASY -->
+        <article class="sys" data-reveal="card" data-reveal-y="40">
+          <p class="sys-no mono" aria-hidden="true">05</p>
+          <div class="sys-body">
+            <p class="sys-kicker mono">Full-stack platform · Ran in production</p>
+            <h3 class="sys-title"><a href="worldcupfantasy-details.html">World Cup Fantasy</a></h3>
+            <p class="sys-purpose">
+              Built solo in six months and run live for real users through the entire World
+              Cup 2026, group stage to Final. The scoring engine reconciled against a feed
+              that was wrong often enough to matter.
+            </p>
+            <dl class="spec">
+              <div><dt>Input</dt><dd>Live match feed, API-Football</dd></div>
+              <div><dt>Process</dt><dd>~39,000 lines of TypeScript, 54 API routes, Prisma + PostgreSQL</dd></div>
+              <div><dt>Output</dt><dd>Banked points, live leaderboard</dd></div>
+              <div><dt>Constraint</dt><dd>Scoring had to be right the first time, during real matches</dd></div>
+              <div><dt>Status</dt><dd>Forked into a La Liga app at roughly <span class="sig">80%</span> reuse</dd></div>
+            </dl>
+            <a class="sys-link" href="worldcupfantasy-details.html">Read system 05 <span aria-hidden="true">→</span></a>
           </div>
-        </div>
+          <figure class="sys-media">
+            <img src="assets/worldcupfantasy landing page.png" alt="Landing page of the World Cup Fantasy web application." width="1912" height="907" loading="lazy" decoding="async">
+            <figcaption class="mono">Production landing page</figcaption>
+          </figure>
+        </article>
+
+        <!-- 06 ACA -->
+        <article class="sys sys--flip" data-reveal="card" data-reveal-y="40">
+          <p class="sys-no mono" aria-hidden="true">06</p>
+          <div class="sys-body">
+            <p class="sys-kicker mono">Workflow automation · In daily use</p>
+            <h3 class="sys-title"><a href="admission-coordinator-assistant.html">Admission Coordinator Assistant</a></h3>
+            <p class="sys-purpose">
+              Five simultaneous PeopleSoft browser sessions behind one Start / Next / Skip
+              workflow. An evaluator reads the documents, types a single number, and the tool
+              does everything else.
+            </p>
+            <dl class="spec">
+              <div><dt>Input</dt><dd>Applicant documents plus one human-typed score</dd></div>
+              <div><dt>Process</dt><dd>Fan-out worker threads, config-driven curriculum rules for IB, CBSE/ISC, GCSE/A-Level</dd></div>
+              <div><dt>Output</dt><dd>Evaluated, signed-off application</dd></div>
+              <div><dt>Constraint</dt><dd>PeopleSoft exposes no API, so everything runs through the browser</dd></div>
+              <div><dt>Status</dt><dd><span class="sig">~1,200</span> applications on the original IB-only build</dd></div>
+            </dl>
+            <a class="sys-link" href="admission-coordinator-assistant.html">Read system 06 <span aria-hidden="true">→</span></a>
+          </div>
+          <div class="sys-media">
+            <div class="asset-pending" role="note">Interface capture pending &mdash; internal tool, applicant data would need redacting first.</div>
+          </div>
+        </article>
+
+        <p class="sys-more" data-reveal="data">
+          <a href="projects.html">The rest of the archive <span aria-hidden="true">→</span></a>
+        </p>
       </div>
     </section>
 
     <!-- ================================================
-         5. ACA / INVISIBLE INFRASTRUCTURE
+         OPERATING PRINCIPLES
          ================================================ -->
-    <section class="section" id="system-03" data-status="SYSTEM 03 / ACA">
-      <div class="container">
-        <div class="section-header">
-          <p class="section-label">System 03 / Invisible infrastructure</p>
-          <h2 class="section-title">The software nobody sees</h2>
-          <p class="section-subtitle">Application review meant the same clicks, the same fields, the same folder handling, for every single applicant. The Coordinator Assistant and the document attacher turned that loop into a pipeline with one human judgment kept in the middle.</p>
-        </div>
+    <section class="section section--inset" id="principles" data-status="METHOD">
+      <div class="shell">
+        <header class="section-head">
+          <p class="section-label mono" data-reveal="data">Method</p>
+          <h2 class="section-title" data-reveal="display">Operating principles</h2>
+        </header>
 
-        <div class="aca-transform">
-          <div class="aca-chaos" aria-label="The manual workflow, repeated per applicant">
-            <p class="aca-chaos-caption">Manual workflow / per applicant / repeat</p>
-            <span class="chip" style="--tx:-14px; --ty:10px; --rot:-6deg;">open folder</span>
-            <span class="chip" style="--tx:22px; --ty:-8px; --rot:4deg;">search student</span>
-            <span class="chip" style="--tx:-6px; --ty:18px; --rot:-3deg;">type average</span>
-            <span class="chip" style="--tx:30px; --ty:6px; --rot:7deg;">sign off</span>
-            <span class="chip" style="--tx:-24px; --ty:-12px; --rot:-8deg;">curriculum change</span>
-            <span class="chip" style="--tx:12px; --ty:22px; --rot:5deg;">next student</span>
-            <span class="chip" style="--tx:-18px; --ty:-6px; --rot:9deg;">open folder</span>
-            <span class="chip" style="--tx:8px; --ty:14px; --rot:-5deg;">search student</span>
-            <span class="chip" style="--tx:26px; --ty:-14px; --rot:3deg;">type average</span>
-            <span class="chip" style="--tx:-10px; --ty:8px; --rot:-9deg;">sign off</span>
-            <span class="chip" style="--tx:18px; --ty:-4px; --rot:6deg;">curriculum change</span>
-            <span class="chip" style="--tx:-28px; --ty:16px; --rot:-4deg;">next student</span>
-            <span class="chip" style="--tx:14px; --ty:-10px; --rot:8deg;">open folder</span>
-          </div>
-
-          <ol class="aca-pipeline" aria-label="The automated pipeline">
-            <li class="aca-step">
-              <span class="aca-step-no">01</span>
-              <span class="aca-step-name">Manual review</span>
-              <span class="aca-step-arrow" aria-hidden="true">↓</span>
-            </li>
-            <li class="aca-step">
-              <span class="aca-step-no">02</span>
-              <span class="aca-step-name">Repeated data entry</span>
-              <span class="aca-step-arrow" aria-hidden="true">↓</span>
-            </li>
-            <li class="aca-step">
-              <span class="aca-step-no">03</span>
-              <span class="aca-step-name">Document handling</span>
-              <span class="aca-step-arrow" aria-hidden="true">↓</span>
-            </li>
-            <li class="aca-step">
-              <span class="aca-step-no">04</span>
-              <span class="aca-step-name">Workflow automation</span>
-              <span class="aca-step-arrow" aria-hidden="true">↓</span>
-            </li>
-            <li class="aca-step">
-              <span class="aca-step-no">05</span>
-              <span class="aca-step-name">Staff-facing interface</span>
-              <span class="aca-step-arrow" aria-hidden="true">↓</span>
-            </li>
-            <li class="aca-step aca-step--result">
-              <span class="aca-step-no">→</span>
-              <span class="aca-step-name">20,000–30,000 documents per cycle</span>
-            </li>
-          </ol>
-        </div>
-
-        <div class="aca-close">
-          <blockquote class="pull-line">Software does not need to be glamorous to matter.</blockquote>
-          <p style="margin-top:1.5rem;">
-            <a class="sys-link" href="admission-coordinator-assistant.html">Read system 03 →</a>
-            &nbsp;&nbsp;&nbsp;
-            <a class="sys-link" href="document-automation.html">Document attacher →</a>
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ================================================
-         6. OPERATING PRINCIPLES
-         ================================================ -->
-    <section class="section" id="principles" data-status="OPERATING PRINCIPLES">
-      <div class="container">
-        <div class="section-header">
-          <p class="section-label">Method</p>
-          <h2 class="section-title">Operating principles</h2>
-        </div>
-
-        <article class="principle">
+        <article class="principle" data-reveal="card" data-reveal-y="30">
           <div class="principle-id">
-            <span class="principle-no" aria-hidden="true">01</span>
+            <span class="principle-no mono" aria-hidden="true">01</span>
             <h3 class="principle-name">Integrate before you optimize</h3>
           </div>
           <div class="principle-body">
-            <p class="principle-statement">The hardest failures often exist between components, not inside them.</p>
-            <p class="principle-links">
+            <p class="principle-statement">Individual components usually work. The seams between them are where projects die.</p>
+            <p class="principle-links mono">
               <span>Seen in:</span>
               <a href="terrabot-details.html">Terrabot's five-subsystem integration</a>
               <a href="autodrive-project.html">AutoDrive CAN timing</a>
-              <a href="capstone.html">CAST, RFID + audio + UI made invisible</a>
+              <a href="capstone.html">CAST, three subsystems made invisible</a>
             </p>
           </div>
         </article>
 
-        <article class="principle">
+        <article class="principle" data-reveal="card" data-reveal-y="30">
           <div class="principle-id">
-            <span class="principle-no" aria-hidden="true">02</span>
+            <span class="principle-no mono" aria-hidden="true">02</span>
             <h3 class="principle-name">Design for the person using it</h3>
           </div>
           <div class="principle-body">
-            <p class="principle-statement">A technically correct system can still fail if its workflow is confusing.</p>
-            <p class="principle-links">
+            <p class="principle-statement">A technically correct system still fails if its workflow confuses the person operating it.</p>
+            <p class="principle-links mono">
               <span>Seen in:</span>
-              <a href="admission-coordinator-assistant.html">ACA's read-type-one-number interface</a>
+              <a href="admission-coordinator-assistant.html">ACA's one-number interface</a>
               <a href="document-automation.html">A filename protocol handed to non-programmers</a>
-              <a href="capstone.html">CAST, built for nursing students, not engineers</a>
+              <a href="capstone.html">CAST, built for nursing students</a>
             </p>
           </div>
         </article>
 
-        <article class="principle">
+        <article class="principle" data-reveal="card" data-reveal-y="30">
           <div class="principle-id">
-            <span class="principle-no" aria-hidden="true">03</span>
+            <span class="principle-no mono" aria-hidden="true">03</span>
             <h3 class="principle-name">Build for the second use</h3>
           </div>
           <div class="principle-body">
-            <p class="principle-statement">A prototype proves the idea. Documentation, reliability, and maintainability make it useful.</p>
-            <p class="principle-links">
+            <p class="principle-statement">A prototype proves the idea. Documentation and reliability are what make it survive contact with someone else.</p>
+            <p class="principle-links mono">
               <span>Seen in:</span>
-              <a href="worldcupfantasy-details.html">World Cup Fantasy → La Liga fork, ~80% reuse</a>
+              <a href="worldcupfantasy-details.html">World Cup Fantasy forked to La Liga</a>
               <a href="admission-analysis.html">A Commerce-only dashboard made config-driven</a>
               <a href="document-automation.html">Ops scripts that default to dry-run</a>
             </p>
@@ -626,573 +381,111 @@
     </section>
 
     <!-- ================================================
-         7. EXPERIENCE
+         EXPERIENCE
          ================================================ -->
     <section class="section" id="experience" data-status="EXPERIENCE">
-      <div class="container">
-        <div class="section-header">
-          <p class="section-label">Log</p>
-          <h2 class="section-title">Experience</h2>
-        </div>
+      <div class="shell">
+        <header class="section-head">
+          <p class="section-label mono" data-reveal="data">Log</p>
+          <h2 class="section-title" data-reveal="display">Experience</h2>
+        </header>
 
-        <div class="xp-log">
+        <div class="xp" data-reveal="card" data-reveal-group>
           <article class="xp-row">
-            <div class="xp-dates">JUL 2026 – PRESENT <span class="status-badge">Live</span></div>
-            <div>
+            <div class="xp-dates mono">Jul 2026 — Present <span class="badge">Current</span></div>
+            <div class="xp-body">
               <h3 class="xp-role">Business Analyst</h3>
-              <p class="xp-org">Queen's University, Undergraduate Admission &amp; Recruitment</p>
-              <p class="xp-duty">Finds manual, repetitive workflows across the admissions office and automates them, with a human check preserved at the end.</p>
-              <p class="xp-contrib">Finalized the document attacher office-wide, 20,000 to 30,000 documents per cycle. Built the CEGEP curriculum evaluator. Genericized the admission analysis dashboard so a new program is a config file.</p>
-              <a class="xp-related" href="document-automation.html">Related: document automation</a>
+              <p class="xp-org mono">Queen's University · Undergraduate Admission &amp; Recruitment</p>
+              <p>Took the document attacher from a personal script to the office's standard tool, now handling 20,000&ndash;30,000 documents per admission cycle. Grew the evaluation dashboard into a ~5,800-line system driving five parallel PeopleSoft sessions.</p>
             </div>
           </article>
 
           <article class="xp-row">
-            <div class="xp-dates">JAN 2026 – JUN 2026</div>
-            <div>
+            <div class="xp-dates mono">Jan 2026 — Jun 2026</div>
+            <div class="xp-body">
               <h3 class="xp-role">Admission Coordinator</h3>
-              <p class="xp-org">Queen's University</p>
-              <p class="xp-duty">Evaluated international applications while building the tools that made evaluating them faster.</p>
-              <p class="xp-contrib">Built the document attacher and the Coordinator Assistant, ~1,200 applications on the original version. Started the IB-only evaluation dashboard.</p>
-              <a class="xp-related" href="admission-coordinator-assistant.html">Related: coordinator assistant</a>
+              <p class="xp-org mono">Queen's University · Undergraduate Admission &amp; Recruitment</p>
+              <p>Built the Tkinter/Selenium tool that semi-automated the admission decision workflow, processing about 1,200 applications.</p>
             </div>
           </article>
 
           <article class="xp-row">
-            <div class="xp-dates">MAY 2025 – JAN 2026</div>
-            <div>
+            <div class="xp-dates mono">May 2025 — Jan 2026</div>
+            <div class="xp-body">
               <h3 class="xp-role">Recruitment Representative</h3>
-              <p class="xp-org">Queen's University</p>
-              <p class="xp-duty">Traveled across Ontario presenting to prospective students almost daily.</p>
-              <p class="xp-contrib">Built the Automatic Recruiter Coordinator, 5 years and ~170K applications fuzzy-matched into feeder-school reports. Ran the Commerce Random Forest analysis whose negative supplementary-application correlation was part of the conversation before thresholds later rose.</p>
-              <a class="xp-related" href="university-application-dashboard.html">Related: automatic recruiter coordinator</a>
+              <p class="xp-org mono">Queen's University · Undergraduate Admission &amp; Recruitment</p>
+              <p>Ran a Random Forest analysis over 5,600 admitted Commerce students against first-year GPA. The negative correlation it found on the supplementary application helped push admission thresholds up.</p>
             </div>
           </article>
 
           <article class="xp-row">
-            <div class="xp-dates">JUN 2023 – AUG 2023</div>
-            <div>
+            <div class="xp-dates mono">Jun 2023 — Aug 2023</div>
+            <div class="xp-body">
               <h3 class="xp-role">Mechanical Engineering Intern</h3>
-              <p class="xp-org">Dorsch Holding GmbH, Abu Dhabi</p>
-              <p class="xp-duty">Worked on the Bu Hasa oil field expansion.</p>
-              <p class="xp-contrib">Gravity-fed drainage redesign after fluid simulations showed pumped inefficiencies. Pipe network layouts reducing pressure losses.</p>
-            </div>
-          </article>
-
-          <article class="xp-row">
-            <div class="xp-dates">JUL 2022 – JUN 2025</div>
-            <div>
-              <h3 class="xp-role">Engineering International Student Mentor</h3>
-              <p class="xp-org">Queen's University</p>
-              <p class="xp-duty">Took incoming international students under my wing individually, not workshops, ongoing mentorship through their first years.</p>
-            </div>
-          </article>
-
-          <article class="xp-row">
-            <div class="xp-dates">JAN 2023 – JUN 2025</div>
-            <div>
-              <h3 class="xp-role">International Student Ambassador</h3>
-              <p class="xp-org">Queen's University</p>
-              <p class="xp-duty">Gave regional presentations and supported data-driven outreach.</p>
+              <p class="xp-org mono">Dorsch Holding GmbH · Abu Dhabi, UAE</p>
+              <p>Redesigned a drainage system from pumped to gravity-fed on the Bu Hasa oil field expansion after simulations showed where the pumping energy was going.</p>
             </div>
           </article>
         </div>
 
-        <p class="xp-edu">EDUCATION · BASc Mechatronics &amp; Robotics Engineering, Queen's University, SEP 2021 – JUN 2025 · Fourth-Year Dean's List (2025)</p>
+        <p class="sys-more" data-reveal="data">
+          <a href="experience.html">Full history <span aria-hidden="true">→</span></a>
+        </p>
       </div>
     </section>
 
     <!-- ================================================
-         8. FIELD NOTES / ARCHIVE
+         ABOUT
          ================================================ -->
-    <section class="section" id="field-notes" data-status="FIELD NOTES">
-      <div class="container">
-        <div class="section-header">
-          <p class="section-label">Archive</p>
-          <h2 class="section-title">Field notes</h2>
-          <p class="section-subtitle">Everything else in the archive, one line each. Hover a row for evidence.</p>
+    <section class="section section--inset" id="about" data-status="ABOUT">
+      <div class="shell about-grid">
+        <div class="about-body">
+          <p class="section-label mono" data-reveal="data">About</p>
+          <h2 class="section-title" data-reveal="display">Two kinds of system, one instinct</h2>
+          <p data-reveal="display" data-reveal-y="22">
+            Half my work is physical: a manikin that has to respond correctly while a nursing
+            student is holding it, a vehicle that has to make a decision every 100 milliseconds,
+            a rover that has to survive its own drivetrain. The other half is software with the
+            same problem &mdash; a scoring engine running during a live match, an agent holding
+            state across weeks, a game where the physics is the mechanic.
+          </p>
+          <p data-reveal="display" data-reveal-y="22">
+            They are the same job. Find where the thing will come apart, and get there first.
+            I graduated from Queen's in mechatronics and robotics engineering in 2025, and I've
+            been building since well before that.
+          </p>
         </div>
-
-        <div class="archive">
-          <div class="archive-header" aria-hidden="true">
-            <span>Year</span><span>Project</span><span>Domain</span><span>Primary challenge</span><span>Tools</span><span>Status</span>
-          </div>
-
-          <div class="ar-row">
-            <a class="ar-link" href="admission-analysis.html">
-              <span class="ar-year">2026</span>
-              <span class="ar-project">Universal Admission Dashboard</span>
-              <span class="ar-domain">Data / ML</span>
-              <span class="ar-challenge">Genericizing a Commerce-only analysis into a config-driven multi-program system</span>
-              <span class="ar-tools">Python, Tkinter, Scikit-learn, YAML</span>
-              <span class="ar-status">Active</span>
-            </a>
-            <figure class="ar-peek">
-              <img src="admission_analysis_Dashboard.jpg" alt="Admission analysis dashboard screenshot." width="230" height="124" loading="lazy">
-              <figcaption>Evidence / dashboard</figcaption>
-            </figure>
-            <button class="ar-expand" aria-expanded="false" aria-label="Show details for Universal Admission Dashboard"></button>
-            <div class="ar-more-mobile">
-              <dl>
-                <dt>Domain</dt><dd>Data / ML</dd>
-                <dt>Challenge</dt><dd>Genericizing a Commerce-only analysis into a config-driven multi-program system</dd>
-                <dt>Tools</dt><dd>Python, Tkinter, Scikit-learn, YAML</dd>
-              </dl>
-            </div>
-          </div>
-
-          <div class="ar-row">
-            <a class="ar-link" href="document-automation.html">
-              <span class="ar-year">2026</span>
-              <span class="ar-project">Document Automation</span>
-              <span class="ar-domain">Automation</span>
-              <span class="ar-challenge">Unattended PeopleSoft attachment at 20 to 30k documents per cycle</span>
-              <span class="ar-tools">Python, Selenium</span>
-              <span class="ar-status">Office-wide</span>
-            </a>
-            <div class="ar-peek">
-              <span class="ar-peek-note">Field note: filename protocol DOCCODE-YYYYMMDD-STAFFID-STUDENTID.pdf, folder state machine incoming/ → processed/ or error/.</span>
-            </div>
-            <button class="ar-expand" aria-expanded="false" aria-label="Show details for Document Automation"></button>
-            <div class="ar-more-mobile">
-              <dl>
-                <dt>Domain</dt><dd>Automation</dd>
-                <dt>Challenge</dt><dd>Unattended PeopleSoft attachment at 20 to 30k documents per cycle</dd>
-                <dt>Tools</dt><dd>Python, Selenium</dd>
-                <dt>Note</dt><dd>Filename protocol DOCCODE-YYYYMMDD-STAFFID-STUDENTID.pdf</dd>
-              </dl>
-            </div>
-          </div>
-
-          <div class="ar-row">
-            <a class="ar-link" href="university-application-dashboard.html">
-              <span class="ar-year">2025–26</span>
-              <span class="ar-project">Automatic Recruiter Coordinator</span>
-              <span class="ar-domain">Data</span>
-              <span class="ar-challenge">Fuzzy-matching 5 years / ~170K applications into feeder-school reports</span>
-              <span class="ar-tools">Python, pandas, rapidfuzz</span>
-              <span class="ar-status">In use</span>
-            </a>
-            <figure class="ar-peek">
-              <img src="assets/university_application_dashboard.png" alt="Automatic Recruiter Coordinator dashboard screenshot." width="230" height="124" loading="lazy">
-              <figcaption>Evidence / dashboard</figcaption>
-            </figure>
-            <button class="ar-expand" aria-expanded="false" aria-label="Show details for Automatic Recruiter Coordinator"></button>
-            <div class="ar-more-mobile">
-              <dl>
-                <dt>Domain</dt><dd>Data</dd>
-                <dt>Challenge</dt><dd>Fuzzy-matching 5 years / ~170K applications into feeder-school reports</dd>
-                <dt>Tools</dt><dd>Python, pandas, rapidfuzz</dd>
-              </dl>
-            </div>
-          </div>
-
-          <div class="ar-row">
-            <a class="ar-link" href="worldcupfantasy-details.html">
-              <span class="ar-year">2026</span>
-              <span class="ar-project">WorldCupFantasy</span>
-              <span class="ar-domain">Full-stack</span>
-              <span class="ar-challenge">Live-scoring engine reconciled in real time against an error-prone external feed</span>
-              <span class="ar-tools">Next.js, TypeScript, PostgreSQL</span>
-              <span class="ar-status">Ran the full tournament</span>
-            </a>
-            <figure class="ar-peek">
-              <img src="assets/worldcupfantasy landing page.png" alt="WorldCupFantasy landing page screenshot." width="230" height="109" loading="lazy">
-              <figcaption>Evidence / landing page</figcaption>
-            </figure>
-            <button class="ar-expand" aria-expanded="false" aria-label="Show details for WorldCupFantasy"></button>
-            <div class="ar-more-mobile">
-              <dl>
-                <dt>Domain</dt><dd>Full-stack</dd>
-                <dt>Challenge</dt><dd>Live-scoring engine reconciled in real time against an error-prone external feed</dd>
-                <dt>Tools</dt><dd>Next.js, TypeScript, PostgreSQL</dd>
-                <dt>Note</dt><dd>Forked into a second live product, La Liga Fantasy, ~80% code reuse, scoring re-verified 75 of 75</dd>
-              </dl>
-            </div>
-          </div>
-
-          <div class="ar-row">
-            <a class="ar-link" href="capstone.html">
-              <span class="ar-year">2025</span>
-              <span class="ar-project">CAST: the interface</span>
-              <span class="ar-domain">Embedded / Medical</span>
-              <span class="ar-challenge">Flask + Socket.IO gluing RFID hardware state, instructor control, and audio playback into one real-time view</span>
-              <span class="ar-tools">Python, Flask, Socket.IO</span>
-              <span class="ar-status">In use at Queen's</span>
-            </a>
-            <figure class="ar-peek">
-              <img src="feedbackinterface-final.jpg" alt="CAST instructor dashboard screenshot." width="230" height="139" loading="lazy">
-              <figcaption>Evidence / dashboard</figcaption>
-            </figure>
-            <button class="ar-expand" aria-expanded="false" aria-label="Show details for CAST: the interface"></button>
-            <div class="ar-more-mobile">
-              <dl>
-                <dt>Domain</dt><dd>Embedded / Medical</dd>
-                <dt>Challenge</dt><dd>Flask + Socket.IO gluing RFID hardware state, instructor control, and audio playback into one real-time view</dd>
-                <dt>Tools</dt><dd>Python, Flask, Socket.IO</dd>
-              </dl>
-            </div>
-          </div>
-
-          <div class="ar-row">
-            <a class="ar-link" href="eii-project-details.html">
-              <span class="ar-year">2025</span>
-              <span class="ar-project">EII Predictor</span>
-              <span class="ar-domain">ML</span>
-              <span class="ar-challenge">Matching a 2.5-week manual refinery calculation to 99.3% accuracy</span>
-              <span class="ar-tools">PyTorch, scikit-learn</span>
-              <span class="ar-status">Delivered</span>
-            </a>
-            <div class="ar-peek">
-              <span class="ar-peek-note">Field note: ensemble of 10 seeded neural nets + Random Forest, weighted by inverse validation error.</span>
-            </div>
-            <button class="ar-expand" aria-expanded="false" aria-label="Show details for EII Predictor"></button>
-            <div class="ar-more-mobile">
-              <dl>
-                <dt>Domain</dt><dd>ML</dd>
-                <dt>Challenge</dt><dd>Matching a 2.5-week manual refinery calculation to 99.3% accuracy</dd>
-                <dt>Tools</dt><dd>PyTorch, scikit-learn</dd>
-              </dl>
-            </div>
-          </div>
-
-          <div class="ar-row">
-            <a class="ar-link" href="energy-digital-twin.html">
-              <span class="ar-year">2025</span>
-              <span class="ar-project">Energy Digital Twin</span>
-              <span class="ar-domain">Simulation</span>
-              <span class="ar-challenge">EnergyPlus physics sim + fast baseline-volatility model behind one API</span>
-              <span class="ar-tools">Python, FastAPI, Streamlit</span>
-              <span class="ar-status">Prototype</span>
-            </a>
-            <div class="ar-peek">
-              <span class="ar-peek-note">Field note: two modes, an instant baseline model or a full EnergyPlus physics run that takes minutes.</span>
-            </div>
-            <button class="ar-expand" aria-expanded="false" aria-label="Show details for Energy Digital Twin"></button>
-            <div class="ar-more-mobile">
-              <dl>
-                <dt>Domain</dt><dd>Simulation</dd>
-                <dt>Challenge</dt><dd>EnergyPlus physics sim + fast baseline-volatility model behind one API</dd>
-                <dt>Tools</dt><dd>Python, FastAPI, Streamlit</dd>
-              </dl>
-            </div>
-          </div>
-
-          <div class="ar-row">
-            <a class="ar-link" href="steering-project.html">
-              <span class="ar-year">2023</span>
-              <span class="ar-project">FSAE Steering</span>
-              <span class="ar-domain">Embedded</span>
-              <span class="ar-challenge">Custom PCB + TFT telemetry on a 500 kbps CAN bus, termination-resistor debugging</span>
-              <span class="ar-tools">C++, PCB design</span>
-              <span class="ar-status">Competition ready</span>
-            </a>
-            <figure class="ar-peek">
-              <img src="assets/steering.jpeg" alt="Formula SAE steering wheel with integrated display." width="230" height="183" loading="lazy">
-              <figcaption>Evidence / steering wheel</figcaption>
-            </figure>
-            <button class="ar-expand" aria-expanded="false" aria-label="Show details for FSAE Steering"></button>
-            <div class="ar-more-mobile">
-              <dl>
-                <dt>Domain</dt><dd>Embedded</dd>
-                <dt>Challenge</dt><dd>Custom PCB + TFT telemetry on a 500 kbps CAN bus, termination-resistor debugging</dd>
-                <dt>Tools</dt><dd>C++, PCB design</dd>
-              </dl>
-            </div>
-          </div>
-
-          <div class="ar-row">
-            <a class="ar-link" href="terrabot-details.html">
-              <span class="ar-year">2023</span>
-              <span class="ar-project">Terrabot</span>
-              <span class="ar-domain">Robotics</span>
-              <span class="ar-challenge">Five subsystems (SLAM, CO2, proximity, controller, viz) working together in ROS</span>
-              <span class="ar-tools">ROS, Python, RPi</span>
-              <span class="ar-status">Course robot, MREN 203</span>
-            </a>
-            <figure class="ar-peek">
-              <img src="assets/SLAMmap.png" alt="SLAM map generated by Terrabot." width="230" height="159" loading="lazy">
-              <figcaption>Evidence / live SLAM map</figcaption>
-            </figure>
-            <button class="ar-expand" aria-expanded="false" aria-label="Show details for Terrabot"></button>
-            <div class="ar-more-mobile">
-              <dl>
-                <dt>Domain</dt><dd>Robotics</dd>
-                <dt>Challenge</dt><dd>Five subsystems (SLAM, CO2, proximity, controller, viz) working together in ROS</dd>
-                <dt>Tools</dt><dd>ROS, Python, RPi</dd>
-              </dl>
-            </div>
-          </div>
-
-          <div class="ar-row">
-            <a class="ar-link" href="rexcubot-details.html">
-              <span class="ar-year">2023</span>
-              <span class="ar-project">Rexcubot</span>
-              <span class="ar-domain">Robotics</span>
-              <span class="ar-challenge">Autonomous competition robot, ~9 s autonomous level</span>
-              <span class="ar-tools">C++, Arduino</span>
-              <span class="ar-status">Competition</span>
-            </a>
-            <figure class="ar-peek">
-              <img src="assets/303bot.jpg" alt="The Rexcubot competition robot." width="230" height="173" loading="lazy">
-              <figcaption>Evidence / competition robot</figcaption>
-            </figure>
-            <button class="ar-expand" aria-expanded="false" aria-label="Show details for Rexcubot"></button>
-            <div class="ar-more-mobile">
-              <dl>
-                <dt>Domain</dt><dd>Robotics</dd>
-                <dt>Challenge</dt><dd>Autonomous competition robot, ~9 s autonomous level</dd>
-                <dt>Tools</dt><dd>C++, Arduino</dd>
-              </dl>
-            </div>
-          </div>
-
-          <div class="ar-row">
-            <a class="ar-link" href="qsetarm-details.html">
-              <span class="ar-year">2023</span>
-              <span class="ar-project">QSET Arm</span>
-              <span class="ar-domain">Kinematics</span>
-              <span class="ar-challenge">DH parameters and arm kinematics by hand, no code</span>
-              <span class="ar-tools">SolidWorks, math</span>
-              <span class="ar-status">Design complete</span>
-            </a>
-            <figure class="ar-peek">
-              <img src="assets/qset arm drawing.png" alt="Technical drawing of the QSET robotic arm." width="230" height="195" loading="lazy">
-              <figcaption>Evidence / arm drawing</figcaption>
-            </figure>
-            <button class="ar-expand" aria-expanded="false" aria-label="Show details for QSET Arm"></button>
-            <div class="ar-more-mobile">
-              <dl>
-                <dt>Domain</dt><dd>Kinematics</dd>
-                <dt>Challenge</dt><dd>DH parameters and arm kinematics by hand, no code</dd>
-                <dt>Tools</dt><dd>SolidWorks, math</dd>
-              </dl>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ================================================
-         9. ABOUT
-         ================================================ -->
-    <section class="section" id="about" data-status="ABOUT">
-      <div class="container">
-        <div class="section-header">
-          <p class="section-label">Off duty</p>
-          <h2 class="section-title">Outside the diagram</h2>
-        </div>
-
-        <div class="about-grid">
-          <div class="about-copy">
-            <p>What pulled me into engineering was a course robot. Terrabot ran five subsystems: SLAM, CO2 sensing, proximity detection, controller input, and a live map. The first time they all talked to each other at once, I stopped caring about individual components and started caring about systems. Most of my work since has been chasing that moment.</p>
-            <p>Away from a desk, I played goalkeeper through high school, coached in a few smaller tournaments, and I am starting my UEFA coaching license. I have supported Arsenal my whole life, which teaches its own kind of patience.</p>
-            <p>The habit that ties it all together: when a problem quietly eats someone's time every day, I turn it into a tool.</p>
-            <p class="margin-note about-note">BASc Mechatronics &amp; Robotics Engineering, Queen's University, Sep 2021 – Jun 2025. Fourth-Year Dean's List (2025).</p>
-          </div>
-          <figure class="about-portrait">
-            <img src="assets/gradpic.jpeg" alt="Yousef Alsaqa in graduation robes at Queen's University." width="1066" height="1600" loading="lazy">
-            <figcaption class="figure-cap">Graduation / Queen's University / 2025</figcaption>
-          </figure>
-        </div>
+        <figure class="about-portrait" data-reveal="card" data-reveal-y="34">
+          <img src="assets/Yousef Headshot.jpg" alt="Portrait of Yousef Alsaqa." width="800" height="1000" loading="lazy" decoding="async">
+        </figure>
       </div>
     </section>
   </main>
 
   <!-- ================================================
-       10. CONTACT (canonical footer)
+       CONTACT / FOOTER
        ================================================ -->
   <footer class="footer" id="contact" data-status="CONTACT">
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-main">
-          <h2>Have a complicated system that needs to work?</h2>
-          <p>I'm interested in robotics, automation, embedded systems, and engineering roles where software meets the physical world.</p>
-          <a href="mailto:21ymsa@queensu.ca" class="footer-email"><i class="bi bi-envelope"></i> 21ymsa@queensu.ca</a>
-        </div>
-        <div class="footer-links">
-          <a href="https://www.linkedin.com/in/yousef-alsaqa-b1ab4822b/" target="_blank" rel="noopener"><i class="bi bi-linkedin"></i> LinkedIn</a>
-          <a href="https://github.com/yousefalsaqa" target="_blank" rel="noopener"><i class="bi bi-github"></i> GitHub</a>
-          <a href="assets/Yousef_Alsaqa_Resume.pdf" target="_blank"><i class="bi bi-file-earmark-text"></i> Résumé</a>
-        </div>
-      </div>
-      <div class="footer-bottom"><p>© 2026 Yousef Alsaqa · Kingston, Canada</p></div>
+    <div class="shell">
+      <h2 class="footer-lede">Have a system that has to hold?</h2>
+      <p class="footer-sub">Robotics, automation, embedded work, or anything where software meets something physical.</p>
+      <a class="footer-email" href="mailto:21ymsa@queensu.ca">21ymsa@queensu.ca</a>
+
+      <nav class="footer-links mono" aria-label="Elsewhere">
+        <a href="https://www.linkedin.com/in/yousef-alsaqa-b1ab4822b/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://github.com/yousefalsaqa" target="_blank" rel="noopener">GitHub</a>
+        <a href="assets/Yousef_Alsaqa_Resume.pdf" target="_blank" rel="noopener">Résumé</a>
+      </nav>
+
+      <p class="footer-meta mono">Kingston, Ontario · Built from scratch, no template</p>
     </div>
   </footer>
 
-  <script>
-    // Progressive enhancement flag: hidden/animated initial states are gated on this.
-    document.documentElement.classList.add('js-enabled');
-
-    // ---- Canonical nav ----
-    const navToggle = document.getElementById('navToggle');
-    const nav = document.getElementById('nav');
-    navToggle.addEventListener('click', () => {
-      const open = nav.classList.toggle('active');
-      navToggle.classList.toggle('active', open);
-      navToggle.setAttribute('aria-expanded', open);
-    });
-    nav.querySelectorAll('.nav-link').forEach(l => l.addEventListener('click', () => {
-      nav.classList.remove('active'); navToggle.classList.remove('active');
-      navToggle.setAttribute('aria-expanded', 'false');
-    }));
-    const header = document.getElementById('header');
-    window.addEventListener('scroll', () => {
-      header.classList.toggle('scrolled', window.scrollY > 40);
-    }, { passive: true });
-
-    // ---- Theme toggle (manual only, never from system preference) ----
-    const themeToggle = document.getElementById('themeToggle');
-    const themeText = themeToggle.querySelector('.theme-toggle-text');
-    function setThemeUI(isDark) {
-      themeText.textContent = isDark ? 'DARK' : 'LIGHT';
-      themeToggle.setAttribute('aria-pressed', String(isDark));
-      themeToggle.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
-    }
-    setThemeUI(document.documentElement.getAttribute('data-theme') === 'dark');
-    themeToggle.addEventListener('click', () => {
-      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-      if (isDark) {
-        document.documentElement.removeAttribute('data-theme');
-        localStorage.setItem('theme', 'light');
-      } else {
-        document.documentElement.setAttribute('data-theme', 'dark');
-        localStorage.setItem('theme', 'dark');
-      }
-      setThemeUI(!isDark);
-    });
-
-    // ---- Reduced motion ----
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)');
-
-    // ---- Scroll spy: header status ----
-    const statusText = document.querySelector('#headerStatus .header-status-text');
-    if (statusText && 'IntersectionObserver' in window) {
-      const spy = new IntersectionObserver((entries) => {
-        entries.forEach(e => {
-          if (e.isIntersecting && e.target.dataset.status) {
-            statusText.textContent = e.target.dataset.status;
-          }
-        });
-      }, { rootMargin: '-35% 0px -60% 0px' });
-      document.querySelectorAll('[data-status]').forEach(s => spy.observe(s));
-    }
-
-    // ---- Scroll-triggered states (teardown layers, pipeline notes, generic reveals) ----
-    if ('IntersectionObserver' in window) {
-      const revealObs = new IntersectionObserver((entries) => {
-        entries.forEach(e => {
-          if (e.isIntersecting) {
-            e.target.classList.add('visible');
-            revealObs.unobserve(e.target);
-          }
-        });
-      }, { threshold: 0.2, rootMargin: '0px 0px -8%' });
-      document.querySelectorAll('.reveal, .reveal-stagger, .td-layers, .pl-flow').forEach(el => revealObs.observe(el));
-
-      // ACA reorganization triggers a little deeper into the section.
-      const acaObs = new IntersectionObserver((entries) => {
-        entries.forEach(e => {
-          if (e.isIntersecting) {
-            e.target.classList.add('visible');
-            acaObs.unobserve(e.target);
-          }
-        });
-      }, { threshold: 0.35 });
-      document.querySelectorAll('.aca-transform').forEach(el => acaObs.observe(el));
-    } else {
-      document.querySelectorAll('.td-layers, .pl-flow, .aca-transform').forEach(el => el.classList.add('visible'));
-    }
-
-    // ---- Systems map: signal path activation ----
-    (function () {
-      const mapEl = document.getElementById('systemMap');
-      if (!mapEl) return;
-
-      // Node lighting order per path, input → output.
-      const PATHS = {
-        cast:      ['n-rfid', 'p-cast', 'n-ec', 'n-audio'],
-        autodrive: ['n-cv', 'p-autodrive', 'n-ec', 'n-can'],
-        aca:       ['n-app', 'p-aca', 'n-human', 'n-web'],
-        analysis:  ['n-app', 'p-analysis', 'n-dash'],
-        wcf:       ['p-wcf', 'n-dash']
-      };
-      const NAMES = Object.keys(PATHS);
-      let timers = [];
-      let paused = false;
-      let mapInView = true;
-      let cursor = 0;
-
-      function clearMap() {
-        timers.forEach(clearTimeout);
-        timers = [];
-        mapEl.querySelectorAll('.map-path.active').forEach(g => g.classList.remove('active', 'ambient'));
-        mapEl.querySelectorAll('.lit').forEach(n => n.classList.remove('lit'));
-      }
-
-      function activate(name, ambient) {
-        clearMap();
-        const g = document.getElementById('path-' + name);
-        if (!g) return;
-        g.classList.add('active');
-        if (ambient) g.classList.add('ambient');
-        const seq = PATHS[name];
-        const total = prefersReduced.matches ? 0 : 1300;
-        seq.forEach((id, i) => {
-          const el = document.getElementById(id);
-          if (!el) return;
-          const delay = seq.length > 1 ? Math.round(total * i / (seq.length - 1)) : 0;
-          timers.push(setTimeout(() => el.classList.add('lit'), delay));
-        });
-      }
-
-      NAMES.forEach(name => {
-        ['path-' + name, 'p-' + name].forEach(id => {
-          const el = document.getElementById(id);
-          if (!el) return;
-          el.addEventListener('mouseenter', () => { paused = true; activate(name, false); });
-          el.addEventListener('mouseleave', () => { paused = false; clearMap(); });
-        });
-        const proj = document.getElementById('p-' + name);
-        if (proj) {
-          proj.addEventListener('focus', () => { paused = true; activate(name, false); });
-          proj.addEventListener('blur', () => { paused = false; clearMap(); });
-        }
-      });
-
-      // Ambient cycle: one gentle activation at a time, paused on interaction,
-      // skipped entirely under reduced motion or off-screen.
-      if ('IntersectionObserver' in window) {
-        const io = new IntersectionObserver((entries) => {
-          entries.forEach(e => { mapInView = e.isIntersecting; });
-        }, { threshold: 0.25 });
-        io.observe(mapEl);
-      }
-      if (!prefersReduced.matches) {
-        setInterval(() => {
-          if (paused || !mapInView || document.hidden) return;
-          activate(NAMES[cursor % NAMES.length], true);
-          cursor++;
-        }, 6000);
-      }
-    })();
-
-    // ---- Teardown: annotation list ↔ photo marker sync (enhancement only) ----
-    document.querySelectorAll('.td-note').forEach(li => {
-      const marker = document.getElementById('m-' + li.dataset.marker);
-      if (!marker) return;
-      ['mouseenter', 'focusin'].forEach(ev => li.addEventListener(ev, () => marker.classList.add('hot')));
-      ['mouseleave', 'focusout'].forEach(ev => li.addEventListener(ev, () => marker.classList.remove('hot')));
-    });
-
-    // ---- Archive: mobile expandable detail records ----
-    document.querySelectorAll('.ar-expand').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const row = btn.closest('.ar-row');
-        const open = row.classList.toggle('open');
-        btn.setAttribute('aria-expanded', open);
-      });
-    });
-  </script>
+  <!-- Libraries are local. A blocked CDN must never blank this page. -->
+  <script src="js/vendor/gsap.min.js"></script>
+  <script src="js/vendor/ScrollTrigger.min.js"></script>
+  <script src="js/vendor/SplitText.min.js"></script>
+  <script src="js/vendor/lenis.min.js"></script>
+  <script type="module" src="js/main.js"></script>
 </body>
 </html>
