@@ -1,0 +1,213 @@
+/* ============================================================================
+   SECOND ORDER — design system
+   ----------------------------------------------------------------------------
+   Dark is the canonical mode: the site reads as an instrument screen. Light is
+   the same trace printed on paper, not a hedge against the dark one.
+
+   Type is two variable faces. Archivo carries wdth (62-125) and wght (100-900),
+   both of which the motion engine drives from scroll velocity, so headlines
+   physically compress and expand as the page is driven. Geist Mono carries the
+   measurements.
+   ========================================================================== */
+
+/* ---------- Fonts (self-hosted; a blocked CDN must never blank the page) --- */
+
+@font-face {
+  font-family: 'Archivo';
+  src: url('../assets/fonts/Archivo.woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-stretch: 62% 125%;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Geist Mono';
+  src: url('../assets/fonts/GeistMono.woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ---------- Tokens ---------- */
+
+:root {
+  /* Ground and surfaces */
+  --ground:     #08090B;
+  --surface:    #131519;
+  --surface-2:  #1B1E24;
+  --hairline:   #262A31;
+
+  /* Type */
+  --type:       #E8E9EB;
+  --muted:      #7C818A;
+  --sand:       #C8CCD4;   /* the cymatic plate's accumulated sand */
+
+  /* The two verbs, in the colours Resonance already uses for them
+     (Art/Reference/README.md): Stabilize reads blue, Overload reads orange.
+     Everything accented on this site is one of these or a mix. */
+  --stabilize:  #4DA6E8;
+  --overload:   #FF7A1F;
+
+  /* Type stacks */
+  --font-display: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'Geist Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  /* Variable-axis rest values. The motion engine perturbs these, so they are
+     custom properties rather than baked into rules. */
+  --wdth-display: 88;
+  --wght-display: 620;
+
+  /* Scale */
+  --step--1: clamp(0.78rem, 0.74rem + 0.18vw, 0.86rem);
+  --step-0:  clamp(0.95rem, 0.90rem + 0.24vw, 1.06rem);
+  --step-1:  clamp(1.18rem, 1.08rem + 0.50vw, 1.45rem);
+  --step-2:  clamp(1.55rem, 1.34rem + 1.05vw, 2.20rem);
+  --step-3:  clamp(2.05rem, 1.62rem + 2.15vw, 3.40rem);
+  --step-4:  clamp(2.70rem, 1.80rem + 4.50vw, 5.60rem);
+  --step-5:  clamp(3.40rem, 1.60rem + 9.00vw, 9.00rem);
+
+  /* Space */
+  --sp-1: 0.25rem;  --sp-2: 0.5rem;   --sp-3: 0.75rem;
+  --sp-4: 1rem;     --sp-5: 1.5rem;   --sp-6: 2rem;
+  --sp-7: 3rem;     --sp-8: 4.5rem;   --sp-9: 7rem;
+  --sp-10: 10rem;
+
+  /* Layout */
+  --header-h: 68px;
+  --measure: 68ch;
+  --gutter: clamp(1.25rem, 4vw, 3.5rem);
+  --max-w: 1440px;
+}
+
+/* Light: the printed trace. Sand becomes ink on paper, the plate inverts.
+   The ground is deliberately a shade of grey rather than white, so panels
+   (which are white) read as panels. A white ground with near-white surfaces
+   flattens the whole instrument into one sheet. */
+:root[data-theme='light'] {
+  --ground:     #DFE3E8;
+  --surface:    #F7F8FA;
+  --surface-2:  #FFFFFF;
+  --hairline:   #B9C0CA;
+
+  --type:       #0B0D11;
+  --muted:      #4E555F;
+  --sand:       #1C2027;
+
+  /* Darkened so both clear 4.5:1 against the paper ground. */
+  --stabilize:  #15618F;
+  --overload:   #A34400;
+}
+
+/* ---------- Reset ---------- */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+/* Lenis drives scrolling itself; native smooth scroll fights it. */
+html.lenis { scroll-behavior: auto; }
+
+body {
+  margin: 0;
+  background: var(--ground);
+  color: var(--type);
+  font-family: var(--font-display);
+  font-variation-settings: 'wdth' 100, 'wght' 400;
+  font-size: var(--step-0);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4 {
+  margin: 0;
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  font-weight: 400;               /* weight comes from the variation axis */
+  font-variation-settings: 'wdth' var(--wdth-display), 'wght' var(--wght-display);
+}
+
+h1 { font-size: var(--step-5); }
+h2 { font-size: var(--step-3); }
+h3 { font-size: var(--step-1); }
+
+p { margin: 0 0 var(--sp-4); max-width: var(--measure); }
+
+a { color: inherit; text-decoration: none; }
+
+img, video, canvas, svg { display: block; max-width: 100%; }
+img, video { height: auto; }
+
+ul, ol { margin: 0; padding: 0; list-style: none; }
+
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+
+::selection { background: var(--stabilize); color: var(--ground); }
+
+/* Focus must survive on both themes and against the plate. */
+:focus-visible {
+  outline: 2px solid var(--stabilize);
+  outline-offset: 3px;
+}
+
+/* ---------- Primitives ---------- */
+
+.mono {
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-variation-settings: 'wght' 450;
+}
+
+.shell {
+  width: 100%;
+  max-width: var(--max-w);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.rule {
+  border: 0;
+  border-top: 1px solid var(--hairline);
+  margin: 0;
+}
+
+/* Skip link — first tab stop, hidden until focused. */
+.skip {
+  position: absolute;
+  left: var(--sp-4);
+  top: -100px;
+  z-index: 200;
+  padding: var(--sp-3) var(--sp-5);
+  background: var(--type);
+  color: var(--ground);
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  transition: top 0.18s;
+}
+.skip:focus { top: var(--sp-4); }
+
+/* ---------- Motion gating ----------
+   Elements that start hidden do so only once JS has confirmed it can bring
+   them back. Without this the whole page is invisible when a script fails. */
+
+.js-enabled [data-reveal] { opacity: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .js-enabled [data-reveal] { opacity: 1; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

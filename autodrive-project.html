@@ -2,21 +2,19 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <script>(function(){try{if(localStorage.getItem("theme")==="dark"){document.documentElement.setAttribute("data-theme","dark");}}catch(e){}})();</script>
+  <script>(function(){try{if(localStorage.getItem("so-theme")==="light"){document.documentElement.setAttribute("data-theme","light");}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Queen's AutoDrive | Yousef Alsaqa</title>
   <meta name="description" content="Technical investigation of two years on Queen's AutoDrive: lane perception on embedded hardware, CAN bus integration at 10Hz, and the incident log from a Level 4 autonomous vehicle program.">
-  <meta name="theme-color" content="#F1EEE6">
+  <meta name="theme-color" content="#08090B">
 
   <!-- Favicons -->
-  <link rel="icon" type="image/png" href="assets/favicon.png">
-  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="assets/favicon.png?v=3">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=3">
 
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=JetBrains+Mono:wght@400;500;700&display=swap" media="print" onload="this.media=&#39;all&#39;">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=JetBrains+Mono:wght@400;500;700&display=swap"></noscript>
+  <!-- Fonts: self-hosted, a blocked CDN must never blank the page -->
+  <link rel="preload" href="assets/fonts/Archivo.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/GeistMono.woff2" as="font" type="font/woff2" crossorigin>
 
   <!-- Bootstrap Icons -->
   <link href="vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
@@ -282,14 +280,14 @@
         <span class="header-logo-role">MECHATRONICS / SYSTEMS</span>
       </a>
       <nav class="header-nav" id="nav" aria-label="Main">
-        <a href="index.html#systems" class="nav-link">Systems</a>
+        <a href="index.html#console" class="nav-link">Systems</a>
         <a href="index.html#experience" class="nav-link">Experience</a>
-        <a href="index.html#field-notes" class="nav-link">Field Notes</a>
+        <a href="index.html#principles" class="nav-link">Method</a>
         <a href="index.html#about" class="nav-link">About</a>
         <a href="index.html#contact" class="nav-link">Contact</a>
       </nav>
       <div class="header-status" id="headerStatus"><span class="header-status-text">SYSTEM 02 / AUTODRIVE</span></div>
-      <button class="theme-toggle" id="themeToggle" type="button" aria-pressed="false" aria-label="Switch to dark mode"><span class="theme-toggle-dot" aria-hidden="true"></span><span class="theme-toggle-text">LIGHT</span></button>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-pressed="false" aria-label="Switch to light mode"><span class="theme-toggle-dot" aria-hidden="true"></span><span class="theme-toggle-text">DARK</span></button>
       <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
@@ -467,11 +465,11 @@ def process_lanes(image):
 
           <div class="case-image-grid">
             <figure class="case-image">
-              <img src="assets/LaneDetectionDemo.gif" alt="Animated clip of the lane detection overlay tracking lane lines while driving" width="426" height="240" loading="lazy">
+              <video src="assets/LaneDetectionDemo.mp4" width="426" height="240" autoplay muted loop playsinline preload="metadata" aria-label="Animated clip of the lane detection overlay tracking lane lines while driving"></video>
               <figcaption>FIG. 02 &middot; Lane detection demo clip.</figcaption>
             </figure>
             <figure class="case-image">
-              <img src="assets/Lanefollowing.gif" alt="Animated clip from a lane following test run" width="600" height="338" loading="lazy">
+              <video src="assets/Lanefollowing.mp4" width="600" height="338" autoplay muted loop playsinline preload="metadata" aria-label="Animated clip from a lane following test run"></video>
               <figcaption>FIG. 03 &middot; Lane following test.</figcaption>
             </figure>
           </div>
@@ -481,7 +479,7 @@ def process_lanes(image):
           <h2>Test environment</h2>
           <p>Two environments, two purposes.</p>
           <p><strong>The garage.</strong> Controlled testing of protocol and software changes on the real vehicle. Safety protocols required a person in the driver's seat, ready to hit the emergency stop, for every test that could move the car.</p>
-          <p><strong>Kingston roads.</strong> Data collection for the perception work. The driving footage that became our training and test sets was recorded around Kingston and annotated frame by frame, which means the ~85% accuracy figure was measured against real local conditions, not a benchmark dataset.</p>
+          <p><strong>Kingston roads.</strong> Data collection for the perception work. The driving footage that became our training and test sets was recorded around Kingston and annotated frame by frame, so the ~85% accuracy figure comes from the roads the car actually drove, footage we annotated ourselves.</p>
         </div>
 
       </div>
@@ -495,7 +493,7 @@ def process_lanes(image):
           <div class="band-section">
             <span class="band-eyebrow">07</span>
             <h2>Incident log</h2>
-            <p>Two entries from the integration years. Both are reconstructed from what we traced afterward, not from how they felt at the time.</p>
+            <p>Two entries from the integration years. Both are written from the traces we pulled afterward. In the moment, neither felt this orderly.</p>
 
             <div class="incident-entry">
               <div class="incident-head">
@@ -656,22 +654,22 @@ def process_lanes(image):
     // ---- Theme toggle (manual only, never from system preference) ----
     const themeToggle = document.getElementById('themeToggle');
     const themeText = themeToggle.querySelector('.theme-toggle-text');
-    function setThemeUI(isDark) {
-      themeText.textContent = isDark ? 'DARK' : 'LIGHT';
-      themeToggle.setAttribute('aria-pressed', String(isDark));
-      themeToggle.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+    function setThemeUI(isLight) {
+      themeText.textContent = isLight ? 'LIGHT' : 'DARK';
+      themeToggle.setAttribute('aria-pressed', String(isLight));
+      themeToggle.setAttribute('aria-label', isLight ? 'Switch to dark mode' : 'Switch to light mode');
     }
-    setThemeUI(document.documentElement.getAttribute('data-theme') === 'dark');
+    setThemeUI(document.documentElement.getAttribute('data-theme') === 'light');
     themeToggle.addEventListener('click', () => {
-      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-      if (isDark) {
+      const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+      if (isLight) {
         document.documentElement.removeAttribute('data-theme');
-        localStorage.setItem('theme', 'light');
+        localStorage.setItem('so-theme', 'dark');
       } else {
-        document.documentElement.setAttribute('data-theme', 'dark');
-        localStorage.setItem('theme', 'dark');
+        document.documentElement.setAttribute('data-theme', 'light');
+        localStorage.setItem('so-theme', 'light');
       }
-      setThemeUI(!isDark);
+      setThemeUI(!isLight);
     });
   </script>
 </body>

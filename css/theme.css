@@ -1,27 +1,44 @@
 /* ============================================================
-   SIGNAL / FIELD LOG, shared design system
-   Warm technical paper, carbon ink, signal-orange annotations.
-   Newsreader (display) / Instrument Sans (body) / JetBrains Mono (technical).
+   SECOND ORDER, case-study compatibility layer.
+   The old FIELD LOG var names are kept so 15 case pages keep
+   working, but they now resolve to the instrument palette:
+   near-black ground, Archivo, Geist Mono, stabilize blue /
+   overload orange.
    ============================================================ */
+
+@font-face {
+  font-family: 'Archivo';
+  src: url('../assets/fonts/Archivo.woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-stretch: 62% 125%;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Geist Mono';
+  src: url('../assets/fonts/GeistMono.woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-display: swap;
+}
 
 /* ---------- Design tokens ---------- */
 :root {
-  --paper: #F1EEE6;        /* warm technical paper — the base background */
-  --paper-2: #E9E4D8;      /* slightly deeper warm panel */
-  --carbon: #11110F;       /* near-black, used for full carbon sections + text */
-  --graphite: #5E5C56;     /* muted secondary text */
-  --hairline: #C9C5BA;     /* 1px dividers, rules, borders */
-  --signal: #FF4F1F;       /* signal orange — SPARINGLY: active states, annotations, key data */
+  --paper: #08090B;        /* the ground */
+  --paper-2: #131519;      /* raised panel */
+  --carbon: #E8E9EB;       /* ink */
+  --graphite: #7C818A;     /* muted secondary text */
+  --hairline: #262A31;     /* 1px dividers, rules, borders */
+  --signal: #4DA6E8;       /* stabilize blue: active states, annotations, key data */
 
   /* Fixed tokens: the deliberate carbon-accent bands (.section-carbon, .footer,
      incident logs) always use these two, regardless of the active theme, so
      that signature dark moment stays constant whether the page is light or dark. */
-  --ink-fixed: #11110F;
-  --paper-fixed: #F1EEE6;
+  --ink-fixed: #101216;
+  --paper-fixed: #E8E9EB;
 
-  --font-sans: 'Instrument Sans', -apple-system, sans-serif;   /* interface + body */
-  --font-serif: 'Newsreader', Georgia, serif;                  /* editorial display statements only */
-  --font-mono: 'JetBrains Mono', 'Courier New', monospace;     /* measurements, labels, dates, statuses, annotations */
+  --font-sans: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
+  --font-serif: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'Geist Mono', ui-monospace, 'SF Mono', Menlo, monospace;
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
 
   /* Supplementary scale (layout only, no colors beyond the palette above) */
@@ -44,29 +61,16 @@
   --font-body: var(--font-sans);
 }
 
-/* ---------- Dark theme ----------
-   Toggled manually only (see theme-toggle script). Never applied from
-   prefers-color-scheme — the reading mode is a deliberate choice, not an
-   assumption about the visitor's OS setting. */
-:root[data-theme="dark"] {
-  --paper: #16150F;
-  --paper-2: #201F19;
-  --carbon: #F1EEE6;
-  --graphite: #9C978C;
-  --hairline: #35332B;
-  --signal: #FF6A3D;
-}
-
-:root[data-theme="dark"] .header {
-  border-bottom-color: rgba(241, 238, 230, 0.09);
-}
-
-:root[data-theme="dark"] .header.scrolled {
-  background: rgba(22, 21, 15, 0.94);
-}
-
-:root[data-theme="dark"] .ar-peek {
-  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.35);
+/* ---------- Light theme ----------
+   Toggled manually only. Dark is the canonical mode; light is the
+   printed trace. */
+:root[data-theme="light"] {
+  --paper: #DFE3E8;
+  --paper-2: #F7F8FA;
+  --carbon: #0B0D11;
+  --graphite: #4E555F;
+  --hairline: #B9C0CA;
+  --signal: #15618F;
 }
 
 :root[data-theme="dark"] img:not([src$=".svg"]) {
@@ -271,7 +275,7 @@ pre code {
   --graphite: #B7B4AB;
   --hairline: rgba(241, 238, 230, 0.2);
   --paper-2: #1C1B18;
-  --signal: #FF4F1F;
+  --signal: #FF7A1F;
 }
 
 .section-carbon ::selection {
@@ -307,12 +311,12 @@ pre code {
   height: var(--header-height);
   z-index: 1000;
   background: transparent;
-  border-bottom: 1px solid rgba(17, 17, 15, 0.07);
+  border-bottom: 1px solid var(--hairline);
   transition: background 0.25s var(--ease), border-color 0.25s var(--ease);
 }
 
 .header.scrolled {
-  background: rgba(241, 238, 230, 0.95);
+  background: color-mix(in srgb, var(--paper) 94%, transparent);
   border-bottom-color: var(--hairline);
 }
 
@@ -795,7 +799,7 @@ pre code {
   --graphite: #B7B4AB;
   --hairline: rgba(241, 238, 230, 0.2);
   --paper-2: #1C1B18;
-  --signal: #FF4F1F;
+  --signal: #FF7A1F;
   padding: clamp(4rem, 9vw, 6.5rem) 0 2rem;
   border-top: none;
 }

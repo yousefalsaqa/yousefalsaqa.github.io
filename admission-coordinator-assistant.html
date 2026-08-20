@@ -2,21 +2,19 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <script>(function(){try{if(localStorage.getItem("theme")==="dark"){document.documentElement.setAttribute("data-theme","dark");}}catch(e){}})();</script>
+  <script>(function(){try{if(localStorage.getItem("so-theme")==="light"){document.documentElement.setAttribute("data-theme","light");}}catch(e){}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admission Coordinator Assistant | Yousef Alsaqa</title>
   <meta name="description" content="Workflow transformation case study: a Tkinter app driving five parallel PeopleSoft browser sessions so an evaluator reads an admission file and types one number. IB, CBSE/ISC, GCSE, and CEGEP curricula.">
-  <meta name="theme-color" content="#F1EEE6">
+  <meta name="theme-color" content="#08090B">
 
   <!-- Favicons -->
-  <link rel="icon" href="assets/favicon.png" type="image/png">
-  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <link rel="icon" href="assets/favicon.png?v=3" type="image/png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=3">
 
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=JetBrains+Mono:wght@400;500;700&display=swap" media="print" onload="this.media=&#39;all&#39;">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=JetBrains+Mono:wght@400;500;700&display=swap"></noscript>
+  <!-- Fonts: self-hosted, a blocked CDN must never blank the page -->
+  <link rel="preload" href="assets/fonts/Archivo.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/GeistMono.woff2" as="font" type="font/woff2" crossorigin>
 
   <!-- Bootstrap Icons -->
   <link href="vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
@@ -260,14 +258,14 @@
         <span class="header-logo-role">MECHATRONICS / SYSTEMS</span>
       </a>
       <nav class="header-nav" id="nav" aria-label="Main">
-        <a href="index.html#systems" class="nav-link">Systems</a>
+        <a href="index.html#console" class="nav-link">Systems</a>
         <a href="index.html#experience" class="nav-link">Experience</a>
-        <a href="index.html#field-notes" class="nav-link">Field Notes</a>
+        <a href="index.html#principles" class="nav-link">Method</a>
         <a href="index.html#about" class="nav-link">About</a>
         <a href="index.html#contact" class="nav-link">Contact</a>
       </nav>
       <div class="header-status" id="headerStatus"><span class="header-status-text">SYSTEM 03 / COORDINATOR ASSISTANT</span></div>
-      <button class="theme-toggle" id="themeToggle" type="button" aria-pressed="false" aria-label="Switch to dark mode"><span class="theme-toggle-dot" aria-hidden="true"></span><span class="theme-toggle-text">LIGHT</span></button>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-pressed="false" aria-label="Switch to light mode"><span class="theme-toggle-dot" aria-hidden="true"></span><span class="theme-toggle-text">DARK</span></button>
       <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
@@ -403,8 +401,8 @@
         <div class="case-section">
           <h2>Automation strategy: five sessions, real threads</h2>
           <p>The tool drives five simultaneous, independent PeopleSoft browser sessions, each with its own persistent Chrome profile. Three launch at startup, one per core component: General Materials for document review and sign-off, Application Evaluation for evaluation code and score entry, and Checklist for status changes. The remaining pair, OUAC Application and Maintain Application for admit-basis updates, is opt-in and launched on demand rather than at startup, to save resources when it is not needed.</p>
-          <p>Loading a student is fan-out, fan-in concurrency. Clicking "process student" spins up a worker thread per active browser (<code>_process_student_thread</code>), and each thread independently searches for and loads that student in its own PeopleSoft session. All threads are joined before the UI updates, so the interface never reflects a half-loaded state. That is genuine parallel automation, not just background work moved off the UI thread. Every cross-thread UI update is funneled through <code>root.after(0, ...)</code> so it lands correctly on Tk's single UI thread.</p>
-          <h3>Rules as configuration, not code paths</h3>
+          <p>Loading a student is fan-out, fan-in concurrency. Clicking "process student" spins up a worker thread per active browser (<code>_process_student_thread</code>), and each thread independently searches for and loads that student in its own PeopleSoft session. All threads are joined before the UI updates, so the interface never reflects a half-loaded state. All five sessions are genuinely working at the same time. Every cross-thread UI update is funneled through <code>root.after(0, ...)</code> so it lands correctly on Tk's single UI thread.</p>
+          <h3>The rules live in configuration</h3>
           <p>A central <code>CURRICULUMS</code> config table drives which PeopleSoft fields to write to and how to calculate a score. IB summing, CBSE/ISC averaging, and the GCSE/A-Level 1-9 to 1-6 conversion table all live there, alongside the roughly 90-entry OUAC admit-basis table and per-program subject and score requirements. A hardcoded IB-only version would never have generalized; a config table did.</p>
         </div>
 
@@ -461,7 +459,7 @@
         <div class="case-section">
           <h2>Maintenance</h2>
           <ul>
-            <li><strong>New curriculum, config entry.</strong> Because field mapping and score calculation live in the <code>CURRICULUMS</code> table, extending the tool usually means adding configuration, not rewriting logic.</li>
+            <li><strong>New curriculum, config entry.</strong> Because field mapping and score calculation live in the <code>CURRICULUMS</code> table, extending the tool usually means one more config entry.</li>
             <li><strong>When the model does not fit, do not force it.</strong> CEGEP got its own ~1,450-line evaluator behind the shared mode-picker rather than a pile of special cases inside the main one.</li>
             <li><strong>The allow-list grows one verified dialog at a time.</strong> A popup only becomes auto-dismissable once it is understood. Until then, it pauses for a human. That boundary is what makes the tool safe to keep extending.</li>
           </ul>
@@ -521,22 +519,22 @@
     // ---- Theme toggle (manual only, never from system preference) ----
     const themeToggle = document.getElementById('themeToggle');
     const themeText = themeToggle.querySelector('.theme-toggle-text');
-    function setThemeUI(isDark) {
-      themeText.textContent = isDark ? 'DARK' : 'LIGHT';
-      themeToggle.setAttribute('aria-pressed', String(isDark));
-      themeToggle.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+    function setThemeUI(isLight) {
+      themeText.textContent = isLight ? 'LIGHT' : 'DARK';
+      themeToggle.setAttribute('aria-pressed', String(isLight));
+      themeToggle.setAttribute('aria-label', isLight ? 'Switch to dark mode' : 'Switch to light mode');
     }
-    setThemeUI(document.documentElement.getAttribute('data-theme') === 'dark');
+    setThemeUI(document.documentElement.getAttribute('data-theme') === 'light');
     themeToggle.addEventListener('click', () => {
-      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-      if (isDark) {
+      const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+      if (isLight) {
         document.documentElement.removeAttribute('data-theme');
-        localStorage.setItem('theme', 'light');
+        localStorage.setItem('so-theme', 'dark');
       } else {
-        document.documentElement.setAttribute('data-theme', 'dark');
-        localStorage.setItem('theme', 'dark');
+        document.documentElement.setAttribute('data-theme', 'light');
+        localStorage.setItem('so-theme', 'light');
       }
-      setThemeUI(!isDark);
+      setThemeUI(!isLight);
     });
   </script>
 </body>
