@@ -45,8 +45,40 @@ export class Tuner {
   init() {
     this._buildRail();
     this._bindDrag();
+    this._bindSwipe();
     document.addEventListener('keydown', this._onKey);
     this.select(0, true);
+  }
+
+  /* ----------------------------------------------------------------- swipe
+     On a phone the rail is a strip, not a instrument you sweep with a mouse,
+     so the sweep gesture moves to where the thumb already is: swipe the
+     instrument left or right to tune to the next system. Touch only, and
+     never when the gesture starts on one of the instrument's own controls. */
+  _bindSwipe() {
+    if (!this.stage) return;
+    let x0 = 0, y0 = 0, t0 = 0, tracking = false;
+
+    this.stage.addEventListener('pointerdown', (e) => {
+      if (e.pointerType !== 'touch') return;
+      if (e.target.closest('input, button, a, [role="button"], [tabindex]')) return;
+      tracking = true;
+      x0 = e.clientX; y0 = e.clientY; t0 = performance.now();
+    }, { passive: true });
+
+    this.stage.addEventListener('pointerup', (e) => {
+      if (!tracking) return;
+      tracking = false;
+      const dx = e.clientX - x0;
+      const dy = e.clientY - y0;
+      const dt = performance.now() - t0;
+      // A deliberate horizontal flick: mostly sideways, far enough, quick enough.
+      if (Math.abs(dx) < 56 || Math.abs(dy) > Math.abs(dx) * 0.6 || dt > 600) return;
+      if (dx < 0) this.select(Math.min(this.index + 1, SYSTEMS.length - 1));
+      else this.select(Math.max(this.index - 1, 0));
+    }, { passive: true });
+
+    this.stage.addEventListener('pointercancel', () => { tracking = false; });
   }
 
   destroy() {
@@ -132,6 +164,8 @@ export class Tuner {
 
     this.busy = true;
     const prev = this.index;
+    // Which way the needle travels; the panel slides the same way.
+    this.dir = prev < 0 ? 1 : (i > prev ? 1 : -1);
     this.index = i;
 
     // Rail state
@@ -165,8 +199,8 @@ export class Tuner {
     if (out && !immediate && gsap && !reduced()) {
       await gsap.to(out, {
         opacity: 0,
-        y: -18,
-        duration: 0.32,
+        x: -26 * this.dir,
+        duration: 0.3,
         ease: 'power2.in',
       });
     }
@@ -188,8 +222,8 @@ export class Tuner {
 
     if (!immediate && gsap && !reduced()) {
       gsap.fromTo(card,
-        { opacity: 0, y: 26 },
-        { opacity: 1, y: 0, duration: 1.0, ease: dampedEase(DAMPING.card, 1.4) }
+        { opacity: 0, x: 42 * this.dir },
+        { opacity: 1, x: 0, duration: 1.0, ease: dampedEase(DAMPING.card, 1.4) }
       );
       gsap.fromTo(card.querySelectorAll('.sysdoc-spec > div'),
         { opacity: 0, x: 14 },

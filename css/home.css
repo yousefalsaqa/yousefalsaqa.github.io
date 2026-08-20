@@ -175,6 +175,10 @@
   background: var(--surface);
   position: relative;
   overflow: hidden;
+  /* Vertical panning stays with the browser; horizontal belongs to the
+     tuner's swipe. Without this the browser claims the sideways gesture
+     and cancels the pointer stream before pointerup ever fires. */
+  touch-action: pan-y;
 }
 .instrument-fallback {
   padding: var(--sp-6);
@@ -263,6 +267,12 @@
   width: 7px; height: 7px;
   background: var(--overload);
   transform: translateX(-50%) rotate(45deg);
+}
+
+.rail-hint-touch { display: none; }
+@media (pointer: coarse) {
+  .rail-hint-fine { display: none; }
+  .rail-hint-touch { display: inline; }
 }
 
 .rail-hint {
@@ -442,9 +452,14 @@ kbd {
   }
   .console-rail {
     order: -1;
+    position: sticky;
+    top: var(--header-h);
+    z-index: 60;
+    background: color-mix(in srgb, var(--ground) 92%, transparent);
+    backdrop-filter: blur(10px);
     border-top: 0;
     border-bottom: 1px solid var(--hairline);
-    padding-block: var(--sp-4) var(--sp-2);
+    padding-block: var(--sp-3) var(--sp-1);
   }
   .console-grid {
     display: flex;
