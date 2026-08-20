@@ -9,6 +9,8 @@ import { mountPlate } from './cymatics.js';
 import {
   initMotion, teardownMotion, initScroll, couplePlate,
 } from './motion.js';
+import { mountTuner } from './tuner.js';
+import { mountCursor } from './cursor.js';
 import { onReducedChange } from './secondorder.js';
 
 /* Reveals are hidden by CSS only when this class is present, so a script that
@@ -16,6 +18,8 @@ import { onReducedChange } from './secondorder.js';
 document.documentElement.classList.add('js-enabled');
 
 let plate = null;
+let tuner = null;
+let cursor = null;
 
 /* ---------------------------------------------------------------------------
    Theme
@@ -122,10 +126,15 @@ export function setupPage(scope = document) {
   initMotion(scope);
   initReadout(scope);
   couplePlate(plate);
+
+  // The tuner takes over the plate's mode, so it must mount after the plate.
+  const tunerRoot = scope.querySelector('[data-tuner]');
+  if (tunerRoot) tuner = mountTuner(tunerRoot, plate);
 }
 
 export function resetPage() {
   teardownMotion();
+  if (tuner) { tuner.destroy(); tuner = null; }
   if (plate) { plate.destroy(); plate = null; }
 }
 
@@ -151,6 +160,7 @@ function boot() {
   initTheme();
   initNav();
   initScroll();
+  cursor = mountCursor();
   setupPage(document);
   failsafe();
 

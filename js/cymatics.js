@@ -148,6 +148,13 @@ export class CymaticPlate {
     this.pointer = [0.5, 0.5];
     this.pointerAmt = 0;
     this.morph = dampedEase(0.55, 1.0);
+    // Mode state. `driven` flips true once a tuner takes control; until then
+    // the plate drifts through MODES on its own.
+    this.driven = false;
+    this.modeFrom = null;
+    this.modeTo = null;
+    this.modeAt = null;
+    this.morphStart = null;
     this._onResize = this._resize.bind(this);
     this._onPointer = this._pointerMove.bind(this);
     this._onLeave = () => { this.pointerAmt = 0; };
@@ -239,16 +246,59 @@ export class CymaticPlate {
     this.excite = Math.min(Math.max(v, 0), 1);
   }
 
-  /** Interpolated mode pair at time t, using the damped ease for the morph. */
+  /**
+   * Drive the plate to a mode pair. Called by the tuner when the visitor
+   * sweeps to a different system; the plate rings into the new figure rather
+   * than cutting to it.
+   *
+   * @param {number} n
+   * @param {number} m
+   * @param {boolean} [immediate] Skip the morph (first paint, or reduced motion).
+   */
+  setMode(n, m, immediate = false) {
+    this.driven = true;
+    this.modeTo = [n, m];
+    if (immediate || reduced()) {
+      this.modeFrom = [n, m];
+      this.modeAt = [n, m];
+      this.morphStart = null;
+      return;
+    }
+    // Morph from wherever the plate currently is, so an interrupted sweep
+    // continues from its real position instead of snapping back.
+    this.modeFrom = this.modeAt ? this.modeAt.slice() : [n, m];
+    this.morphStart = null;   // stamped on the next frame
+  }
+
+  /** Interpolated mode pair at time t. */
   _modeAt(t) {
-    if (reduced()) return MODES[2];  // frozen on one legible figure
+    if (this.driven) {
+      if (!this.modeTo) return MODES[0];
+      if (!this.modeFrom) return this.modeTo;
+      if (this.morphStart === null) this.morphStart = t;
+      const k = Math.min((t - this.morphStart) / MORPH_SECONDS, 1);
+      if (k >= 1) {
+        this.modeAt = this.modeTo.slice();
+        return this.modeAt;
+      }
+      const e = this.morph(k);
+      this.modeAt = [
+        this.modeFrom[0] + (this.modeTo[0] - this.modeFrom[0]) * e,
+        this.modeFrom[1] + (this.modeTo[1] - this.modeFrom[1]) * e,
+      ];
+      return this.modeAt;
+    }
+
+    // Undriven: drift through the mode table on its own.
+    if (reduced()) return MODES[2];
     const idx = Math.floor(t / SECONDS_PER_MODE);
     const into = t - idx * SECONDS_PER_MODE;
     const a = MODES[idx % MODES.length];
     const b = MODES[(idx + 1) % MODES.length];
     if (into > MORPH_SECONDS) return a;
     const k = this.morph(into / MORPH_SECONDS);
-    return [a[0] + (b[0] - a[0]) * k, a[1] + (b[1] - a[1]) * k];
+    this.modeAt = [a[0] + (b[0] - a[0]) * k, a[1] + (b[1] - a[1]) * k];
+    return this.modeAt;
   }
 
   _frame(now) {
