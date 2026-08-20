@@ -186,7 +186,7 @@
 
         <div class="case-section">
           <h2>Dataset</h2>
-          <p>Two datasets, one per program, each covering roughly 10 years of admitted students. Commerce: about 5,600 students. Engineering: about 8,700 students, spread across six common-first-year disciplines. Each record pairs admission inputs, overall high school average, individual subject grades, supplementary application score, admission curriculum (Ontario, IB, and so on), with the outcome variable, first-year GPA. The raw material arrived as difficult Excel exports, cleaned with pandas and openpyxl and loaded into SQLite for querying.</p>
+          <p>Two datasets, one per program, each covering roughly 10 years of admitted students. Commerce: about 5,600 students. Engineering: about 8,700 students through the common first year. Each record pairs admission inputs, overall high school average, individual subject grades, supplementary application score, admission curriculum (Ontario, IB, and so on), with the outcome variable, first-year GPA. The raw material arrived as difficult Excel exports, cleaned with pandas and openpyxl and loaded into SQLite for querying.</p>
           <p>Privacy came first. <code>anonymize_commerce_data.py</code> hashes real student numbers into anonymous IDs with SHA-256, and the only file linking the two is <code>misc/student_id_mapping.json</code>. Analysts can explore grades and GPA freely without a real ID ever appearing on screen, while that one mapping file is the sensitive key that gets locked down separately. The anonymized lookup table, built from per-term sheets in <code>anonymized_commerce_data.xlsx</code>, holds about 5,087 students.</p>
           <p>One property of this dataset shapes everything downstream: it contains only students who were admitted and enrolled. That matters later, in Limitations.</p>
 
@@ -290,7 +290,7 @@
         </figure>
 
         <div class="case-section">
-          <p>Once the generic engine existed, the same pipeline was pointed at Engineering: roughly 8,700 admitted students over 10 years. The bigger dataset and different program structure, six common-first-year disciplines instead of one Commerce track, required rethinking the predictor variables and how to handle program transfers. That model is built and running. Its findings are still being reviewed internally and no policy discussion has come from it yet, so this writeup deliberately reports only the Commerce results.</p>
+          <p>Once the generic engine existed, the same pipeline was pointed at Engineering: roughly ten years of admitted students. The brief was specific. For Ontario applicants: high school average and each of the five required 4U courses (ENG4U, MCV4U, MHF4U, SCH4U, SPH4U) against Year 1 GPA and against each APSC first-year course, broken down by public, private, and separate school designation. For all applicants: admission basis against the same outcomes. That model is built and running. Its findings are still being reviewed internally and no policy discussion has come from it yet, so this writeup deliberately reports only the Commerce results.</p>
         </div>
 
         <div class="case-section">
