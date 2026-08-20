@@ -101,10 +101,6 @@ const MODES = [
   },
 ];
 
-/* All labels the quiz can offer as claims, per kind. */
-const HEART_LABELS = ['Normal S1 S2', 'Holosystolic murmur', 'S3 gallop', 'Normal, fast'];
-const LUNG_LABELS = ['Clear vesicular', 'Coarse crackles', 'Fine crackles, both bases', 'Expiratory wheeze'];
-
 /* ---------------------------------------------------------------------------
    Waveform synthesis
    ------------------------------------------------------------------------- */
@@ -204,9 +200,7 @@ export function mount(container, system) {
           <div class="bm-quiz" hidden>
             <p class="bm-quiz-q" aria-live="polite"></p>
             <div class="bm-quiz-actions">
-              <button type="button" class="bm-quiz-btn" data-ans="yes">Yes</button>
-              <button type="button" class="bm-quiz-btn" data-ans="no">No</button>
-              <button type="button" class="bm-quiz-next" hidden>Next</button>
+              <button type="button" class="bm-quiz-next" hidden>Next case</button>
             </div>
           </div>
 
@@ -230,7 +224,6 @@ export function mount(container, system) {
   const quizEl = container.querySelector('.bm-quiz');
   const quizQ = container.querySelector('.bm-quiz-q');
   const quizNext = container.querySelector('.bm-quiz-next');
-  const quizBtns = Array.from(container.querySelectorAll('.bm-quiz-btn'));
   const ctx = canvas.getContext('2d');
 
   let mode = MODES[0];
@@ -256,7 +249,7 @@ export function mount(container, system) {
       <circle class="bp-hit"  cx="${p.x}" cy="${p.y}" r="9"/>
       <text class="bp-id" x="${p.x + 8}" y="${p.y - 5}">${p.id}</text>
     `;
-    const pick = () => { if (tab === 'sim') setActive(p, g); };
+    const pick = () => setActive(p, g);
     g.addEventListener('pointerenter', pick);
     g.addEventListener('focus', pick);
     g.addEventListener('click', pick);
@@ -278,13 +271,16 @@ export function mount(container, system) {
     active = p;
     buttons.forEach((b) => b.classList.toggle('is-live', b === (btn || p.el)));
 
+    const quizzing = tab === 'quiz';
     const f = findingOf(p);
     siteEl.textContent = p.site;
     tagEl.textContent = `TAG ${String(p.id).padStart(2, '0')}`;
-    findingEl.textContent = tab === 'quiz' ? 'Listen, then answer' : f.label;
+    // In the quiz you get the sound, never the label - reading the trace is
+    // the exercise.
+    findingEl.textContent = quizzing ? 'Listen…' : f.label;
     noteEl.textContent = p.kind === 'heart' ? 'Cardiac site' : 'Lung field';
 
-    if (!silent) {
+    if (!silent && !quizzing) {
       const t = new Date().toLocaleTimeString('en-CA', { hour12: false });
       const row = document.createElement('div');
       row.className = 'scope-log-row';
@@ -304,6 +300,7 @@ export function mount(container, system) {
   /* ---- scenario picker ---- */
   const modeBtns = Array.from(container.querySelectorAll('.bm-mode'));
   modeBtns.forEach((b) => b.addEventListener('click', () => {
+    if (tab === 'quiz') { answer(b.dataset.mode); return; }
     mode = MODES.find((m) => m.id === b.dataset.mode);
     modeBtns.forEach((x) => x.classList.toggle('is-on', x === b));
     modeEl.textContent = mode.label;
@@ -317,44 +314,45 @@ export function mount(container, system) {
     while (logEl.children.length > 4) logEl.lastElementChild.remove();
   }));
 
-  /* ---- quiz ---- */
-  function newQuestion() {
-    const qMode = MODES[Math.floor(Math.random() * MODES.length)];
-    const pos = POSITIONS[Math.floor(Math.random() * POSITIONS.length)];
-    const truth = qMode.find(pos).label;
-    const pool = (pos.kind === 'heart' ? HEART_LABELS : LUNG_LABELS).filter((l) => l !== truth);
-    const honest = Math.random() < 0.5;
-    const claim = honest ? truth : pool[Math.floor(Math.random() * pool.length)];
-    quiz = { pos, mode: qMode, claim, truth, answered: false };
-
-    setActive(pos, pos.el, true);
-    quizQ.innerHTML = `You are listening at the <b>${pos.site}</b>. Is this <b>${claim.toLowerCase()}</b>?`;
-    quizQ.className = 'bm-quiz-q';
-    quizBtns.forEach((b) => { b.disabled = false; });
-    quizNext.hidden = true;
+  /* ---- quiz: identify the scenario ----
+     A scenario runs in secret. Probing plays its sound at every position, so
+     the diagnosis is made the way it is made on the real manikin: check the
+     apex, check both bases, then commit. The scenario chips are the answer. */
+  function clearChipMarks() {
+    modeBtns.forEach((x) => x.classList.remove('is-on', 'is-right', 'is-wrong'));
   }
 
-  function answer(ans) {
+  function newQuestion() {
+    quiz = { mode: MODES[Math.floor(Math.random() * MODES.length)], answered: false };
+    clearChipMarks();
+    modeEl.textContent = '?';
+    quizQ.textContent = 'A scenario is running. Probe the chest, then pick which one.';
+    quizQ.className = 'bm-quiz-q';
+    quizNext.hidden = true;
+    setActive(active, active.el, true);
+  }
+
+  function answer(modeId) {
     if (!quiz || quiz.answered) return;
     quiz.answered = true;
     asked++;
-    const truthful = quiz.claim === quiz.truth;
-    const right = (ans === 'yes') === truthful;
+    const right = modeId === quiz.mode.id;
     if (right) score++;
+    modeBtns.forEach((x) => {
+      if (x.dataset.mode === quiz.mode.id) x.classList.add('is-right');
+      else if (x.dataset.mode === modeId) x.classList.add('is-wrong');
+    });
     quizQ.innerHTML = right
-      ? `Correct. ${truthful ? 'That is exactly it.' : `It is actually ${quiz.truth.toLowerCase()}.`} &middot; <b>${score}/${asked}</b>`
-      : `Wrong. This is ${quiz.truth.toLowerCase()}. &middot; <b>${score}/${asked}</b>`;
+      ? `Correct: ${quiz.mode.label.toLowerCase()}. &middot; <b>${score}/${asked}</b>`
+      : `Not this time. It was ${quiz.mode.label.toLowerCase()}. &middot; <b>${score}/${asked}</b>`;
     quizQ.className = `bm-quiz-q ${right ? 'is-right' : 'is-wrong'}`;
-    quizBtns.forEach((b) => { b.disabled = true; });
     quizNext.hidden = false;
   }
 
-  quizBtns.forEach((b) => b.addEventListener('click', () => answer(b.dataset.ans)));
   quizNext.addEventListener('click', newQuestion);
 
   /* ---- tabs ---- */
   const tabBtns = Array.from(container.querySelectorAll('.bm-tab'));
-  const modesBar = container.querySelector('.bm-modes');
   tabBtns.forEach((b) => b.addEventListener('click', () => {
     tab = b.dataset.tab;
     tabBtns.forEach((x) => {
@@ -364,9 +362,15 @@ export function mount(container, system) {
     const quizzing = tab === 'quiz';
     quizEl.hidden = !quizzing;
     logEl.hidden = quizzing;
-    modesBar.classList.toggle('is-locked', quizzing);
     if (quizzing) newQuestion();
-    else { setActive(active, active.el, true); }
+    else {
+      quiz = null;
+      clearChipMarks();
+      const cur = modeBtns.find((x) => x.dataset.mode === mode.id);
+      if (cur) cur.classList.add('is-on');
+      modeEl.textContent = mode.label;
+      setActive(active, active.el, true);
+    }
   }));
 
   /* ---- scope ---- */
@@ -398,11 +402,12 @@ export function mount(container, system) {
     ctx.stroke();
     ctx.globalAlpha = 1;
 
-    // In quiz mode the truth's waveform plays; in simulate, the scenario's.
+    // In the quiz the secret scenario plays at whichever position you probe;
+    // in simulate, the chosen one does.
     const f = quiz && tab === 'quiz'
-      ? quiz.mode.find(quiz.pos)
+      ? quiz.mode.find(active)
       : findingOf(active);
-    const pos = quiz && tab === 'quiz' ? quiz.pos : active;
+    const pos = active;
 
     const span = 2.2;
     const base = reduced() ? 0 : t;

@@ -49,7 +49,6 @@
 .bm-tab.is-on { background: var(--stabilize); border-color: var(--stabilize); color: var(--ground); }
 
 .bm-modes { display: flex; flex-wrap: wrap; gap: 0.35rem; min-width: 0; }
-.bm-modes.is-locked { opacity: 0.35; pointer-events: none; }
 .bm-mode {
   padding: 0.3rem 0.6rem;
   border: 1px solid var(--hairline);
@@ -86,7 +85,10 @@
 .bm-quiz-q.is-right { color: var(--stabilize); }
 .bm-quiz-q.is-wrong { color: var(--overload); }
 .bm-quiz-actions { display: flex; gap: var(--sp-3); }
-.bm-quiz-btn, .bm-quiz-next {
+.bm-mode.is-right { border-color: var(--stabilize); color: var(--stabilize); background: color-mix(in srgb, var(--stabilize) 16%, transparent); }
+.bm-mode.is-wrong { border-color: var(--overload); color: var(--overload); }
+
+.bm-quiz-next {
   min-width: 4.5rem;
   min-height: 44px;
   padding: 0.4rem 1rem;
@@ -98,8 +100,6 @@
   color: var(--type);
   transition: border-color 0.22s, color 0.22s;
 }
-.bm-quiz-btn:not(:disabled):hover { border-color: var(--stabilize); color: var(--stabilize); }
-.bm-quiz-btn:disabled { opacity: 0.4; }
 .bm-quiz-next { border-color: var(--stabilize); color: var(--stabilize); }
 
 .bodymap-figure {
