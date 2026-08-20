@@ -160,6 +160,33 @@
 .manikin { width: 100%; height: 100%; }
 
 .mk-body { fill: var(--surface-2); stroke: var(--hairline); stroke-width: 1.1; }
+
+/* The head is the power switch. Its glyph is the Pi's activity LED green -
+   the one place that colour appears, because that is what a power light is. */
+.mk-head { cursor: pointer; }
+.mk-head:focus { outline: none; }
+.mk-head-shell {
+  fill: var(--surface-2);
+  stroke: var(--hairline);
+  stroke-width: 1.1;
+  transition: stroke 0.3s;
+}
+.mk-power-line, .mk-power-arc {
+  fill: none;
+  stroke: var(--muted);
+  stroke-width: 2;
+  stroke-linecap: round;
+  transition: stroke 0.3s;
+}
+.mk-head:hover .mk-head-shell,
+.mk-head:focus-visible .mk-head-shell { stroke: var(--stabilize); }
+.mk-head.is-on .mk-power-line,
+.mk-head.is-on .mk-power-arc { stroke: #3FBF6F; }
+.mk-head.is-on .mk-head-shell { stroke: #3FBF6F; }
+
+/* Off: the chest waits quietly. */
+.bodymap.is-off .bp { opacity: 0.45; }
+.bodymap.is-off .scope-banner { color: var(--muted); background: color-mix(in srgb, var(--muted) 10%, transparent); }
 .mk-module {
   fill: none;
   stroke: var(--hairline);

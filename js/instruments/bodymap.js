@@ -214,7 +214,12 @@ export function mount(container, system) {
                aria-label="Twelve RFID auscultation positions on the manikin">
             <path class="mk-body" d="M16 26 H118 C132 26 140 34 146 46 H166 V74 H146
                                      C140 86 132 94 118 94 H16 Z"/>
-            <circle class="mk-body" cx="190" cy="60" r="26"/>
+            <g class="mk-head" tabindex="0" role="switch" aria-checked="false"
+               aria-label="Power. The head houses the Pi; tap it to start the module.">
+              <circle class="mk-head-shell" cx="190" cy="60" r="26"/>
+              <path class="mk-power-line" d="M190 50 v9"/>
+              <path class="mk-power-arc" d="M183.5 55.5 a9 9 0 1 0 13 0"/>
+            </g>
             <rect class="mk-module" x="40" y="30" width="98" height="60" rx="2"/>
             <path class="mk-midline" d="M40 60 H138"/>
             <g class="mk-points"></g>
@@ -223,7 +228,7 @@ export function mount(container, system) {
         </div>
 
         <div class="bodymap-scope">
-          <div class="scope-banner">Auscultation module active &middot; <b class="scope-mode">Normal / Clear</b></div>
+          <div class="scope-banner"><span class="scope-power">Auscultation module offline &middot; tap the head to power on</span><span class="scope-live" hidden>Auscultation module active &middot; <b class="scope-mode">Normal / Clear</b></span></div>
           <div class="scope-head">
             <span class="scope-head-main">
               <span class="scope-site">—</span>
@@ -258,6 +263,10 @@ export function mount(container, system) {
   const findingEl = container.querySelector('.scope-finding');
   const noteEl = container.querySelector('.scope-note');
   const modeEl = container.querySelector('.scope-mode');
+  const powerMsg = container.querySelector('.scope-power');
+  const liveMsg = container.querySelector('.scope-live');
+  const headEl = container.querySelector('.mk-head');
+  const hintEl = container.querySelector('.bodymap-hint');
   const logEl = container.querySelector('.scope-log');
   const quizEl = container.querySelector('.bm-quiz');
   const quizQ = container.querySelector('.bm-quiz-q');
@@ -267,6 +276,7 @@ export function mount(container, system) {
   const lungSel = container.querySelector('[data-pick="lung"]');
   const ctx = canvas.getContext('2d');
 
+  let powered = false;
   let heart = HEART[0];
   let lung = LUNG[0];
   let tab = 'sim';
@@ -330,10 +340,10 @@ export function mount(container, system) {
     siteEl.textContent = p.site;
     locEl.textContent = p.loc;
     tagEl.textContent = `TAG ${String(p.id).padStart(2, '0')}`;
-    findingEl.textContent = quizzing ? 'Listen…' : f.label;
+    findingEl.textContent = !powered ? 'Module offline' : quizzing ? 'Listen…' : f.label;
     noteEl.textContent = p.kind === 'heart' ? 'Cardiac site' : 'Lung field';
 
-    if (!silent && !quizzing) {
+    if (!silent && !quizzing && powered) {
       logLine(`Tag ${String(p.id).padStart(2, '0')} read &middot; ${p.site} &middot; ${f.label}`);
     }
 
@@ -344,6 +354,31 @@ export function mount(container, system) {
       );
     }
   }
+
+  /* ---- power ----
+     The module starts off, because a waveform scrolling the moment the page
+     opens is noise when you are trying to read. The head is the switch - in
+     the real manikin the detachable head is where the Raspberry Pi lives. */
+  function setPower(on) {
+    powered = on;
+    headEl.classList.toggle('is-on', on);
+    headEl.setAttribute('aria-checked', String(on));
+    powerMsg.hidden = on;
+    liveMsg.hidden = !on;
+    container.querySelector('.bodymap').classList.toggle('is-off', !on);
+    hintEl.textContent = on ? 'Probe a position' : 'Tap the head to power on';
+    if (on) {
+      setActive(active, active.el, true);
+    } else {
+      findingEl.textContent = 'Module offline';
+    }
+  }
+
+  const togglePower = () => setPower(!powered);
+  headEl.addEventListener('click', togglePower);
+  headEl.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); togglePower(); }
+  });
 
   /* ---- pickers ---- */
   function onPick() {
@@ -453,6 +488,20 @@ export function mount(container, system) {
     ctx.stroke();
     ctx.globalAlpha = 1;
 
+    // Off: the graticule and a flat trace. The module is not running.
+    if (!powered) {
+      ctx.strokeStyle = line;
+      ctx.globalAlpha = 0.4;
+      ctx.lineWidth = Math.max(1.2, w / 1000);
+      ctx.beginPath();
+      ctx.moveTo(0, h / 2);
+      ctx.lineTo(w, h / 2);
+      ctx.stroke();
+      ctx.globalAlpha = 1;
+      raf = requestAnimationFrame(draw);
+      return;
+    }
+
     // In the quiz the secret case plays at whichever position you probe.
     const f = quiz && tab === 'quiz'
       ? findingOf(active, quiz.heart, quiz.lung)
@@ -480,6 +529,7 @@ export function mount(container, system) {
   const onResize = () => size();
   window.addEventListener('resize', onResize, { passive: true });
   setActive(POSITIONS[4], buttons[4], true);
+  setPower(false);
   raf = requestAnimationFrame(draw);
 
   if (gsap && !reduced()) {
