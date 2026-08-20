@@ -23,7 +23,7 @@ const EXCHANGES = [
   {
     say: 'what am I working on',
     tools: ['list_projects'],
-    reply: 'Three. Resonance, this portfolio, and the NASA telemetry project. Resonance was the last one you touched.',
+    reply: 'Three. Resonance, this portfolio, and the C-MAPSS predictive maintenance project. Resonance was the last one you touched.',
   },
   {
     say: 'open the resonance log',
