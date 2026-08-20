@@ -16,25 +16,31 @@ const gsap = window.gsap;
 const HZ = 10;
 const WINDOW = 120;   // samples held on screen = 12 s at 10 Hz
 
+/* The last channel is the one that matters: how old the newest perception
+   message is by the time the planner consumes it. At 10 Hz anything past
+   ~100 ms means the controller is steering toward a road that has moved. */
 const CHANNELS = [
-  { id: 'lane',  label: 'Lane offset',   unit: 'm',  range: [-1.4, 1.4], accent: false },
-  { id: 'steer', label: 'Steering angle', unit: '°',  range: [-28, 28],   accent: false },
-  { id: 'speed', label: 'Velocity',      unit: 'm/s', range: [0, 14],     accent: false },
-  { id: 'sync',  label: 'Node sync error', unit: 'ms', range: [0, 120],   accent: true },
+  { id: 'lane',  label: 'Lateral offset',  unit: 'm',   range: [-1.4, 1.4], accent: false },
+  { id: 'steer', label: 'Steering angle',  unit: '°',   range: [-28, 28],   accent: false },
+  { id: 'speed', label: 'Speed',           unit: 'm/s', range: [0, 14],     accent: false },
+  { id: 'age',   label: 'Perception msg age', unit: 'ms', range: [0, 400],  accent: true },
 ];
+
+const AGE_LIMIT = 100;
 
 export function mount(container, system) {
   container.innerHTML = `
     <div class="trace">
       <div class="trace-head">
         <span class="trace-title">CAN bus · 10 Hz</span>
-        <button type="button" class="trace-drift">Induce node drift</button>
+        <button type="button" class="trace-drift">Drop perception frames</button>
       </div>
       <div class="trace-body">
         <figure class="trace-cam">
           <video src="assets/LaneDetectionDemo.mp4" autoplay muted loop playsinline
                  preload="metadata" width="426" height="240"
                  aria-label="Onboard footage with the lane detection overlay tracking lane lines."></video>
+          <canvas class="trace-ghost" aria-hidden="true"></canvas>
           <span class="trace-stale-flag" aria-hidden="true">PERCEPTION STALE</span>
           <figcaption>Perception · onboard, the lane model's own output</figcaption>
         </figure>
@@ -51,6 +57,9 @@ export function mount(container, system) {
   const clockEl = container.querySelector('.trace-clock');
   const stateEl = container.querySelector('.trace-state');
   const driftBtn = container.querySelector('.trace-drift');
+  const ghost = container.querySelector('.trace-ghost');
+  const gctx = ghost.getContext('2d');
+  const staleFlag = container.querySelector('.trace-stale-flag');
 
   const chans = CHANNELS.map((c) => {
     const row = document.createElement('div');
@@ -75,6 +84,8 @@ export function mount(container, system) {
   });
 
   let t = 0;
+  let staleErr = 0;       // metres the lane estimate lags the road
+  let lastAge = 16;
   let drift = 0;          // 0..1, how far the nodes have fallen out of step
   let drifting = false;
   let raf = 0;
@@ -84,7 +95,7 @@ export function mount(container, system) {
 
   driftBtn.addEventListener('click', () => {
     drifting = !drifting;
-    driftBtn.textContent = drifting ? 'Resynchronize' : 'Induce node drift';
+    driftBtn.textContent = drifting ? 'Restore frame rate' : 'Drop perception frames';
     driftBtn.classList.toggle('is-on', drifting);
   });
 
@@ -96,29 +107,43 @@ export function mount(container, system) {
       ? Math.min(drift + 0.016, 1)
       : Math.max(drift - 0.045, 0);
 
-    // A gentle lane weave, plus growing error as perception goes stale.
+    // A gentle lane weave, plus the error that stale perception adds: the
+    // planner is steering toward where the lane WAS, so in any curvature the
+    // estimate and the road pull apart.
     const weave = Math.sin(t * 0.7) * 0.5 + Math.sin(t * 1.9) * 0.16;
     const stale = drift * Math.sin(t * 2.6) * 1.3;
     const lane = weave + stale;
+    // What the ghost draws: on this left-curving road the stale estimate is
+    // the road continuing straighter than it does, so the target path hangs
+    // persistently to the OUTSIDE of the curve. It wanders but never swings
+    // back through perfect alignment while frames are still being dropped.
+    staleErr = drift * (0.7 + 0.3 * Math.sin(t * 2.1)) * 1.2;
 
-    // Control chases the lane offset; with drift it chases an old value, so
-    // the steering hunts hard while the lane barely moved.
+    // Control chases the lane estimate; with a stale estimate the steering
+    // hunts hard while the actual road barely moved.
     const steer = -(lane * 16) + drift * Math.sin(t * 3.4) * 18;
     const speed = 9.4 + Math.sin(t * 0.42) * 1.6 - drift * 3.4;
-    const sync = 4 + drift * 96 + Math.abs(Math.sin(t * 5.1)) * (2 + drift * 14);
 
-    const vals = { lane, steer, speed, sync };
+    // Message age: nominal is transport latency plus jitter. Dropping frames
+    // sends it climbing toward several consumed cycles.
+    const age = 16 + Math.abs(Math.sin(t * 5.1)) * 10 + drift * (290 + Math.sin(t * 1.3) * 30);
+    lastAge = age;
+
+    const vals = { lane, steer, speed, age };
     chans.forEach((ch) => {
       ch.buf.push(vals[ch.cfg.id]);
       if (ch.buf.length > WINDOW) ch.buf.shift();
       const v = vals[ch.cfg.id];
-      ch.val.textContent = `${v.toFixed(ch.cfg.id === 'sync' ? 0 : 2)} ${ch.cfg.unit}`;
+      ch.val.textContent = `${v.toFixed(ch.cfg.id === 'age' ? 0 : 2)} ${ch.cfg.unit}`;
     });
 
     clockEl.textContent = `t = ${t.toFixed(1)} s`;
-    const bad = sync > 40;
-    stateEl.textContent = bad ? 'stale perception' : 'nominal';
+    const bad = age > AGE_LIMIT;
+    stateEl.textContent = bad
+      ? `stale perception · acting on ${Math.round(age)} ms old road`
+      : 'nominal';
     stateEl.classList.toggle('is-bad', bad);
+    staleFlag.textContent = `PERCEPTION STALE · ${Math.round(age)} ms`;
     // The footage itself goes stale: flagged and washed out, because the
     // frame you are watching is no longer the frame the planner is using.
     container.querySelector('.trace')?.classList.toggle('is-stale', bad);
@@ -152,7 +177,7 @@ export function mount(container, system) {
 
     // The sync channel turns red once it is out of tolerance, because that is
     // the channel that actually matters.
-    const hot = cfg.id === 'sync' && buf[buf.length - 1] > 40;
+    const hot = cfg.id === 'age' && buf[buf.length - 1] > AGE_LIMIT;
     ctx.strokeStyle = hot ? over : stable;
     ctx.lineWidth = Math.max(1.3, w / 900);
     ctx.beginPath();
@@ -172,6 +197,53 @@ export function mount(container, system) {
     ctx.fill();
   }
 
+  function sizeGhost() {
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    ghost.width = Math.round(ghost.clientWidth * dpr);
+    ghost.height = Math.round(ghost.clientHeight * dpr);
+  }
+
+  /* The planner's target path, drawn in perspective over the footage. Nominal
+     it hugs the lane centre; with stale perception it is the road as it was
+     hundreds of milliseconds ago, so it visibly peels away from where the
+     lane actually is - which is exactly the failure on a real test drive. */
+  function paintGhost() {
+    const w = ghost.width, h = ghost.height;
+    if (!w || !h) return;
+    const css = getComputedStyle(document.documentElement);
+    const stable = css.getPropertyValue('--stabilize').trim() || '#4DA6E8';
+    const over = css.getPropertyValue('--overload').trim() || '#FF7A1F';
+
+    gctx.clearRect(0, 0, w, h);
+
+    const bad = lastAge > AGE_LIMIT;
+    const err = staleErr;                 // metres of lag
+    const vpx = w * 0.5, vpy = h * 0.42;  // vanishing point
+    const baseHalf = w * 0.16;            // path half-width at the bumper
+
+    gctx.strokeStyle = bad ? over : stable;
+    gctx.globalAlpha = bad ? 0.95 : 0.55;
+    gctx.lineWidth = Math.max(2, w / 240);
+    gctx.setLineDash(bad ? [] : [w / 60, w / 90]);
+
+    // Chevrons marching up the road. The lateral error scales with distance:
+    // near the bumper the estimate still matches; toward the horizon it is
+    // the old road.
+    for (let i = 0; i < 6; i++) {
+      const k = i / 6;                    // 0 near, 1 far
+      const y = h * 0.96 - (h * 0.96 - vpy) * k;
+      const half = baseHalf * (1 - k * 0.82);
+      const cx = vpx + err * (w * 0.22) * k * (bad ? 1 : 0.15);
+      gctx.beginPath();
+      gctx.moveTo(cx - half, y);
+      gctx.lineTo(cx, y - h * 0.03 * (1 - k * 0.6));
+      gctx.lineTo(cx + half, y);
+      gctx.stroke();
+    }
+    gctx.setLineDash([]);
+    gctx.globalAlpha = 1;
+  }
+
   function frame(now) {
     if (!alive) return;
     if (!last) last = now;
@@ -183,11 +255,13 @@ export function mount(container, system) {
     while (acc >= period) { step(); acc -= period; }
 
     chans.forEach(paint);
+    paintGhost();
     raf = requestAnimationFrame(frame);
   }
 
   chans.forEach(size);
-  const onResize = () => chans.forEach(size);
+  sizeGhost();
+  const onResize = () => { chans.forEach(size); sizeGhost(); };
   window.addEventListener('resize', onResize, { passive: true });
 
   // Prime the buffers so it opens mid-run rather than from a flat line.
