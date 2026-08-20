@@ -512,9 +512,15 @@ kbd {
     padding-block: var(--sp-3) var(--sp-5);
   }
   .console-right { display: contents; }
-  /* The intro repeats what the doc already says; on a phone it only costs
-     screen. The instrument IS the introduction. */
-  .console-intro { display: none; }
+  /* The framing line stays on the phone — without it the page throws you
+     into an instrument with no explanation of what it is. Compact, first in
+     the flow; the full-height instrument sits right under it. */
+  .console-intro {
+    order: 0;
+    font-size: 0.82rem;
+    line-height: 1.55;
+    max-width: none;
+  }
   /* The instrument owns the screen: header + sticky rail + this = one
      viewport, so nothing inside it gets cut off below the fold. */
   /* The sticky rail's hint already says every instrument is live, and the

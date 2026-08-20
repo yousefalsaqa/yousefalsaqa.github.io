@@ -32,9 +32,20 @@ const EXCHANGES = [
     reply: 'Three. Resonance, this portfolio, and the C-MAPSS predictive maintenance project. Resonance was the last one you touched.',
   },
   {
-    say: 'open the resonance log',
-    tools: ['list_projects', 'launch_app'],
-    reply: 'Opening Resonance.log. Last write was 14 minutes ago.',
+    say: 'open netflix and put my show on',
+    tools: ['recall', 'launch_app'],
+    reply: 'You were on The Mentalist, season 3 episode 7. Pulling it up.',
+  },
+  {
+    say: 'put something new on',
+    tools: ['launch_app'],
+    replies: [
+      'Feeling like Twitch tonight. Opening it.',
+      'Crave has something you have not touched. Opening it.',
+      'Prime Video this time. Up on the second monitor.',
+      'YouTube it is. Your subscriptions are stacked anyway.',
+      'Netflix, but nothing from your list. Something new.',
+    ],
   },
   {
     say: 'what do you know about the game',
@@ -57,19 +68,14 @@ const EXCHANGES = [
     reply: 'Watching. I will say something when it changes.',
   },
   {
-    say: 'put something on',
-    tools: ['launch_app'],
-    reply: 'Netflix is up on the second monitor.',
+    say: 'can you take my calls',
+    tools: [],
+    reply: 'Getting there. I can pick up and take a message; holding the conversation for you is the part being built right now.',
   },
   {
     say: 'what have I got open',
     tools: ['list_windows'],
     reply: 'Unreal Editor, two Chrome windows, Blender, and a terminal in the portfolio repo.',
-  },
-  {
-    say: 'open the hub',
-    tools: ['launch_app'],
-    reply: 'Hub is up. Every tool call will sketch itself there as it fires.',
   },
 ];
 
@@ -172,7 +178,10 @@ export function mount(container, system) {
       }
 
       after(reduced() ? 0 : (hasTools ? 520 : 140), () => {
-        line('vln--her', `<span class="vln-who">vela</span><span class="vln-text">${ex.reply}</span>`);
+        const said = ex.replies
+          ? ex.replies[Math.floor(Math.random() * ex.replies.length)]
+          : ex.reply;
+        line('vln--her', `<span class="vln-who">vela</span><span class="vln-text">${said}</span>`);
         if (ex.note) after(reduced() ? 0 : 260, () => addNote(ex.note, true));
         statusEl.textContent = 'listening for "vela"';
         busy = false;
