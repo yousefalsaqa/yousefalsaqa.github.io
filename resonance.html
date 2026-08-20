@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <script>(function(){try{if(localStorage.getItem("so-theme")==="light"){document.documentElement.setAttribute("data-theme","light");}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resonance | Yousef Alsaqa</title>
+  <meta name="description" content="Case study: Resonance, an Unreal Engine 5.8 action game where combat is frequency matching. Probe a part, match its dampener, then overload it or stabilize it.">
+  <meta name="theme-color" content="#08090B">
+  <link rel="canonical" href="https://yousefalsaqa.netlify.app/resonance.html">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+
+  <!-- Fonts: self-hosted, a blocked CDN must never blank the page -->
+  <link rel="preload" href="assets/fonts/Archivo.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/GeistMono.woff2" as="font" type="font/woff2" crossorigin>
+
+  <!-- Bootstrap Icons -->
+  <link href="vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link href="css/theme.css" rel="stylesheet">
+  <link href="css/pages/case-study.css" rel="stylesheet">
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="header" id="header">
+    <div class="header-inner">
+      <a href="index.html" class="header-logo">
+        <span class="header-logo-name">YOUSEF ALSAQA</span>
+        <span class="header-logo-role">MECHATRONICS / SYSTEMS</span>
+      </a>
+      <nav class="header-nav" id="nav" aria-label="Main">
+        <a href="index.html#console" class="nav-link">Systems</a>
+        <a href="index.html#experience" class="nav-link">Experience</a>
+        <a href="index.html#principles" class="nav-link">Method</a>
+        <a href="index.html#about" class="nav-link">About</a>
+        <a href="index.html#contact" class="nav-link">Contact</a>
+      </nav>
+      <div class="header-status" id="headerStatus"><span class="header-status-text">SYSTEM 06 / RESONANCE</span></div>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-pressed="false" aria-label="Switch to light mode"><span class="theme-toggle-dot" aria-hidden="true"></span><span class="theme-toggle-text">DARK</span></button>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="case-hero">
+      <div class="container">
+        <a href="projects.html" class="back-link">
+          <i class="bi bi-arrow-left"></i>
+          Back to projects
+        </a>
+        <h1>Resonance</h1>
+        <p class="subtitle">An action game where you cannot cut, burn, or out-damage the machines. You find the frequency a part is being held at, and you take it from there.</p>
+
+        <div class="case-meta">
+          <div class="case-meta-item">
+            <span class="case-meta-label">Role</span>
+            <span class="case-meta-value">Solo, design &amp; C++</span>
+          </div>
+          <div class="case-meta-item">
+            <span class="case-meta-label">Timeline</span>
+            <span class="case-meta-value">Jul 2026 to present</span>
+          </div>
+          <div class="case-meta-item">
+            <span class="case-meta-label">Engine</span>
+            <span class="case-meta-value">Unreal Engine 5.8</span>
+          </div>
+          <div class="case-meta-item">
+            <span class="case-meta-label">Status</span>
+            <span class="case-meta-value">Phase 1, in playtest</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Content -->
+    <section class="section">
+      <div class="container case-content">
+
+        <div class="case-section">
+          <h2>The mechanic</h2>
+          <p>Here is how the main mechanic works. You probe a part to hear what it is doing. That tells you the frequency its dampener is applying to it. You tune your own frequency to match, and once you are locked, you choose a verb.</p>
+          <p><strong>Overload</strong> is the simple route. Hold the match and drive the part past what it can take. It cracks, buckles, or shears off, and that specific part is gone.</p>
+          <p><strong>Stabilize</strong> is where the skill comes in. The part's frequency wanders as it destabilizes, and you have to match the movement, following it as it drifts, until it calms back down. Get it settled and the part comes back under control instead of coming apart.</p>
+          <p>There are no HP bars. A machine is exactly the sum of its parts, and every part has its own resonance profile: natural modes, a safe amplitude, coupling points, dampener placement. The machine is the interface.</p>
+        </div>
+
+        <div class="case-image-grid">
+          <figure class="case-image">
+            <img src="assets/resonance/cymatics-stabilize-01.webp" alt="Concept sheet for the Stabilize feedback language: scattered dust aligning into a coherent pattern, in blue, across three machine systems." loading="lazy">
+            <figcaption>Stabilize reads blue. Dust scattered, aligning, coherent.</figcaption>
+          </figure>
+          <figure class="case-image">
+            <img src="assets/resonance/cymatics-overload-01.webp" alt="Concept sheet for the Overload feedback language: a part going from stable to resonance lock to overloaded and venting, in orange." loading="lazy">
+            <figcaption>Overload reads orange. Stable, near failure, gone.</figcaption>
+          </figure>
+        </div>
+
+        <div class="case-section">
+          <h2>The machine</h2>
+          <p>The Phase 1 machine is a bipedal Cadence work unit. The turnaround sheet below is what authored it: every readable part on that drawing became a data-asset entry with its own modes, safe amplitude, and coupling points. Sensor head module, core housing, shoulder actuators, upper brace, forearm guard, hip joint, knee joint, ankle assembly.</p>
+        </div>
+
+        <figure class="case-image">
+          <img src="assets/resonance/monster-turnaround-01.webp" alt="Front, side and three-quarter turnaround of the Phase 1 machine with labelled anatomy." loading="lazy">
+          <figcaption>The turnaround sheet. This drawing is the Phase 1 part list.</figcaption>
+        </figure>
+
+        <div class="case-image-grid">
+          <figure class="case-image">
+            <img src="assets/resonance/part-dampener-01.webp" alt="Close-up concept of the dampener unit: housing, mount ring, exposed feed line, and a vulnerable service latch." loading="lazy">
+            <figcaption>The dampener unit. Two counterplay routes: overload the latch, or sever the feed.</figcaption>
+          </figure>
+          <figure class="case-image">
+            <img src="assets/resonance/part-joint-01.webp" alt="Close-up concept of an exposed joint mechanism: joint core, pivot ring, linkage, actuator, and the one exposed coupling point through armor." loading="lazy">
+            <figcaption>An exposed joint. The red point is its only honest coupling site through armor.</figcaption>
+          </figure>
+        </div>
+
+        <div class="case-section">
+          <h2>How the work actually gets done</h2>
+          <p>Rapid playtest loops. I play, something feels wrong, and the rule is that feel gets diagnosed from telemetry. Every verb and every machine state change writes one <code>key=value</code> line to the log. When a sweep feels mushy or a lock feels unfair, I go read the numbers from that exact second before touching any code. Nearly every fix in this project has come out of a log line rather than a theory.</p>
+          <div class="case-code">
+<pre>
+LogResonance: verb=probe part=upper_brace mode=2 f_damp=0.61
+LogResonance: verb=sweep f_driver=0.585 lock=0.42
+LogResonance: verb=sweep f_driver=0.608 lock=0.93
+LogResonance: state=ringing part=upper_brace amp=1.86 safe=1.40
+LogResonance: state=sheared part=upper_brace t_hold=2.31
+</pre>
+          </div>
+          <p>"Boring" is useful data. Blunt playtest feedback goes into the log the same way the numbers do, and the fix starts from both.</p>
+        </div>
+
+        <div class="case-section">
+          <h2>The arena</h2>
+          <p>Phase 1 happens on a foundry floor: the machine centered on a circular turntable plate, low cover, resonant stations glowing at the edges. The blockout matches the key below for scale, footing, and where the fight happens.</p>
+        </div>
+
+        <figure class="case-image">
+          <img src="assets/resonance/arena-foundry-01.webp" alt="Concept key of the Phase 1 arena: a foundry floor with the machine centered on a circular turntable plate, low cover crates, and glowing resonant stations at the edges." loading="lazy">
+          <figcaption>The foundry. Elevated third-person framing, one machine, one plate.</figcaption>
+        </figure>
+
+        <div class="case-section">
+          <h2>Stack</h2>
+          <div class="tech-grid">
+            <div class="tech-item">
+              <h4>C++ gameplay layer</h4>
+              <p>The verbs, the resonance profiles, the lock model. Blueprint stays out of the core loop.</p>
+            </div>
+            <div class="tech-item">
+              <h4>Chaos destruction</h4>
+              <p>Parts fail structurally. A sheared brace is geometry coming apart, played straight.</p>
+            </div>
+            <div class="tech-item">
+              <h4>Blender pipeline</h4>
+              <p>Gray-box part modeling against the concept sheets, exported into the engine.</p>
+            </div>
+            <div class="tech-item">
+              <h4>Telemetry-first iteration</h4>
+              <p>One key=value line per verb and state change. Feel is debugged from the log.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="case-section">
+          <h2>Where it stands</h2>
+          <p>Phase 1, 47 commits in. The dampener session recently turned the dampener from a thing that aims at the player into a machine part with its own failure modes, which exposed four follow-up problems, and that is the honest shape of this project: play, measure, fix, commit, again.</p>
+          <p>You can work the core loop in miniature on the <a href="index.html">systems console</a>: probe a part on the concept sheet, match its dampener, and take it apart or settle it.</p>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer" id="contact">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-main">
+          <h2>Have a complicated system that needs to work?</h2>
+          <p>I'm interested in robotics, automation, embedded systems, and engineering roles where software meets the physical world.</p>
+          <a href="mailto:21ymsa@queensu.ca" class="footer-email"><i class="bi bi-envelope"></i> 21ymsa@queensu.ca</a>
+        </div>
+        <div class="footer-links">
+          <a href="https://www.linkedin.com/in/yousef-alsaqa-b1ab4822b/" target="_blank" rel="noopener"><i class="bi bi-linkedin"></i> LinkedIn</a>
+          <a href="https://github.com/yousefalsaqa" target="_blank" rel="noopener"><i class="bi bi-github"></i> GitHub</a>
+          <a href="assets/Yousef_Alsaqa_Resume.pdf" target="_blank"><i class="bi bi-file-earmark-text"></i> Résumé</a>
+        </div>
+      </div>
+      <div class="footer-bottom"><p>© 2026 Yousef Alsaqa · Kingston, Canada</p></div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    const navToggle = document.getElementById('navToggle');
+    const nav = document.getElementById('nav');
+    navToggle.addEventListener('click', () => {
+      const open = nav.classList.toggle('active');
+      navToggle.classList.toggle('active', open);
+      navToggle.setAttribute('aria-expanded', open);
+    });
+    nav.querySelectorAll('.nav-link').forEach(l => l.addEventListener('click', () => {
+      nav.classList.remove('active'); navToggle.classList.remove('active');
+      navToggle.setAttribute('aria-expanded', 'false');
+    }));
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    // ---- Theme toggle (manual only, never from system preference) ----
+    const themeToggle = document.getElementById('themeToggle');
+    const themeText = themeToggle.querySelector('.theme-toggle-text');
+    function setThemeUI(isLight) {
+      themeText.textContent = isLight ? 'LIGHT' : 'DARK';
+      themeToggle.setAttribute('aria-pressed', String(isLight));
+      themeToggle.setAttribute('aria-label', isLight ? 'Switch to dark mode' : 'Switch to light mode');
+    }
+    setThemeUI(document.documentElement.getAttribute('data-theme') === 'light');
+    themeToggle.addEventListener('click', () => {
+      const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+      if (isLight) {
+        document.documentElement.removeAttribute('data-theme');
+        localStorage.setItem('so-theme', 'dark');
+      } else {
+        document.documentElement.setAttribute('data-theme', 'light');
+        localStorage.setItem('so-theme', 'light');
+      }
+      setThemeUI(!isLight);
+    });
+  </script>
+</body>
+</html>

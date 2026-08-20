@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <script>(function(){try{if(localStorage.getItem("so-theme")==="light"){document.documentElement.setAttribute("data-theme","light");}}catch(e){}})();</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vela | Yousef Alsaqa</title>
+  <meta name="description" content="Case study: Vela, a voice assistant with hands. Claude Agent SDK, ambient listening, desktop control, and a memory that lives as markdown in an Obsidian vault.">
+  <meta name="theme-color" content="#08090B">
+  <link rel="canonical" href="https://yousefalsaqa.netlify.app/vela.html">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+
+  <!-- Fonts: self-hosted, a blocked CDN must never blank the page -->
+  <link rel="preload" href="assets/fonts/Archivo.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/GeistMono.woff2" as="font" type="font/woff2" crossorigin>
+
+  <!-- Bootstrap Icons -->
+  <link href="vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link href="css/theme.css" rel="stylesheet">
+  <link href="css/pages/case-study.css" rel="stylesheet">
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="header" id="header">
+    <div class="header-inner">
+      <a href="index.html" class="header-logo">
+        <span class="header-logo-name">YOUSEF ALSAQA</span>
+        <span class="header-logo-role">MECHATRONICS / SYSTEMS</span>
+      </a>
+      <nav class="header-nav" id="nav" aria-label="Main">
+        <a href="index.html#console" class="nav-link">Systems</a>
+        <a href="index.html#experience" class="nav-link">Experience</a>
+        <a href="index.html#principles" class="nav-link">Method</a>
+        <a href="index.html#about" class="nav-link">About</a>
+        <a href="index.html#contact" class="nav-link">Contact</a>
+      </nav>
+      <div class="header-status" id="headerStatus"><span class="header-status-text">SYSTEM 03 / VELA</span></div>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-pressed="false" aria-label="Switch to light mode"><span class="theme-toggle-dot" aria-hidden="true"></span><span class="theme-toggle-text">DARK</span></button>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="case-hero">
+      <div class="container">
+        <a href="projects.html" class="back-link">
+          <i class="bi bi-arrow-left"></i>
+          Back to projects
+        </a>
+        <h1>Vela</h1>
+        <p class="subtitle">A personal assistant with hands. She listens for her name, talks back, drives my desktop, and keeps everything she knows about me somewhere I can read it.</p>
+
+        <div class="case-meta">
+          <div class="case-meta-item">
+            <span class="case-meta-label">Role</span>
+            <span class="case-meta-value">Solo, TypeScript</span>
+          </div>
+          <div class="case-meta-item">
+            <span class="case-meta-label">Timeline</span>
+            <span class="case-meta-value">Aug 2026 to present</span>
+          </div>
+          <div class="case-meta-item">
+            <span class="case-meta-label">Runtime</span>
+            <span class="case-meta-value">Claude Agent SDK</span>
+          </div>
+          <div class="case-meta-item">
+            <span class="case-meta-label">Status</span>
+            <span class="case-meta-value">In daily use</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Content -->
+    <section class="section">
+      <div class="container case-content">
+
+        <div class="case-section">
+          <h2>What she is</h2>
+          <p>Vela runs on this machine, on the Claude Agent SDK, using the same OAuth credentials Claude Code already has, so there is no API key and no separate billing. Say her name and she wakes. She can open apps and files, control media, tell me what windows are open, keep an eye on something and speak up when it changes, and refer to my codebases by nickname.</p>
+          <p>The SDK gives her the baseline hands: read and write files, run shell commands, search code, fetch the web. The tool layer on top is mine.</p>
+          <div class="case-code">
+<pre>
+remember / recall / forget      durable memory across sessions
+list_projects / add_project     codebases by nickname
+launch_app                      apps, URLs, files - knows "netflix"
+media_control                   play/pause, skip, volume
+list_windows                    what is currently open
+watch / resolve_watch           watch something, speak up on change
+</pre>
+          </div>
+        </div>
+
+        <div class="case-section">
+          <h2>Memory is an Obsidian vault</h2>
+          <p>What she knows about me lives in <code>vault/Memory</code> as one markdown note per fact. A SQLite row is a fine place to put a fact and a terrible place to read one. As notes, I can open the vault, see everything she believes about me, correct what is wrong, and link facts together, and she reads the edit back on the next recall.</p>
+          <div class="case-code">
+<pre>
+vault/Memory/
+  yousef-graduated-basc-mechatronics-robotics-engineering.md
+  yousef-has-used-typescript-for-his.md
+  fabrication-is-aspirational-as-of-aug.md
+</pre>
+          </div>
+          <p>Notes are named after the sentence rather than an id, because that name is what Obsidian links with. Frontmatter carries the kind, tags and dates, and any key she does not recognise gets written back untouched, so a plugin's metadata survives her next write. A note I write by hand with no frontmatter at all is read as a plain fact.</p>
+          <p>Projects and watches stay in SQLite. That is operational state; nobody needs to read it, and <code>last_spoke</code> churning through a git-tracked vault would be noise.</p>
+        </div>
+
+        <div class="case-section">
+          <h2>How a request moves through her</h2>
+          <p>The order matters: she calls the tool first, then answers from what it returned. Nothing is answered from memory when the machine can be asked directly.</p>
+          <div class="case-code">
+<pre>
+you    what have I got open
+tool   list_windows
+vela   Unreal Editor, two Chrome windows, Blender,
+       and a terminal in the portfolio repo.
+
+you    watch the build and tell me when it finishes
+tool   watch
+vela   Watching. I'll say something when it changes.
+</pre>
+          </div>
+        </div>
+
+        <div class="case-section">
+          <h2>Architecture</h2>
+          <p>Nineteen TypeScript modules, each owning one concern. The ones that earn their names:</p>
+          <div class="tech-grid">
+            <div class="tech-item">
+              <h4>voice.ts / listen.ts</h4>
+              <p>Wake word, speech in and out, and hearing without reloading the pipeline.</p>
+            </div>
+            <div class="tech-item">
+              <h4>memory.ts / vault.ts</h4>
+              <p>The markdown vault: naming, frontmatter round-tripping, recall filtering.</p>
+            </div>
+            <div class="tech-item">
+              <h4>desktop.ts</h4>
+              <p>The hands. Windows, apps, media, files.</p>
+            </div>
+            <div class="tech-item">
+              <h4>triggers.ts / ambient.ts</h4>
+              <p>Watches and ambient state, so she can bring something up unprompted.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="case-section">
+          <h2>Where this goes</h2>
+          <p>The desktop was the first body. When I move into the new place, the next one is the house: relay boards behind the light switches, and if the protocol cooperates, the dishwasher. From her side nothing changes, a switch is just one more tool with a name, and the house is the same problem as the desktop with different hands.</p>
+          <p>Her console runs in miniature on the <a href="index.html">systems index</a>: say something to her, watch which tool fires, and watch the vault take the note.</p>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer" id="contact">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-main">
+          <h2>Have a complicated system that needs to work?</h2>
+          <p>I'm interested in robotics, automation, embedded systems, and engineering roles where software meets the physical world.</p>
+          <a href="mailto:21ymsa@queensu.ca" class="footer-email"><i class="bi bi-envelope"></i> 21ymsa@queensu.ca</a>
+        </div>
+        <div class="footer-links">
+          <a href="https://www.linkedin.com/in/yousef-alsaqa-b1ab4822b/" target="_blank" rel="noopener"><i class="bi bi-linkedin"></i> LinkedIn</a>
+          <a href="https://github.com/yousefalsaqa" target="_blank" rel="noopener"><i class="bi bi-github"></i> GitHub</a>
+          <a href="assets/Yousef_Alsaqa_Resume.pdf" target="_blank"><i class="bi bi-file-earmark-text"></i> Résumé</a>
+        </div>
+      </div>
+      <div class="footer-bottom"><p>© 2026 Yousef Alsaqa · Kingston, Canada</p></div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    const navToggle = document.getElementById('navToggle');
+    const nav = document.getElementById('nav');
+    navToggle.addEventListener('click', () => {
+      const open = nav.classList.toggle('active');
+      navToggle.classList.toggle('active', open);
+      navToggle.setAttribute('aria-expanded', open);
+    });
+    nav.querySelectorAll('.nav-link').forEach(l => l.addEventListener('click', () => {
+      nav.classList.remove('active'); navToggle.classList.remove('active');
+      navToggle.setAttribute('aria-expanded', 'false');
+    }));
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    // ---- Theme toggle (manual only, never from system preference) ----
+    const themeToggle = document.getElementById('themeToggle');
+    const themeText = themeToggle.querySelector('.theme-toggle-text');
+    function setThemeUI(isLight) {
+      themeText.textContent = isLight ? 'LIGHT' : 'DARK';
+      themeToggle.setAttribute('aria-pressed', String(isLight));
+      themeToggle.setAttribute('aria-label', isLight ? 'Switch to dark mode' : 'Switch to light mode');
+    }
+    setThemeUI(document.documentElement.getAttribute('data-theme') === 'light');
+    themeToggle.addEventListener('click', () => {
+      const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+      if (isLight) {
+        document.documentElement.removeAttribute('data-theme');
+        localStorage.setItem('so-theme', 'dark');
+      } else {
+        document.documentElement.setAttribute('data-theme', 'light');
+        localStorage.setItem('so-theme', 'light');
+      }
+      setThemeUI(!isLight);
+    });
+  </script>
+</body>
+</html>
